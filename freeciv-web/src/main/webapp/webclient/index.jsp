@@ -42,7 +42,7 @@ var fcwDebug=<%= fcwDebug %>;
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 
-<script src="/statis/javascript/bootstrap.min.js" ></script>
+<script src="/static/javascript/bootstrap.min.js" ></script>
 
 <script src="https://apis.google.com/js/platform.js"></script>
 
