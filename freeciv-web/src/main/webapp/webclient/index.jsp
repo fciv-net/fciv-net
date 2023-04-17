@@ -41,7 +41,8 @@ var ts="${initParam.buildTimeStamp}";
 var fcwDebug=<%= fcwDebug %>;
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="/statis/javascript/bootstrap.min.js" ></script>
 
 <script src="https://apis.google.com/js/platform.js"></script>
 
