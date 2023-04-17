@@ -28,7 +28,6 @@
 <meta property="og:image" content="/static/images/brand.png" />
 
 <script type="text/javascript" src="/javascript/libs/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link href="/static/images/favicon.png" rel="shortcut icon">
 <link href="/static/images/apple-touch-icon.png" rel="apple-touch-icon">
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
