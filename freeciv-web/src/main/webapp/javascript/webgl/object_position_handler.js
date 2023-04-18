@@ -450,10 +450,10 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if ( extra_name == "Fish") {
       extra_name = extra_name +  Math.floor(1 + Math.random() * 3);
-      height -= 0;
+      height += 0.6;
     }
     if (extra_name == "Whales") {
-      height -= 1;
+      height += 0.3;
     }
 
     var model = webgl_get_model(extra_name, ptile);
@@ -465,6 +465,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
     model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 1);
     model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+    model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
     if (scene != null) scene.add(model);
 
   } else if (scene != null && tile_extra_positions[extra_type + "." + ptile['index']] != null && !tile_has_extra(ptile, extra_type)) {
