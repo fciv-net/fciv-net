@@ -389,6 +389,9 @@ function update_tile_extras(ptile) {
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null && extra_visibilities[ptile['index']] == null) {
+    if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales") {
+      update_tile_extra_update_model(extra_resource['id'], extra_resource['name'], ptile);
+    } else {
       var key = extra_resource['graphic_str'];
       var extra_texture = get_extra_texture(key);
       var terrain_name = tile_terrain(ptile).name;
@@ -408,9 +411,6 @@ function update_tile_extras(ptile) {
           height += 0.3;
         }
       }
-      if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales") {
-        height = 52.35;
-      }
       if (terrain_name == "Forest" || terrain_name == "Jungle") {
         height += 4.5;
       }
@@ -425,6 +425,7 @@ function update_tile_extras(ptile) {
       extra_material.transparent = true;
       scene.add(extra_points);
       extra_visibilities[ptile['index']] = extra_points;
+    }
   }
 
   if (tile_get_known(ptile) == TILE_KNOWN_SEEN && extra_visibilities[ptile['index']] != null) {
@@ -446,6 +447,13 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     var height = 5 + ptile['height'] * 100;
     if (extra_name == "Hut") {
       height -= 5;
+    }
+    if ( extra_name == "Fish") {
+      extra_name = extra_name +  Math.floor(1 + Math.random() * 3);
+      height -= 0;
+    }
+    if (extra_name == "Whales") {
+      height -= 1;
     }
 
     var model = webgl_get_model(extra_name, ptile);

@@ -27,7 +27,7 @@ var webgl_materials = {};
 var meshes = {};
 
 var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "Warriors", "citywalls",
-                               "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3"];
+                               "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Fish1", "Fish2", "Fish3", "Whales"];
 var tiles_of_unloaded_models_map = {};
 
 /****************************************************************************
@@ -185,6 +185,13 @@ function load_model(filename)
   }
   if (filename == "Pine1" || filename == "Pine2") {
     modelscale = 40;
+  }
+  if (filename == "Fish1" || filename == "Fish2" || filename == "Fish3") {
+    modelscale = 3;
+  }
+
+  if (filename == "Whales") {
+    modelscale = 1.9;
   }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
