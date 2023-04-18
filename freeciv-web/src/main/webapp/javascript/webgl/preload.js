@@ -175,7 +175,7 @@ function load_model(filename)
   }
 
   if (filename == "Tree1" || filename == "Tree2" || filename == "Tree3" ) {
-    modelscale = 29;
+    modelscale = 29.5;
   }
   if (filename == "Palm1" || filename == "Palm2") {
     modelscale = 31;
@@ -184,14 +184,17 @@ function load_model(filename)
     modelscale = 47;
   }
   if (filename == "Pine1" || filename == "Pine2") {
-    modelscale = 40;
+    modelscale = 40.5;
   }
-  if (filename == "Fish1" || filename == "Fish2" || filename == "Fish3") {
+  if (filename == "Fish1" || filename == "Fish2") {
+    modelscale = 2.3;
+  }
+  if (filename == "Fish3") {
     modelscale = 2.6;
   }
 
   if (filename == "Whales") {
-    modelscale = 1.8;
+    modelscale = 1.7;
   }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
