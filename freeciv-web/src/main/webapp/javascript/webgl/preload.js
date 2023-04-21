@@ -197,6 +197,10 @@ function load_model(filename)
     modelscale = 1.7;
   }
 
+  if (filename == "Mine") {
+    modelscale = 15;
+  }
+
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 

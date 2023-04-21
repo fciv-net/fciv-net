@@ -455,6 +455,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     if (extra_name == "Whales") {
       height += 0.3;
     }
+    if (extra_name == "Mine") {
+      height -= 7;
+    }
 
     var model = webgl_get_model(extra_name, ptile);
     if (model == null) {
