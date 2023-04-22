@@ -31,7 +31,7 @@
 			</li>
 			<li><a href="https://github.com/fciv-net/fciv-net">Development</a></li>
 
-		    <li><a href="https://fciv.net/wiki/">Wiki</a></li>
+		    <li><a href="https://www.fciv.net/wiki/">Wiki</a></li>
 
 		    <li><a href="/hall_of_fame">Hall of Fame</a></li>
 
