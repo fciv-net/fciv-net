@@ -10,7 +10,6 @@
   h: set unit's (h)omecity  (to city on current tile)
   i: build (i)rrigation or convert terrain  (settler/worker units)
   m: build (m)ine or convert terrain  (settler/worker units)
-  n: clean (n)uclear fallout
   N: explode (N)uclear
   o: transf(o)rm terrain  (engineer unit)
   p: clean (p)ollution  (settler/worker units)

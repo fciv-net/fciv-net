@@ -1864,3 +1864,13 @@ function handle_city_update_counter(packet)
 {
   /* TODO */
 }
+
+/***************************************************************************
+  This packet is related to the city, and sent at the same time
+  as city info. Current implementation is not a clean
+  "city_info follow up packet", though.
+***************************************************************************/
+function handle_city_update_counters(packet)
+{
+  // TODO: Implement
+}

@@ -12,14 +12,13 @@
 # tutorial_ruleset changes the ruleset of the tutorial to one supported by Freeciv-web.
 #      - This should be replaced by modification of the tutorial scenario that allows it to
 #        work with multiple rulesets (Requires patch #7362 / SVN r33159)
-# win_chance includes 'Chance to win' in Freeciv-web map tile popup.
 # load_command_confirmation adds a log message which confirms that loading is complete, so that Freeciv-web can issue additional commands.
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0038-Move-combat-stats-part-of-popup_info_text-to-clientu"
-  "backports/0035-packets_json.c-Fix-tautological-unsigned-enum-zero-c"
-  "backports/0024-Fix-cases-where-AI-didn-t-consider-that-building-mig"
+  "backports/rebased-0050-Add-ERM_CLEAN"
+  "0005-Save-map-images-also-on-game-over"
+  "0019-send_server_info_to_metaserver-Read-timer-just-once"
   "metachange"
   "text_fixes"
   "freeciv-svn-webclient-changes"
@@ -30,7 +29,6 @@ declare -a PATCHLIST=(
   "server_password"
   "message_escape"
   "scorelog_filenames"
-  "win_chance"
   "load_command_confirmation"
   "endgame-mapimg"
   "add_packet_tile_height"

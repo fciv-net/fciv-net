@@ -1117,15 +1117,8 @@ function update_unit_order_commands()
 
       }
 
-      if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
-        unit_actions["fallout"] = {name: "Remove fallout (N)"};
-      }
-
-      if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
-
-        unit_actions["pollution"] = {name: "Remove pollution (P)"};
-      } else {
-
+      if (tile_has_extra(ptile, EXTRA_FALLOUT) || tile_has_extra(ptile, EXTRA_POLLUTION)) {
+        unit_actions["clean"] = {name: "Remove pollution (P)"};
       }
 
       if (tile_terrain(ptile)['cultivate_time'] > 0) {
@@ -1997,7 +1990,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
       if (shift) {
         key_unit_pillage();
       } else {
-        key_unit_pollution();
+        key_unit_clean();
       }
     break;
 
@@ -2028,8 +2021,6 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
     case 'N':
       if (shift) {
         key_unit_nuke();
-      } else {
-        key_unit_fallout();
       }
     break;
 
@@ -2199,12 +2190,8 @@ function handle_context_menu_callback(key)
       key_unit_auto_settle();
       break;
 
-    case "fallout":
-      key_unit_fallout();
-      break;
-
-    case "pollution":
-      key_unit_pollution();
+    case "clean":
+      key_unit_clean();
       break;
 
     case "cultivate":
@@ -2444,10 +2431,10 @@ function key_unit_unload()
 
   for (var i = 0; i < units_on_tile.length; i++) {
     var punit = units_on_tile[i];
-    if (punit['transported'] && punit['transported_by'] > 0 &&
-        punit['owner'] == client.conn.playing.playerno) {
+    if (punit['transported'] && punit['transported_by'] > 0
+        && punit['owner'] == client.conn.playing.playerno) {
       request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
-      request_unit_do_action(ACTION_TRANSPORT_ALIGHT, punit['id'],
+      request_unit_do_action(ACTION_TRANSPORT_DEBOARD, punit['id'],
                              punit['transported_by']);
     } else {
       request_new_unit_activity(punit, ACTIVITY_IDLE, EXTRA_NONE);
@@ -2605,12 +2592,12 @@ function key_unit_cultivate()
 /**************************************************************************
  Tell the units to remove pollution.
 **************************************************************************/
-function key_unit_pollution()
+function key_unit_clean()
 {
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_POLLUTION, EXTRA_NONE);
+    request_new_unit_activity(punit, ACTIVITY_CLEAN, EXTRA_NONE);
   }
   setTimeout(update_unit_focus, 700);
 }
@@ -2663,19 +2650,6 @@ function key_unit_airlift()
     event: E_BEGINNER_HELP,
     message: "Click on the city to airlift this unit to."
   });
-}
-
-/**************************************************************************
- Tell the units to remove nuclear fallout.
-**************************************************************************/
-function key_unit_fallout()
-{
-  var funits = get_units_in_focus();
-  for (var i = 0; i < funits.length; i++) {
-    var punit = funits[i];
-    request_new_unit_activity(punit, ACTIVITY_FALLOUT, EXTRA_NONE);
-  }
-  update_unit_focus();
 }
 
 /**************************************************************************
