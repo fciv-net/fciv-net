@@ -95,8 +95,8 @@ function enable_mapview_slide_3d(ptile)
   camera_dy = camera.position.y - controls.target.y + 50;
   camera_dz = camera.position.z - controls.target.z + 50;
 
-  mapview_slide['dx'] = camera_current_x - pos_dest['x'];
-  mapview_slide['dy'] = camera_current_z - pos_dest['y'];
+  mapview_slide['dx'] = camera_current_x - pos_dest['x'] + 50;
+  mapview_slide['dy'] = camera_current_z - pos_dest['y'] + 50;
   mapview_slide['i'] = mapview_slide['max'];
   mapview_slide['prev'] = mapview_slide['i'];
   mapview_slide['start'] = new Date().getTime();
