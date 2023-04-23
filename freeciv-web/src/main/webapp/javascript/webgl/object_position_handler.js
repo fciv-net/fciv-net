@@ -458,6 +458,10 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     if (extra_name == "Mine") {
       height -= 7;
     }
+    if (extra_name == "Ruins") {
+      height -= 8;
+    }
+
 
     var model = webgl_get_model(extra_name, ptile);
     if (model == null) {
