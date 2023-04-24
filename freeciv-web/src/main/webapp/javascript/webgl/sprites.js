@@ -58,33 +58,25 @@ function create_unit_label_sprite(punit, ptile)
 {
   var texture;
   var activities = get_unit_activity_sprite(punit);
-  var key = (activities != null ? activities.key : "") + tile_units(ptile).length;
+  var key = (activities != null ? activities.key : "") + tile_units(ptile).length + '-' + punit['veteran'];
 
   if (texture_cache[key] != null) {
     texture = texture_cache[key];
   } else {
     var fcanvas = document.createElement("canvas");
-    fcanvas.width = 48;
+    fcanvas.width = 68;
     fcanvas.height = 32;
     var ctx = fcanvas.getContext("2d");
     ctx.font = 'bold 18px serif';
+    var width = 0;
 
     if (activities != null) {
       ctx.drawImage(sprites[activities.key],
                   0, 0,
                   28, 28,
                   0, 0, 28, 28);
+      width += 28;
     }
-
-    if (tile_units(ptile).length > 1) {
-      var txt = "" + tile_units(ptile).length;
-      ctx.strokeStyle = '#000000';
-      ctx.lineWidth = 3;
-      ctx.strokeText(txt, 23, 20);
-      ctx.fillStyle = '#ffe800';
-      ctx.fillText(txt, 23, 20);
-    }
-
     var activity_txt = get_unit_activity_text(punit);
     if (activity_txt == "A") {
       var txt = activity_txt;
@@ -95,13 +87,31 @@ function create_unit_label_sprite(punit, ptile)
       ctx.fillText(txt, 0, 20);
     }
 
+    if (tile_units(ptile).length > 1) {
+      var txt = "" + tile_units(ptile).length;
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 3;
+      ctx.strokeText(txt, width, 20);
+      ctx.fillStyle = '#ffe800';
+      ctx.fillText(txt, width, 20);
+      width += 23;
+    }
+
+    if (punit['veteran'] > 0) {
+      ctx.drawImage(sprites["unit.vet_" + punit['veteran']],
+                  24, 24,
+                  24, 24,
+                  width - 10, -10, 36, 36);
+      width += 28;
+    }
+
     texture = new THREE.Texture(fcanvas);
     texture.needsUpdate = true;
     texture_cache[key] = texture;
   }
 
   var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
-  sprite.scale.set(16,10,1);
+  sprite.scale.set(20,10,1);
   return sprite;
 }
 

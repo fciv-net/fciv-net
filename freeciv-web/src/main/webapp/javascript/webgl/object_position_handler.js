@@ -163,9 +163,9 @@ function update_unit_position(ptile) {
         && visible_unit['anim_list'].length == 0) {
       // add unit activity label
       if (scene != null && unit_label_positions[ptile['index']] != null) scene.remove(unit_label_positions[ptile['index']]);
-      if (scene != null && (get_unit_activity_text(visible_unit) != null || tile_units(ptile).length > 1)) {
+      if (scene != null && (get_unit_activity_text(visible_unit) != null || tile_units(ptile).length > 1 || visible_unit['veteran'] > 0)) {
         activity = create_unit_label_sprite(visible_unit, ptile);
-        activity.position.set(pos['x'] + 8, height + 25, pos['y'] - 5);
+        activity.position.set(pos['x'] -1, height + 30, pos['y'] - 12);
         scene.add(activity);
         unit_label_positions[ptile['index']] = activity;
       }

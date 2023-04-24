@@ -48,6 +48,13 @@
   </div>
 </td>
 </tr>
+<tr>
+<td>
+  <div class="main_menu_buttons">
+    <b>Dialogs open minimized:</b> <input type='checkbox' name='dialogs_minimized_setting' id='dialogs_minimized_setting'>
+  </div>
+</td>
+</tr>
 </table>
 
 

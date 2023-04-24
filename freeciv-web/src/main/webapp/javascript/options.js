@@ -101,19 +101,7 @@ var player_dlg_show_dead_players = TRUE;
 var reqtree_show_icons = TRUE;
 var reqtree_curved_lines = FALSE;
 
-/* gui-gtk-2.0 client specific options. */
-var gui_gtk2_map_scrollbars = FALSE;
-var gui_gtk2_dialogs_on_top = TRUE;
-var gui_gtk2_show_task_icons = TRUE;
-var gui_gtk2_enable_tabs = TRUE;
-var gui_gtk2_better_fog = TRUE;
-var gui_gtk2_show_chat_message_time = FALSE;
-var gui_gtk2_split_bottom_notebook = FALSE;
-var gui_gtk2_new_messages_go_to_top = FALSE;
-var gui_gtk2_show_message_window_buttons = TRUE;
-var gui_gtk2_metaserver_tab_first = FALSE;
-var gui_gtk2_allied_chat_only = FALSE;
-var gui_gtk2_small_display_layout = FALSE;
+var dialogs_minimized_setting = false;
 
 function init_options_dialog()
 {
@@ -153,6 +141,13 @@ function init_options_dialog()
   }
 
   $(".setting_button").tooltip();
+
+
+  $('#dialogs_minimized_setting').change(function() {
+    dialogs_minimized_setting = this.checked;
+    simpleStorage.set('dialogs_minimized_setting', dialogs_minimized_setting);
+  });
+
 
   $('#play_sounds_setting').prop('checked', sounds_enabled);
 

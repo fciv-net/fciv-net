@@ -690,12 +690,22 @@ function show_tech_gained_dialog(tech_gained_id)
                 }
               }
              ]
-		});
+		}).dialogExtend({
+                     "minimizable" : true,
+                     "closable" : true,
+                     "icons" : {
+                       "minimize" : "ui-icon-circle-minus",
+                       "restore" : "ui-icon-bullet"
+                     }});
 
   $("#tech_dialog").dialog('open');
   $("#game_text_input").blur();
   $("#tech_advance_helptext").tooltip({ disabled: false });
   $(".specific_tech").tooltip({ disabled: false });
+
+  if (dialogs_minimized_setting) {
+    $("#tech_dialog").dialogExtend("minimize");
+  }
 
 }
 

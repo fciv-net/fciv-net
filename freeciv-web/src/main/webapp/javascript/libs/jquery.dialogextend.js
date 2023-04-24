@@ -88,7 +88,7 @@
       buttonPane.css({
         "position": "absolute",
         "top": "50%",
-        "right": "0.0em",
+        "right": "0.3em",
         "margin-top": "-10px",
         "height": "18px"
       });

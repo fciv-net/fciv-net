@@ -124,7 +124,7 @@ function civclient_init()
     }
   }
 
-
+  dialogs_minimized_setting = simpleStorage.get('dialogs_minimized_setting');
 
  init_common_intro_dialog();
  setup_window_size();
@@ -221,6 +221,10 @@ function show_dialog_message(title, message) {
   $("#game_text_input").blur();
 
   $('#generic_dialog').css("max-height", "450px");
+
+  if (dialogs_minimized_setting) {
+    $("#generic_dialog").dialogExtend("minimize");
+  }
 
 }
 
@@ -326,12 +330,7 @@ function request_observe_game()
 function surrender_game()
 {
   send_surrender_game();
-
-  $("#tabs-map").removeClass("ui-tabs-hide");
-  $("#tabs-opt").addClass("ui-tabs-hide");
-  $("#map_tab").addClass("ui-state-active");
-  $("#map_tab").addClass("ui-tabs-selected");
-  $("#map_tab").removeClass("ui-state-default");
+  set_default_mapview_active();
 
 }
 

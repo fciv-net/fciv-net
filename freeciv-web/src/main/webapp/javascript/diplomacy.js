@@ -391,6 +391,10 @@ function create_diplomacy_dialog(counterpart, template) {
 
   diplomacy_dialog.css("overflow", "visible");
   diplomacy_dialog.parent().css("z-index", 1000);
+
+  if (dialogs_minimized_setting) {
+    diplomacy_dialog.dialogExtend("minimize");
+  }
 }
 
 function meeting_paint_custom_flag(nation, flag_canvas)
