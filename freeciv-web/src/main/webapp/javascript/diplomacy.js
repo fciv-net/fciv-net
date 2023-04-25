@@ -339,7 +339,7 @@ function create_diplomacy_dialog(counterpart, template) {
            "closable" : true,
            "icons" : {
              "minimize" : "ui-icon-circle-minus",
-             "restore" : "ui-icon-bullet"
+             "restore" : "ui-icon-newwin"
            }});
 
   diplomacy_dialog.dialog('open');

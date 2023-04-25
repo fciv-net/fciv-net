@@ -212,7 +212,7 @@ function show_city_dialog(pcity)
                      "minimize" : function(evt, dlg){ set_default_mapview_active(); },
                      "icons" : {
                        "minimize" : "ui-icon-circle-minus",
-                       "restore" : "ui-icon-bullet"
+                       "restore" : "ui-icon-newwin"
                      }});
 
   $("#city_dialog").dialog('widget').keydown(city_keyboard_listener);

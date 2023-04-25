@@ -695,7 +695,7 @@ function show_tech_gained_dialog(tech_gained_id)
                      "closable" : true,
                      "icons" : {
                        "minimize" : "ui-icon-circle-minus",
-                       "restore" : "ui-icon-bullet"
+                       "restore" : "ui-icon-newwin"
                      }});
 
   $("#tech_dialog").dialog('open');

@@ -910,18 +910,6 @@ function show_intro_dialog(title, message) {
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "85%" : "44%",
-			beforeClose: function( event, ui ) {
-			  $("#fciv-intro").hide();
-			  // if intro dialog is closed, then check the username and connect to the server.
-			  if (dialog_close_trigger != "button") {
-			    if (validate_username()) {
-			      if (!is_touch_device()) $("#pregame_text_input").focus();
-			      return true;
-			    } else {
-			      return false;
-			    }
-			  }
-			},
 			buttons:
 			[
 			  {
@@ -965,7 +953,10 @@ function show_intro_dialog(title, message) {
               }
 			]
 
-		});
+		}).dialogExtend({
+                       "minimizable" : false,
+                       "closable" : false
+                               });
 
   if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi" || $.getUrlVar('action') == "earthload")
          && $.getUrlVar('load') != "tutorial") {
@@ -1107,7 +1098,7 @@ function show_new_user_account_dialog(gametype)
                 + "Remember your username and password, since you will need this to log in later.<br><br>"
                 + (captcha_site_key != '' ? "Click to accept captcha to show that you are real human player:<br>" : "")
                 + "<div id='captcha_element'></div><br><br>"
-                + "<div><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
+                + "<div id='new_user_extra_info'><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
                 + "<li>A user account allows you to save and load games.</li>"
                 + "<li>Other players can use your username to start Play-by-email games with you.</li>"
                 + "<li>You will not receive any spam and your e-mail address will be kept safe. Your password is stored securely as a secure hash.</li>"
@@ -1180,6 +1171,11 @@ function show_new_user_account_dialog(gametype)
       }
     });
   });
+
+  if (is_small_screen()) {
+    $("#new_user_extra_info").hide();
+  }
+
 }
 
 /**************************************************************************

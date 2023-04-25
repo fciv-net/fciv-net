@@ -52,7 +52,7 @@ function init_chatbox()
                      "icons" : {
                        "minimize" : "ui-icon-circle-minus",
                        "maximize" : "ui-icon-circle-plus",
-                       "restore" : "ui-icon-bullet"
+                       "restore" : "ui-icon-newwin"
                      }});
   $("#game_chatbox_panel").dialog('open');
   $(".chatbox_dialog").css("top", ($("#game_page").height() - $("#game_chatbox_panel").height() - 34) + "px");

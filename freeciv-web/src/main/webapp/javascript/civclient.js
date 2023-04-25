@@ -214,7 +214,7 @@ function show_dialog_message(title, message) {
                    "closable" : true,
                    "icons" : {
                      "minimize" : "ui-icon-circle-minus",
-                     "restore" : "ui-icon-bullet"
+                     "restore" : "ui-icon-newwin"
                    }});
 
   $("#generic_dialog").dialog('open');

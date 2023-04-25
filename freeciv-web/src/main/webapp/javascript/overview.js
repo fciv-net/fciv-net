@@ -91,7 +91,7 @@ function init_overview()
                   "icons" : {
                     "minimize" : "ui-icon-circle-minus",
                     "maximize" : "ui-icon-circle-plus",
-                    "restore" : "ui-icon-bullet"
+                    "restore" : "ui-icon-newwin"
                   }});
   if (overview_current_state == "minimized") $("#game_overview_panel").dialogExtend("minimize");
 

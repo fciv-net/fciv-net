@@ -1271,7 +1271,7 @@ function init_game_unit_panel()
              "restore" : function(evt, dlg){ game_unit_panel_state = $("#game_unit_panel").dialogExtend("state") },
              "icons" : {
                "minimize" : "ui-icon-circle-minus",
-               "restore" : "ui-icon-bullet"
+               "restore" : "ui-icon-newwin"
              }});
 
   $("#game_unit_panel").dialog('open');
