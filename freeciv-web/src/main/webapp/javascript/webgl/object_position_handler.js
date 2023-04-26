@@ -389,7 +389,7 @@ function update_tile_extras(ptile) {
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null && extra_visibilities[ptile['index']] == null) {
-    if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales") {
+    if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales" || extra_resource['name'] == "Oasis") {
       update_tile_extra_update_model(extra_resource['id'], extra_resource['name'], ptile);
     } else {
       var key = extra_resource['graphic_str'];
@@ -460,6 +460,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (extra_name == "Ruins") {
       height -= 8;
+    }
+    if (extra_name == "Oasis") {
+      height -= 5;
     }
 
 

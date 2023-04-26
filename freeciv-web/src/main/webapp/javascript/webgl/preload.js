@@ -207,6 +207,9 @@ function load_model(filename)
     model.traverse(function(node) {
       if (node.isMesh) {
         node.castShadow = true;
+        if (filename == "Oasis") {
+          node.castShadow = false;
+        }
       }
     });
 
