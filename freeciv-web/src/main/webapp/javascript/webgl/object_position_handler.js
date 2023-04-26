@@ -462,7 +462,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 8;
     }
     if (extra_name == "Oasis") {
-      height -= 5;
+      height -= 5.45;
     }
 
 
