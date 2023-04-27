@@ -450,7 +450,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if ( extra_name == "Fish") {
       extra_name = extra_name +  Math.floor(1 + Math.random() * 3);
-      height += 0.6;
+      height += 0.1;
     }
     if (extra_name == "Whales") {
       height += 0.3;

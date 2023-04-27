@@ -71,6 +71,7 @@ function webgl_start_renderer()
   }
 
   console.log("Three.js " + THREE.REVISION);
+  THREE.ColorManagement.enabled = false;
 
   container = document.getElementById('mapcanvas');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 12000 );
@@ -106,6 +107,7 @@ function webgl_start_renderer()
   }
 
   maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing} );
+  maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
   if (graphics_quality == QUALITY_HIGH) {
     maprenderer.shadowMap.enabled = true;
     maprenderer.shadowMap.type = THREE.PCFShadowMap;
