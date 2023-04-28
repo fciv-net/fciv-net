@@ -18,8 +18,7 @@
 declare -a PATCHLIST=(
   "backports/rebased-0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
-  "0005-Save-map-images-also-on-game-over"
-  "0019-send_server_info_to_metaserver-Read-timer-just-once"
+  "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "metachange"
   "text_fixes"
   "freeciv-svn-webclient-changes"
@@ -33,7 +32,6 @@ declare -a PATCHLIST=(
   "load_command_confirmation"
   "endgame-mapimg"
   "add_packet_tile_height"
-  "freeciv-web-hex"
 )
 
 apply_patch() {
