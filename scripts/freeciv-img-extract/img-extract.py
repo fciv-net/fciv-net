@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: iso-8859-1 -*-
 ''' 
- Freeciv - Copyright (C) 2009-2016 - Andreas Røsdal   andrearo@pvv.ntnu.no
+ Freeciv - Copyright (C) 2009-2023 - Andreas Røsdal   andrearo@pvv.ntnu.no
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2, or (at your option)
@@ -63,41 +63,14 @@ spec_files = {
     "fog.spec",
     "grid.spec",
     "nuke.spec",
-    "mountains.spec",
-    "hills.spec",
-    "ocean.spec",
     "select.spec",
     "terrain2.spec",
     "tiles.spec",
     "units.spec",
     "upkeep.spec",
     "veterancy.spec",
-    "water.spec",
     "extra_units.spec"
-  ],
-  "trident" : [
-    "auto_ll.spec",
-    "fog.spec",
-    "roads.spec",
-    "tiles.spec",
-    "cities.spec",
-    "explosions.spec",
-    "grid.spec",
-    "select.spec",
-    "units.spec"
-  ],
-  "isotrident" : [
-    "terrain1.spec",
-    "cities.spec",
-    "fog.spec",
-    "grid.spec",
-    "morecities.spec",
-    "nuke.spec",
-    "select.spec",
-    "terrain2.spec",
-    "tiles.spec",
-    "unitextras.spec"
-  ]
+   ]
 }
 def expand_spec_files(name, file_names):
   files = [path.join(freeciv_data_dir, name + ".tilespec")]
@@ -166,7 +139,7 @@ def increment_tileset_image(tileset_name):
   global tileset_inc;
 
   draw = ImageDraw.Draw(tileset)
-  draw.text((130, 0), "Freeciv-web - https://github.com/freeciv/freeciv-web  GPL Licensed  - Copyright 2007-2015  Andreas Rosdal", fill="rgb(0,0,0)")
+  draw.text((130, 0), "Freeciv-web - https://github.com/fciv-net  GPL Licensed  - Copyright 2007-2023  FCIV.NETl", fill="rgb(0,0,0)")
 
   tileset_file = "freeciv-web-tileset-" + tileset_name + "-" + str(tileset_inc) + ".png"
   tileset.save(path.join(out_dir, tileset_file))
