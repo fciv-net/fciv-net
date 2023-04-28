@@ -22,7 +22,7 @@ var QUALITY_HIGH = 3;   // best quality, add features which require high-end gra
 
 var graphics_quality = QUALITY_HIGH;
 
-var terrain_quality = 8;
+var terrain_quality = 7; // 8 is too slow.
 
 var anaglyph_3d_enabled = false;
 var stats = null;

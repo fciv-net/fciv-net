@@ -1,0 +1,45 @@
+diff --git a/data/classic/units.ruleset b/data/classic/units.ruleset
+index a2fab15..989119d 100644
+--- a/data/classic/units.ruleset
++++ b/data/classic/units.ruleset
+@@ -1483,6 +1483,40 @@ Bombers are specialized airborne units that may\
+  units.\
+ ")
+ 
++[unit_zeppelin]
++name          = _("Zeppelin")
++class         = "Air"
++reqs          =
++  { "type", "name", "range"
++    "Tech", "Flight", "Player"
++  }
++obsolete_by   = "Stealth Bomber"
++graphic       = "u.zeppelin"
++graphic_alt   = "-"
++sound_move    = "m_bomber"
++sound_move_alt = "m_generic"
++sound_fight   = "f_bomber"
++sound_fight_alt = "f_generic"
++build_cost    = 45
++pop_cost      = 0
++attack        = 2
++defense       = 1
++hitpoints     = 20
++firepower     = 2
++move_rate     = 6
++vision_radius_sq = 24
++transport_cap = 0
++fuel          = 6
++uk_happy      = 0
++uk_shield     = 0
++uk_food       = 0
++uk_gold       = 0
++tp_defense    = "Alight"
++flags         = "FieldUnit", "OneAttack", "AirAttacker", "HasNoZOC", "Bomber"
++roles         = ""
++helptext      = _("A Zeppelin is a type of rigid airship named after the German inventor Count Ferdinand von Zeppelin who pioneered rigid airship development at the beginning of the 20th century.")
++
++
+ [unit_helicopter]
+ ; /* TRANS: unit type */
+ name          = _("Helicopter")

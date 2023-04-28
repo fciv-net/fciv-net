@@ -35,6 +35,10 @@ function get_unit_height_offset(punit)
     return 7;
   }
 
+  if (ptype['name'] == "Zeppelin") {
+    return 28;
+  }
+
   if (tile_has_extra(ptile, EXTRA_RIVER)) {
     return 1;
   }

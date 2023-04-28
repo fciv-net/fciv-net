@@ -32,6 +32,7 @@ declare -a PATCHLIST=(
   "load_command_confirmation"
   "endgame-mapimg"
   "add_packet_tile_height"
+  "zeppelin"
 )
 
 apply_patch() {

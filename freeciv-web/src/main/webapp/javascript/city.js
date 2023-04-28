@@ -665,8 +665,8 @@ function request_city_buy()
   var pplayer = client.conn.playing;
 
   // reset dialog page.
-  $("#dialog").remove();
-  $("<div id='dialog'></div>").appendTo("div#game_page");
+  $("#buy_dialog").remove();
+  $("<div id='buy_dialog'></div>").appendTo("div#game_page");
   var buy_price_string = "";
   var buy_question_string = "";
 
@@ -695,26 +695,26 @@ function request_city_buy()
   var dhtml = buy_question_string + treasury_text;
 
 
-  $("#dialog").html(dhtml);
+  $("#buy_dialog").html(dhtml);
 
-  $("#dialog").attr("title", "Buy It!");
-  $("#dialog").dialog({
+  $("#buy_dialog").attr("title", "Buy It!");
+  $("#buy_dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "95%" : "50%",
 			buttons: {
 				"Yes": function() {
 						send_city_buy();
-						$("#dialog").dialog('close');
+						$("#buy_dialog").dialog('close');
 				},
 				"No": function() {
-						$("#dialog").dialog('close');
+						$("#buy_dialog").dialog('close');
 
 				}
 			}
 		});
 
-  $("#dialog").dialog('open');
+  $("#buy_dialog").dialog('open');
 }
 
 
