@@ -123,6 +123,7 @@ function setup_window_size ()
     $("#game_status_panel_bottom").css("font-size", "0.8em");
 
     game_unit_panel_state = "minimized";
+    $("#pregame_player_list").hide();
 
   }
 
