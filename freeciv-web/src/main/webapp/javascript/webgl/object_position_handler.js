@@ -299,6 +299,19 @@ function update_city_position(ptile) {
 
     pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity);
     if (scene != null) scene.add(city_label);
+
+    if (city_has_building(pcity, improvement_id_by_name('Pyramids')) && pcity['pyramid_added'] == null) {
+      var pyramid = webgl_get_model("Pyramid", ptile);
+      if (pyramid == null) {
+        return;
+      }
+      pos = map_to_scene_coords(ptile['x'] + 1, ptile['y'] + 1);
+      pyramid.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
+      pyramid.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
+      pyramid.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
+      pcity['pyramid_added'] = true;
+      scene.add(pyramid);
+    }
     return;
   }
 
@@ -340,6 +353,19 @@ function update_city_position(ptile) {
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
       }
+    }
+
+    if (city_has_building(pcity, improvement_id_by_name('Pyramids')) && pcity['pyramid_added'] == null) {
+      var pyramid = webgl_get_model("Pyramid", ptile);
+      if (pyramid == null) {
+        return;
+      }
+      pos = map_to_scene_coords(ptile['x'] + 1, ptile['y'] + 1);
+      pyramid.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
+      pyramid.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
+      pyramid.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
+      pcity['pyramid_added'] = true;
+      scene.add(pyramid);
     }
 
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity)) {

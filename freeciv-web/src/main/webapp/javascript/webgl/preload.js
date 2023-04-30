@@ -204,6 +204,10 @@ function load_model(filename)
   if (filename == "Zeppelin") {
     modelscale = 7;
   }
+  if (filename == "Pyramid") {
+    modelscale = 5.8;
+  }
+
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
