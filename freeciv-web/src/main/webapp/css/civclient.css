@@ -132,7 +132,7 @@ body
 }
 
 #city_dialog {
-  font-size: 80%;
+  font-size: 90%;
 }
 
 #city_dialog_info {
@@ -404,7 +404,7 @@ body
 #tabs_menu {
   font-size: 0.98em;
   overflow: hidden;
-  background: #444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
+  background: black;
 }
 
 .chatbox_dialog {
@@ -448,7 +448,8 @@ body
 }
 
 #city_stats tr {
-  line-height: 11px;
+  line-height: 15px;
+  font-size: 14px;
 }
 
 .govbutton {
@@ -610,6 +611,7 @@ body
   overflow: auto;
   background-color: rgba(40,40,40,0.4);
   border: 1px solid black;
+  list-style-type: none;
 }
 
 #worklist_production_choices {
@@ -671,6 +673,9 @@ body
   font-size: 100%;
   cursor:pointer;
   cursor:hand;
+  float: left;
+  padding: 2px;
+  margin: 2px;
 }
 
 .worklist_table {
@@ -1117,4 +1122,43 @@ li.tech-both::before {
 
 .noTitleBar .ui-dialog-titlebar {
   height: 10px;
+}
+
+#worklist_production_choices .ui-selecting {
+  background: #FECA40;
+}
+
+#worklist_production_choices .ui-selected {
+  background: #337ab7;
+  color: white;
+}
+
+#worklist_production_choices {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#worklist_production_choices li {
+  margin: 3px;
+  padding: 2px;
+  font-size: 1.1em;
+  float: left;
+  height: 80px;
+
+}
+
+
+#city_current_worklist .ui-selected{
+  background: #337ab7;
+  color: white;
+}
+
+
+#city_change_production_btn {
+  padding: 10px;
+}
+
+#city_add_to_worklist_btn {
+  padding: 10px;
 }

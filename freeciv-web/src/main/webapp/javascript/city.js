@@ -227,7 +227,7 @@ function show_city_dialog(pcity)
   city_worklist_dialog(pcity);
   set_default_mapview_inactive();
 
-  center_tile_city(pcity);
+  //center_tile_city(pcity);
   show_city_worked_tiles();
 
   $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>"
@@ -560,8 +560,8 @@ function generate_production_list()
 	                    "helptext" : punit_type['helptext'],
                             "rule_name" : punit_type['rule_name'],
                             "build_cost" : punit_type['build_cost'],
-                            "unit_details" : punit_type['attack_strength'] + ", " 
-                                             + punit_type['defense_strength'] + ", " 
+                            "unit_details" : "Attack:" + punit_type['attack_strength'] + ", Defense:"
+                                             + punit_type['defense_strength'] + ", Firepower:"
                                              + punit_type['firepower'],
                             "sprite" : get_unit_type_image_sprite(punit_type)});
   }
@@ -1332,7 +1332,7 @@ function city_worklist_dialog(pcity)
     }
   }
 
-  var worklist_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td>Cost</td></tr>";
+  var worklist_html = "";
   for (var j = 0; j < universals_list.length; j++) {
     var universal = universals_list[j];
     var sprite = universal['sprite'];
@@ -1341,20 +1341,19 @@ function city_worklist_dialog(pcity)
       continue;
     }
 
-    worklist_html += "<tr class='prod_choice_list_item"
+    worklist_html += "<li class='prod_choice_list_item kindvalue_item ui-widget-content"
      + (can_city_build_now(pcity, universal['kind'], universal['value']) ?
         "" : " cannot_build_item")
      + "' data-wlitem='" + j + "' "
-     + " title=\"" + universal['helptext'] + "\">"
-     + "<td><div class='production_list_item_sub' style=' background: transparent url("
+     + " title=\"" +  universal['name'] + " " + universal['helptext'] + "\">"
+     + "<div class='production_list_item_sub' style=' background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
-           +"></div></td>"
-     + "<td class='prod_choice_name'>" + universal['name'] + "</td>"
-     + "<td class='prod_choice_cost'>" + universal['build_cost'] + "</td></tr>";
+           +"></div>"
+     + "</li>";
   }
-  worklist_html += "</table>";
+
   $("#city_current_worklist").html(worklist_html);
 
   populate_worklist_production_choices(pcity);
@@ -1407,15 +1406,7 @@ function city_worklist_dialog(pcity)
   var tab_h = $("#city_production_tab").height();
   $("#city_current_worklist").height(tab_h - 120);
   $("#worklist_production_choices").height(tab_h - 47);
-  /* TODO: remove all hacky sizing and positioning */
-  /* It would have been nice to use $("#city_current_worklist").position().top
-     for worklist_control padding-top, but that's 0 on first run.
-     73 is also wrong, as it depends on text size. */
-  if (tab_h > 250) {
-    $("#worklist_control").height(tab_h - 148).css("padding-top", 73);
-  } else {
-    $("#worklist_control").height(tab_h - 77);
-  }
+  $("#worklist_control").height("190px");
 
   var worklist_items = $("#city_current_worklist .prod_choice_list_item");
   var max_selection = Math.min(MAX_LEN_WORKLIST, worklist_items.length);
@@ -1428,8 +1419,8 @@ function city_worklist_dialog(pcity)
   }
 
   if (!is_touch_device()) {
-    $("#city_current_worklist .worklist_table").selectable({
-       filter: "tr",
+    $("#city_current_worklist").selectable({
+       filter: "li",
        selected: handle_current_worklist_select,
        unselected: handle_current_worklist_unselect
     });
@@ -1448,7 +1439,7 @@ function city_worklist_dialog(pcity)
 function populate_worklist_production_choices(pcity)
 {
   var production_list = generate_production_list();
-  var production_html = "<table class='worklist_table'><tr><td>Type</td><td>Name</td><td title='Attack/Defense/Firepower'>Info</td><td>Cost</td></tr>";
+  var production_html = "";
   for (var a = 0; a < production_list.length; a++) {
     var sprite = production_list[a]['sprite'];
     if (sprite == null) {
@@ -1460,27 +1451,26 @@ function populate_worklist_production_choices(pcity)
     var can_build = can_city_build_now(pcity, kind, value);
 
     if (can_build || opt_show_unreachable_items) {
-      production_html += "<tr class='prod_choice_list_item kindvalue_item"
+      production_html += "<li class='prod_choice_list_item kindvalue_item ui-widget-content "
        + (can_build ? "" : " cannot_build_item")
        + "' data-value='" + value + "' data-kind='" + kind + "'>"
-       + "<td><div class='production_list_item_sub' title=\"" + production_list[a]['helptext'] + "\" style=' background: transparent url("
+       + "<div class='production_list_item_sub ' title='" + production_list[a]['helptext'].slice(0, 150) +  " Cost: " + production_list[a]['build_cost']  + " Info: " + production_list[a]['unit_details'] + "' style=' background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
-           +"></div></td>"
-       + "<td class='prod_choice_name'>" + production_list[a]['text'] + "</td>"
-       + "<td class='prod_choice_name'>" + production_list[a]['unit_details'] + "</td>"
-       + "<td class='prod_choice_cost'>" + production_list[a]['build_cost'] + "</td></tr>";
+           +"></div><br>"
+           +"<div >" + production_list[a]['text'] + "</div>"
+           + "</li>";
      }
   }
-  production_html += "</table>";
+  production_html += "</div>";
 
   $("#worklist_production_choices").html(production_html);
   $("#worklist_production_choices .production_list_item_sub").tooltip();
 
   if (!is_touch_device()) {
-    $("#worklist_production_choices .worklist_table").selectable({
-       filter: "tr",
+    $("#worklist_production_choices").selectable({
+       filter: "li",
        selected: handle_worklist_select,
        unselected: handle_worklist_unselect
     });
@@ -1651,8 +1641,10 @@ function update_worklist_actions()
 
   if (production_selection.length === 1) {
     $("#city_change_production_btn").button("enable");
+    $("#city_change_production_btn").css("color", "blue");
   } else {
     $("#city_change_production_btn").button("disable");
+    $("#city_change_production_btn").css("color", "grey");
   }
 }
 
