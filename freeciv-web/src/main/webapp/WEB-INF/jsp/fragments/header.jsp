@@ -29,9 +29,9 @@
 				
 				</ul>
 			</li>
-			<li><a href="https://github.com/fciv-net/fciv-net">Development</a></li>
+			<li><a href="https://github.com/fciv-net/fciv-net">GitHub</a></li>
 
-			<li><a href="https://discord.gg/baFdjpNpTR">Discord chat</a></li>
+			<li><a href="https://discord.gg/baFdjpNpTR">Discord</a></li>
 
 		    <li><a href="https://www.fciv.net/wiki/">Wiki</a></li>
 
@@ -39,7 +39,7 @@
 
 		    <li><a href="/about">About</a></li>
 
-            <li><a href="https://www.twitter.com/fcivnet">@Fcivnet Twitter</a></li>
+            <li><a href="https://www.twitter.com/fcivnet">@Fcivnet</a></li>
 		
 </ul>
 		<form class="navbar-form navbar-right hidden-sm hidden-md" action="https://duckduckgo.com/" style="width: 220px;">
