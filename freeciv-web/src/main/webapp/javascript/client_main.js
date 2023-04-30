@@ -124,6 +124,8 @@ function setup_window_size ()
 
     game_unit_panel_state = "minimized";
     $("#pregame_player_list").hide();
+    $("#pregame_message_area").width($(window).width() - 20);
+    $("#pregame_text_input").width($(window).width() - 20);
 
   }
 
