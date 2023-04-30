@@ -126,6 +126,7 @@ function setup_window_size ()
     $("#pregame_player_list").hide();
     $("#pregame_message_area").width($(window).width() - 20);
     $("#pregame_text_input").width($(window).width() - 20);
+    $("#pregame_text_input").css("margin-left", "0px");
 
   }
 
