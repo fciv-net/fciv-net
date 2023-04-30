@@ -1454,7 +1454,7 @@ function populate_worklist_production_choices(pcity)
       production_html += "<li class='prod_choice_list_item kindvalue_item ui-widget-content "
        + (can_build ? "" : " cannot_build_item")
        + "' data-value='" + value + "' data-kind='" + kind + "'>"
-       + "<div class='production_list_item_sub ' title='" + production_list[a]['helptext'].slice(0, 150) +  " Cost: " + production_list[a]['build_cost']  + " Info: " + production_list[a]['unit_details'] + "' style=' background: transparent url("
+       + "<div class='production_list_item_sub ' title='" + production_list[a]['helptext'].slice(0, 150) +  " \nCost: " + production_list[a]['build_cost']  + " \n" + production_list[a]['unit_details'] + "' style=' background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
