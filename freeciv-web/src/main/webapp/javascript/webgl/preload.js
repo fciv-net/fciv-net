@@ -205,7 +205,7 @@ function load_model(filename)
     modelscale = 7;
   }
   if (filename == "Pyramid") {
-    modelscale = 5.8;
+    modelscale = 5.1;
   }
 
 
