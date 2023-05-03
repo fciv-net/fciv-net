@@ -2677,9 +2677,9 @@ function key_unit_pillage()
     if (tgt.length > 0) {
       if (tgt.length == 1) {
         request_unit_do_action(ACTION_PILLAGE, punit['id'], punit.tile,
-                               EXTRA_NONE);
+                               tgt[0]);
       } else {
-        popup_pillage_selection_dialog(punit);
+        popup_pillage_selection_dialog(punit, tgt);
       }
     }
   }
