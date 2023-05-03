@@ -312,6 +312,19 @@ function update_city_position(ptile) {
       pcity['pyramid_added'] = true;
       scene.add(pyramid);
     }
+    if (city_has_building(pcity, improvement_id_by_name('Lighthouse')) && pcity['lighthouse_added'] == null) {
+      var lighthouse = webgl_get_model("Lighthouse", ptile);
+      if (lighthouse == null) {
+        return;
+      }
+      pos = map_to_scene_coords(ptile['x'], ptile['y'] + 1);
+      lighthouse.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
+      lighthouse.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
+      lighthouse.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
+      pcity['lighthouse_added'] = true;
+      scene.add(lighthouse);
+    }
+
     return;
   }
 
@@ -366,6 +379,18 @@ function update_city_position(ptile) {
       pyramid.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
       pcity['pyramid_added'] = true;
       scene.add(pyramid);
+    }
+    if (city_has_building(pcity, improvement_id_by_name('Lighthouse')) && pcity['lighthouse_added'] == null) {
+      var lighthouse = webgl_get_model("Lighthouse", ptile);
+      if (lighthouse == null) {
+        return;
+      }
+      pos = map_to_scene_coords(ptile['x'], ptile['y'] + 1);
+      lighthouse.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
+      lighthouse.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
+      lighthouse.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
+      pcity['lighthouse_added'] = true;
+      scene.add(lighthouse);
     }
 
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity)) {

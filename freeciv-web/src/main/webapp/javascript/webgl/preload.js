@@ -207,6 +207,9 @@ function load_model(filename)
   if (filename == "Pyramid") {
     modelscale = 5.1;
   }
+  if (filename == "Lighthouse") {
+    modelscale = 7;
+  }
 
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
