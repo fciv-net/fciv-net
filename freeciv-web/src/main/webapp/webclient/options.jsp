@@ -54,6 +54,11 @@
     <b>Dialogs open minimized:</b> <input type='checkbox' name='dialogs_minimized_setting' id='dialogs_minimized_setting'>
   </div>
 </td>
+<td>
+<div class="main_menu_buttons">
+  <button id="city_labels_hide_button" type="button" class="button setting_button" onClick="hide_city_labels();" title="Hide city labels." >Hide city labels</button>
+</div>
+</td>
 </tr>
 </table>
 

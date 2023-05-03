@@ -204,11 +204,11 @@ function load_model(filename)
   if (filename == "Zeppelin") {
     modelscale = 7;
   }
-  if (filename == "Pyramid") {
-    modelscale = 5.1;
+  if (filename == "Pyramids") {
+    modelscale = 5.0;
   }
   if (filename == "Lighthouse") {
-    modelscale = 7;
+    modelscale = 4.8;
   }
 
 

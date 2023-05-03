@@ -300,30 +300,8 @@ function update_city_position(ptile) {
     pcity['webgl_label_hash'] = pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity);
     if (scene != null) scene.add(city_label);
 
-    if (city_has_building(pcity, improvement_id_by_name('Pyramids')) && pcity['pyramid_added'] == null) {
-      var pyramid = webgl_get_model("Pyramid", ptile);
-      if (pyramid == null) {
-        return;
-      }
-      pos = map_to_scene_coords(ptile['x'] + 1, ptile['y'] + 1);
-      pyramid.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
-      pyramid.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
-      pyramid.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
-      pcity['pyramid_added'] = true;
-      scene.add(pyramid);
-    }
-    if (city_has_building(pcity, improvement_id_by_name('Lighthouse')) && pcity['lighthouse_added'] == null) {
-      var lighthouse = webgl_get_model("Lighthouse", ptile);
-      if (lighthouse == null) {
-        return;
-      }
-      pos = map_to_scene_coords(ptile['x'], ptile['y'] + 1);
-      lighthouse.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
-      lighthouse.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
-      lighthouse.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
-      pcity['lighthouse_added'] = true;
-      scene.add(lighthouse);
-    }
+    add_wonder(ptile, pcity, scene, "Pyramids");
+    add_wonder(ptile, pcity, scene, "Lighthouse");
 
     return;
   }
@@ -368,30 +346,8 @@ function update_city_position(ptile) {
       }
     }
 
-    if (city_has_building(pcity, improvement_id_by_name('Pyramids')) && pcity['pyramid_added'] == null) {
-      var pyramid = webgl_get_model("Pyramid", ptile);
-      if (pyramid == null) {
-        return;
-      }
-      pos = map_to_scene_coords(ptile['x'] + 1, ptile['y'] + 1);
-      pyramid.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
-      pyramid.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
-      pyramid.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
-      pcity['pyramid_added'] = true;
-      scene.add(pyramid);
-    }
-    if (city_has_building(pcity, improvement_id_by_name('Lighthouse')) && pcity['lighthouse_added'] == null) {
-      var lighthouse = webgl_get_model("Lighthouse", ptile);
-      if (lighthouse == null) {
-        return;
-      }
-      pos = map_to_scene_coords(ptile['x'], ptile['y'] + 1);
-      lighthouse.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] + 2);
-      lighthouse.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
-      lighthouse.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] + 2);
-      pcity['lighthouse_added'] = true;
-      scene.add(lighthouse);
-    }
+    add_wonder(ptile, pcity, scene, "Pyramids");
+    add_wonder(ptile, pcity, scene, "Lighthouse");
 
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity)) {
       update_city_label(pcity);
@@ -488,6 +444,28 @@ function update_tile_extras(ptile) {
 
 }
 
+/****************************************************************************
+  Adds a wonder 3d model.
+****************************************************************************/
+function add_wonder(ptile, pcity, scene, wonder_name) {
+    if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
+      var wonder = webgl_get_model(wonder_name, ptile);
+      if (wonder == null) {
+        return;
+      }
+      var nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
+      if (nexttile == null || is_ocean_tile(nexttile)) nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
+      if (nexttile == null || is_ocean_tile(nexttile)) nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
+      if (nexttile == null || is_ocean_tile(nexttile)) nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
+      var height = 5 + nexttile['height'] * 100;
+      pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
+      wonder.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 1);
+      wonder.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
+      wonder.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 1);
+      pcity[wonder_name + '_added'] = true;
+      scene.add(wonder);
+    }
+}
 
 /****************************************************************************
   Adds or removes a extra tile 3d model.

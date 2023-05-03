@@ -98,3 +98,16 @@ function is_city_tile(ptile, active_city)
   return false;
 
 }
+
+/****************************************************************************
+...
+****************************************************************************/
+function hide_city_labels() {
+  for (var cid in city_label_positions) {
+    var city_label = city_label_positions[cid];
+    city_label.visible = false;
+
+  }
+
+
+}
