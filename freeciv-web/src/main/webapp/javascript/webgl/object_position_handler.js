@@ -453,10 +453,21 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       if (wonder == null) {
         return;
       }
-      var nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
-      if (nexttile == null || is_ocean_tile(nexttile)) nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
-      if (nexttile == null || is_ocean_tile(nexttile)) nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
-      if (nexttile == null || is_ocean_tile(nexttile)) nexttile = mapstep(ptile, Math.floor(Math.random() * 8));
+      var nexttile = ptile;
+      for (var i = 0; i < 30; i++) {
+        var dir = Math.floor(Math.random() * 8);
+        var ntile = mapstep(ptile, dir);
+        var nexttile = mapstep(ntile, dir);
+        if (wonder_name == 'Lighthouse' && !is_ocean_tile_near(nexttile)) {
+          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          continue;
+        }
+        if (nexttile != null) {
+          break;
+        }
+      }
+      if (nexttile == null) return;
+
       var height = 5 + nexttile['height'] * 100;
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
       wonder.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 1);

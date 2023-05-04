@@ -21,6 +21,8 @@
  * You can look up a setting by its name or by its id number. */
 var server_settings = {};
 
+var statsview = null;
+
 /****************************************************************
  The "options" file handles actual "options", and also view options,
  message options, dialog/report settings, cma settings, server settings,
@@ -169,9 +171,20 @@ function init_options_dialog()
 
 function show_fps()
 {
-  stats = new Stats();
-  stats.showPanel( 0);
-  document.body.appendChild( stats.dom );
-  set_default_mapview_active();
+  if (statsview != null) {
+    $(statsview).hide();
+    $("#fps_button").text("Show fps");
+    statsview = null;
+
+  } else {
+
+    stats = new Stats();
+    stats.showPanel( 0);
+    document.body.appendChild( stats.dom );
+    set_default_mapview_active();
+    statsview = stats.dom;
+    $("#fps_button").text("Hide fps");
+    $(statsview).css("top", "60px");
+  }
 
 }
