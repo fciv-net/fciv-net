@@ -200,6 +200,9 @@ function load_model(filename)
   if (filename == "Mine") {
     modelscale = 15;
   }
+  if (filename == "Oil") {
+    modelscale = 18;
+  }
 
   if (filename == "Zeppelin") {
     modelscale = 7;

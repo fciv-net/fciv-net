@@ -396,7 +396,8 @@ function update_tile_extras(ptile) {
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null && extra_visibilities[ptile['index']] == null) {
-    if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales" || extra_resource['name'] == "Oasis") {
+    if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales" || extra_resource['name'] == "Oasis" || extra_resource['name'] == "Wine"
+         || extra_resource['name'] == "Iron" || extra_resource['name'] == "Spice" || extra_resource['name'] == "Ivory" || extra_resource['name'] == "Oil") {
       update_tile_extra_update_model(extra_resource['id'], extra_resource['name'], ptile);
     } else {
       var key = extra_resource['graphic_str'];
@@ -497,6 +498,12 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (extra_name == "Mine") {
       height -= 7;
+    }
+    if (extra_name == "Wine" || extra_name == "Iron" || extra_name == "Spice" || extra_name == "Ivory" ) {
+      height -= 7;
+    }
+    if (extra_name == "Oil") {
+      height -= 6;
     }
     if (extra_name == "Ruins") {
       height -= 8;
