@@ -213,7 +213,9 @@ function load_model(filename)
   if (filename == "Lighthouse") {
     modelscale = 4.8;
   }
-
+  if (filename == 'Iron') {
+    modelscale = 9;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;

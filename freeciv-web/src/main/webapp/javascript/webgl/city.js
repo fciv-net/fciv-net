@@ -19,6 +19,7 @@
 
 
 var city_worked_positions = {};
+var city_labels_visible = true;
 
 /****************************************************************************
 Show labels with worked city tiles.
@@ -60,6 +61,27 @@ function show_city_worked_tiles()
           scene.add(mesh);
         }
       }
+    } else if (active_city != null && ptile != null && ptile['worked'] != null
+                && active_city['id'] != ptile['worked'] && ptile['worked'] > 0) {
+      // tile worked by other city
+      var ctile = city_tile(active_city);
+      var d = map_distance_vector(ctile, ptile);
+      var idx = get_city_dxy_to_index(d[0], d[1], active_city);
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      var height = 5 + ptile['height'] * 100;
+
+      if (city_worked_positions[ptile['index']] == null) {
+        var material = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.5} );
+        var mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 16, 30), material );
+        city_worked_positions[ptile['index']] = mesh;
+        mesh.position.set(pos['x'], height + 6, pos['y'] - 4);
+        mesh.rotation.x = -1 * Math.PI / 2;
+        if (scene != null) {
+          scene.add(mesh);
+        }
+      }
+
+
     }
   }
 
@@ -103,10 +125,20 @@ function is_city_tile(ptile, active_city)
 ...
 ****************************************************************************/
 function hide_city_labels() {
-  for (var cid in city_label_positions) {
-    var city_label = city_label_positions[cid];
-    city_label.visible = false;
-
+  if (city_labels_visible) {
+    for (var cid in city_label_positions) {
+      var city_label = city_label_positions[cid];
+      city_label.visible = false;
+    }
+    city_labels_visible = false;
+    $("#city_labels_hide_button").text("Show city labels");
+  } else {
+    for (var cid in city_label_positions) {
+      var city_label = city_label_positions[cid];
+      city_label.visible = true;
+    }
+    city_labels_visible = true;
+    $("#city_labels_hide_button").text("Hide city labels");
   }
 
 

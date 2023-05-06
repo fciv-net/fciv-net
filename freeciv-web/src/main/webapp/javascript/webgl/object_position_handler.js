@@ -127,9 +127,7 @@ function update_unit_position(ptile) {
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
         selected_mesh.castShadow = true;
-        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 2);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 2);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 2);
+        selected_mesh-position.set(pos['x'] - 2, height + 2, pos['y'] - 2);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
@@ -284,9 +282,7 @@ function update_city_position(ptile) {
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls", ptile);
       if (city_walls != null) {
-        city_walls.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-        city_walls.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
-        city_walls.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+        city_walls.position.set(pos['x'] - 10, height - 4, pos['y'] - 10);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
@@ -339,7 +335,7 @@ function update_city_position(ptile) {
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls", ptile);
       if (city_walls != null) {
-        city_walls.position.set(pos['x'] - 10, height, pos['y'] - 10);
+        city_walls.position.set(pos['x'] - 10, height - 4, pos['y'] - 10);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
@@ -459,6 +455,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
         var dir = Math.floor(Math.random() * 8);
         var ntile = mapstep(ptile, dir);
         var nexttile = mapstep(ntile, dir);
+        if (is_ocean_tile(nexttile)) {
+          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          continue;
+        }
         if (wonder_name == 'Lighthouse' && !is_ocean_tile_near(nexttile)) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
@@ -470,10 +470,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       if (nexttile == null) return;
 
       var height = 5 + nexttile['height'] * 100;
+      if (wonder_name == 'Lighthouse') height += 3;
+
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
-      wonder.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 1);
-      wonder.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 7);
-      wonder.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 1);
+      wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
       pcity[wonder_name + '_added'] = true;
       scene.add(wonder);
     }

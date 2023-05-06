@@ -65,11 +65,6 @@ function webgl_start_renderer()
     new_mapview_height = $(window).height() - height_offset - 40;
   }
 
-  if (!Detector.webgl) {
-    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
-    return;
-  }
-
   console.log("Three.js " + THREE.REVISION);
   THREE.ColorManagement.enabled = false;
 

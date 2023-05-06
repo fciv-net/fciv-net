@@ -61,6 +61,11 @@ function webgl_preload_complete()
 
 
 function renderer_init() {
+  if (!Detector.webgl) {
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    return;
+  }
+
   if (C_S_RUNNING == client_state() || C_S_OVER == client_state()) {
     webgl_start_renderer();
     init_webgl_mapview();

@@ -175,7 +175,6 @@ function show_fps()
     $(statsview).hide();
     $("#fps_button").text("Show fps");
     statsview = null;
-
   } else {
 
     stats = new Stats();
