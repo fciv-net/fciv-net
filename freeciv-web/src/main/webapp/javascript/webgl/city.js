@@ -70,7 +70,7 @@ function show_city_worked_tiles()
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       var height = 5 + ptile['height'] * 100;
 
-      if (city_worked_positions[ptile['index']] == null) {
+      if (city_worked_positions[ptile['index']] == null && Math.abs(d[0]) <= 2 && Math.abs(d[1]) <= 2) {
         var material = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.5} );
         var mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 16, 30), material );
         city_worked_positions[ptile['index']] = mesh;
