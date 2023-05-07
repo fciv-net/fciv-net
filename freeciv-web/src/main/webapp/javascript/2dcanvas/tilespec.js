@@ -326,9 +326,7 @@ function get_city_flag_sprite(pcity) {
   if (nation_id == null) return {};
   var nation = nations[nation_id];
   if (nation == null) return {};
-  return {"key" : "f." + nation['graphic_str'],
-          "offset_x" : city_flag_offset_x,
-          "offset_y" : - city_flag_offset_y};
+  return {"key" : "f." + nation['graphic_str']};
 }
 
 /**********************************************************************
@@ -429,9 +427,7 @@ function get_unit_nation_flag_sprite(punit)
   var nation = nations[nation_id];
   var unit_offset = get_unit_anim_offset(punit);
 
-  return {"key" : "f.shield." + nation['graphic_str'],
-          "offset_x" : unit_flag_offset_x + unit_offset['x'],
-          "offset_y" : - unit_flag_offset_y + unit_offset['y']};
+  return {"key" : "f.shield." + nation['graphic_str']};
 }
 
 /**********************************************************************
@@ -445,9 +441,7 @@ function get_unit_nation_flag_normal_sprite(punit)
   var nation = nations[nation_id];
   var unit_offset = get_unit_anim_offset(punit);
 
-  return {"key" : "f." + nation['graphic_str'],
-          "offset_x" : unit_flag_offset_x + unit_offset['x'],
-          "offset_y" : - unit_flag_offset_y + unit_offset['y']};
+  return {"key" : "f." + nation['graphic_str']};
 }
 
 /**********************************************************************
@@ -455,9 +449,7 @@ function get_unit_nation_flag_normal_sprite(punit)
 ***********************************************************************/
 function get_unit_stack_sprite(punit)
 {
-  return {"key" : "unit.stack",
-          "offset_x" : unit_flag_offset_x + -25,
-          "offset_y" : - unit_flag_offset_y - 15};
+  return {"key" : "unit.stack"};
 }
 
 /**********************************************************************
@@ -472,9 +464,7 @@ function get_unit_hp_sprite(punit)
   var unit_offset = get_unit_anim_offset(punit);
 
 
-  return {"key" : "unit.hp_" + healthpercent,
-          "offset_x" : unit_flag_offset_x + -25 + unit_offset['x'],
-          "offset_y" : - unit_flag_offset_y - 15 + unit_offset['y']};
+  return {"key" : "unit.hp_" + healthpercent};
 }
 
 /**********************************************************************
@@ -482,9 +472,7 @@ function get_unit_hp_sprite(punit)
 ***********************************************************************/
 function get_unit_veteran_sprite(punit)
 {
-  return {"key" : "unit.vet_" + punit['veteran'],
-          "offset_x" : unit_activity_offset_x - 20,
-          "offset_y" : - unit_activity_offset_y - 10};
+  return {"key" : "unit.vet_" + punit['veteran']};
 }
 
 /**********************************************************************
@@ -499,107 +487,69 @@ function get_unit_activity_sprite(punit)
     /* TODO: Use target specific sprites. */
     case ACTIVITY_CLEAN:
     case ACTIVITY_POLLUTION:
-     return {"key" : "unit.pollution",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+     return {"key" : "unit.pollution"};
 
     case ACTIVITY_FALLOUT:
-      return {"key" : "unit.fallout",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.fallout"};
 
     case ACTIVITY_MINE:
       return {"key"      : -1 == act_tgt ?
                              "unit.plant" :
-                             tileset_extra_id_activity_graphic_tag(act_tgt),
-              "offset_x" : unit_activity_offset_x,
-              "offset_y" : - unit_activity_offset_y};
+                             tileset_extra_id_activity_graphic_tag(act_tgt)};
 
     case ACTIVITY_PLANT:
-      return {"key" : "unit.plant",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.plant"};
 
     case ACTIVITY_IRRIGATE:
       return {"key" : -1 == act_tgt ?
                         "unit.irrigate" :
-                        tileset_extra_id_activity_graphic_tag(act_tgt),
-              "offset_x" : unit_activity_offset_x,
-              "offset_y" : - unit_activity_offset_y};
+                        tileset_extra_id_activity_graphic_tag(act_tgt)};
 
     case ACTIVITY_CULTIVATE:
-      return {"key" : "unit.cultivate",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.cultivate"};
 
     case ACTIVITY_FORTIFIED:
-      return {"key" : "unit.fortified",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.fortified"};
 
     case ACTIVITY_BASE:
-      return {"key" : tileset_extra_id_activity_graphic_tag(act_tgt),
-              "offset_x" : unit_activity_offset_x,
-              "offset_y" : - unit_activity_offset_y};
+      return {"key" : tileset_extra_id_activity_graphic_tag(act_tgt)};
 
     case ACTIVITY_SENTRY:
-      return {"key" : "unit.sentry",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.sentry"};
 
     case ACTIVITY_PILLAGE:
-      return {"key" : "unit.pillage",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.pillage"};
 
     case ACTIVITY_GOTO:
-      return {"key" : "unit.goto",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.goto"};
 
     case ACTIVITY_EXPLORE:
-      return {"key" : "unit.auto_explore",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.auto_explore"};
 
     case ACTIVITY_TRANSFORM:
-      return {"key" : "unit.transform",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.transform"};
 
     case ACTIVITY_FORTIFYING:
-      return {"key" : "unit.fortifying",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.fortifying"};
 
     case ACTIVITY_GEN_ROAD:
-      return {"key" : tileset_extra_id_activity_graphic_tag(act_tgt),
-              "offset_x" : unit_activity_offset_x,
-              "offset_y" : - unit_activity_offset_y};
+      return {"key" : tileset_extra_id_activity_graphic_tag(act_tgt)};
 
     case ACTIVITY_CONVERT:
-      return {"key" : "unit.convert",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.convert"};
   }
 
   if (unit_has_goto(punit)) {
-      return {"key" : "unit.goto",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : - unit_activity_offset_y};
+      return {"key" : "unit.goto"};
   }
 
   switch (punit['ssa_controller']) {
   case SSA_NONE:
     break;
   case SSA_AUTOSETTLER:
-    return {"key" : "unit.auto_settler",
-          "offset_x" : 20, //FIXME.
-          "offset_y" : - unit_activity_offset_y};
+    return {"key" : "unit.auto_settler"};
   case SSA_AUTOEXPLORE:
-    return {"key" : "unit.auto_explore",
-          "offset_x" : unit_activity_offset_x,
-          "offset_y" : -unit_activity_offset_y};
+    return {"key" : "unit.auto_explore"};
   }
 
   return null;

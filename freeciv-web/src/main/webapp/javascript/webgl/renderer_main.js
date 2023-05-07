@@ -70,7 +70,9 @@ function renderer_init() {
     webgl_start_renderer();
     init_webgl_mapview();
     init_webgl_mapctrl();
-    mapdeco_init();
+    init_game_unit_panel();
+    init_chatbox();
+   keyboard_input=true;
     $.unblockUI();
     setTimeout("$('#mapcanvas').fadeIn(2500);", 300);
   }

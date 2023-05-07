@@ -31,6 +31,14 @@ var fullfog = [];
 var GOTO_DIR_DX = [0, 1, 2, -1, 1, -2, -1, 0];
 var GOTO_DIR_DY = [-2, -1, 0, -1, 1, 0, 1, 2];
 
+var mapview_slide = {};
+mapview_slide['active'] = false;
+mapview_slide['dx'] = 0;
+mapview_slide['dy'] = 0;
+mapview_slide['i'] = 0;
+mapview_slide['max'] = 100;
+mapview_slide['slide_time'] = 700;
+
 
 
 /**************************************************************************
