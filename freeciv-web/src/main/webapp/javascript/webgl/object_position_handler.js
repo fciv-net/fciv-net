@@ -127,7 +127,7 @@ function update_unit_position(ptile) {
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
         selected_mesh.castShadow = true;
-        selected_mesh-position.set(pos['x'] - 2, height + 2, pos['y'] - 2);
+        selected_mesh.position.set(pos['x'] - 2, height + 2, pos['y'] - 2);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
