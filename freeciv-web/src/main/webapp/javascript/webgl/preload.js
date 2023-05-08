@@ -216,7 +216,18 @@ function load_model(filename)
   if (filename == 'Iron') {
     modelscale = 9;
   }
-
+  if (filename == 'Furs') {
+    modelscale = 4;
+  }
+  if (filename == 'Gems') {
+    modelscale = 3;
+  }
+  if (filename == 'Coal') {
+    modelscale = 9;
+  }
+  if (filename == 'Fruit') {
+    modelscale = 6;
+  }
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 
