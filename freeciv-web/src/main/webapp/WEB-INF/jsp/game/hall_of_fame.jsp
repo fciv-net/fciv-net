@@ -31,6 +31,17 @@
 
 	<div class="container">
 
+		<div class="jumbotron">
+			<h2>Game of the day</h2>
+
+			<div class="row">
+				<img src="/data/game_of_the_day.png" alt="" style="width: 99%;">
+
+			</div>
+
+		</div> <!-- end jumbotron -->
+
+
  		<div class="row">
      			<div class="col-md-12">
 
