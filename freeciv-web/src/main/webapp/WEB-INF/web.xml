@@ -83,6 +83,17 @@
 		<url-pattern>/errorlist</url-pattern>
 	</servlet-mapping>
 
+	<!-- /save_game_of_the_day -->
+	<servlet>
+		<servlet-name>SaveGameOfTheDay</servlet-name>
+		<servlet-class>org.freeciv.servlet.SaveGameOfTheDay</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SaveGameOfTheDay</servlet-name>
+		<url-pattern>/save_game_of_the_day</url-pattern>
+	</servlet-mapping>
+
 	<!-- /fcivnet_is_the_best_way_to_play_freeciv_in_3d -->
 	<servlet>
 		<servlet-name>fcivnet_is_the_best_way_to_play_freeciv_in_3d</servlet-name>

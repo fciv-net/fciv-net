@@ -101,7 +101,7 @@ function webgl_start_renderer()
     enable_antialiasing = false;
   }
 
-  maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing} );
+  maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
   maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
   if (graphics_quality == QUALITY_HIGH) {
     maprenderer.shadowMap.enabled = true;

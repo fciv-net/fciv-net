@@ -233,10 +233,6 @@ function fractionalize(s) {
   else if (s.toString().endsWith(".25")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#xBC;";
   else if (s.toString().endsWith(".05")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#8203;1&#x2044;20";
   else if (s.toString().endsWith(".1")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#x2152;";
-//  else if (s.toString().endsWith(".33")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#x2153;";
-//  else if (s.toString().endsWith(".34")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#x2153;";
-//  else if (s.toString().endsWith(".66")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#x2154;";
-//  else if (s.toString().endsWith(".67")) s = "" + (Math.trunc(s) ? Math.trunc(s) : "") + "&#x2154;";
 
   return s;
 }
@@ -247,4 +243,14 @@ function fractionalize(s) {
 function forceLower(strnput)
 {
   strnput.value=strnput.value.toLowerCase();
+}
+
+
+function submit_game_of_the_day() {
+
+ html2canvas(document.body).then(function(canvas) {
+    var screenshot = canvas.toDataURL("image/png");
+    $.post( "/save_game_of_the_day", screenshot);
+  });
+
 }

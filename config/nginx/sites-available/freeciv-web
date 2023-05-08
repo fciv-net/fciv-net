@@ -37,7 +37,7 @@
         }
 
 	# location for maps and logs in the data "webapp"
-	location ~ /data/.*\.(gif|log)$ {
+	location ~ /data/.*\.(gif|log|png)$ {
         proxy_pass         http://localhost:8080;
         proxy_redirect     off;
 
