@@ -51,6 +51,8 @@ var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
 
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems"];
+
 /****************************************************************************
   Handles unit positions
 ****************************************************************************/
@@ -392,10 +394,7 @@ function update_tile_extras(ptile) {
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null && extra_visibilities[ptile['index']] == null) {
-    if (extra_resource['name'] == "Fish" || extra_resource['name'] == "Whales" || extra_resource['name'] == "Oasis" || extra_resource['name'] == "Wine"
-         || extra_resource['name'] == "Iron" || extra_resource['name'] == "Spice" || extra_resource['name'] == "Ivory" || extra_resource['name'] == "Oil"
-         || extra_resource['name'] == "Coal" || extra_resource['name'] == "Fruit" || extra_resource['name'] == "Furs" || extra_resource['name'] == "Gold"
-         || extra_resource['name'] == "Gems") {
+    if (special_resources.includes(extra_resource['name'])) {
       update_tile_extra_update_model(extra_resource['id'], extra_resource['name'], ptile);
     } else {
       var key = extra_resource['graphic_str'];
@@ -528,7 +527,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
     if (extra_name == "Furs") {
-      model.rotateOnAxis(new THREE.Vector3(1,0,0).normalize(), (Math.PI  / 2));
+      model.rotateOnAxis(new THREE.Vector3(1,0,0).normalize(), -1 * (Math.PI  / 2));
     }
     if (scene != null) scene.add(model);
 
