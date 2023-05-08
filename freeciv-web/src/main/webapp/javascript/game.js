@@ -111,15 +111,15 @@ function update_game_status_panel() {
   if ($(window).width() - sum_width() > 800) {
     if ($("#game_status_panel_top").length) {
       $("#game_status_panel_top").show();
-      $("#game_status_panel_bottom").hide();
+      $("#game_status_panel_bar").hide();
       $("#game_status_panel_top").html(status_html);
     }
   } else {
-    if ($("#game_status_panel_bottom").length) {
+    if ($("#game_status_panel_bar").length) {
       $("#game_status_panel_top").hide();
-      $("#game_status_panel_bottom").show();
-      $("#game_status_panel_bottom").css("width", $(window).width());
-      $("#game_status_panel_bottom").html(status_html);
+      $("#game_status_panel_bar").show();
+      $("#game_status_panel_bar").css("width", $(window).width());
+      $("#game_status_panel_bar").html(status_html);
     }
   }
 

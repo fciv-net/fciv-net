@@ -20,7 +20,7 @@
     </div>
 
     <%-- Game status panel --%>
-    <div id="game_status_panel_bottom"></div>
+    <div id="game_status_panel_bar"></div>
 
 
     <%-- Overview mini-map --%>

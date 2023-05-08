@@ -300,14 +300,15 @@ body
 }
 
 
-#game_status_panel_bottom {
+#game_status_panel_bar {
   position: absolute;
   color: #ffffff;
   height: 23px;
   text-align: center;
-  bottom: 25px;
+  top: 50px;
   overflow: hidden;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 70%;
 }
 
 #game_status_panel_top {

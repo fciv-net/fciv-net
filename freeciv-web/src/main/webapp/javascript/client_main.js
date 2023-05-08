@@ -120,7 +120,7 @@ function setup_window_size ()
     $("#freeciv_logo").hide();
     overview_active = false;
 
-    $("#game_status_panel_bottom").css("font-size", "0.8em");
+    $("#game_status_panel_bar").css("font-size", "0.8em");
 
     game_unit_panel_state = "minimized";
     $("#pregame_player_list").hide();

@@ -183,7 +183,7 @@ function show_fps()
     set_default_mapview_active();
     statsview = stats.dom;
     $("#fps_button").text("Hide fps");
-    $(statsview).css("top", "60px");
+    $(statsview).css("top", "48px");
   }
 
 }
