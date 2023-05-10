@@ -247,10 +247,12 @@ function forceLower(strnput)
 
 
 function submit_game_of_the_day() {
+ update_game_status_panel(true);
  set_default_mapview_active();
  html2canvas(document.querySelector("#mapview_canvas_div")).then(function(canvas) {
     var screenshot = canvas.toDataURL("image/png");
     $.post( "/save_game_of_the_day", screenshot);
   });
+  update_game_status_panel();
   swal("Your game map image has now been submitted to the Game of the Day");
 }

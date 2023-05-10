@@ -72,7 +72,7 @@ function civ_population(playerno) {
 /**************************************************************************
   ...
 **************************************************************************/
-function update_game_status_panel() {
+function update_game_status_panel(force_status_on_map) {
 
   if (C_S_RUNNING != client_state() || is_small_screen()) return;
 
@@ -108,7 +108,7 @@ function update_game_status_panel() {
     status_html += "Turn: <b>" + game_info['turn'] + "</b>  ";
   }
 
-  if ($(window).width() - sum_width() > 800) {
+  if (force_status_on_map != true && $(window).width() - sum_width() > 800) {
     if ($("#game_status_panel_top").length) {
       $("#game_status_panel_top").show();
       $("#game_status_panel_bar").hide();
