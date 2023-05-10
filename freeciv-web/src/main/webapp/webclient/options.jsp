@@ -79,6 +79,9 @@
   <td>
     <button id="fps_button" type="button" class="button setting_button" onClick="show_fps();">Show fps</button>
   </td>
+  <td>
+    <button id="hof_button" type="button" class="button setting_button" onClick="submit_game_of_the_day();">Submit Game of the Day</button>
+  </td>
 </tr>
 </table>
 

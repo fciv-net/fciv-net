@@ -1154,10 +1154,6 @@ function handle_end_phase(packet)
 {
   chatbox_clip_messages();
 
-  if (game_info['turn'] % 100 == 0) {
-    setTimeout(submit_game_of_the_day, 10000);
-  }
-
 }
 
 /* Done. */

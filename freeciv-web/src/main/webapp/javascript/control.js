@@ -2341,7 +2341,9 @@ function activate_goto_last(last_order, last_action)
 function deactivate_goto(will_advance_unit_focus)
 {
   goto_active = false;
-  controls.enabled = true;
+  if (controls != null) {
+    controls.enabled = true;
+  }
   $("#mapcanvas").css("cursor", "default");
   goto_request_map = {};
   goto_turns_request_map = {};

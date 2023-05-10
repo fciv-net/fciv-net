@@ -2,10 +2,12 @@ package org.freeciv.servlet;
 
 import org.apache.commons.io.FileUtils;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Base64;
 
@@ -39,8 +41,16 @@ public class SaveGameOfTheDay extends HttpServlet {
             System.out.println(image);
             image = image.replace("data:image/png;base64,", "");
             byte[] image_of_the_day = Base64.getDecoder().decode(image.getBytes("UTF-8"));
-            File mapimg = new File(mapDstImgPaths + "game_of_the_day.png");
-            FileUtils.writeByteArrayToFile(mapimg, image_of_the_day);
+            if (image_of_the_day.length > 5000000) {
+                return;
+            }
+            ByteArrayInputStream bais = new ByteArrayInputStream(image_of_the_day);
+            BufferedImage bufferedImage = ImageIO.read(bais);
+            if (bufferedImage.getWidth() > 100 && bufferedImage.getWidth() < 10000) {
+                File mapimg = new File(mapDstImgPaths + "game_of_the_day.png");
+                FileUtils.writeByteArrayToFile(mapimg, image_of_the_day);
+            }
+            bais.close();
 
         } catch (Exception ex) {
             // Ignore.

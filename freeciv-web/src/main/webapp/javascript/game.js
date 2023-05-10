@@ -89,7 +89,7 @@ function update_game_status_panel() {
       net_income = "+" + pplayer['expected_income'];
     }
 
-    if (!is_small_screen()) status_html += "<b>" + nations[pplayer['nation']]['adjective'] + "</b> &nbsp;&nbsp; <i class='fa fa-child' aria-hidden='true' title='Population'></i>: ";
+    if (!is_small_screen()) status_html += "<b>" + pplayer['name'] + " - " + nations[pplayer['nation']]['adjective'] + "</b> &nbsp;&nbsp; <i class='fa fa-child' aria-hidden='true' title='Population'></i>: ";
     if (!is_small_screen()) status_html += "<b>" + civ_population(client.conn.playing.playerno) + "</b>  &nbsp;&nbsp;";
     if (!is_small_screen()) status_html += "<i class='fa fa-clock-o' aria-hidden='true' title='Year (turn)'></i>: <b>" + get_year_string() + "</b> &nbsp;&nbsp;";
     status_html += "<img src='/images/coinage.png'> ";

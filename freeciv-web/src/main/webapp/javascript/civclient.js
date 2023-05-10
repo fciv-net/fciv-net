@@ -57,6 +57,11 @@ $(document).ready(function() {
 **************************************************************************/
 function civclient_init()
 {
+  if (!Detector.webgl) {
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card.  ");
+    return;
+  }
+
   $.blockUI.defaults['css']['backgroundColor'] = "#222";
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;

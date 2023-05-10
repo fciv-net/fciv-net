@@ -33,10 +33,9 @@ var stats = null;
 function init_webgl_renderer()
 {
   if (!Detector.webgl) {
-    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. ");
     return;
   }
-
 
   var stored_graphics_quality_setting = simpleStorage.get("graphics_quality", "");
   if (stored_graphics_quality_setting != null && stored_graphics_quality_setting > 0) {
@@ -62,7 +61,7 @@ function webgl_preload_complete()
 
 function renderer_init() {
   if (!Detector.webgl) {
-    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. Please go back and try the 2D version instead. ");
+    swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. ");
     return;
   }
 
