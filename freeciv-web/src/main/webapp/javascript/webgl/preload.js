@@ -228,6 +228,15 @@ function load_model(filename)
   if (filename == 'Fruit') {
     modelscale = 6;
   }
+  if (filename == 'Silk') {
+    modelscale = 4;
+  }
+  if (filename == 'Resources') {
+    modelscale = 4;
+  }
+  if (filename == 'Fallout') {
+    modelscale = 6;
+  }
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 

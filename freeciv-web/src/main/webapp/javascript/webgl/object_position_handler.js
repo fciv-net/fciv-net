@@ -51,7 +51,7 @@ var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
 
-var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems"];
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout"];
 
 /****************************************************************************
   Handles unit positions
@@ -515,6 +515,10 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     if (extra_name == "Furs") {
       height -= 2;
     }
+    if (extra_name == "Resources") {
+      height -= 2;
+    }
+
     var model = webgl_get_model(extra_name, ptile);
     if (model == null) {
       return;
@@ -526,7 +530,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 1);
     model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
     model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
-    if (extra_name == "Furs") {
+    if (extra_name == "Furs" || extra_name == "Silk") {
       model.rotateOnAxis(new THREE.Vector3(1,0,0).normalize(), -1 * (Math.PI  / 2));
     }
     if (scene != null) scene.add(model);
