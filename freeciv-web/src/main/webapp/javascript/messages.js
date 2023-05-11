@@ -35,8 +35,8 @@ function init_chatbox()
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "38%",
-			height: (is_small_screen() ? 90 : 160),
+			width: "62%",
+			height: (is_small_screen() ? 100 : 200),
 			resizable: true,
 			dialogClass: 'chatbox_dialog no-close noTitleBar',
 			closeOnEscape: false,

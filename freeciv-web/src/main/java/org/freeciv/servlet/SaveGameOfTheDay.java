@@ -3,6 +3,7 @@ package org.freeciv.servlet;
 import org.apache.commons.io.FileUtils;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Base64;
+import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Saves a game of the day image.
@@ -23,22 +26,9 @@ public class SaveGameOfTheDay extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         String image = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader bufferedReader = null;
 
         try {
-            InputStream inputStream = request.getInputStream();
-            if (inputStream != null) {
-                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                char[] charBuffer = new char[128];
-                int bytesRead = -1;
-                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-                    stringBuilder.append(charBuffer, 0, bytesRead);
-                }
-            }
-
-            image = stringBuilder.toString();
-            System.out.println(image);
+            image = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
             image = image.replace("data:image/png;base64,", "");
             byte[] image_of_the_day = Base64.getDecoder().decode(image.getBytes("UTF-8"));
             if (image_of_the_day.length > 5000000) {
@@ -53,15 +43,6 @@ public class SaveGameOfTheDay extends HttpServlet {
             bais.close();
 
         } catch (Exception ex) {
-            // Ignore.
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException ex) {
-                    throw ex;
-                }
-            }
         }
 
 

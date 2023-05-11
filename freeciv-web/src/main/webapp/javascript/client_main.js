@@ -194,7 +194,13 @@ function show_new_game_message()
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
-    message = "Welcome, " + username + " ruler of the " + nations[pplayer['nation']]['adjective'] + " empire.";
+    message = "Welcome to FCIV.NET! ";
+    var openai_message = "Please create a short introduction text to the game Freeciv for " + username + " ruler of the " + nations[pplayer['nation']]['adjective'];
+      $.post( "/openai_chat", utf8_to_b64(openai_message))
+              .done(function( chatresponse ) {
+                message_log.update({ event: E_CONNECTION, message: chatresponse });
+                message_log.update({ event: E_CONNECTION, message: "You can write questions to the AI assistant (ChatGPT) here. Have fun! " });
+              });
 
   } else if (game_loaded) {
     message = "Welcome back, " + username;

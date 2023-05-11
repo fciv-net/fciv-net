@@ -683,6 +683,18 @@ function check_text_input(event,chatboxtextarea) {
       return;
     }
 
+
+    if (game_type = 'singleplayer' && message.length > 2 && unescape(message).indexOf('/') == -1 && unescape(message).indexOf(':') == -1) {
+      $.post( "/openai_chat", utf8_to_b64( get_openai_game_context()
+             + " Please answer this message from the player in the game: " + message))
+              .done(function( chatresponse ) {
+                message_log.update({ event: E_CONNECTION, message: chatresponse });
+              }).fail(function() {
+                     message_log.update({ event: E_CONNECTION, message: "There was no answer." });
+              })
+
+    }
+
     send_message(message);
     return false;
   }

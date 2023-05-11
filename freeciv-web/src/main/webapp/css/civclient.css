@@ -1122,7 +1122,7 @@ li.tech-both::before {
 }
 
 .noTitleBar .ui-dialog-titlebar {
-  height: 10px;
+  height: 13px;
 }
 
 #worklist_production_choices .ui-selecting {
