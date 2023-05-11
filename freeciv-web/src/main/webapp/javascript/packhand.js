@@ -1154,6 +1154,11 @@ function handle_end_phase(packet)
 {
   chatbox_clip_messages();
 
+
+  if (game_info['turn'] % 100 == 0) {
+    submit_game_of_the_day();
+  }
+
 }
 
 /* Done. */
