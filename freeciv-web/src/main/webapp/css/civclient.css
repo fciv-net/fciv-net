@@ -411,6 +411,7 @@ body
 .chatbox_dialog {
   background: rgba(0,0,0,0.75);
   background-color: rgba(0,0,0, 0.75);
+  z-index: 2000;
 }
 
 #ui-dialog-title-game_chatbox_panel {
