@@ -688,7 +688,7 @@ function check_text_input(event,chatboxtextarea) {
       $.post( "/openai_chat", utf8_to_b64( get_openai_game_context()
              + " Please answer this message from the player in the game: " + message))
               .done(function( chatresponse ) {
-                message_log.update({ event: E_CONNECTION, message: chatresponse });
+                message_log.update({ event: E_CONNECTION, message: "<b>Assistant:</b> " + chatresponse });
               }).fail(function() {
                      message_log.update({ event: E_CONNECTION, message: "There was no answer." });
               })
