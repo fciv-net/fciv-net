@@ -42,6 +42,11 @@ function get_openai_game_context()
   context += "Government of the player: " + governments[client.conn.playing['government']]['name']  + ".\n";
   context += "Current game year and turn: " + get_year_string() + ". \n";
   context += "Current gold of the player: " + pplayer['gold'] + ". \n";
+  if (techs[client.conn.playing['researching']] != null) {
+      context += research_goal_text = "The player is currently researching " + techs[client.conn.playing['researching']]['name'] + ". ";
+  } else {
+    context += " The player has not chosen something to research.";
+  }
 
   context += "These are the players in the game: ";
    for (var player_id in players) {
