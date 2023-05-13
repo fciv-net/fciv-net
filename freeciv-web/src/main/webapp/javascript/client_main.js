@@ -132,7 +132,7 @@ function setup_window_size ()
 
   $("#tabs-map").css("overflow", "hidden");
 
-  $(".chatbox_dialog").css("top", ($("#game_page").height() - $("#game_chatbox_panel").height() - 34) + "px");
+  $(".chatbox_dialog").css("top", "52px");
 
   if (overview_active) init_overview();
   if (unitpanel_active) init_game_unit_panel();
@@ -194,13 +194,10 @@ function show_new_game_message()
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
-    message = "Welcome to FCIV.NET! ";
-    var openai_message = "Please create a short introduction text to the game Freeciv for " + username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ". Maximum 100 words please.";
-      $.post( "/openai_chat", utf8_to_b64(openai_message))
-              .done(function( chatresponse ) {
-                message_log.update({ event: E_CONNECTION, message: chatresponse });
-                message_log.update({ event: E_CONNECTION, message: "You can write questions to the AI assistant (ChatGPT) here. Have fun! " });
-              });
+    message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! You can write questions to the AI assistant (ChatGPT) here. Have fun!";
+
+    var msg = "Please create a short introduction text to the game FCIV.NET. FCIV.NET is a fork of the game Freeciv with 3D graphics. The player is  " + username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ". Maximum 100 words please.";
+    send_message_to_openai(msg);
 
   } else if (game_loaded) {
     message = "Welcome back, " + username;

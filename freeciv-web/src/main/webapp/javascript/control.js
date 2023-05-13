@@ -632,6 +632,7 @@ function check_text_input(event,chatboxtextarea) {
 
   if (event.keyCode == 13 && event.shiftKey == 0)  {
     var message = $(chatboxtextarea).val();
+    var message_original = $(chatboxtextarea).val();
 
     if (chat_send_to != null && chat_send_to >= 0
         && is_unprefixed_message(message)) {
@@ -684,15 +685,8 @@ function check_text_input(event,chatboxtextarea) {
     }
 
 
-    if (game_type = 'singleplayer' && message.length > 2 && unescape(message).indexOf('/') == -1 && unescape(message).indexOf(':') == -1) {
-      $.post( "/openai_chat", utf8_to_b64( get_openai_game_context()
-             + " Please answer this message from the player in the game: " + message))
-              .done(function( chatresponse ) {
-                message_log.update({ event: E_CONNECTION, message: "<b>Assistant:</b> " + chatresponse });
-              }).fail(function() {
-                     message_log.update({ event: E_CONNECTION, message: "There was no answer." });
-              })
-
+    if (game_type = 'singleplayer' && message.length > 2 && message_original.indexOf('/') == -1 && message_original.indexOf(':') == -1) {
+      send_message_to_openai(message_original);
     }
 
     send_message(message);

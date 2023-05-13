@@ -1189,6 +1189,10 @@ function handle_begin_turn(packet)
 
   if (is_tech_tree_init && tech_dialog_active) update_tech_screen();
 
+  if (game_info['turn'] > 0 && game_info['turn'] % 10 == 0) {
+     send_message_to_openai("Please summarize the current game in 100 words.");
+  }
+
 }
 
 function handle_end_turn(packet)

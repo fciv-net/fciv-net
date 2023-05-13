@@ -35,12 +35,14 @@ function init_chatbox()
   $("#game_chatbox_panel").dialog({
 			bgiframe: true,
 			modal: false,
-			width: "55%",
-			height: (is_small_screen() ? 100 : 220),
+            width: (is_small_screen() ? "100%" : "35%"),
+            top: 43,
+            left: 2,
+			height: (is_small_screen() ? 100 : 250),
 			resizable: false,
 			dialogClass: 'chatbox_dialog no-close noTitleBar',
 			closeOnEscape: false,
-			position: {my: 'center bottom', at: 'center bottom', of: window, within: $("#game_page")},
+			position: {my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")},
 			close: function(event, ui) { chatbox_active = false;}
 		}).dialogExtend({
                      "minimizable" : true,
@@ -55,7 +57,15 @@ function init_chatbox()
                        "restore" : "ui-icon-newwin"
                      }});
   $("#game_chatbox_panel").dialog('open');
-  $(".chatbox_dialog").css("top", ($("#game_page").height() - $("#game_chatbox_panel").height() - 34) + "px");
+  $(".chatbox_dialog").css("top", "52px");
+
+  $("#game_chatbox_panel").parent().css("z-index","100"); // ensure it can always be opened/closed/never covered
+  $("#game_chatbox_panel").parent().css("overflow", "hidden"); // make it immune to glitches making standard scrollbars (it already has a custom)
+  // This is how you override unknown css ghosts who think they're !important:
+  $( '#game_chatbox_panel' ).parent().each(function () {
+    this.style.setProperty( 'border', 'solid 1px', 'important' );
+    this.style.setProperty( 'border-color', '#4328', 'important' );
+  });
 
 
   if (is_small_screen()) {

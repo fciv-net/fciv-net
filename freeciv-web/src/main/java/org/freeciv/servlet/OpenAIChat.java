@@ -49,7 +49,32 @@ public class OpenAIChat  extends HttpServlet {
             List<ChatMessage> messages = new ArrayList<>();
             ChatMessage systemchat = new ChatMessage();
             systemchat.setRole("system");
-            systemchat.setContent("I am a player in the game of Freeciv. You can pretent do be a assistant in the game.");
+            String fcivInfo = "I am a player in the game of FCIV.NET, a fork of the game Freeciv. FCIV.NET is a 3D version of Freeciv which can be played in a browser for free. You can pretent do be a assistant in the game. "
+                    + "In FCIV.NET new cities are built using the keyboard shortcut B or right clicking on a Settlers unit and selecting Build city from the menu. "
+                    + "Units are moved using the keyboard shortcut G (Goto) and then selecting the destination. Units can also be moved using the arrow keys on the keyboard";
+
+            String keyboardShortcuts = " Keyboard Shortcuts for Unit Orders: "+
+                    "a: (a)uto-settler (settler/worker units). "+
+                    "b: (b)uild city (settler units). "+
+                    "c: (c)enter map on active unit. "+
+                    "f: (f)ortify unit (military units). "+
+                    "f: build (f)ortress (settler/worker units). "+
+                    "g: (g)o to tile (then left-click mouse to select target tile). "+
+                    "h: set unit's (h)omecity (to city on current tile). "+
+                    "i: build (i)rrigation or convert terrain (settler/worker units). "+
+                    "m: build (m)ine or convert terrain (settler/worker units). "+
+                    "N: explode (N)uclear. "+
+                    "o: transf(o)rm terrain (engineer unit). "+
+                    "p: clean (p)ollution (settler/worker units). "+
+                    "P: (P)illage (destroy terrain alteration). "+
+                    "r: build (r)oad/railroad (settler/worker units). "+
+                    "s: (s)entry unit. "+
+                    "S: un(S)entry all units on tile. "+
+                    "L: unit go (t)o/airlift to city. "+
+                    "u: (u)nload unit from transporter. "+
+                    "x: unit auto e(x)plore.  Shift-Return: Turn done. ";
+            systemchat.setContent(fcivInfo + keyboardShortcuts);
+
             messages.add(systemchat);
 
             ChatMessage userchat = new ChatMessage();

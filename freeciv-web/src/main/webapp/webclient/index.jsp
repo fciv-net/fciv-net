@@ -27,7 +27,7 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-<title>FCIV.NET - Freeciv 3D the best free strategy game!</title>
+<title>FCIV.NET the browser-based 3D version of the classic turn-based strategy game Freeciv.</title>
 
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
