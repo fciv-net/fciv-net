@@ -165,7 +165,7 @@ function load_model(filename)
     modelscale = 10;
   }
   if (filename == 'Trireme') {
-    modelscale = 5;
+    modelscale = 4.5;
   }
   if (filename == 'Caravel') {
     modelscale = 7;
@@ -237,6 +237,13 @@ function load_model(filename)
   if (filename == 'Fallout') {
     modelscale = 6;
   }
+  if (filename == 'Game') {
+    modelscale = 3.7;
+  }
+  if (filename == 'Ivory') {
+    modelscale = 6;
+  }
+
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 

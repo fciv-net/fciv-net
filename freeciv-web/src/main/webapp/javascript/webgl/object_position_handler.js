@@ -51,7 +51,7 @@ var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
 
-var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout"];
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game"];
 
 /****************************************************************************
   Handles unit positions
@@ -394,8 +394,8 @@ function update_tile_extras(ptile) {
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null && extra_visibilities[ptile['index']] == null) {
-    if (special_resources.includes(extra_resource['name'])) {
-      update_tile_extra_update_model(extra_resource['id'], extra_resource['name'], ptile);
+    if (special_resources.includes(extra_resource['rule_name'])) {
+      update_tile_extra_update_model(extra_resource['id'], extra_resource['rule_name'], ptile);
     } else {
       var key = extra_resource['graphic_str'];
       var extra_texture = get_extra_texture(key);
@@ -517,6 +517,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (extra_name == "Resources") {
       height -= 2;
+    }
+    if (extra_name == "Game") {
+      height += 2.2;
     }
 
     var model = webgl_get_model(extra_name, ptile);
