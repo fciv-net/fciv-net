@@ -51,7 +51,7 @@ var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
 
-var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game"];
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo"];
 
 /****************************************************************************
   Handles unit positions

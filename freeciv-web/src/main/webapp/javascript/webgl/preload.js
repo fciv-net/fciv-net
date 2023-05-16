@@ -243,6 +243,9 @@ function load_model(filename)
   if (filename == 'Ivory') {
     modelscale = 6;
   }
+  if (filename == 'Buffalo') {
+    modelscale = 3.0;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
