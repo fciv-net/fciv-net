@@ -18,7 +18,7 @@
 ***********************************************************************/
 
 
-
+var openai_messages = "";
 
 
 /**************************************************************************
@@ -45,14 +45,27 @@ function get_openai_game_context()
   if (techs[client.conn.playing['researching']] != null) {
       context += research_goal_text = "The player is currently researching " + techs[client.conn.playing['researching']]['name'] + ". ";
   } else {
-    context += " The player has not chosen something to research.";
+    context += " The player has not chosen something to research. ";
   }
+
+  if (current_focus[0] != null) {
+    var punit_type = unit_types[current_focus[0]['type']];
+    context += "This selected unit is in focus for the current player: " + punit_type['rule_name'] + ". ";
+  } else {
+    context += "There is no selected unit in focus. ";
+  }
+
+  context += "The current tax rate is: " + client.conn.playing['tax'] + "%. ";
+  context += "The current luxury rate is: " + client.conn.playing['luxury'] + "%. ";
+  context += "The current science rate is: " + client.conn.playing['science'] + "%. ";
+  context += "The maximum rate is " + government_max_rate(client.conn.playing['government']) + "%. ";
 
   context += "These are the players in the game: ";
    for (var player_id in players) {
      var pplayer = players[player_id];
      if (pplayer['nation'] == -1) continue;
-     context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation, "
+     context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation "
+        + "with diplomatic state " + get_diplstate_text(diplstates[player_id])  + " with the current player, "
    }
    context += ".\n";
 
@@ -102,6 +115,10 @@ function get_openai_game_context()
     return context;
   }
 
+  context += "The following text until **** is the game console text shown to the user to tell important events in the game "
+          + "and can be used by ChatGTP to create dialogs with the player about game events: "
+          + $("#game_message_area").text() + " ****.";
+
   return context;
 
 }
@@ -112,14 +129,27 @@ function get_openai_game_context()
 function send_message_to_openai(message)
 {
 
+  var prefix = ". Please answer this message from the player in the game: ";
+  var otherone = "Assistant";
+
+   for (var player_id in players) {
+     var pplayer = players[player_id];
+     if (message.indexOf(pplayer['name']) >= 0 && message.indexOf(pplayer['name']) < 120) {
+       prefix = ". Please respond to this message from " + username + " to the AI player " + pplayer['name']
+               + " in the game with a message of maximum 100 words where you pretend that you are the AI player. "
+               + " Take into consideration the current diplomatic state between this AI player and the human player. ";
+       otherone = pplayer['name'];
+     }
+   }
+
+  openai_messages += prefix + ": " +  message + ";";
+
   $.post( "/openai_chat", utf8_to_b64( get_openai_game_context()
-         + " Please answer this message from the player in the game: " + message))
+         + openai_messages))
           .done(function( chatresponse ) {
-            message_log.update({ event: E_CONNECTION, message: "<b>Assistant:</b> " + chatresponse });
+            message_log.update({ event: E_CONNECTION, message: "<b>" + otherone + ":</b> " + chatresponse });
           }).fail(function() {
                  message_log.update({ event: E_CONNECTION, message: "There was no answer." });
           })
-
-
 
 }

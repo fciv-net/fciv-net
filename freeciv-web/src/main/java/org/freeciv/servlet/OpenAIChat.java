@@ -77,10 +77,13 @@ public class OpenAIChat  extends HttpServlet {
 
             messages.add(systemchat);
 
-            ChatMessage userchat = new ChatMessage();
-            userchat.setRole("user");
-            userchat.setContent(message);
-            messages.add(userchat);
+
+            for (String submessage : message.split(";")) {
+                ChatMessage userchat = new ChatMessage();
+                userchat.setRole("user");
+                userchat.setContent(submessage);
+                messages.add(userchat);
+            }
 
             ChatCompletionRequest completionRequest = ChatCompletionRequest.builder()
                     .messages(messages)

@@ -118,6 +118,7 @@ function civclient_init()
   $(".button").button();
 
   sounds_enabled = simpleStorage.get('sndFX');
+
   if (sounds_enabled == null) {
     // Default to true, except when known to be problematic.
     if (platform.name == 'Safari') {
@@ -125,6 +126,11 @@ function civclient_init()
     } else {
       sounds_enabled = true;
     }
+  }
+
+  openai_enabled = simpleStorage.get('openai_enabled');
+  if (openai_enabled == null) {
+    openai_enabled = true;
   }
 
   dialogs_minimized_setting = simpleStorage.get('dialogs_minimized_setting');

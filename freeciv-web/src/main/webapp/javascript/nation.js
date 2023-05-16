@@ -237,7 +237,7 @@ function select_a_nation()
     $('#meet_player_button').button("disable");
   }
 
-    if (pplayer['flags'].isSet(PLRF_AI) || selected_myself) {
+    if ((!game_type == 'singleplayer' && pplayer['flags'].isSet(PLRF_AI)) || selected_myself) {
       $('#send_message_button').button("disable");
     } else {
       $('#send_message_button').button("enable");
@@ -465,6 +465,10 @@ function send_private_message(other_player_name)
   send_request(JSON.stringify(packet));
   keyboard_input = true;
   $("#dialog").dialog('close');
+
+  if (game_type == 'singleplayer') {
+    send_message_to_openai(message);
+  }
 }
 
 /**************************************************************************
