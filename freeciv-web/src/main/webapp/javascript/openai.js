@@ -64,8 +64,22 @@ function get_openai_game_context()
    for (var player_id in players) {
      var pplayer = players[player_id];
      if (pplayer['nation'] == -1) continue;
-     context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation "
-        + "with diplomatic state " + get_diplstate_text(diplstates[player_id])  + " with the current player, "
+     if (player_id == client.conn.playing['playerno']) {
+      context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation "
+         + " is the current human player "
+         + " and this player is " + (pplayer['is_alive'] ? "alive" : "dead")
+         + " and a game score of " + get_score_text(pplayer) + ". "
+
+     } else {
+      context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation "
+         + "with diplomatic state " + get_diplstate_text(diplstates[player_id]) + " with the current player "
+         + " and a " + col_love(pplayer) + " attitude of with the current player "
+         + " and a game score of " + get_score_text(pplayer)
+         + " and this AI player is " + (pplayer['is_alive'] ? "alive" : "dead")
+         + ". "
+     }
+
+
    }
    context += ".\n";
 
