@@ -246,6 +246,12 @@ function load_model(filename)
   if (filename == 'Buffalo') {
     modelscale = 3.0;
   }
+  if (filename == 'Pheasant') {
+    modelscale = 1.5;
+  }
+  if (filename == 'Wheat') {
+    modelscale = 3.4;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;

@@ -51,7 +51,7 @@ var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
 
-var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo"];
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo", "Pheasant", "Wheat"];
 
 /****************************************************************************
   Handles unit positions
@@ -389,6 +389,7 @@ function update_tile_extras(ptile) {
   update_tile_forest(ptile);
   update_tile_jungle(ptile);
   update_tile_cactus(ptile);
+  update_tile_wheat(ptile);
 
   // Render tile specials (extras), as 2D sprites from the 2D version.
   const extra_id = tile_resource(ptile);
@@ -412,9 +413,6 @@ function update_tile_extras(ptile) {
       }
       if (tile_terrain(ptile) != null && tile_terrain(ptile)['name'].indexOf("Forest") >= 0) {
         height += 1;
-        if (extra_resource['name'] == "Pheasant") {
-          height += 0.3;
-        }
       }
       if (terrain_name == "Forest" || terrain_name == "Jungle") {
         height += 4.5;
@@ -520,6 +518,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (extra_name == "Game") {
       height += 2.2;
+    }
+    if (extra_name == "Pheasant") {
+      height += 1.5;
     }
 
     var model = webgl_get_model(extra_name, ptile);
@@ -646,6 +647,41 @@ function update_tile_cactus(ptile)
     if (scene != null) scene.add(model);
 
   }
+}
+
+/****************************************************************************
+  Adds wheat
+****************************************************************************/
+function update_tile_wheat(ptile)
+{
+  var terrain_name = tile_terrain(ptile).name;
+  const extra_id = tile_resource(ptile);
+  var extra_resource = (extra_id === null) ? null : extras[extra_id];
+
+  if (scene != null && extra_resource != null && tile_forest_positions[ptile['index']] == null && extra_resource['name'] == "Wheat" && tile_get_known(ptile) != TILE_UNKNOWN) {
+    var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
+    tile_forest_positions[ptile['index']] = [];
+    var modelname = "Wheat";
+    for (var i = 0; i < 8; i++) {
+      var model = webgl_get_model(modelname, ptile);
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      if (pos != null && model != null) {
+        model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (20 - Math.floor(Math.random() * 40)));
+        model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
+        model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (20 - Math.floor(Math.random() * 40)));
+        model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
+        tile_forest_positions[ptile['index']].push(model);
+        if (scene != null) scene.add(model);
+      }
+    }
+
+  } else if (scene != null && extra_resource != null && tile_forest_positions[ptile['index']] != null && extra_resource['name'] != "Wheat" && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
+    for (var i = 0; i < tile_forest_positions[ptile['index']].length; i++) {
+      scene.remove(tile_forest_positions[ptile['index']][i]);
+    }
+    tile_forest_positions[ptile['index']] = null;
+  }
+
 }
 
 /****************************************************************************
