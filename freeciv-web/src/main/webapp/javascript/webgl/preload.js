@@ -252,6 +252,9 @@ function load_model(filename)
   if (filename == 'Wheat') {
     modelscale = 3.4;
   }
+  if (filename == 'Galleon') {
+    modelscale = 5;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;

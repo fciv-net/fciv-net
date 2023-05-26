@@ -100,7 +100,7 @@ function convert_unit_rotation(facing_dir, unit_type_name)
   if (facing_dir == 5) rotation_rad = -1;
   if (facing_dir == 3) rotation_rad = -2;
 
-  if (unit_type_name == "Horsemen" || unit_type_name == "Knights" || unit_type_name == "Zeppelin") {
+  if (unit_type_name == "Horsemen" || unit_type_name == "Knights" || unit_type_name == "Zeppelin" || unit_type_name == "Galleon") {
     return rotation_rad * Math.PI * 2 / 8 + Math.PI;
   }
 
