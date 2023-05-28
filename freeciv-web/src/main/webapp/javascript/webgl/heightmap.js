@@ -36,7 +36,11 @@ function get_unit_height_offset(punit)
   }
 
   if (ptype['name'] == "Galleon") {
-    return 5.5;
+    return 5.4;
+  }
+
+  if (ptype['name'] == "Ironclad") {
+    return 0.5;
   }
 
   if (ptype['name'] == "Zeppelin") {
