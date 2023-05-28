@@ -471,7 +471,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       if (nexttile == null) return;
 
       var height = 5 + nexttile['height'] * 100;
-      if (wonder_name == 'Lighthouse') height += 3;
+      if (wonder_name == 'Lighthouse') height += 4.2;
 
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
       wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
