@@ -51,6 +51,8 @@ var selected_unit_indicator = null;
 var selected_unit_material = null;
 var selected_unit_material_counter = 0;
 
+var sun_mesh = null;
+
 var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo", "Pheasant", "Wheat"];
 
 /****************************************************************************
@@ -522,6 +524,12 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     if (extra_name == "Pheasant") {
       height += 1.5;
     }
+    if (extra_name == "Airbase") {
+      height -= 4.9;
+    }
+    if (extra_name == "Fortress") {
+      height -= 3.5;
+    }
 
     var model = webgl_get_model(extra_name, ptile);
     if (model == null) {
@@ -666,9 +674,9 @@ function update_tile_wheat(ptile)
       var model = webgl_get_model(modelname, ptile);
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       if (pos != null && model != null) {
-        model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (20 - Math.floor(Math.random() * 40)));
+        model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (15 - Math.floor(Math.random() * 30)));
         model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
-        model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (20 - Math.floor(Math.random() * 40)));
+        model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (15 - Math.floor(Math.random() * 30)));
         model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
         tile_forest_positions[ptile['index']].push(model);
         if (scene != null) scene.add(model);

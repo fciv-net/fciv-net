@@ -170,6 +170,12 @@ function init_webgl_mapview() {
   water.castShadow = false;
   scene.add( water );
 
+  sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
+  sun_mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 25, 30), sun_material );
+  sun_mesh.castShadow = true;
+  sun_mesh.rotation.x = -1 * Math.PI / 2;
+  sun_mesh.position.set(- 500, 1000, -400);
+  scene.add(sun_mesh);
 
   /* heightmap image */
   init_borders_image();

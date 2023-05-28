@@ -41,10 +41,12 @@ function camera_look_at(x, y, z)
     camera.position.set( x + camera_dx, y + camera_dy, z + camera_dz);
     camera.lookAt( new THREE.Vector3(x, 0, z));
 
-    spotlight.position.set( x + camera_dx - 500, 1000, z + camera_dz + 400);
-    spotlight.target.position.set(x + camera_dx  + 100, 0, z + camera_dz - 100);
+    spotlight.position.set( x + 500, 900, z + 500);
+    spotlight.target.position.set(x - 200, 0, z - 200);
     spotlight.shadow.camera.position.copy(spotlight.position);
-    spotlight.shadow.camera.lookAt(new THREE.Vector3(x + camera_dx  - 100, 0, z + camera_dz - 100));
+    spotlight.shadow.camera.lookAt(new THREE.Vector3(x - 200, 0, z + 500));
+
+    sun_mesh.position.set( x + 500, 900, z + 500);
   }
 
   if (controls != null) {

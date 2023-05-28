@@ -485,14 +485,20 @@ function map_tile_height_adjust(ptile)
     } else {
       // Convert tile height to web client scale.
       ptile['height'] = (840 + ptile['height']) * 0.00037;
+
+      if (is_ocean_tile(ptile) && ptile['height'] > 0.5) {
+        ptile['height'] = 0.45;
+      } else if (!is_ocean_tile(ptile) && ptile['height'] < 0.5) {
+        ptile['height'] = 0.57;
+      }
     }
 
     if (tile_has_extra(ptile, EXTRA_RIVER)) {
       ptile['height'] = 0.488;
     } else if (tile_terrain(ptile)['name'] == "Hills") {
-      ptile['height'] =  ptile['height'] * 1.10;
+      ptile['height'] =  ptile['height'] * 1.11;
     } else if (tile_terrain(ptile)['name'] == "Mountains") {
-      ptile['height'] =  ptile['height'] * 1.16;
+      ptile['height'] =  ptile['height'] * 1.17;
     } else if (tile_terrain(ptile)['name'] == "Glacier" || tile_terrain(ptile)['name'] == "Tundra") {
       ptile['height'] = 0.52;
     }

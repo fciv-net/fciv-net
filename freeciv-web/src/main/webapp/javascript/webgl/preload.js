@@ -255,6 +255,12 @@ function load_model(filename)
   if (filename == 'Galleon') {
     modelscale = 5;
   }
+  if (filename == 'Airbase') {
+    modelscale = 8;
+  }
+  if (filename == 'Fortress') {
+    modelscale = 8;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
