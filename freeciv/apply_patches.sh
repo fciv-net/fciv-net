@@ -16,7 +16,7 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/rebased-0050-Add-ERM_CLEAN"
+  "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"

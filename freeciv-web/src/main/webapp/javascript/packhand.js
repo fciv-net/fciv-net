@@ -1883,3 +1883,13 @@ function handle_city_update_counters(packet)
 {
   // TODO: Implement
 }
+
+function handle_investigate_started(packet)
+{
+  // TODO: Implement
+}
+
+function handle_investigate_finished(packet)
+{
+  // TODO: Implement
+}
