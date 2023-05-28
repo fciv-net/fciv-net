@@ -36,7 +36,7 @@ function get_unit_height_offset(punit)
   }
 
   if (ptype['name'] == "Galleon") {
-    return 6;
+    return 5.5;
   }
 
   if (ptype['name'] == "Zeppelin") {

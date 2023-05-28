@@ -253,7 +253,7 @@ function load_model(filename)
     modelscale = 3.4;
   }
   if (filename == 'Galleon') {
-    modelscale = 5;
+    modelscale = 4.8;
   }
   if (filename == 'Airbase') {
     modelscale = 8;
