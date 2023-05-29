@@ -157,6 +157,15 @@ function load_model(filename)
         node.material.side = THREE.DoubleSide;
         node.material.needsUpdate = true;
         node.geometry.computeVertexNormals();
+
+        if (filename == "Oasis" && node['name'] == "Groundlow") {
+          node.material.opacity = 0.45;
+          node.material.transparent = true;
+        }
+        node.castShadow = true;
+        if (filename == "Oasis") {
+          node.castShadow = false;
+        }
       }
     });
 
@@ -261,19 +270,15 @@ function load_model(filename)
   if (filename == 'Fortress') {
     modelscale = 8;
   }
+  if (filename == 'Engineers') {
+    modelscale = 8.5;
+  }
+  if (filename == 'Settlers') {
+    modelscale = 10;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
-
-    model.traverse(function(node) {
-      if (node.isMesh) {
-        node.castShadow = true;
-        if (filename == "Oasis") {
-          node.castShadow = false;
-        }
-      }
-    });
-
 
     load_count++;
     if (load_count == total_model_count) webgl_preload_complete();

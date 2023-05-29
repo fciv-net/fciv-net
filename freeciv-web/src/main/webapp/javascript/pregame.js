@@ -486,7 +486,7 @@ function pregame_settings()
           "<option value='FRACTAL'>Pseudo-fractal height</option>" +
           "<option value='ISLAND'>Island-based</option>" +
           "<option value='FAIR'>Fair islands</option>" +
-          "<option value='FRACTURE'>Fracture map</option>" +
+          //"<option value='FRACTURE'>Fracture map</option>" + FIXME: this one doesnt work.
     "</select></td></tr>"
     + "</table><br>"+
 	  "<span id='settings_info'><i>Freeciv-web can be customized using the command line in many " +
