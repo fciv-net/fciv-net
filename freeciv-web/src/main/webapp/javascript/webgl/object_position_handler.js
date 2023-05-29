@@ -100,9 +100,7 @@ function update_unit_position(ptile) {
       pos = map_to_scene_coords(ptile['x'], ptile['y']);
     }
     new_unit.matrixAutoUpdate = false;
-    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
-    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
-    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);
+    new_unit.position.set(pos['x'] - 11, height -2, pos['y'] - 4);
     var rnd_rotation = Math.floor(Math.random() * 8);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(rnd_rotation, unit_type(visible_unit)['name'])));
     new_unit.updateMatrix();
@@ -115,7 +113,7 @@ function update_unit_position(ptile) {
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
       var new_flag = create_flag_sprite(pflag['key']);
-      new_flag.position.set(pos['x'] - 10, height + 20, pos['y'] - 10);
+      new_flag.position.set(pos['x'] - 10, height + 20, pos['y'] - 20);
       scene.add(new_flag);
       unit_flag_positions[ptile['index']] = new_flag;
     }
@@ -131,7 +129,7 @@ function update_unit_position(ptile) {
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
         selected_mesh.castShadow = true;
-        selected_mesh.position.set(pos['x'] - 2, height + 2, pos['y'] - 2);
+        selected_mesh.position.set(pos['x'] - 4, height + 2, pos['y'] - 4);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
@@ -167,7 +165,7 @@ function update_unit_position(ptile) {
       if (scene != null && unit_label_positions[ptile['index']] != null) scene.remove(unit_label_positions[ptile['index']]);
       if (scene != null && (get_unit_activity_text(visible_unit) != null || tile_units(ptile).length > 1 || visible_unit['veteran'] > 0)) {
         activity = create_unit_label_sprite(visible_unit, ptile);
-        activity.position.set(pos['x'] -1, height + 30, pos['y'] - 12);
+        activity.position.set(pos['x'] + 7, height + 20, pos['y'] - 12);
         scene.add(activity);
         unit_label_positions[ptile['index']] = activity;
       }
@@ -178,7 +176,7 @@ function update_unit_position(ptile) {
     if (unit_healthpercentage_positions[ptile['index']] != visible_unit['hp'] && visible_unit['anim_list'].length == 0) {
       if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
       new_unit_health_bar = create_unit_health_sprite(visible_unit);
-      new_unit_health_bar.position.set(pos['x'] - flag_dx, height + flag_dz + 6, pos['y'] - flag_dy);
+      new_unit_health_bar.position.set(pos['x'] - flag_dx, height + flag_dz + 6, pos['y'] - flag_dy - 10);
       unit_health_positions[ptile['index']] = new_unit_health_bar;
       if (scene != null) {
         scene.add(new_unit_health_bar);
@@ -196,9 +194,7 @@ function update_unit_position(ptile) {
       }
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
-        selected_mesh.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 2);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 2);
-        selected_mesh.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 2);
+        selected_mesh.position.set(pos['x'] - 12, height + 2, pos['y'] - 7);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
@@ -218,9 +214,7 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']]['unit_type'] = unit_type_name;
 
     new_unit.matrixAutoUpdate = false;
-    new_unit.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 4);
-    new_unit.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height - 2);
-    new_unit.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 4);
+    new_unit.position.set(pos['x'] - 11, height -2, pos['y'] - 4);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(visible_unit['facing'], unit_type(visible_unit)['name']) ));
     new_unit.updateMatrix();
 
@@ -233,7 +227,7 @@ function update_unit_position(ptile) {
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
       var new_flag = create_flag_sprite(pflag['key']);
-      new_flag.position.set(pos['x'] - flag_dx, height + flag_dz, pos['y'] - flag_dy);
+      new_flag.position.set(pos['x'] - flag_dx, height + flag_dz, pos['y'] - flag_dy - 10);
       scene.add(new_flag);
       unit_flag_positions[ptile['index']] = new_flag;
     }
@@ -276,7 +270,7 @@ function update_city_position(ptile) {
     city_positions[ptile['index']] = new_city;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    new_city.position.set(pos['x'] - 10, height, pos['y'] - 10);
+    new_city.position.set(pos['x'] - 12, height, pos['y'] - 11);
     new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
     if (scene != null) {
@@ -321,7 +315,7 @@ function update_city_position(ptile) {
       city_positions[ptile['index']] = new_city;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      new_city.position.set(pos['x'] - 10, height, pos['y'] - 10);
+      new_city.position.set(pos['x'] - 12, height, pos['y'] - 10);
       new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
       if (scene != null) {
@@ -516,7 +510,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 2;
     }
     if (extra_name == "Resources") {
-      height -= 2;
+      height -= 6;
     }
     if (extra_name == "Game") {
       height += 2.2;
@@ -538,11 +532,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
 
     tile_extra_positions[extra_type + "." + ptile['index']] = model;
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10);
-    model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 1);
-    model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10);
+    model.position.set( pos['x'] - 10, height + 1,  pos['y'] - 10);
     model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
-    if (extra_name == "Furs" || extra_name == "Silk") {
+    if (extra_name == "Furs" || extra_name == "Silk"  || extra_name == "Resources") {
       model.rotateOnAxis(new THREE.Vector3(1,0,0).normalize(), -1 * (Math.PI  / 2));
     }
     if (scene != null) scene.add(model);

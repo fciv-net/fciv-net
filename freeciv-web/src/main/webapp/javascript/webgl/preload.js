@@ -241,7 +241,7 @@ function load_model(filename)
     modelscale = 4;
   }
   if (filename == 'Resources') {
-    modelscale = 4;
+    modelscale = 3.5;
   }
   if (filename == 'Fallout') {
     modelscale = 6;
