@@ -1,4 +1,4 @@
-Freeciv-web is free and open source software. The Freeciv C server is released under
+Fciv.net and Freeciv-web is free and open source software. The Freeciv C server is released under
 the GNU General Public License, while the Freeciv-web web client is released
 under the GNU Affero General Public License. 
 
@@ -10,6 +10,10 @@ trademark material involved in developing, merchandising, or playing a game. Onc
 has been made public, nothing in the copyright law prevents others from developing another
 game based on similar principles. Copyright protects only the particular manner of an 
 author's expression in literary, artistic, or musical form."
+
+The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure cooperation with the community in the case of network server software.
+
+All source code, graphics, 3d models and game resources in  Fciv.net are covered by the GNU Affero General Public License.
 
 
 Freeciv-web is released under the GNU Affero General Public License, which is included here:
