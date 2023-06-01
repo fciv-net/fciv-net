@@ -3141,6 +3141,15 @@ function center_tile_mapcanvas(ptile)
 }
 
 /**************************************************************************
+  Centers the mapview around tile with given id.
+**************************************************************************/
+function center_tile_id(ptile_id)
+{
+  var ptile = tiles[ptile_id];
+  center_tile_mapcanvas(ptile);
+}
+
+/**************************************************************************
   Show tile information in a popup
 **************************************************************************/
 function popit()
