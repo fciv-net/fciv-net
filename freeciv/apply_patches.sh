@@ -16,12 +16,16 @@
 # endgame-mapimg is used to generate a mapimg at endgame for hall of fame.
 
 declare -a PATCHLIST=(
-  "backports/0050-Add-ERM_CLEAN"
   "backports/0024-Fix-cargo_iter_next-out-of-bounds-read"
   "backports/0035-Fix-overzealous-pcity-surplus-O_SHIELD-0-assert"
   "backports/0021-Autoworkers-Fix-assert-failure-because-of-recursive-"
   "backports/0023-Savegame-Correct-loading-governor-settings"
   "backports/0025-Filter-chat-messages-more-aggressively-on-freeciv-we"
+  "backports/0023-Rulesave-Fix-crash-when-handling-internal-actions"
+  "backports/0028-Fix-action_is_internal-crash-when-actions-are-not-se"
+  "backports/0036-make_dir-Add-mode-parameter"
+  "backports/0039-Meson-Make-it-possible-to-disable-server-build"
+  "backports/0037-Add-ACTIVITY_CLEAN-to-tile-changing-activities"
   "metachange"
   "text_fixes"
   "freeciv-svn-webclient-changes"
