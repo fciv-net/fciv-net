@@ -339,6 +339,7 @@ function set_default_mapview_active()
   keyboard_input = true;
 
   $("#game_overview_panel").parent().show();
+  $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
 
