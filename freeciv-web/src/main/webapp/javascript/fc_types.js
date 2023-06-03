@@ -379,9 +379,10 @@ var EC_RESOURCE = 8;
 
 /* causes for extra removal */
 var ERM_PILLAGE = 0;
-var ERM_CLEANPOLLUTION = 1;
+var ERM_CLEANPOLLUTION = 1; // deprecated.
 var ERM_CLEANFALLOUT = 2;
 var ERM_DISAPPEARANCE = 3;
+var ERM_CLEAN = 1;
 
 /* barbarian types */
 var NOT_A_BARBARIAN = 0;
