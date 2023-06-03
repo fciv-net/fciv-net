@@ -280,7 +280,7 @@ function update_city_position(ptile) {
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls", ptile);
       if (city_walls != null) {
-        city_walls.position.set(pos['x'] - 10, height - 4, pos['y'] - 10);
+        city_walls.position.set(pos['x'] - 10, height - 7, pos['y'] - 10);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
@@ -333,7 +333,7 @@ function update_city_position(ptile) {
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
       var city_walls = webgl_get_model("citywalls", ptile);
       if (city_walls != null) {
-        city_walls.position.set(pos['x'] - 10, height - 4, pos['y'] - 10);
+        city_walls.position.set(pos['x'] - 10, height - 7, pos['y'] - 10);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
         scene.add(city_walls);
         city_walls_positions[ptile['index']] = city_walls;
