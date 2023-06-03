@@ -40,7 +40,7 @@ function get_unit_height_offset(punit)
   }
 
   if (ptype['name'] == "Frigate") {
-    return 7.1;
+    return 7.2;
   }
 
   if (ptype['name'] == "Ironclad") {

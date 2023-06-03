@@ -265,7 +265,7 @@ function load_model(filename)
     modelscale = 4.7;
   }
   if (filename == 'Frigate') {
-    modelscale = 5.4;
+    modelscale = 5.5;
   }
   if (filename == 'Airbase') {
     modelscale = 8;

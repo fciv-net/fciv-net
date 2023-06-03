@@ -129,10 +129,6 @@ function update_nation_screen()
   }
 
   $("#nation_table").tablesorter({theme: "dark", sortList: [[2,0]] });
-  if (is_small_screen()) {
-    $("#nations").height( mapview['height'] - 150);
-    $("#nations").width( mapview['width']);
-  }
 
   /* Fetch online (connected) players on this game from Freeciv-proxy. */
   $.ajax({
