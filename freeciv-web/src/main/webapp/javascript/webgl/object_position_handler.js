@@ -552,6 +552,8 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
 function update_tile_forest(ptile)
 {
   var terrain_name = tile_terrain(ptile).name;
+  const extra_id = tile_resource(ptile);
+  var extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_forest_positions[ptile['index']] == null && terrain_name == "Forest" && tile_get_known(ptile) != TILE_UNKNOWN) {
     var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
@@ -580,7 +582,7 @@ function update_tile_forest(ptile)
       if (scene != null) scene.add(model);
     }
 
-  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Forest" && terrain_name != "Jungle" && terrain_name != "Wheat" && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_forest_positions[ptile['index']] != null && (extra_resource == null || extra_resource['name'] != "Wheat") && terrain_name != "Forest" && terrain_name != "Jungle" && terrain_name != "Wheat" && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_forest_positions[ptile['index']].length; i++) {
       scene.remove(tile_forest_positions[ptile['index']][i]);
     }
@@ -595,6 +597,8 @@ function update_tile_forest(ptile)
 function update_tile_jungle(ptile)
 {
   var terrain_name = tile_terrain(ptile).name;
+  const extra_id = tile_resource(ptile);
+  var extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_forest_positions[ptile['index']] == null && terrain_name == "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
     var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
@@ -617,7 +621,7 @@ function update_tile_jungle(ptile)
       if (scene != null) scene.add(model);
     }
 
-  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Jungle" && terrain_name != "Wheat" && terrain_name != "Forest"  && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Jungle" && (extra_resource == null || extra_resource['name'] != "Wheat") && terrain_name != "Forest"  && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_forest_positions[ptile['index']].length; i++) {
       scene.remove(tile_forest_positions[ptile['index']][i]);
     }
@@ -677,7 +681,7 @@ function update_tile_wheat(ptile)
       }
     }
 
-  } else if (scene != null && extra_resource != null && tile_forest_positions[ptile['index']] != null && extra_resource['name'] != "Wheat" && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_forest_positions[ptile['index']] != null && (extra_resource == null || extra_resource['name'] != "Wheat") && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_forest_positions[ptile['index']].length; i++) {
       scene.remove(tile_forest_positions[ptile['index']][i]);
     }
