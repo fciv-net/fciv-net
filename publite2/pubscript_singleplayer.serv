@@ -19,6 +19,8 @@ set ysize 64
 set landm 50
 set aifill 12
 
+set victories spacerace
+
 set wetness 25
 set topology ""
 set wrap=

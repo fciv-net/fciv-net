@@ -279,6 +279,10 @@ function load_model(filename)
   if (filename == 'Settlers') {
     modelscale = 10;
   }
+  if (filename == 'Spaceship' || filename == 'Spaceship_launched') {
+    modelscale = 3.3;
+  }
+
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
@@ -289,6 +293,7 @@ function load_model(filename)
     /* Update view of tiles where model now has been downloaded. */
     for (ptile_index in tiles_of_unloaded_models_map) {
       var ptile = tiles[ptile_index];
+      if (ptile == null) continue;
       var model_filename = tiles_of_unloaded_models_map[ptile_index];
       if (filename == model_filename) {
         update_unit_position(ptile);

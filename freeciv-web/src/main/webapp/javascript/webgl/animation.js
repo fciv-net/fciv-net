@@ -79,6 +79,16 @@ function update_animated_objects()
 
   }
 
+  if (spaceship_launched != null) {
+    spaceship_launched.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), spaceship_speed);
+    spaceship_speed = spaceship_speed * spaceship_acc;
+    if (spaceship_launched.position.y > 10000) {
+      scene.remove(spaceship_launched);
+      spaceship_launched = null;
+      spaceship_speed = 1;
+    }
+
+  }
 
 }
 

@@ -20,6 +20,8 @@
 
 var spaceship_info = {};
 
+var spaceships = {};
+var spaceship_launched = null;
 
 var SSHIP_NONE = 0;
 var SSHIP_STARTED = 1;
@@ -33,6 +35,9 @@ var SSHIP_PLACE_HABITATION = 3;
 var SSHIP_PLACE_LIFE_SUPPORT = 4;
 var SSHIP_PLACE_SOLAR_PANELS = 5;
 
+var spaceship_speed = 1.0;
+var spaceship_acc = 1.01;
+
 /**************************************************************************
  ...
 **************************************************************************/
@@ -42,8 +47,6 @@ function show_spaceship_dialog()
   var message = "";
 
   if (client_is_observer()) return;
-
-  console.log(spaceship_info[client.conn.playing['playerno']]);
 
   var spaceship = spaceship_info[client.conn.playing['playerno']];
 
@@ -65,7 +68,8 @@ function show_spaceship_dialog()
 
   if (game_info['victory_conditions'] == 0) message = "Spaceship victory disabled.<br>";
 
-  message += "<br>For help, see the Space Race page in the manual.<br>";
+  message += "<br>Launch a spaceship to Alpha Centauri! To build a spaceship build the Apollo program wonder, Factory, then lots of Space Components, Space Modules and Space Structurals (10+ each) in a city. "
+   + "For help, see the Space Race page in the manual.<br>";
 
   $("#dialog").remove();
   $("<div id='dialog'></div>").appendTo("div#game_page");
@@ -102,6 +106,7 @@ function launch_spaceship()
   var test_packet = {"pid" : packet_spaceship_launch};
   var myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
+  launch_spaceship_anim();
 
 }
 
@@ -116,4 +121,63 @@ function get_spaceship_state_text(state_id)
  if (state_id == SSHIP_ARRIVED) return "Arrived";
 }
 
+/****************************************************************************
+  Adds a spaceship 3d model.
+****************************************************************************/
+function add_spaceship(ptile, pcity, scene) {
+  if (observing) return;
+
+  var spaceship = spaceship_info[ptile['extras_owner']];
+  if (spaceships[ptile['extras_owner']] == null && is_primary_capital(pcity) && spaceship['sship_state'] == SSHIP_STARTED) {
+    var spaceshipmodel = webgl_get_model("Spaceship", ptile);
+    if (spaceshipmodel == null) {
+      return;
+    }
+    var nexttile = ptile;
+    for (var i = 0; i < 30; i++) {
+      var dir = Math.floor(Math.random() * 8);
+      var ntile = mapstep(ptile, dir);
+      var nexttile = mapstep(ntile, dir);
+      if (is_ocean_tile(nexttile)) {
+        ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        continue;
+      }
+      if (nexttile != null) {
+        break;
+      }
+    }
+    if (nexttile == null) return;
+
+    var height = 5 + nexttile['height'] * 100;
+
+    pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
+    spaceshipmodel.position.set(pos['x'] - 1, height + 3, pos['y'] - 1);
+    scene.add(spaceshipmodel);
+    spaceships[ptile['extras_owner']] = spaceshipmodel;
+
+    load_model("Spaceship_launched");
+  }
+}
+
+/****************************************************************************
+  Animate spaceship launch
+****************************************************************************/
+function launch_spaceship_anim() {
+  var playerno = client.conn.playing['playerno'];
+
+  var spaceshipmodel = webgl_get_model("Spaceship_launched", null);
+  if (spaceshipmodel == null) {
+    return;
+  }
+
+  if (spaceships[playerno] != null) {
+    spaceshipmodel.position.copy(spaceships[playerno].position);
+    scene.remove(spaceships[playerno]);
+    spaceships[playerno] = null;
+  }
+
+  scene.add(spaceshipmodel);
+  spaceship_launched = spaceshipmodel;
+
+}
 

@@ -258,6 +258,10 @@ function generate_help_text(key)
        msg += techs[reqs[n]]['name'] + " ";
       }
     }
+    if (improvement['name'] == "Space Module" || improvement['name'] == "Space Component" || improvement['name'] == "Space Structural") {
+      msg += "<br>Requirements: Factory in city";
+    }
+
     msg += "<br><br>";
     msg += wiki_on_item_button(improvement['name']);
   } else if (key.indexOf("help_gen_units") != -1) {

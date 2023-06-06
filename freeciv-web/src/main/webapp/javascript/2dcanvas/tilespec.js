@@ -546,8 +546,8 @@ function get_unit_activity_sprite(punit)
   switch (punit['ssa_controller']) {
   case SSA_NONE:
     break;
-  case SSA_AUTOSETTLER:
-    return {"key" : "unit.auto_settler"};
+  //case SSA_AUTOSETTLER:
+  //  return {"key" : "unit.auto_settler"};
   case SSA_AUTOEXPLORE:
     return {"key" : "unit.auto_explore"};
   }

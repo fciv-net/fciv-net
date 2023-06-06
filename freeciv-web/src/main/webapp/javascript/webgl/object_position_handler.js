@@ -296,6 +296,7 @@ function update_city_position(ptile) {
 
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
+    add_spaceship(ptile, pcity, scene);
 
     return;
   }
@@ -342,6 +343,7 @@ function update_city_position(ptile) {
 
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
+    add_spaceship(ptile, pcity, scene);
 
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity)) {
       update_city_label(pcity);
@@ -578,7 +580,7 @@ function update_tile_forest(ptile)
       if (scene != null) scene.add(model);
     }
 
-  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Forest" && terrain_name != "Jungle" && terrain_name != "Wheat" && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_forest_positions[ptile['index']].length; i++) {
       scene.remove(tile_forest_positions[ptile['index']][i]);
     }
@@ -615,7 +617,7 @@ function update_tile_jungle(ptile)
       if (scene != null) scene.add(model);
     }
 
-  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Jungle" && terrain_name != "Forest" && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_forest_positions[ptile['index']] != null && terrain_name != "Jungle" && terrain_name != "Wheat" && terrain_name != "Forest"  && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_forest_positions[ptile['index']].length; i++) {
       scene.remove(tile_forest_positions[ptile['index']][i]);
     }

@@ -17,6 +17,8 @@ set mapsize xysize
 set xsize 64
 set ysize 64
 
+set victories spacerace
+
 set landm 50
 set minp 2
 set generator FAIR
