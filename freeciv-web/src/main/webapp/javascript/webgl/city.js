@@ -28,8 +28,9 @@ function show_city_worked_tiles()
 {
   if (active_city == null) return;
 
-  city_label_positions[city_tile(active_city)['index']].visible = false;
-
+  if (city_tile(active_city) != null && city_label_positions[city_tile(active_city)['index']] != null) {
+    city_label_positions[city_tile(active_city)['index']].visible = false;
+  }
   for (var tile_id in tiles) {
     var ptile = tiles[tile_id];
     if (active_city != null && ptile != null && ptile['worked'] != null
@@ -93,11 +94,13 @@ function show_city_worked_tiles()
 ****************************************************************************/
 function remove_city_worked_tiles() {
   for (var workedid in city_worked_positions) {
-    scene.remove(city_worked_positions[workedid]);
+    if (city_worked_positions[workedid] != null) {
+      scene.remove(city_worked_positions[workedid]);
+    }
     delete city_worked_positions[workedid];
   }
 
-  if (active_city != null) {
+  if (active_city != null && city_tile(active_city) != null && city_label_positions[city_tile(active_city)['index']] != null) {
       city_label_positions[city_tile(active_city)['index']].visible = true;
   }
 }

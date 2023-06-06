@@ -125,10 +125,10 @@ function get_spaceship_state_text(state_id)
   Adds a spaceship 3d model.
 ****************************************************************************/
 function add_spaceship(ptile, pcity, scene) {
-  if (observing) return;
+  if (observing || ptile == null || ptile['extras_owner'] == null) return;
 
-  var spaceship = spaceship_info[ptile['extras_owner']];
-  if (spaceships[ptile['extras_owner']] == null && is_primary_capital(pcity) && spaceship['sship_state'] == SSHIP_STARTED) {
+  var spaceship_plr = spaceship_info[ptile['extras_owner']];
+  if (spaceship_plr != null && pcity != null && spaceships[ptile['extras_owner']] == null && is_primary_capital(pcity) && spaceship_plr['sship_state'] == SSHIP_STARTED) {
     var spaceshipmodel = webgl_get_model("Spaceship", ptile);
     if (spaceshipmodel == null) {
       return;
