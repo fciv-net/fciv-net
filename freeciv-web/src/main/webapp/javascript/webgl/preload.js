@@ -195,11 +195,14 @@ function load_model(filename)
   if (filename == "Pine1" || filename == "Pine2") {
     modelscale = 40.5;
   }
-  if (filename == "Fish1" || filename == "Fish2") {
+  if (filename == "Fish1") {
     modelscale = 2.1;
   }
+  if (filename == "Fish2") {
+    modelscale = 1.9;
+  }
   if (filename == "Fish3") {
-    modelscale = 2.4;
+    modelscale = 2.1;
   }
 
   if (filename == "Whales") {

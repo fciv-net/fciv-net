@@ -41,9 +41,6 @@ var unit_healthpercentage_positions = {};
 // stores tile extras (eg specials), key is extra + "." + tile_index.
 var tile_extra_positions = {};
 
-// key is tile id, value is three.js point object.
-var extra_visibilities = {};
-
 // key is tile is, value is list of three.js tree models.
 var tile_models_list = {};
 
@@ -392,7 +389,7 @@ function update_tile_extras(ptile) {
   // Render tile specials (extras), as 2D sprites from the 2D version.
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
-  if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null && extra_visibilities[ptile['index']] == null) {
+  if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
     if (special_resources.includes(extra_resource['rule_name'])) {
       update_tile_extra_update_model(extra_resource['id'], extra_resource['rule_name'], ptile);
     } else {
@@ -425,16 +422,8 @@ function update_tile_extras(ptile) {
       var extra_points = new THREE.Points( extra_geometry, extra_material );
       extra_material.transparent = true;
       scene.add(extra_points);
-      extra_visibilities[ptile['index']] = extra_points;
     }
   }
-
-  if (tile_get_known(ptile) == TILE_KNOWN_SEEN && extra_visibilities[ptile['index']] != null) {
-    extra_visibilities[ptile['index']].material.opacity = 1;
-  } else if (tile_get_known(ptile) == TILE_KNOWN_UNSEEN && extra_visibilities[ptile['index']] != null) {
-    extra_visibilities[ptile['index']].material.opacity = 0.8;
-  }
-
 
 }
 
@@ -488,7 +477,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (extra_name == "Fish") {
       extra_name = extra_name +  Math.floor(1 + Math.random() * 3);
-      height += 0.1;
+      height += 0.00;
     }
     if (extra_name == "Whales") {
       height += 0.3;
