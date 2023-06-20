@@ -262,13 +262,13 @@ function load_model(filename)
     modelscale = 1.5;
   }
   if (filename == 'Wheat') {
-    modelscale = 3.4;
+    modelscale = 3.2;
   }
   if (filename == 'Galleon') {
-    modelscale = 4.7;
+    modelscale = 4.4;
   }
   if (filename == 'Frigate') {
-    modelscale = 5.5;
+    modelscale = 5.3;
   }
   if (filename == 'Airbase') {
     modelscale = 8;
@@ -286,7 +286,7 @@ function load_model(filename)
     modelscale = 3.3;
   }
   if (filename == 'Ironclad') {
-    modelscale = 2.8;
+    modelscale = 2.9;
   }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
