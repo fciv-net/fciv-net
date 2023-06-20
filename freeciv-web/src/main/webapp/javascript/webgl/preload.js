@@ -285,7 +285,9 @@ function load_model(filename)
   if (filename == 'Spaceship' || filename == 'Spaceship_launched') {
     modelscale = 3.3;
   }
-
+  if (filename == 'Ironclad') {
+    modelscale = 2.8;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;

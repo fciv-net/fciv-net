@@ -41,6 +41,7 @@ public class OpenAIChat  extends HttpServlet {
             prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
             String key = prop.getProperty("openai_key");
             if (key == null || key.equals("")) {
+                System.out.println("OpenAI key missing.");
                 return;
             }
 

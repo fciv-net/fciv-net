@@ -44,7 +44,7 @@ function get_unit_height_offset(punit)
   }
 
   if (ptype['name'] == "Ironclad") {
-    return 0.5;
+    return 4.0;
   }
 
   if (ptype['name'] == "Zeppelin") {
