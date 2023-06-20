@@ -20,8 +20,6 @@ Currently known servers based on FCIV.NET / Freeciv-web, which are open source i
 
 FCIV-NET screenshots:
 ------------------------
-![Freeciv-web](https://raw.githubusercontent.com/fciv-net/fciv-net/main/freeciv-web/src/main/webapp/static/images/freeciv-webgl-splash-48.png "Freeciv-web WebGL screenshot")
-
 ![Freeciv-web](https://raw.githubusercontent.com/fciv-net/fciv-net/main/doc/Screenshot.png "FCIV.NET screenshot")
 
 
