@@ -90,6 +90,13 @@ function webgl_preload()
     })(imgurl)
   );
 
+  var city_light = new THREE.Texture();
+  webgl_textures["city_light"] = city_light;
+  textureLoader.load( '/textures/city_light.png', function ( image ) {
+      city_light.image = image;
+      city_light.needsUpdate = true;
+  } );
+
   var hours = new Date().getHours();
   var is_day = hours > 6 && hours < 20;
 
@@ -182,6 +189,9 @@ function load_model(filename)
   if (filename == 'Chariot') {
     modelscale = 6;
   }
+  if (filename == 'Mech. Inf.') {
+    modelscale = 9;
+  }
 
   if (filename == "Tree1" || filename == "Tree2" || filename == "Tree3" ) {
     modelscale = 29.5;
@@ -207,6 +217,10 @@ function load_model(filename)
 
   if (filename == "Whales") {
     modelscale = 1.65;
+  }
+
+  if (filename == "Hut") {
+    modelscale = 8;
   }
 
   if (filename == "Mine") {

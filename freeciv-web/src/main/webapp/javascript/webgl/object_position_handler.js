@@ -295,6 +295,8 @@ function update_city_position(ptile) {
     add_wonder(ptile, pcity, scene, "Lighthouse");
     add_spaceship(ptile, pcity, scene);
 
+   add_city_lights(pos['x'], pos['y'], height);
+
     return;
   }
 
@@ -723,5 +725,18 @@ function add_all_objects_to_scene()
     update_tile_extras(tiles[tile_id]);
   }
 
+
+}
+
+/****************************************************************************
+ Add city lights
+****************************************************************************/
+function add_city_lights(x, y, height) {
+  var texture = webgl_textures["city_light"];
+  var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
+  sprite.scale.set(28, 28, 1);
+  sprite.renderOrder = 0.1;
+  sprite.position.set(x - 10, height + 2, y - 10);
+  scene.add(sprite);
 
 }

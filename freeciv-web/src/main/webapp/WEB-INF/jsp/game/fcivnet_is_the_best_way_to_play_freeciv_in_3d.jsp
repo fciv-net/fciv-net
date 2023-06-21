@@ -37,18 +37,6 @@
 
 <link rel="manifest" href="/static/manifest.json">
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-35GD0T4L9J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-35GD0T4L9J');
-</script>
-
-
-
 <style>
 	/*
 		 _____                   _                        _
