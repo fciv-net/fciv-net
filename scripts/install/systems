@@ -1,5 +1,5 @@
 # Install script for different systems
 # vendor[TAB]codename[TAB]script
-buntu	jammy	deb.sh
+Ubuntu	jammy	deb.sh
 Ubuntu	lunar	deb.sh
 Ubuntu	mantic	deb.sh
