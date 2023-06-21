@@ -343,7 +343,7 @@ function set_default_mapview_active()
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
 
-
+ $("#mapview_canvas_div").show();
 }
 
 
