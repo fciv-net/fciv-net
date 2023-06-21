@@ -27,6 +27,7 @@ var city_positions = {};
 var city_label_positions = {};
 var city_walls_positions = {};
 var city_disorder_positions = {};
+var city_light_positions = {};
 
 // stores flag positions on the map. tile index is key, unit 3d model is value.
 var unit_flag_positions = {};
@@ -255,7 +256,8 @@ function update_city_position(ptile) {
     if (scene != null && city_disorder_positions[ptile['index']] != null) scene.remove(city_disorder_positions[ptile['index']]);
     delete city_disorder_positions[ptile['index']];
     if (scene != null) {
-      scene.remove(pcity['lights']);
+      scene.remove(city_light_positions[ptile['index']]);
+      delete city_light_positions[ptile['index']];
     }
   }
 
@@ -298,9 +300,9 @@ function update_city_position(ptile) {
     add_wonder(ptile, pcity, scene, "Lighthouse");
     add_spaceship(ptile, pcity, scene);
 
-    if (scene != null && pcity['lights'] == null) {
+    if (scene != null && city_light_positions[ptile['index']] == null ) {
       var city_light = add_city_lights(pos['x'], pos['y'], height);
-      pcity['lights'] = city_light;
+      city_light_positions[ptile['index']] = city_light;
     }
     return;
   }
@@ -348,9 +350,9 @@ function update_city_position(ptile) {
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
     add_spaceship(ptile, pcity, scene);
-    if (scene != null && pcity['lights'] == null) {
+    if (scene != null && city_light_positions[ptile['index']] == null) {
       var city_light = add_city_lights(pos['x'], pos['y'], height);
-      pcity['lights'] = city_light;
+      city_light_positions[ptile['index']] = city_light;
     }
 
     if (pcity['webgl_label_hash'] != pcity['name'] + pcity['size'] + pcity['production_value'] + "." + pcity['production_kind'] + punits.length + pcity['nation_id'] + get_city_production_time(pcity)) {
@@ -743,9 +745,9 @@ function add_all_objects_to_scene()
 function add_city_lights(x, y, height) {
   var texture = webgl_textures["city_light"];
   var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
-  sprite.scale.set(28, 28, 1);
+  sprite.scale.set(30, 30, 1);
   sprite.renderOrder = 0.1;
-  sprite.position.set(x - 10, height + 2, y - 10);
+  sprite.position.set(x - 10, height + 3, y - 10);
   scene.add(sprite);
   return sprite;
 
