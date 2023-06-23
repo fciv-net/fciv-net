@@ -419,7 +419,7 @@ function create_nuke_explosion_sprite(frame)
 function create_city_disorder_sprite()
 {
   var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures['city_disorder']}));
-  sprite.scale.set(70,70,1);
+  sprite.scale.set(60,60,1);
   return sprite;
 }
 
