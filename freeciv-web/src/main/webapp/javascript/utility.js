@@ -254,5 +254,4 @@ function submit_game_of_the_day() {
     $.post( "/save_game_of_the_day", screenshot);
   });
   update_game_status_panel();
-  swal("Your game map image has now been submitted to the Game of the Day");
 }
