@@ -94,17 +94,6 @@
 		<url-pattern>/save_game_of_the_day</url-pattern>
 	</servlet-mapping>
 
-	<!-- /fcivnet_is_the_best_way_to_play_freeciv_in_3d -->
-	<servlet>
-		<servlet-name>fcivnet_is_the_best_way_to_play_freeciv_in_3d</servlet-name>
-		<servlet-class>org.freeciv.servlet.Fcivnet_is_the_best_way_to_play_freeciv_in_3d</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>fcivnet_is_the_best_way_to_play_freeciv_in_3d</servlet-name>
-		<url-pattern>/fcivnet_is_the_best_way_to_play_freeciv_in_3d</url-pattern>
-	</servlet-mapping>
-
 	<!-- /game/details -->
 	<servlet>
 		<servlet-name>GameDetails</servlet-name>
@@ -125,17 +114,6 @@
 	<servlet-mapping>
 		<servlet-name>GameList</servlet-name>
 		<url-pattern>/game/list</url-pattern>
-	</servlet-mapping>
-	
-	<!-- /game/play-by-email/top -->
-	<servlet>
-		<servlet-name>GamePlayByEmailTop</servlet-name>
-		<servlet-class>org.freeciv.servlet.GamePlayByEmailTop</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>GamePlayByEmailTop</servlet-name>
-		<url-pattern>/game/play-by-email/top</url-pattern>
 	</servlet-mapping>
 	
 	<!-- /game/statistics -->
