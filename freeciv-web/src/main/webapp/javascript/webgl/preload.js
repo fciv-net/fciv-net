@@ -97,6 +97,55 @@ function webgl_preload()
       city_light.needsUpdate = true;
   } );
 
+  var nuke_grey_blast_area = new THREE.Texture();
+  webgl_textures["nuke_grey_blast_area"] = nuke_grey_blast_area;
+  textureLoader.load( '/textures/nuke_grey_blast_area.png', function ( image ) {
+      nuke_grey_blast_area.image = image;
+      nuke_grey_blast_area.needsUpdate = true;
+  } );
+
+  var nuke_inner_mushroom_cloud = new THREE.Texture();
+  webgl_textures["nuke_inner_mushroom_cloud"] = nuke_inner_mushroom_cloud;
+  textureLoader.load( '/textures/nuke_inner_mushroom_cloud.png', function ( image ) {
+      nuke_inner_mushroom_cloud.image = image;
+      nuke_inner_mushroom_cloud.needsUpdate = true;
+  } );
+
+  var nuke_outer_mushroom_cloud = new THREE.Texture();
+  webgl_textures["nuke_outer_mushroom_cloud"] = nuke_outer_mushroom_cloud;
+  textureLoader.load( '/textures/nuke_outer_mushroom_cloud.png', function ( image ) {
+      nuke_outer_mushroom_cloud.image = image;
+      nuke_outer_mushroom_cloud.needsUpdate = true;
+  } );
+
+  var nuke_hot_mushroom_cloud = new THREE.Texture();
+  webgl_textures["nuke_hot_mushroom_cloud"] = nuke_hot_mushroom_cloud;
+  textureLoader.load( '/textures/nuke_hot_mushroom_cloud.png', function ( image ) {
+      nuke_hot_mushroom_cloud.image = image;
+      nuke_hot_mushroom_cloud.needsUpdate = true;
+  } );
+
+  var nuke_rising_column = new THREE.Texture();
+  webgl_textures["nuke_rising_column"] = nuke_rising_column;
+  textureLoader.load( '/textures/nuke_rising_column.png', function ( image ) {
+      nuke_rising_column.image = image;
+      nuke_rising_column.needsUpdate = true;
+  } );
+
+  var nuke_shock_wave = new THREE.Texture();
+  webgl_textures["nuke_shock_wave"] = nuke_shock_wave;
+  textureLoader.load( '/textures/nuke_shock_wave.png', function ( image ) {
+      nuke_shock_wave.image = image;
+      nuke_shock_wave.needsUpdate = true;
+  } );
+
+  var nuke_glow = new THREE.Texture();
+  webgl_textures["nuke_glow"] = nuke_glow;
+  textureLoader.load( '/textures/nuke_glow.png', function ( image ) {
+      nuke_glow.image = image;
+      nuke_glow.needsUpdate = true;
+  } );
+
   var hours = new Date().getHours();
   var is_day = hours > 6 && hours < 20;
 
@@ -292,6 +341,9 @@ function load_model(filename)
   }
   if (filename == 'Engineers') {
     modelscale = 8.5;
+  }
+  if (filename == 'Nuclear') {
+    modelscale = 9;
   }
   if (filename == 'Settlers') {
     modelscale = 10;

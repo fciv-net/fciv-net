@@ -1165,10 +1165,7 @@ function update_unit_order_commands()
     }
 
     if (utype_can_do_action(ptype, ACTION_NUKE)) {
-
       unit_actions["nuke"] = {name: "Detonate Nuke At (Shift-N)"};
-    } else {
-
     }
 
     if (utype_can_do_action_result(ptype, ACTRES_PARADROP)
@@ -1182,7 +1179,6 @@ function update_unit_order_commands()
         && get_what_can_unit_pillage_from(punit, ptile).length > 0
         && (pcity == null || city_owner_player_id(pcity) !== client.conn.playing.playerno)) {
       unit_actions["pillage"] = {name: "Pillage (Shift-P)"};
-    } else {
     }
 
     if (pcity == null || punit['homecity'] === 0 || punit['homecity'] === pcity['id']) {
@@ -2613,12 +2609,17 @@ function key_unit_clean()
 
 /**************************************************************************
   Start a goto that will end in the unit(s) detonating in a nuclear
-  exlosion.
+  explosion.
 **************************************************************************/
 function key_unit_nuke()
 {
+  var funits = get_units_in_focus();
+  nuke_unit = (funits != null && funits.length == 1) ? funits[0] : null;
+  nuke_start_tile = (funits != null && funits.length == 1) ? index_to_tile(funits[0]['tile']) : null;
+
   /* The last order of the goto is the nuclear detonation. */
   activate_goto_last(ORDER_PERFORM_ACTION, ACTION_NUKE);
+
 }
 
 /**************************************************************************

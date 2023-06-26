@@ -386,34 +386,6 @@ function create_unit_explosion_sprite(frame)
 }
 
 /****************************************************************************
- Create a nuke explosion sprite
-****************************************************************************/
-function create_nuke_explosion_sprite(frame)
-{
-  var texture;
-  var key = 'explode.nuke';
-
-  if (texture_cache[key] != null) {
-    texture = texture_cache[key];
-  } else {
-    var fcanvas = document.createElement("canvas");
-    fcanvas.width = 256;
-    fcanvas.height = 256;
-    var fcontext = fcanvas.getContext("2d");
-    fcontext.drawImage(sprites[key], 0, 0,
-                sprites[key].width, sprites[key].height,
-                0,0,sprites[key].width,sprites[key].height);
-    texture = new THREE.Texture(fcanvas);
-    texture.needsUpdate = true;
-    texture_cache[key] = texture;
-  }
-
-  var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
-  sprite.scale.set(180,180,1);
-  return sprite;
-}
-
-/****************************************************************************
  Create a city civil disorder sprite
 ****************************************************************************/
 function create_city_disorder_sprite()

@@ -663,7 +663,6 @@ function handle_nuke_tile_info(packet)
 
   render_nuclear_explosion(ptile);
 
-  play_sound('LrgExpl.ogg');
 
 }
 
@@ -749,7 +748,7 @@ function handle_unit_remove(packet)
 {
   var punit = game_find_unit_by_number(packet['unit_id']);
 
-  if (punit == null) {
+  if (punit == null || (nuke_unit != null && unit_type(punit)['name'] == 'Nuclear')) {
     return;
   }
 
@@ -873,6 +872,8 @@ function action_decision_maybe_auto(actor_unit, action_probabilities,
 function handle_unit_packet_common(packet_unit)
 {
   var punit = player_find_unit_by_id(unit_owner(packet_unit), packet_unit['id']);
+
+  if (nuke_unit != null) return;
 
   clear_tile_unit(punit);
 

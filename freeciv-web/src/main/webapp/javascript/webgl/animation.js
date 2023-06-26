@@ -90,6 +90,10 @@ function update_animated_objects()
 
   }
 
+  if (nuke_objects.length > 0) {
+    animate_nuke();
+  }
+
 }
 
 
@@ -123,33 +127,4 @@ function animate_explosion_on_tile(tile_id, animation_frame)
 
   if (animation_frame <= 4) setTimeout("animate_explosion_on_tile(" + tile_id + "," + (animation_frame + 1) + ")", 350);
 
-}
-
-/****************************************************************************
- Renders a nuclear explosion animation on the given tile.
-****************************************************************************/
-function render_nuclear_explosion(ptile)
-{
-  if (ptile == null) return;
-  var height = 5 + ptile['height'] * 100;
-
-  var explosion_mesh = create_nuke_explosion_sprite();
-  var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-  explosion_mesh.position.set(pos['x'] + 30, height + 50, pos['y'] + 30);
-  if (scene != null) {
-     scene.add(explosion_mesh);
-     ptile['nuclear_mesh'] = explosion_mesh;
-  }
-
-  setTimeout("remove_nuclear_explosion(" + ptile['index'] + ")", 3000);
-
-}
-
-/****************************************************************************
-...
-****************************************************************************/
-function remove_nuclear_explosion(tile_id)
-{
-  var ptile = tiles[tile_id];
-  scene.remove(ptile['nuclear_mesh']);
 }
