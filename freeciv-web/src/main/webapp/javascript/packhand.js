@@ -748,7 +748,7 @@ function handle_unit_remove(packet)
 {
   var punit = game_find_unit_by_number(packet['unit_id']);
 
-  if (punit == null || (nuke_unit != null && unit_type(punit)['name'] == 'Nuclear')) {
+  if (punit == null) {
     return;
   }
 

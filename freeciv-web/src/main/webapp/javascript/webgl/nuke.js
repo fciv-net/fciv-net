@@ -19,8 +19,6 @@
 
 var nuke_unit = null;
 var nuke_start_tile = null;
-var nuke_mesh = null;
-var nuke_flag = null;
 var nuke_objects = [];
 var nuke_mushroom_objects = [];
 var nuke_other_objects = [];
@@ -31,21 +29,10 @@ var nuke_other_objects = [];
 function render_nuclear_explosion(ptile)
 {
   if (ptile == null || nuke_unit == null || nuke_start_tile == null) return;
-  var height = 5 + ptile['height'] * 100;
-  ANIM_STEPS = 40;
 
   center_tile_mapcanvas_3d(ptile);
-
-  nuke_flag = unit_flag_positions[nuke_start_tile['index']];
-  nuke_mesh = unit_positions[nuke_start_tile['index']];
-
-  var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-
-  animate_nuke_unit(pos, ptile);
-  setTimeout("create_nuke(" + ptile['index'] + ");", 1000);
-
+  setTimeout("create_nuke(" + ptile['index'] + ");", 500);
 }
-
 
 /****************************************************************************
  Render nuclear explosion using particles.
@@ -181,50 +168,9 @@ function create_nuke(ptile_id)
     nuke_other_objects.push(sprite);
   }
 
-  remove_nuclear_unit(ptile_id);
-
   setTimeout("clear_nuke();", 10000);
 }
 
-/****************************************************************************
- Move nuclear rocket to destination.
-****************************************************************************/
-function animate_nuke_unit(pos, ptile)
-{
-
-  anim_objs[nuke_unit['id']] = {'unit' : nuke_unit['id'], 'mesh' : unit_positions[nuke_start_tile['index']], 'flag' : unit_flag_positions[nuke_start_tile['index']]};
-
-  nuke_unit['anim_list'] = [];
-  var anim_tuple = {};
-  anim_tuple['tile'] = nuke_start_tile['index'];
-  anim_tuple['i'] = ANIM_STEPS;
-  nuke_unit['anim_list'].push(anim_tuple);
-
-  anim_tuple = {};
-  anim_tuple['tile'] = ptile['index'];
-  anim_tuple['i'] = ANIM_STEPS;
-  nuke_unit['anim_list'].push(anim_tuple);
-
-}
-
-/****************************************************************************
- Remove nuke unit
-****************************************************************************/
-function remove_nuclear_unit(ptile_id)
-{
-  clear_tile_unit(nuke_unit);
-  current_focus = [];
-  webgl_clear_unit_focus();
-  delete units[nuke_unit['id']];
-
-  nuke_unit = null;
-  nuke_start_tile = null;
-  scene.remove(nuke_mesh);
-  scene.remove(nuke_flag);
-
-  ANIM_STEPS = 6;
-
-}
 
 /****************************************************************************
  Remove nuke particles
