@@ -57,7 +57,7 @@ function create_nuke(ptile_id)
 
   // Render inner mushroom cloud.
   var innerMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_inner_mushroom_cloud"]});
-  for (var i = 0; i < 60000; i++) {
+  for (var i = 0; i < 45000; i++) {
     var x = pos['x'] + (Math.random() * inner_radius) - (inner_radius / 2);
     var h = height + mushroom_height + (Math.random() * inner_radius) - (inner_radius / 2);
     var y = pos['y']  + (Math.random() * inner_radius) - (inner_radius / 2);
@@ -67,7 +67,7 @@ function create_nuke(ptile_id)
     }
 
     var sprite = new THREE.Sprite(innerMaterial);
-    sprite.scale.set(2 + Math.random(), 2 + Math.random(), 1);
+    sprite.scale.set(2.5 + Math.random(), 2.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -78,25 +78,6 @@ function create_nuke(ptile_id)
 
   // Render outer mushroom cloud.
   var outerMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_outer_mushroom_cloud"]});
-  for (var i = 0; i < 30000; i++) {
-    var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
-    var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
-    var y = pos['y']  + (Math.random() * outer_radius) - (outer_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
-    if (dist > (outer_radius / 2) || dist < 35) {
-      continue;
-    }
-
-    var sprite = new THREE.Sprite(outerMaterial);
-    sprite.scale.set(0.5 + Math.random(), Math.random(), 1);
-    sprite.position.set(x, h, y);
-    scene.add(sprite);
-    nuke_objects.push(sprite);
-    nuke_mushroom_objects.push(sprite);
-  }
-
-  // Render hot mushroom cloud.
-  var hotMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_hot_mushroom_cloud"]});
   for (var i = 0; i < 25000; i++) {
     var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
     var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
@@ -106,8 +87,27 @@ function create_nuke(ptile_id)
       continue;
     }
 
+    var sprite = new THREE.Sprite(outerMaterial);
+    sprite.scale.set(0.8 + Math.random(), 0.5 + Math.random(), 1);
+    sprite.position.set(x, h, y);
+    scene.add(sprite);
+    nuke_objects.push(sprite);
+    nuke_mushroom_objects.push(sprite);
+  }
+
+  // Render hot mushroom cloud.
+  var hotMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_hot_mushroom_cloud"]});
+  for (var i = 0; i < 15000; i++) {
+    var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
+    var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
+    var y = pos['y']  + (Math.random() * outer_radius) - (outer_radius / 2);
+    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
+    if (dist > (outer_radius / 2) || dist < 35) {
+      continue;
+    }
+
     var sprite = new THREE.Sprite(hotMaterial);
-    sprite.scale.set(0.2 + Math.random(), Math.random(), 1);
+    sprite.scale.set(0.5 + Math.random(), 0.4 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -118,7 +118,7 @@ function create_nuke(ptile_id)
   // Render shock wave
   var shock_radius = 240;
   var shockMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_shock_wave"]});
-  for (var i = 0; i < 800000; i++) {
+  for (var i = 0; i < 100000; i++) {
     var x = pos['x'] + (Math.random() * shock_radius) - (shock_radius / 2);
     var h = height + mushroom_height + (Math.random() * shock_radius) - (shock_radius / 2);
     var y = pos['y']  + (Math.random() * shock_radius) - (shock_radius / 2);
@@ -138,7 +138,7 @@ function create_nuke(ptile_id)
   // Render blast area.
   var blast_radius = 200;
   var blastMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_grey_blast_area"]});
-  for (var i = 0; i < 130000; i++) {
+  for (var i = 0; i < 90000; i++) {
     var x = pos['x'] + (Math.random() * blast_radius) - (blast_radius / 2);
     var h = height + 0.5 + (Math.random() * blast_radius) - (blast_radius / 2);
     var y = pos['y']  + (Math.random() * blast_radius) - (blast_radius / 2);
