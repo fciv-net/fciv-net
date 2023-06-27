@@ -40,6 +40,7 @@ function render_nuclear_explosion(ptile)
 function create_nuke(ptile_id)
 {
   play_sound('LrgExpl.ogg');
+  landMesh.material.uniforms.nuke.value = true;
 
   var ptile = tiles[ptile_id];
   var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -55,7 +56,8 @@ function create_nuke(ptile_id)
   nuke_objects.push(sprite);
 
   // Render inner mushroom cloud.
-  for (var i = 0; i < 25000; i++) {
+  var innerMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_inner_mushroom_cloud"]});
+  for (var i = 0; i < 60000; i++) {
     var x = pos['x'] + (Math.random() * inner_radius) - (inner_radius / 2);
     var h = height + mushroom_height + (Math.random() * inner_radius) - (inner_radius / 2);
     var y = pos['y']  + (Math.random() * inner_radius) - (inner_radius / 2);
@@ -64,8 +66,8 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_inner_mushroom_cloud"]}));
-    sprite.scale.set(5, 5, 1);
+    var sprite = new THREE.Sprite(innerMaterial);
+    sprite.scale.set(2 + Math.random(), 2 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -75,7 +77,8 @@ function create_nuke(ptile_id)
   var outer_radius = 118;
 
   // Render outer mushroom cloud.
-  for (var i = 0; i < 12000; i++) {
+  var outerMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_outer_mushroom_cloud"]});
+  for (var i = 0; i < 30000; i++) {
     var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
     var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
     var y = pos['y']  + (Math.random() * outer_radius) - (outer_radius / 2);
@@ -84,8 +87,8 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_outer_mushroom_cloud"]}));
-    sprite.scale.set(5, 5, 1);
+    var sprite = new THREE.Sprite(outerMaterial);
+    sprite.scale.set(0.5 + Math.random(), Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -93,7 +96,8 @@ function create_nuke(ptile_id)
   }
 
   // Render hot mushroom cloud.
-  for (var i = 0; i < 8000; i++) {
+  var hotMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_hot_mushroom_cloud"]});
+  for (var i = 0; i < 25000; i++) {
     var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
     var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
     var y = pos['y']  + (Math.random() * outer_radius) - (outer_radius / 2);
@@ -102,8 +106,8 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_hot_mushroom_cloud"]}));
-    sprite.scale.set(4, 4, 1);
+    var sprite = new THREE.Sprite(hotMaterial);
+    sprite.scale.set(0.2 + Math.random(), Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -113,7 +117,8 @@ function create_nuke(ptile_id)
 
   // Render shock wave
   var shock_radius = 240;
-  for (var i = 0; i < 250000; i++) {
+  var shockMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_shock_wave"]});
+  for (var i = 0; i < 800000; i++) {
     var x = pos['x'] + (Math.random() * shock_radius) - (shock_radius / 2);
     var h = height + mushroom_height + (Math.random() * shock_radius) - (shock_radius / 2);
     var y = pos['y']  + (Math.random() * shock_radius) - (shock_radius / 2);
@@ -122,8 +127,8 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_shock_wave"]}));
-    sprite.scale.set(5, 5, 1);
+    var sprite = new THREE.Sprite(shockMaterial);
+    sprite.scale.set(0.5 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -132,7 +137,8 @@ function create_nuke(ptile_id)
 
   // Render blast area.
   var blast_radius = 200;
-  for (var i = 0; i < 25000; i++) {
+  var blastMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_grey_blast_area"]});
+  for (var i = 0; i < 130000; i++) {
     var x = pos['x'] + (Math.random() * blast_radius) - (blast_radius / 2);
     var h = height + 0.5 + (Math.random() * blast_radius) - (blast_radius / 2);
     var y = pos['y']  + (Math.random() * blast_radius) - (blast_radius / 2);
@@ -141,8 +147,8 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_grey_blast_area"]}));
-    sprite.scale.set(6, 6, 1);
+    var sprite = new THREE.Sprite(blastMaterial);
+    sprite.scale.set(1 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -151,7 +157,8 @@ function create_nuke(ptile_id)
 
   // Render rising column.
   var column_radius = 60;
-  for (var i = 0; i < 1000; i++) {
+  var risingMaterial = new THREE.SpriteMaterial( { map: webgl_textures["nuke_rising_column"]});
+  for (var i = 0; i < 4000; i++) {
     var x = pos['x'] + (Math.random() * column_radius) - (column_radius / 2);
     var h = height + 30 + (Math.random() * column_radius) - (column_radius / 2);
     var y = pos['y']  + (Math.random() * column_radius) - (column_radius / 2);
@@ -160,8 +167,8 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_rising_column"]}));
-    sprite.scale.set(6, 6, 1);
+    var sprite = new THREE.Sprite(risingMaterial);
+    sprite.scale.set(1 + Math.random(), 1 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
     nuke_objects.push(sprite);
@@ -183,6 +190,7 @@ function clear_nuke()
   nuke_objects = [];
   nuke_mushroom_objects = [];
   nuke_other_objects = [];
+  landMesh.material.uniforms.nuke.value = false;
 }
 
 /****************************************************************************
