@@ -873,8 +873,6 @@ function handle_unit_packet_common(packet_unit)
 {
   var punit = player_find_unit_by_id(unit_owner(packet_unit), packet_unit['id']);
 
-  if (nuke_unit != null) return;
-
   clear_tile_unit(punit);
 
   if (punit == null && game_find_unit_by_number(packet_unit['id'])) {
