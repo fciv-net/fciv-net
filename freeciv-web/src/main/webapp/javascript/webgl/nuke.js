@@ -199,7 +199,7 @@ function clear_nuke()
 function animate_nuke() {
   for (var i = 0; i < nuke_mushroom_objects.length; i++) {
     nuke_mushroom_objects[i].position.set(nuke_mushroom_objects[i].position.x + ( 2 * Math.random()) - 1,
-    nuke_mushroom_objects[i].position.y + (2 * Math.random()) - 1 + 0.25,
+    nuke_mushroom_objects[i].position.y + (2 * Math.random()) - 1 + 0.5,
     nuke_mushroom_objects[i].position.z + (2 * Math.random()) - 1
     );
   }
