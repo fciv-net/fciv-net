@@ -26,7 +26,7 @@ var webgl_materials = {};
 
 var meshes = {};
 
-var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "Warriors", "citywalls",
+var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0", "Warriors", "citywalls",
                                "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Fish1", "Fish2", "Fish3", "Whales"];
 var tiles_of_unloaded_models_map = {};
 
@@ -353,6 +353,10 @@ function load_model(filename)
   }
   if (filename == 'Ironclad') {
     modelscale = 2.9;
+  }
+  if (filename == 'city_roman_0' || filename == 'city_roman_1' || filename == 'city_roman_2' || filename == 'city_roman_3'
+      || filename == 'city_roman_4' || filename == 'city_roman_capital') {
+    modelscale = 2.1;
   }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;

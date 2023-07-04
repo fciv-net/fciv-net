@@ -2030,6 +2030,13 @@ function city_to_3d_model_name(pcity)
       || city_rule['rule_name'] == "PostModern" || city_rule['rule_name'] == "Asian") {
     city_style_name = "modern";
   }
+  if (city_rule['rule_name'] == "Classical") {
+    city_style_name = "roman";
+
+    if (is_primary_capital(pcity)) {
+      return "city_roman_capital";
+    }
+  }
 
   return "city_" + city_style_name + "_" + size;
 }
