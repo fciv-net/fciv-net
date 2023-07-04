@@ -73,7 +73,7 @@ public class DeleteSaveGame extends HttpServlet {
 					"Invalid username");
 			return;
 		}
-		if (savegame == null || savegame.length() > 100 || savegame.contains("/") || savegame.contains("\\")) {
+		if (savegame == null || savegame.length() > 100 || savegame.contains("/") || savegame.contains("\\") || savegame.contains(".")) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					"Invalid savegame");
 			return;
