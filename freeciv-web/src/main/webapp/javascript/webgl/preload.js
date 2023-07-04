@@ -358,6 +358,9 @@ function load_model(filename)
       || filename == 'city_roman_4' || filename == 'city_roman_capital') {
     modelscale = 2.1;
   }
+  if (filename == 'Ruins') {
+    modelscale = 7;
+  }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
