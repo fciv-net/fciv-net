@@ -270,7 +270,7 @@ function update_city_position(ptile) {
       return;
     }
     city_positions[ptile['index']] = new_city;
-    if (pcity['style'] == 1) height -= 0.5;
+    if (pcity['style'] == 1) height -= 0.82;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_city.position.set(pos['x'] - 12, height, pos['y'] - 11);
@@ -321,7 +321,7 @@ function update_city_position(ptile) {
       if (scene != null) scene.remove(city_positions[ptile['index']]);
       pcity['webgl_model_name'] = model_name;
       city_positions[ptile['index']] = new_city;
-      if (pcity['style'] == 1) height -= 0.9;
+      if (pcity['style'] == 1) height -= 0.82;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_city.position.set(pos['x'] - 12, height, pos['y'] - 10);
