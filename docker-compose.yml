@@ -1,10 +1,10 @@
 version: "3"
 services:
 
-  freeciv-web:
-    image: freeciv/freeciv-web
+  fciv-net:
+    image: freeciv/fciv-net
     build: .
-    container_name: freeciv-web
+    container_name: fciv-net
     command: ["sleep", "infinity"]
     volumes:
       - "data:/var/lib/tomcat9/webapps/data"
