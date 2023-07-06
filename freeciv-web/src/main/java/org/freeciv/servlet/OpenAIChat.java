@@ -25,6 +25,8 @@ import java.util.stream.Collectors;
  */
 public class OpenAIChat  extends HttpServlet {
 
+    private String model = "gpt-4";
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
@@ -88,7 +90,7 @@ public class OpenAIChat  extends HttpServlet {
 
             ChatCompletionRequest completionRequest = ChatCompletionRequest.builder()
                     .messages(messages)
-                    .model("gpt-3.5-turbo")
+                    .model(model)
                     .build();
             List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
             for (ChatCompletionChoice choice : choices) {
