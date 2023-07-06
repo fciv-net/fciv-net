@@ -30,6 +30,9 @@ function get_openai_game_context()
   if (observing) return;
 
   var pplayer = client.conn.playing;
+  if (pplayer == null || pplayer['nation'] == null) {
+    return "";
+  }
 
   if (civclient_state == C_S_PREPARING) {
     context += "The current player is called " + username + ". ";
