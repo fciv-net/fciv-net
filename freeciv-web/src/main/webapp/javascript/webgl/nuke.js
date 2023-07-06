@@ -40,7 +40,6 @@ function render_nuclear_explosion(ptile)
 function create_nuke(ptile_id)
 {
   play_sound('LrgExpl.ogg');
-  landMesh.material.uniforms.nuke.value = true;
 
   var ptile = tiles[ptile_id];
   var pos = map_to_scene_coords(ptile['x'], ptile['y']);
@@ -190,7 +189,6 @@ function clear_nuke()
   nuke_objects = [];
   nuke_mushroom_objects = [];
   nuke_other_objects = [];
-  landMesh.material.uniforms.nuke.value = false;
 }
 
 /****************************************************************************

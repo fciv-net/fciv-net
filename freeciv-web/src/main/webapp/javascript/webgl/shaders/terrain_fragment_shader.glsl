@@ -52,7 +52,6 @@ varying vec3 vPosition;
 varying vec3 vPosition_camera;
 
 uniform bool borders_visible;
-uniform bool nuke;
 
 float terrain_inaccessible = 0.0;
 float terrain_lake = 10.0;
@@ -522,10 +521,6 @@ void main(void)
 
     // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
     c = c * vColor.r;
-
-    if (nuke) {
-      c.r = 0.6;
-    }
 
     gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0000187);
 

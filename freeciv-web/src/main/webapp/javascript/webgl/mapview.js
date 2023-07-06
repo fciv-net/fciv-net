@@ -201,8 +201,7 @@ function init_webgl_mapview() {
     roadsmap: { type: "t", value: update_roads_image()},
     roadsprites: {type: "t", value: webgl_textures["roads"]},
     railroadsprites: {type: "t", value: webgl_textures["railroads"]},
-    borders_visible: {type: "bool", value: server_settings['borders']['is_visible']},
-    nuke: {type: "bool", value: false}
+    borders_visible: {type: "bool", value: server_settings['borders']['is_visible']}
   };
 
   for (var i = 0; i < tiletype_terrains.length ; i++) {
