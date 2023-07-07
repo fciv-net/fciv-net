@@ -299,6 +299,7 @@ function update_city_position(ptile) {
 
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
+    add_wonder(ptile, pcity, scene, "Statue of Liberty");
     add_spaceship(ptile, pcity, scene);
 
     if (scene != null && city_light_positions[ptile['index']] == null ) {
@@ -351,6 +352,7 @@ function update_city_position(ptile) {
 
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
+    add_wonder(ptile, pcity, scene, "Statue of Liberty");
     add_spaceship(ptile, pcity, scene);
     if (scene != null && city_light_positions[ptile['index']] == null) {
       var city_light = add_city_lights(pos['x'], pos['y'], height);
@@ -447,7 +449,7 @@ function update_tile_extras(ptile) {
 ****************************************************************************/
 function add_wonder(ptile, pcity, scene, wonder_name) {
     if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
-      var wonder = webgl_get_model(wonder_name, ptile);
+      var wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
       if (wonder == null) {
         return;
       }
@@ -460,7 +462,15 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
+        if (city_positions[nexttile['index']] != null) {
+          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          continue;
+        }
         if (wonder_name == 'Lighthouse' && !is_ocean_tile_near(nexttile)) {
+          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          continue;
+        }
+        if (wonder_name == 'Statue of Liberty' && !is_ocean_tile_near(nexttile)) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
@@ -472,6 +482,8 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
 
       var height = 5 + nexttile['height'] * 100;
       if (wonder_name == 'Lighthouse') height += 4.2;
+      if (wonder_name == 'Statue of Liberty' && is_ocean_tile(nexttile)) height += 20.1;
+      if (wonder_name == 'Statue of Liberty' && !is_ocean_tile(nexttile)) height += 21.3;
 
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
       wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);

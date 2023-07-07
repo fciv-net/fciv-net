@@ -285,6 +285,9 @@ function load_model(filename)
   if (filename == "Pyramids") {
     modelscale = 5.0;
   }
+  if (filename == "StatueOfLiberty") {
+    modelscale = 5.4;
+  }
   if (filename == "Lighthouse") {
     modelscale = 4.8;
   }
