@@ -470,10 +470,6 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
-        if (wonder_name == 'Statue of Liberty' && !is_ocean_tile_near(nexttile)) {
-          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
-          continue;
-        }
         if (nexttile != null) {
           break;
         }
