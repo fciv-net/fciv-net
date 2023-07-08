@@ -173,12 +173,30 @@ function create_heightmap(heightmap_quality)
        if (Math.round(gx) == gx && Math.round(gy) == gy) {
         var ptile = map_pos_to_tile(gx, gy);
         heightmap[x][y] = ptile['height'];
+        if (tile_has_extra(ptile, EXTRA_RIVER)) {
+          heightmap[x][y] = ptile['height'] * 0.98;
+        }
+        if (tile_terrain(ptile)['name'] == "Mountains") {
+          heightmap[x][y] = ptile['height'] * 1.01;
+        }
       } else {
         var neighbours = [
           { "x": Math.floor(gx), "y": Math.floor(gy) },
           { "x": Math.floor(gx), "y": Math.ceil(gy) },
           { "x": Math.ceil(gx),  "y": Math.floor(gy) },
           { "x": Math.ceil(gx),  "y": Math.ceil(gy) }];
+
+        var num_river_neighbours = 0;
+        for (var i = 0; i < 4; i++) {
+          var coords = neighbours[i];
+          if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
+            continue;
+          }
+          var ptile = map_pos_to_tile(coords.x, coords.y);
+          if (tile_has_extra(ptile, EXTRA_RIVER)) {
+            num_river_neighbours++;
+          }
+        }
 
         var norm = 0;
         var sum = 0;
@@ -198,6 +216,10 @@ function create_heightmap(heightmap_quality)
           } else {
             height = ptile['height'];
           }
+          if (tile_has_extra(ptile, EXTRA_RIVER)) {
+            height = ptile['height'] * 1.045  - ((num_river_neighbours / 4) * 0.02);
+          }
+
           sum += height / distance / distance;
           norm += 1 / distance / distance;
         }
