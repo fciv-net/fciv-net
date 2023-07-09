@@ -2039,42 +2039,42 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
   switch (key_code) {
     case 35: //1
     case 97:
-      key_unit_move(DIR8_SOUTH);
+      key_unit_move(DIR8_SOUTHWEST);
       break;
 
     case 40: // 2
     case 98:
-      key_unit_move(DIR8_SOUTHEAST);
+      key_unit_move(DIR8_SOUTH);
       break;
 
     case 34: // 3
     case 99:
-      key_unit_move(DIR8_EAST);
+      key_unit_move(DIR8_SOUTHEAST);
       break;
 
     case 37: // 4
     case 100:
-      key_unit_move(DIR8_SOUTHWEST);
+      key_unit_move(DIR8_WEST);
       break;
 
     case 39: // 6
     case 102:
-      key_unit_move(DIR8_NORTHEAST);
+      key_unit_move(DIR8_EAST);
       break;
 
     case 36: // 7
     case 103:
-      key_unit_move(DIR8_WEST);
+      key_unit_move(DIR8_NORTHWEST);
       break;
 
     case 38: // 8
     case 104:
-      key_unit_move(DIR8_NORTHWEST);
+      key_unit_move(DIR8_NORTH);
       break;
 
     case 33: // 9
     case 105:
-      key_unit_move(DIR8_NORTH);
+      key_unit_move(DIR8_NORTHEAST);
       break;
 
     case 27:
