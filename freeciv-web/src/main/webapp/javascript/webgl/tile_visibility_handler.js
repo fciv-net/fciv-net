@@ -18,7 +18,6 @@
 ***********************************************************************/
 
 var vertex_colors_dirty = false;
-var trees_need_update = true;
 
 /**************************************************************************
  Updates the terrain vertex colors to set tile to known, unknown or fogged.
@@ -37,9 +36,6 @@ function webgl_update_tile_known(old_tile, new_tile)
 
   vertex_colors_dirty = true;
 
-  if (tile_terrain(new_tile).name != tile_terrain(old_tile).name && tile_terrain(old_tile).name == "Forest" || tile_terrain(old_tile).name == "Jungle" || tile_terrain(new_tile).name == "Forest" || tile_terrain(new_tile).name == "Jungle") {
-    trees_need_update = true;
-  }
 }
 
 

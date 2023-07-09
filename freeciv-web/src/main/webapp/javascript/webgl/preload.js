@@ -29,6 +29,7 @@ var meshes = {};
 var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0", "Warriors", "citywalls",
                                "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Fish1", "Fish2", "Fish3", "Whales"];
 var tiles_of_unloaded_models_map = {};
+var models_loading_map = {}; // used to keep track of which models are loading, to prevent loading the same models multiple times.
 
 /****************************************************************************
   Preload textures and models
@@ -381,6 +382,7 @@ function load_model(filename)
         update_city_position(ptile);
         update_tile_extras(ptile);
         delete tiles_of_unloaded_models_map[ptile_index];
+        delete models_loading_map[model_filename];
       }
     }
 
@@ -397,7 +399,12 @@ function webgl_get_model(filename, ptile)
   } else {
     // Download model and redraw the tile when loaded.
     tiles_of_unloaded_models_map[ptile['index']] = filename;
-    load_model(filename);
+
+    if (models_loading_map[filename] == null) {
+      models_loading_map[filename] = filename;
+      load_model(filename);
+    }
+
     return null;
   }
 }
