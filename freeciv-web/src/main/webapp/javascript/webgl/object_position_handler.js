@@ -300,6 +300,7 @@ function update_city_position(ptile) {
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
     add_wonder(ptile, pcity, scene, "Statue of Liberty");
+    add_wonder(ptile, pcity, scene, "Eiffel Tower");
     add_spaceship(ptile, pcity, scene);
 
     if (scene != null && city_light_positions[ptile['index']] == null ) {
@@ -353,6 +354,7 @@ function update_city_position(ptile) {
     add_wonder(ptile, pcity, scene, "Pyramids");
     add_wonder(ptile, pcity, scene, "Lighthouse");
     add_wonder(ptile, pcity, scene, "Statue of Liberty");
+    add_wonder(ptile, pcity, scene, "Eiffel Tower");
     add_spaceship(ptile, pcity, scene);
     if (scene != null && city_light_positions[ptile['index']] == null) {
       var city_light = add_city_lights(pos['x'], pos['y'], height);
@@ -480,8 +482,14 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       if (wonder_name == 'Lighthouse') height += 4.2;
       if (wonder_name == 'Statue of Liberty' && is_ocean_tile(nexttile)) height += 20.1;
       if (wonder_name == 'Statue of Liberty' && !is_ocean_tile(nexttile)) height += 21.3;
+      if (wonder_name == 'Eiffel Tower') height += 18;
 
-      pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
+      if (wonder_name == 'Eiffel Tower') {
+        pos = map_to_scene_coords(ntile['x'] - 0.4, ntile['y'] - 0.4);
+      } else {
+        pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
+      }
+
       wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
       pcity[wonder_name + '_added'] = true;
       scene.add(wonder);

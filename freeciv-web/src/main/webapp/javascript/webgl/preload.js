@@ -289,6 +289,9 @@ function load_model(filename)
   if (filename == "StatueOfLiberty") {
     modelscale = 5.4;
   }
+  if (filename == "EiffelTower") {
+    modelscale = 8;
+  }
   if (filename == "Lighthouse") {
     modelscale = 4.8;
   }
