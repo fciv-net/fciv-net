@@ -2320,7 +2320,7 @@ function activate_goto_last(last_order, last_action)
       } else {
         message_log.update({
           event: E_BEGINNER_HELP,
-          message: "Click on the tile to send this unit to."
+          message: "Move this unit by dragging it using the mouse, or select an action from the popup-menu."
         });
       }
       intro_click_description = false;
