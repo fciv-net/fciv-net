@@ -482,10 +482,11 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       if (wonder_name == 'Lighthouse') height += 4.2;
       if (wonder_name == 'Statue of Liberty' && is_ocean_tile(nexttile)) height += 20.1;
       if (wonder_name == 'Statue of Liberty' && !is_ocean_tile(nexttile)) height += 21.3;
-      if (wonder_name == 'Eiffel Tower') height += 18;
 
       if (wonder_name == 'Eiffel Tower') {
         pos = map_to_scene_coords(ntile['x'] - 0.4, ntile['y'] - 0.4);
+        height = 22 + ntile['height'] * 100;
+
       } else {
         pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
       }
