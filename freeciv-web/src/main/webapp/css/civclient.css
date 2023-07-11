@@ -153,8 +153,7 @@ body
 }
 
 #city_improvements_panel {
-  padding-left: 60px;
-  max-width: 60%;
+
 }
 
 #city_right_panel {
@@ -207,7 +206,7 @@ body
 .ui-dialog {
   border: 1px #444444 solid;
   max-height: 100%;
-  overflow: auto;
+  // overflow: auto;
 }
 
 #dialog {

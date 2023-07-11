@@ -179,6 +179,12 @@ function show_city_dialog(pcity)
        },
        "Rename" : function() {
          rename_city();
+       },
+       "Change production" : function() {
+         city_change_production();
+       },
+       "Add to worklist" : function() {
+         city_add_to_worklist();
        }
      });
    } else {
@@ -202,7 +208,7 @@ function show_city_dialog(pcity)
 			bgiframe: true,
 			modal: false,
 			width:  "99.5%" ,
-                        height: is_small_screen() ? 250 : 332,
+                        height: is_small_screen() ? 250 : 372,
                         close : city_dialog_close_handler,
             position: {my: 'left bottom', at: 'left bottom', of: window},
             buttons: dialog_buttons
@@ -218,11 +224,10 @@ function show_city_dialog(pcity)
   $("#city_dialog").dialog('widget').keydown(city_keyboard_listener);
   $("#city_dialog").dialog('open');
   $("#game_text_input").blur();
-  $("#city_dialog").parent().css("overflow", "hidden");
 
   $("#city_tabs").tabs({ active: city_tab_index});
 
-  $(".citydlg_tabs").height(is_small_screen() ? 250 : 212);
+  $(".citydlg_tabs").height(is_small_screen() ? 250 : 242);
 
   city_worklist_dialog(pcity);
   set_default_mapview_inactive();
@@ -316,6 +321,7 @@ function show_city_dialog(pcity)
   $(".game_unit_list_item").tooltip({
        position: { my: "left+15 center", at: "right center" }
      });
+  $("#city_improvement_element").tooltip();
 
   if ('prod' in pcity && 'surplus' in pcity) {
     var food_txt = pcity['prod'][O_FOOD] + " ( ";
@@ -410,19 +416,26 @@ function show_city_dialog(pcity)
   });
 
   $(".ui-dialog-titlebar").css("padding", "0px");
+  $(".ui-dialog-buttonpane").css("margin-top", "-47px");
 
   if (is_small_screen()) {
    $(".ui-dialog-titlebar").css("font-size", "11px");
    $(".ui-tabs-anchor").css("padding", "1px");
    $(".ui-dialog-titlebar").css("padding", "0px");
    //$(".ui-dialog").height(260);
-   $(".citydlg_tabs").height(225);
-   $("#city_dialog").height(260);
+   $(".citydlg_tabs").height(365);
+   $("#city_dialog").height(400);
    $(".ui-dialog-buttonpane").css("font-size", "10px");
    $(".ui-dialog").css("padding", "0px");
    $("#cma_form").css("padding-left", "0px");
+   $("#city_dialog").parent().css("margin-top", "-200px");
+   $("#city_improvements_panel").hide();
+  } else {
+    $("#city_dialog").parent().css("margin-top", "60px");
   }
+
   $("#city_dialog").parent().css("z-index", 100000)
+
 
   show_city_governor_tab();
 
@@ -1458,7 +1471,7 @@ function populate_worklist_production_choices(pcity)
       production_html += "<li class='prod_choice_list_item kindvalue_item ui-widget-content "
        + (can_build ? "" : " cannot_build_item")
        + "' data-value='" + value + "' data-kind='" + kind + "'>"
-       + "<div class='production_list_item_sub ' title='" + production_list[a]['helptext'].slice(0, 150) +  " \nCost: " + production_list[a]['build_cost']  + " \n" + production_list[a]['unit_details'] + "' style=' background: transparent url("
+       + "<div class='production_list_item_sub ' title='" + production_list[a]['helptext'] +  " \nCost: " + production_list[a]['build_cost']  + " \n" + production_list[a]['unit_details'] + "' style=' background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
