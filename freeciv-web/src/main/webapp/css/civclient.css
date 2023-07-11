@@ -828,6 +828,8 @@ body
 
 .ui-tooltip {
     white-space: pre-line;
+    z-index: 100002;
+    position: absolute;
 }
 
 .no-close .ui-dialog-titlebar-close {

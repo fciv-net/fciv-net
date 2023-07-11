@@ -313,7 +313,9 @@ function show_city_dialog(pcity)
     }
     $("#city_supported_units_list").html(supported_units_html);
   }
-  $(".game_unit_list_item").tooltip();
+  $(".game_unit_list_item").tooltip({
+       position: { my: "left+15 center", at: "right center" }
+     });
 
   if ('prod' in pcity && 'surplus' in pcity) {
     var food_txt = pcity['prod'][O_FOOD] + " ( ";
@@ -1395,7 +1397,9 @@ function city_worklist_dialog(pcity)
 
   $("#worklist_dialog_headline").html(headline + "</div>");
 
-  $(".production_list_item_sub").tooltip();
+  $(".production_list_item_sub").tooltip({
+       position: { my: "left+15 center", at: "right center" }
+     });
 
   if (is_touch_device()) {
     $("#prod_buttons").html("<x-small>Click to change production, next clicks will add to worklist on mobile.</x-small>");
@@ -1466,7 +1470,9 @@ function populate_worklist_production_choices(pcity)
   production_html += "</div>";
 
   $("#worklist_production_choices").html(production_html);
-  $("#worklist_production_choices .production_list_item_sub").tooltip();
+  $("#worklist_production_choices .production_list_item_sub").tooltip({
+                                        position: { my: "left+15 center", at: "right center" }
+  });
 
   if (!is_touch_device()) {
     $("#worklist_production_choices").selectable({

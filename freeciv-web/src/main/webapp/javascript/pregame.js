@@ -897,9 +897,7 @@ function show_intro_dialog(title, message) {
     $(".pwd_reset_2").click(forgot_pbem_password);
   }
   var join_game_customize_text = "";
-  if ($.getUrlVar('action') == "load") {
-    join_game_customize_text = "Load games";
-  } else if ($.getUrlVar('action') == "multi") {
+  if ($.getUrlVar('action') == "multi") {
     join_game_customize_text = "Join Game";
   } else {
     join_game_customize_text = "Customize";
@@ -950,6 +948,17 @@ function show_intro_dialog(title, message) {
                    window.location="/game/list?v=multiplayer";
                 },
                 icons : { primary: "ui-icon-person" }
+              },
+              {
+                text : "Load",
+                click : function() {
+                  dialog_close_trigger = "button";
+                  pregame_handle_user(false);
+                  wait_for_text("You are logged in as", function () {
+                    show_load_game_dialog();
+                  });
+                },
+                icons : { primary: "ui-icon-disk" }
               }
 			]
 
@@ -958,7 +967,7 @@ function show_intro_dialog(title, message) {
                        "closable" : false
                                });
 
-  if (($.getUrlVar('action') == "load" || $.getUrlVar('action') == "multi" || $.getUrlVar('action') == "earthload")
+  if (($.getUrlVar('action') == "multi")
          && $.getUrlVar('load') != "tutorial") {
     $(".ui-dialog-buttonset button").first().hide();
   }
@@ -1003,6 +1012,10 @@ function show_intro_dialog(title, message) {
 function pregame_handle_user(close_pregame)
 {
   var check_username = $("#username_req").val();
+  if (check_username == null || check_username.length == 0) {
+    swal("Please enter a player name.");
+    return;
+  }
   $("#fciv-intro").hide();
   $.ajax({
    type: 'POST',
