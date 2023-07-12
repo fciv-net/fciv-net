@@ -423,6 +423,8 @@ body
 }
 
 .specialist_item {
+  width: 30px;
+  height: 38px;
   float: left;
 }
 

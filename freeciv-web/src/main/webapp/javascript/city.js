@@ -363,14 +363,8 @@ function show_city_dialog(pcity)
   for (var s = 0; s < citizen_types.length; s++) {
     if (pcity['ppl_' + citizen_types[s]] == null) continue;
     for (var i = 0; i < pcity['ppl_' + citizen_types[s]][FEELING_FINAL]; i ++) {
-      sprite = get_specialist_image_sprite("citizen." + citizen_types[s] + "_"
-         + (i % 2));
       specialist_html = specialist_html +
-      "<div class='specialist_item' style='background: transparent url("
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-           +" title='One " + citizen_types[s] + " citizen'></div>";
+      "<canvas id='citizen_" + s + "_" + i + "' class='specialist_item' title='One " + citizen_types[s] + " citizen' width='30' height='38'></canvas>";
     }
   }
 
@@ -380,17 +374,29 @@ function show_city_dialog(pcity)
     for (var j = 0; j < pcity['specialists'][u]; j++) {
       sprite = get_specialist_image_sprite(spec_gfx_key);
       specialist_html = specialist_html +
-      "<div class='specialist_item' style='cursor:pointer;cursor:hand; background: transparent url("
-           + sprite['image-src'] +
-           ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
-           + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;float:left; '"
-           + " onclick='city_change_specialist(" + pcity['id'] + "," + specialists[u]['id'] + ");'"
-           +" title='" + spec_type_name + " (click to change)'></div>";
-
+      "<canvas id='specialist_" + u + "_" + j + "' class='specialist_item' style='cursor:pointer;cursor:hand;' title='" + spec_type_name
+        + " (click to change)' width='30' height='38' onclick='city_change_specialist(" + pcity['id'] + "," + specialists[u]['id'] + ");'></canvas>";
     }
   }
   specialist_html += "<div style='clear: both;'></div>";
   $("#specialist_panel").html(specialist_html);
+
+  for (var s = 0; s < citizen_types.length; s++) {
+    if (pcity['ppl_' + citizen_types[s]] == null) continue;
+    for (var i = 0; i < pcity['ppl_' + citizen_types[s]][FEELING_FINAL]; i ++) {
+      var citizen_canvas = $("#citizen_"  + s + "_" + i)[0].getContext("2d");
+      citizen_canvas.drawImage(sprites["citizen." + citizen_types[s] + "_" + (i % 2)], 0, 0, 15, 20, 0, 0, 30, 38);
+    }
+  }
+  for (var u = 0; u < pcity['specialists_size']; u++) {
+    var spec_type_name = specialists[u]['plural_name'];
+    var spec_gfx_key = "specialist." + specialists[u]['rule_name'] + "_0";
+    for (var j = 0; j < pcity['specialists'][u]; j++) {
+      var specialist_canvas = $("#specialist_" + u + "_" + j)[0].getContext("2d");
+      specialist_canvas.drawImage(sprites[spec_gfx_key],  0, 0, 15, 20, 0, 0, 30, 38);
+    }
+  }
+
 
   $('#disbandable_city').off();
   $('#disbandable_city').prop('checked',
