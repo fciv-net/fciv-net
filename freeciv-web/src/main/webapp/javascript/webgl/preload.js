@@ -368,7 +368,9 @@ function load_model(filename)
   if (filename == 'Ruins') {
     modelscale = 7;
   }
-
+  if (filename == "Library") {
+    modelscale = 3.1;
+  }
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 
