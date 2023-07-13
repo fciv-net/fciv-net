@@ -31,6 +31,8 @@ function show_city_worked_tiles()
   if (city_tile(active_city) != null && city_label_positions[city_tile(active_city)['index']] != null) {
     city_label_positions[city_tile(active_city)['index']].visible = false;
   }
+  var other_city_material = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.4} );
+
   for (var tile_id in tiles) {
     var ptile = tiles[tile_id];
     if (active_city != null && ptile != null && ptile['worked'] != null
@@ -72,10 +74,9 @@ function show_city_worked_tiles()
       var height = 5 + ptile['height'] * 100;
 
       if (city_worked_positions[ptile['index']] == null && Math.abs(d[0]) <= 2 && Math.abs(d[1]) <= 2) {
-        var material = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.5} );
-        var mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 16, 30), material );
+        var mesh = new THREE.Mesh( new THREE.RingGeometry( 1, 15, 30), other_city_material );
         city_worked_positions[ptile['index']] = mesh;
-        mesh.position.set(pos['x'], height + 6, pos['y'] - 4);
+        mesh.position.set(pos['x'] - 12, height + 3, pos['y'] - 9);
         mesh.rotation.x = -1 * Math.PI / 2;
         if (scene != null) {
           scene.add(mesh);

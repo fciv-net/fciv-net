@@ -168,39 +168,32 @@ function show_city_dialog(pcity)
   show_city_traderoutes();
 
   var dialog_buttons = {};
+  dialog_buttons = $.extend(dialog_buttons,
+  {
+     "Change production" : city_change_production,
+     "Add to worklist" : city_add_to_worklist
+  });
+
   if (!is_small_screen()) {
     dialog_buttons = $.extend(dialog_buttons,
       {
-       "Previous city" : function() {
-         previous_city();
-       },
-       "Next city (N)" : function() {
-         next_city();
-       },
-       "Rename" : function() {
-         rename_city();
-       },
-       "Change production" : function() {
-         city_change_production();
-       },
-       "Add to worklist" : function() {
-         city_add_to_worklist();
-       }
+       "Rename" : rename_city
      });
    } else {
        dialog_buttons = $.extend(dialog_buttons,
          {
-          "Next" : function() {
-            next_city();
-          }
+          "Next" : next_city
         });
    }
-
   if (pcity['buy_cost'] > 0) {
     dialog_buttons = $.extend(dialog_buttons, {"Buy (B)": request_city_buy});
   }
+  if (!is_small_screen()) {
+    dialog_buttons = $.extend(dialog_buttons, {"Previous city": previous_city});
+    dialog_buttons = $.extend(dialog_buttons, {"Next city (N)": next_city});
+  }
 
-   dialog_buttons = $.extend(dialog_buttons, {"Close (W)": close_city_dialog});
+  dialog_buttons = $.extend(dialog_buttons, {"Close (W)": close_city_dialog});
 
   $("#city_dialog").attr("title", decodeURIComponent(pcity['name'])
                          + " (" + pcity['size'] + ")");
@@ -232,7 +225,6 @@ function show_city_dialog(pcity)
   city_worklist_dialog(pcity);
   set_default_mapview_inactive();
 
-  //center_tile_city(pcity);
   show_city_worked_tiles();
 
   $("#city_size").html("Population: " + numberWithCommas(city_population(pcity)*1000) + "<br>"
@@ -444,6 +436,8 @@ function show_city_dialog(pcity)
 
 
   show_city_governor_tab();
+
+  center_tile_city(pcity);
 
 }
 
@@ -787,7 +781,6 @@ function city_dialog_close_handler()
   set_default_mapview_active();
   if (active_city != null) {
     setup_window_size ();
-    center_tile_mapcanvas(city_tile(active_city));
     remove_city_worked_tiles();
     active_city = null;
 
@@ -1665,11 +1658,11 @@ function update_worklist_actions()
   }
 
   if (production_selection.length === 1) {
-    $("#city_change_production_btn").button("enable");
-    $("#city_change_production_btn").css("color", "blue");
+    $(":button:contains('Change production')").prop("disabled", false).removeClass("ui-state-disabled");
+    $(":button:contains('Add to worklist')").prop("disabled", false).removeClass("ui-state-disabled");
   } else {
-    $("#city_change_production_btn").button("disable");
-    $("#city_change_production_btn").css("color", "grey");
+    $(":button:contains('Change production')").prop("disabled", true).addClass("ui-state-disabled");
+    $(":button:contains('Add to worklist')").prop("disabled", true).addClass("ui-state-disabled");
   }
 }
 
