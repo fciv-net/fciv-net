@@ -128,11 +128,6 @@ function civclient_init()
     }
   }
 
-  openai_enabled = simpleStorage.get('openai_enabled');
-  if (openai_enabled == null) {
-    openai_enabled = true;
-  }
-
   dialogs_minimized_setting = simpleStorage.get('dialogs_minimized_setting');
 
  init_common_intro_dialog();

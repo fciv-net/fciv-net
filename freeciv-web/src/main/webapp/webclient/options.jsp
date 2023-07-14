@@ -39,14 +39,6 @@
 <tr>
 <td>
   <div class="main_menu_buttons">
-    <b>ChatGTP OpenAI enabled:</b> <input type='checkbox' name='openai_setting' id='openai_setting' checked>
-  </div>
-</td>
-</tr>
-
-<tr>
-<td>
-  <div class="main_menu_buttons">
     <b>Play sounds:</b> <input type='checkbox' name='play_sounds_setting' id='play_sounds_setting' checked>
   </div>
 </td>
