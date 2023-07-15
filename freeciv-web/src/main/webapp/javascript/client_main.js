@@ -196,11 +196,6 @@ function show_new_game_message()
     var pplayer = client.conn.playing;
     message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! You can write questions to the AI assistant (ChatGPT) here. Have fun!";
 
-    if (openai_enabled) {
-      var msg = "Please create a short introduction text to the game FCIV.NET. FCIV.NET is a fork of the game Freeciv with 3D graphics. The player is  " + username + " ruler of the " + nations[pplayer['nation']]['adjective'] + ". Maximum 100 words please.";
-      send_message_to_openai(msg);
-    }
-
   } else if (game_loaded) {
     message = "Welcome back, " + username;
     if (client.conn.playing != null) {
