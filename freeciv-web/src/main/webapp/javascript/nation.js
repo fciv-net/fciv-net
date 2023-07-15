@@ -461,6 +461,10 @@ function send_private_message(other_player_name)
   send_request(JSON.stringify(packet));
   keyboard_input = true;
   $("#dialog").dialog('close');
+
+  if (game_type == 'singleplayer') {
+    send_message_to_openai(message);
+  }
 }
 
 /**************************************************************************

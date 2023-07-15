@@ -149,6 +149,17 @@
 		<url-pattern>/hall_of_fame</url-pattern>
 	</servlet-mapping>
 
+	<!-- /openai_chat -->
+	<servlet>
+		<servlet-name>OpenAIChat</servlet-name>
+		<servlet-class>org.freeciv.servlet.OpenAIChat</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>OpenAIChat</servlet-name>
+		<url-pattern>/openai_chat</url-pattern>
+	</servlet-mapping>
+
 	<!-- /civclientlauncher (game launcher servlet) -->
 	<servlet>
 		<servlet-name>CivclientLauncher</servlet-name>
