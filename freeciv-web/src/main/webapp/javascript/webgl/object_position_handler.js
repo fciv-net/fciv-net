@@ -448,6 +448,7 @@ function add_city_buildings(ptile, pcity, scene) {
     add_wonder(ptile, pcity, scene, "Statue of Liberty");
     add_wonder(ptile, pcity, scene, "Eiffel Tower");
     add_city_building(ptile, pcity, scene, "Library");
+    add_city_building(ptile, pcity, scene, "Temple");
     add_spaceship(ptile, pcity, scene);
 
 }
@@ -532,6 +533,10 @@ function add_city_building(ptile, pcity, scene, building_name) {
       if (nexttile == null) return;
 
       var height = 7 + nexttile['height'] * 100;
+
+      if (building_name == "Temple") {
+        height -= 0.5;
+      }
 
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
 
