@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-mysql</artifactId>
-			<version>9.20.0</version>
+			<version>9.20.1</version>
 		</dependency>
 
 		<dependency>
