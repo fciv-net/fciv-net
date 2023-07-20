@@ -28,6 +28,7 @@ var city_label_positions = {};
 var city_walls_positions = {};
 var city_disorder_positions = {};
 var city_light_positions = {};
+var city_building_positions = {};
 
 // stores flag positions on the map. tile index is key, unit 3d model is value.
 var unit_flag_positions = {};
@@ -449,6 +450,9 @@ function add_city_buildings(ptile, pcity, scene) {
     add_wonder(ptile, pcity, scene, "Eiffel Tower");
     add_city_building(ptile, pcity, scene, "Library");
     add_city_building(ptile, pcity, scene, "Temple");
+    add_city_building(ptile, pcity, scene, "Barracks");
+    add_city_building(ptile, pcity, scene, "Barracks II");
+    add_city_building(ptile, pcity, scene, "Barracks III");
     add_spaceship(ptile, pcity, scene);
 
 }
@@ -471,7 +475,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
-        if (city_positions[nexttile['index']] != null) {
+        if (city_positions[nexttile['index']] != null || city_building_positions[nexttile['index']] != null) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
@@ -500,6 +504,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
 
       wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
       pcity[wonder_name + '_added'] = true;
+      city_building_positions[nexttile['index']] = true;
       scene.add(wonder);
     }
 }
@@ -521,7 +526,7 @@ function add_city_building(ptile, pcity, scene, building_name) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
-        if (city_positions[nexttile['index']] != null) {
+        if (city_positions[nexttile['index']] != null || city_building_positions[nexttile['index']] != null) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
@@ -535,13 +540,16 @@ function add_city_building(ptile, pcity, scene, building_name) {
       var height = 7 + nexttile['height'] * 100;
 
       if (building_name == "Temple") {
-        height -= 0.5;
+        height -= 0.6;
       }
-
+      if (building_name.indexOf("Barracks") >= 0) {
+        height -= 0.9;
+      }
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
 
       building.position.set(pos['x'] - 14, height - 5, pos['y'] - 14);
       pcity[building_name + '_added'] = true;
+      city_building_positions[nexttile['index']] = true;
       scene.add(building);
     }
 }

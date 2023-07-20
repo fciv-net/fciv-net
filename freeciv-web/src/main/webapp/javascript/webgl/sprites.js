@@ -391,7 +391,7 @@ function create_unit_explosion_sprite(frame)
 function create_city_disorder_sprite()
 {
   var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures['city_disorder']}));
-  sprite.scale.set(60,60,1);
+  sprite.scale.set(55,55,1);
   return sprite;
 }
 

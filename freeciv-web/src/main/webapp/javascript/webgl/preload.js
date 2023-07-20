@@ -369,10 +369,13 @@ function load_model(filename)
     modelscale = 7;
   }
   if (filename == "Library") {
-    modelscale = 3.1;
+    modelscale = 2.6;
   }
   if (filename == "Temple") {
-    modelscale = 2.5;
+    modelscale = 2.2;
+  }
+  if (filename.indexOf("Barracks") >= 0) {
+    modelscale = 0.8;
   }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;
