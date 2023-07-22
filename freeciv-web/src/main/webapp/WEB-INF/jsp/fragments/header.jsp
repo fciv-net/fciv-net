@@ -42,17 +42,6 @@
             <li><a href="https://www.twitter.com/fcivnet">@Fcivnet</a></li>
 		
 </ul>
-		<form class="navbar-form navbar-right hidden-sm hidden-md" action="https://duckduckgo.com/" style="width: 220px;">
-			<input type="hidden" name="sites" value="www.freeciv.org,forum.freeciv.org,freeciv.wikia.com,www.fciv.net">
-			<div class="form-group">
-				<div class="input-group">
-					<input type="text" class="form-control" name="q" placeholder="Search Fciv...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-					</span>
-				</div>
-			</div>
-		</form>
 		</div><!-- end navbar-collapse -->
 	</div><!-- end container-fluid -->
 </nav> <!-- end nav -->
