@@ -168,6 +168,9 @@ var fcwDebug=<%= fcwDebug %>;
 </head>
 
 <body>
+
+  <div id="introtxtja">FCIV.NET is the 3D version of the strategy game Freeciv. Because Civilization should be free!</div>
+
     <div class="container">
         <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
     </div>

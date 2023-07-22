@@ -110,6 +110,10 @@ var dialogs_minimized_setting = false;
 function init_options_dialog()
 {
   $("#save_button").button("option", "label", "Save Game (Ctrl+S)");
+  $("#surrender_button").button("option", "label", "Surrender Game");
+  $("#end_button").button("option", "label", "End Game");
+  $("#fullscreen_button").button("option", "label", "Fullscreen");
+
   $("#metamessage_setting").val(server_settings['metamessage']['val']);
   $('#metamessage_setting').change(function() {
     send_message("/metamessage " + $('#metamessage_setting').val());

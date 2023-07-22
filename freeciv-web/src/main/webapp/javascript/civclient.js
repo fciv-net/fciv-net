@@ -62,6 +62,8 @@ function civclient_init()
     return;
   }
 
+  $("#introtxtja").hide();
+
   $.blockUI.defaults['css']['backgroundColor'] = "#222";
   $.blockUI.defaults['css']['color'] = "#fff";
   $.blockUI.defaults['theme'] = true;

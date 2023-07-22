@@ -75,7 +75,11 @@ public class OpenAIChat  extends HttpServlet {
                     "S: un(S)entry all units on tile. "+
                     "L: unit go (t)o/airlift to city. "+
                     "u: (u)nload unit from transporter. "+
-                    "x: unit auto e(x)plore.  Shift-Return: Turn done. ";
+                    "x: unit auto e(x)plore.  Shift-Return: Turn done. " +
+                    "Middle-click with the mouse to get information about map tiles. " +
+                    "Left-click with the mouse to select units and cities. " +
+                    "Right-click with the moues to move the map." +
+                    "Left-click and drag with the mouse to change view angle. ";
             systemchat.setContent(fcivInfo + keyboardShortcuts);
 
             messages.add(systemchat);
