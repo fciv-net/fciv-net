@@ -102,15 +102,15 @@ function get_city_height_offset(pcity)
   if (!is_ocean_tile(ptile) && is_ocean_tile_near(ptile)) {
     if (tile_terrain(ptile)['name'] == "Hills") return -6;
     if (tile_terrain(ptile)['name'] == "Mountains") return -10;
-    return -2;
+    return -2.2;
   }
 
   if (tile_terrain(ptile) != null) {
-      if (tile_terrain(ptile)['name'] == "Hills") return -6;
-      if (tile_terrain(ptile)['name'] == "Mountains") return -10;
+    if (tile_terrain(ptile)['name'] == "Hills") return -6;
+    if (tile_terrain(ptile)['name'] == "Mountains") return -10;
   }
 
-  return 2;
+  return 1.8;
 
 }
 
