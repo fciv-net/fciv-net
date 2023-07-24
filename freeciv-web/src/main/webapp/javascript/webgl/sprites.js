@@ -298,14 +298,6 @@ function update_city_label(pcity)
       ctx.fillRect(width, 0, 36, 32);
       ctx.drawImage(sprites[tag], width, 0, 34, 18*2);
       width += 35;
-      var progress = get_production_progress_num(pcity);
-      if (progress != 0) {
-        ctx.fillStyle = '#00FF00';
-        ctx.fillRect(width - 35, 30, progress * 35, 2);
-        ctx.fillStyle = '#000000';
-        ctx.fillRect(width - 35 + progress * 35, 30, (1 - progress) * 35, 2);
-        width += 2
-      }
     }
   }
 
