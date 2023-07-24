@@ -332,7 +332,7 @@ function load_model(filename)
     modelscale = 1.5;
   }
   if (filename == 'Wheat') {
-    modelscale = 3.2;
+    modelscale = 2.7;
   }
   if (filename == 'Galleon') {
     modelscale = 4.4;
@@ -376,6 +376,9 @@ function load_model(filename)
   }
   if (filename.indexOf("Barracks") >= 0) {
     modelscale = 0.8;
+  }
+  if (filename == "Granary") {
+    modelscale = 1.5;
   }
 
     model.scale.x = model.scale.y = model.scale.z = modelscale;

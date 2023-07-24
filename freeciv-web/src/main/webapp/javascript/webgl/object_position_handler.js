@@ -453,6 +453,7 @@ function add_city_buildings(ptile, pcity, scene) {
     add_city_building(ptile, pcity, scene, "Barracks");
     add_city_building(ptile, pcity, scene, "Barracks II");
     add_city_building(ptile, pcity, scene, "Barracks III");
+    add_city_building(ptile, pcity, scene, "Granary");
     add_spaceship(ptile, pcity, scene);
 
 }
@@ -541,6 +542,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
 
       if (building_name == "Temple") {
         height -= 0.6;
+      }
+      if (building_name == "Granary") {
+        height += 1.0;
       }
       if (building_name.indexOf("Barracks") >= 0) {
         height -= 0.9;
