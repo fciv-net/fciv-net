@@ -2,7 +2,9 @@
   <div id="fciv-intro-txt" style="position: relative; left: -50%; ">
     Fciv.net is a Free and Open Source empire-building strategy game inspired by the history of human civilization.
     The game begins in prehistory and your mission is to lead your tribe peacefully from the Stone Age to the Space Age.
-    Freeciv can be played online in your web-browser for free. Press F11 for fullscreen. Fciv.net is open source with a AGPL license.
+    Freeciv can be played online in your web-browser for free. Press F11 for fullscreen. <a href="/privacy-policy.jsp">Privacy policy</a>.
+    Fciv.net is open source with a <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL license</a>.
+
   </div>
 </div>
 
