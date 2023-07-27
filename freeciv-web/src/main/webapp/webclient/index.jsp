@@ -165,6 +165,9 @@ var fcwDebug=<%= fcwDebug %>;
 
 </style>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9958178836739125"
+     crossorigin="anonymous"></script>
+
 </head>
 
 <body>
