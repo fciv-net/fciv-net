@@ -455,6 +455,7 @@ function add_city_buildings(ptile, pcity, scene) {
     add_city_building(ptile, pcity, scene, "Barracks III");
     add_city_building(ptile, pcity, scene, "Granary");
     add_city_building(ptile, pcity, scene, "Colosseum");
+    add_city_building(ptile, pcity, scene, "Aqueduct");
     add_spaceship(ptile, pcity, scene);
 
 }
