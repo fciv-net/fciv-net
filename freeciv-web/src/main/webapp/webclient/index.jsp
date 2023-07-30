@@ -176,6 +176,26 @@ var fcwDebug=<%= fcwDebug %>;
 
     <div class="container">
         <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
+
+            <div class="row" style="position: relative; z-index: 1000; padding-top: 20px;  margin-left: -50px;">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9958178836739125"
+                         crossorigin="anonymous"></script>
+                    <!-- HORIZONAL-GOOD-SIZE -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:728px;height:90px"
+                         data-ad-client="ca-pub-9958178836739125"
+                         data-ad-slot="9479544084"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+       </div>
+    </div>
+
+
+
     </div>
 
     <jsp:include page="pregame.jsp" flush="false"/>
