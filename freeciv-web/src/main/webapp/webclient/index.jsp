@@ -177,7 +177,7 @@ var fcwDebug=<%= fcwDebug %>;
     <div class="container">
         <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
 
-            <div class="row" style="position: relative; z-index: 1000; padding-top: 20px;  margin-left: -50px;">
+            <div class="row" style="position: relative; z-index: 1000; padding-top: 60px;  margin-left: -56px;">
                     <div class="col-md-3"></div>
                     <div class="col-md-9">
 
