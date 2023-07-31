@@ -386,7 +386,9 @@ function load_model(filename)
   if (filename == "Aqueduct") {
     modelscale = 0.68;
   }
-
+  if (filename == "Cathedral") {
+    modelscale = 1.8;
+  }
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 
