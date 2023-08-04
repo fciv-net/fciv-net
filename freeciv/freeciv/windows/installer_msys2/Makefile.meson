@@ -1,0 +1,448 @@
+#
+# Makefile for Freeciv Windows installer creation,
+# using meson.
+#
+# See doc/README.msys2
+#
+
+#
+# Variable setup
+#
+
+MAKEFILE_NAME=Makefile.meson
+OUT_DIR=meson/Output
+BUILD_DIR=meson/build
+INST_DIR=meson/install
+NSI_DIR=meson/nsi
+
+ifeq ($(MSYSTEM),MINGW64)
+WINARCH=win64
+ARCHDIR=mingw64
+LIBGCCDLL=libgcc_s_seh-1.dll
+CRYPTOLIB_SUFFIX=-x64
+PREF_WIN_VER=0x0603
+
+else ifeq ($(MSYSTEM),MINGW32)
+WINARCH=win32
+ARCHDIR=mingw32
+LIBGCCDLL=libgcc_s_dw2-1.dll
+CRYPTOLIB_SUFFIX=
+PREF_WIN_VER=0x0603
+
+else ifeq ($(MSYSTEM),UCRT64)
+WINARCH=win64-10
+ARCHDIR=ucrt64
+LIBGCCDLL=libgcc_s_seh-1.dll
+CRYPTOLIB_SUFFIX=-x64
+PREF_WIN_VER=0x0A00
+
+else ifeq ($(MSYSTEM),CLANG64)
+WINARCH=win64+
+ARCHDIR=clang64
+LIBGCCDLL=
+CRYPTOLIB_SUFFIX=-x64
+PREF_WIN_VER=0x0A00
+
+else ifeq ($(MSYSTEM),CLANG32)
+WINARCH=win32+
+ARCHDIR=clang32
+LIBGCCDLL=
+CRYPTOLIB_SUFFIX=
+PREF_WIN_VER=0x0A00
+
+else
+error "Unsupported MSYSTEM environment"
+endif
+
+IMSYS2_DIR = $(shell pwd)
+
+ifeq ($(MIN_WIN_VER),)
+MIN_WIN_VER=$(PREF_WIN_VER)
+endif
+
+MAGICKVER=7.Q16HDRI-10
+FFIVER=8
+ICUVER=72
+CRYPTOVERSUF=3${CRYPTOLIB_SUFFIX}
+
+# msys2 has dlls in...
+DLLPATH_PREFIX=/$(ARCHDIR)/bin/
+
+ifeq ($(CI),yes)
+else
+endif
+
+#
+# Make rules
+#
+
+all: all-$(WINARCH)
+
+all-win64: gtk3.22-installer sdl2-installer gtk4-installer qt5-installer ruledit-installer-qt5
+
+all-win32: gtk3.22-installer sdl2-installer gtk4-installer qt5-installer ruledit-installer-qt5
+
+all-win64-10: gtk3.22-installer sdl2-installer gtk4-installer qt6-installer ruledit-installer-qt6
+
+all-win64+: gtk3.22-install sdl2-install gtk4-install qt6-install ruledit-install-qt6
+
+all-win32+: gtk3.22-install sdl2-install gtk4-install qt6-install ruledit-install-qt6
+
+snapshot:
+	make -f $(MAKEFILE_NAME) VERSION_REVTYPE="git" EXTRA_CONFIG="-Dgitrev=true $(EXTRA_CONFIG)" all
+
+ci:
+	make -f $(MAKEFILE_NAME) VERSION_REVTYPE="git" CI=yes EXTRA_CONFIG="-Dgitrev=true -Dsys-tolua-cmd=true $(EXTRA_CONFIG)" gtk3.22-installer sdl2-installer gtk4-installer qt6-installer ruledit-installer-qt6
+
+gtk3.22-installer:
+	make -f $(MAKEFILE_NAME) GUI=gtk3.22 CLIENT=gtk3.22 FCMP=gtk3 installer-common
+
+gtk4-installer:
+	make -f $(MAKEFILE_NAME) GUI=gtk4 CLIENT=gtk4 FCMP=gtk4 installer-common
+
+sdl2-installer:
+	make -f $(MAKEFILE_NAME) GUI=sdl2 CLIENT=sdl2 FCMP=gtk4 installer-common
+
+qt5-installer:
+	make -f $(MAKEFILE_NAME) EXTRA_CONFIG="-Dqtver=qt5 $(EXTRA_CONFIG)" GUI=qt5 CLIENT=qt FCMP=qt installer-common
+
+qt6-installer:
+	make -f $(MAKEFILE_NAME) EXTRA_CONFIG="-Ddebug=false -Dqtver=qt6 $(EXTRA_CONFIG)" GUI=qt6 CLIENT=qt FCMP=qt installer-common
+
+ruledit-installer-qt5:
+	make -f $(MAKEFILE_NAME) EXTRA_CONFIG="-Ddebug=false -Dqtver=qt5 $(EXTRA_CONFIG)" GUI=qt5 installer-ruledit-common
+
+ruledit-installer-qt6:
+	make -f $(MAKEFILE_NAME) EXTRA_CONFIG="-Ddebug=false -Dqtver=qt6 $(EXTRA_CONFIG)" GUI=qt6 installer-ruledit-common
+
+gtk3.22-install:
+	make -f $(MAKEFILE_NAME) GUI=gtk3.22 CLIENT=gtk3.22 FCMP=gtk3 install-freeciv-gtk3.22
+
+gtk4-install:
+	make -f $(MAKEFILE_NAME) GUI=gtk4 CLIENT=gtk4 FCMP=gtk4 install-freeciv-gtk4
+
+sdl2-install:
+	make -f $(MAKEFILE_NAME) GUI=sdl2 CLIENT=sdl2 FCMP=gtk4 install-freeciv-sdl2
+
+qt6-install:
+	make -f $(MAKEFILE_NAME) GUI=qt6 CLIENT=qt FCMP=qt install-freeciv-qt6
+
+ruledit-install-qt6:
+	make -f $(MAKEFILE_NAME) GUI=qt6 install-ruledit-qt6
+
+installer-common: install-freeciv-$(GUI) install-env-$(GUI)
+	# Extract Freeciv version
+	$(eval FREECIV_VERSION := $(shell ../../fc_version))
+	# Create NSIS script
+	mkdir -p $(NSI_DIR)
+	./create-freeciv-$(GUI)-nsi.sh $(INST_DIR)/$(WINARCH)-client-$(GUI) $(OUT_DIR) $(FREECIV_VERSION) $(WINARCH) > $(NSI_DIR)/$(WINARCH)-$(FREECIV_VERSION)-$(GUI).nsi
+	# Create installer executable
+	mkdir -p $(OUT_DIR)
+	makensis -NOCD $(NSI_DIR)/$(WINARCH)-$(FREECIV_VERSION)-$(GUI).nsi
+
+install-freeciv-common: clean-install-client-arch
+	# Create build directory
+	mkdir -p $(BUILD_DIR)/$(WINARCH)-$(GUI)
+	cd $(BUILD_DIR)/$(WINARCH)-$(GUI); meson setup $(IMSYS2_DIR)/../.. -Dprefix=$(IMSYS2_DIR)/$(INST_DIR)/$(WINARCH)-client-$(GUI) -Dclients=$(CLIENT) -Dfcmp=$(FCMP) -Druledit=false -Dreadline=false -Dcacert-path='./ssl/certs/ca-bundle.crt' -Dmin-win-ver=$(MIN_WIN_VER) $(EXTRA_CONFIG)
+	cd $(BUILD_DIR)/$(WINARCH)-$(GUI); ninja
+	cd $(BUILD_DIR)/$(WINARCH)-$(GUI); ninja install
+	cd $(BUILD_DIR)/$(WINARCH)-$(GUI); ninja langstat_core.txt
+	# Reorder directory layout
+	mv $(INST_DIR)/$(WINARCH)-client-$(GUI)/bin/* $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	rm -Rf $(INST_DIR)/$(WINARCH)-client-$(GUI)/bin
+	mv $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/freeciv $(INST_DIR)/$(WINARCH)-client-$(GUI)/data
+	mv $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/doc $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/doc/freeciv/installer
+	cat licenses/header.txt ../../COPYING > $(INST_DIR)/$(WINARCH)-client-$(GUI)/doc/freeciv/installer/COPYING.installer
+	cp freeciv-server.cmd freeciv-mp-$(FCMP).cmd freeciv-$(CLIENT).cmd Freeciv.url $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+
+install-ruledit-common: clean-ruledit-install-arch
+	# Create build directory
+	mkdir -p $(BUILD_DIR)/$(WINARCH)-ruledit-$(GUI)
+	cd $(BUILD_DIR)/$(WINARCH)-ruledit-$(GUI); meson setup $(IMSYS2_DIR)/../.. -Dprefix=$(IMSYS2_DIR)/$(INST_DIR)/$(WINARCH)-ruledit-$(GUI) -Dclients=[] -Dfcmp=[] -Druledit=true -Dreadline=false -Dcacert-path='./ssl/certs/ca-bundle.crt' -Dmin-win-ver=$(MIN_WIN_VER) $(EXTRA_CONFIG)
+	cd $(BUILD_DIR)/$(WINARCH)-ruledit-$(GUI); ninja
+	cd $(BUILD_DIR)/$(WINARCH)-ruledit-$(GUI); ninja install
+	cd $(BUILD_DIR)/$(WINARCH)-ruledit-$(GUI); ninja langstat_core.txt langstat_ruledit.txt
+	# Reorder directory layout
+	mv $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/bin/* $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	rm -Rf $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/bin
+	mv $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/share/freeciv $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/data
+	mv $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/share/doc $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	mkdir -p $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/doc/freeciv/installer
+	cat licenses/header.txt ../../COPYING > $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/doc/freeciv/installer/COPYING.installer
+	cp freeciv-ruledit.cmd Freeciv.url $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+
+SOUND_DLLS := \
+	SDL2.dll \
+	SDL2_mixer.dll \
+	libFLAC.dll \
+	libopusfile-0.dll \
+	libopus-0.dll \
+	libmpg123-0.dll \
+	libvorbisfile-3.dll \
+	libvorbis-0.dll \
+	libogg-0.dll \
+	libssp-0.dll
+
+COMMON_DLLS := \
+	libcairo-2.dll \
+	libgdk_pixbuf-2.0-0.dll \
+	libgio-2.0-0.dll \
+	libglib-2.0-0.dll \
+	libgobject-2.0-0.dll \
+	libintl-8.dll \
+	libpangocairo-1.0-0.dll \
+	libpango-1.0-0.dll \
+	$(LIBGCCDLL) \
+	libfontconfig-1.dll \
+	libfreetype-6.dll \
+	libpixman-1-0.dll \
+	libpng16-16.dll \
+	zlib1.dll \
+	libgmodule-2.0-0.dll \
+	libwinpthread-1.dll \
+	libpcre2-8-0.dll \
+	libcairo-gobject-2.dll \
+	libfribidi-0.dll \
+	libpangowin32-1.0-0.dll \
+	libffi-${FFIVER}.dll \
+	libbz2-1.dll \
+	libbrotlidec.dll \
+	libbrotlicommon.dll \
+	libiconv-2.dll \
+	libatk-1.0-0.dll \
+	libcurl-4.dll \
+	libicuuc${ICUVER}.dll \
+	libicudt${ICUVER}.dll \
+	liblzma-5.dll \
+	libsqlite3-0.dll \
+	libzstd.dll \
+	libexpat-1.dll \
+	libstdc++-6.dll \
+	libcrypto-${CRYPTOVERSUF}.dll \
+	libssl-${CRYPTOVERSUF}.dll \
+	libidn2-0.dll \
+	libnghttp2-14.dll \
+	libpsl-5.dll \
+	libssh2-1.dll \
+	libreadline8.dll \
+	libtermcap-0.dll \
+	libharfbuzz-0.dll \
+	libgraphite2.dll \
+	libMagickWand-${MAGICKVER}.dll \
+	libMagickCore-${MAGICKVER}.dll \
+	libgomp-1.dll \
+	libfftw3-3.dll \
+	liblcms2-2.dll \
+	liblqr-1-0.dll \
+	libltdl-7.dll \
+	libxml2-2.dll \
+	libraqm-0.dll \
+	libunistring-5.dll \
+	exchndl.dll \
+	mgwhelp.dll \
+	$(SOUND_DLLS)
+
+install-env-common:
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(COMMON_DLLS)) $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/ssl/certs
+	cp -R /$(ARCHDIR)/etc/ssl/certs/ca-bundle.crt $(INST_DIR)/$(WINARCH)-client-$(GUI)/ssl/certs/
+
+FCMP_GTK3_DLLS := \
+	libgdk-3-0.dll \
+	libgtk-3-0.dll \
+	libepoxy-0.dll \
+	libpangoft2-1.0-0.dll \
+	libthai-0.dll \
+	libdatrie-1.dll
+
+install-env-gtk3-fcmp: install-env-common
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(FCMP_GTK3_DLLS)) $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	# Add additional GTK+3 files
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/etc
+	cp -R /$(ARCHDIR)/etc/gtk-3.0 $(INST_DIR)/$(WINARCH)-client-$(GUI)/etc/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/icons
+	cp -R /$(ARCHDIR)/share/icons/Adwaita $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/icons/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/glib-2.0/schemas
+	cp /$(ARCHDIR)/share/glib-2.0/schemas/gschemas.compiled $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/glib-2.0/schemas/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/lib/gtk-3.0/
+	cp -R /$(ARCHDIR)/lib/gtk-3.0/* $(INST_DIR)/$(WINARCH)-client-$(GUI)/lib/gtk-3.0/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/lib/gdk-pixbuf-2.0/
+	cp -R /$(ARCHDIR)/lib/gdk-pixbuf-2.0/* $(INST_DIR)/$(WINARCH)-client-$(GUI)/lib/gdk-pixbuf-2.0/
+	cp -R /$(ARCHDIR)/share/locale $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/
+	find $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/locale -type f -not -name "freeciv-*.mo" -and -not -name gtk30.mo -delete
+
+FCMP_GTK4_DLLS := \
+	libgtk-4-1.dll \
+	libgraphene-1.0-0.dll \
+	libcairo-script-interpreter-2.dll \
+	libepoxy-0.dll \
+	libpangoft2-1.0-0.dll \
+	liblzo2-2.dll \
+	libthai-0.dll \
+	libdatrie-1.dll \
+	libtiff-6.dll \
+	libjpeg-8.dll \
+	libjbig-0.dll \
+	libwebp-7.dll \
+	libdeflate.dll \
+	libLerc.dll \
+	libsharpyuv-0.dll \
+	libEGL.dll \
+	libGLESv2.dll
+
+install-env-gtk4-fcmp: install-env-common
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(FCMP_GTK4_DLLS)) $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	# Add additional GTK4 files
+	cp /$(ARCHDIR)/bin/gdbus.exe $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	mkdir -p $(INST_DIR)/$(WINARCH)-client-$(GUI)/lib/gdk-pixbuf-2.0/
+	cp -R /$(ARCHDIR)/lib/gdk-pixbuf-2.0/* $(INST_DIR)/$(WINARCH)-client-$(GUI)/lib/gdk-pixbuf-2.0/
+	cp -R /$(ARCHDIR)/share/locale $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/
+	find $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/locale -type f -not -name "freeciv-*.mo" -and -not -name gtk40.mo -delete
+
+install-freeciv-gtk3.22: install-freeciv-common
+
+install-freeciv-gtk4: install-freeciv-common
+
+install-freeciv-sdl2: install-freeciv-common
+
+install-freeciv-qt5: install-freeciv-common
+
+install-freeciv-qt6: install-freeciv-common
+
+install-env-gtk3.22: install-env-gtk3-fcmp
+
+install-env-gtk4: install-env-gtk4-fcmp
+
+SDL2_DLLS := \
+	SDL2_ttf.dll \
+	libSDL2_gfx-1-0-0.dll \
+	SDL2_image.dll \
+	libjxl.dll \
+	libbrotlienc.dll \
+	libhwy.dll
+
+install-env-sdl2: install-env-gtk4-fcmp
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(SDL2_DLLS)) $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+
+FCMP_QT5_DLLS := \
+	Qt5Core.dll \
+	Qt5Gui.dll \
+	Qt5Widgets.dll \
+	libdouble-conversion.dll \
+	libicuin${ICUVER}.dll \
+	libpcre2-16-0.dll \
+	libmd4c.dll
+
+install-env-qt5-fcmp: install-env-common
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(FCMP_QT5_DLLS)) $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	# Add additional Qt5 files
+	cp -R /$(ARCHDIR)/share/qt5/plugins $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	cp -R /$(ARCHDIR)/share/locale $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/
+	find $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/locale -type f -not -name "freeciv-*.mo" -delete
+
+install-env-qt5: install-env-qt5-fcmp
+
+FCMP_QT6_DLLS := \
+	Qt6Core.dll \
+	Qt6Gui.dll \
+	Qt6Widgets.dll \
+	libmd4c.dll \
+	libb2-1.dll \
+	libdouble-conversion.dll \
+	libicuin${ICUVER}.dll \
+	libpcre2-16-0.dll
+
+install-env-qt6-fcmp: install-env-common
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(FCMP_QT6_DLLS)) $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	# Add additional Qt6 files
+	cp -R /$(ARCHDIR)/share/qt6/plugins $(INST_DIR)/$(WINARCH)-client-$(GUI)/
+	cp -R /$(ARCHDIR)/share/locale $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/
+	find $(INST_DIR)/$(WINARCH)-client-$(GUI)/share/locale -type f -not -name "freeciv-*.mo" -delete
+
+install-env-qt6: install-env-qt6-fcmp
+
+installer-ruledit-common: install-ruledit-$(GUI)
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(COMMON_DLLS)) $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	# Extract Freeciv version
+	$(eval FREECIV_VERSION := $(shell ../../fc_version))
+	# Create NSIS script
+	mkdir -p $(NSI_DIR)
+	./create-freeciv-ruledit-nsi.sh $(INST_DIR)/$(WINARCH)-ruledit-$(GUI) $(OUT_DIR) $(FREECIV_VERSION) $(WINARCH) > $(NSI_DIR)/$(WINARCH)-$(FREECIV_VERSION)-ruledit-$(GUI).nsi
+	# Create installer executable
+	mkdir -p $(OUT_DIR)
+	makensis -NOCD $(NSI_DIR)/$(WINARCH)-$(FREECIV_VERSION)-ruledit-$(GUI).nsi
+
+RULEDIT_QT5_DLLS := \
+	libmd4c.dll \
+	libdouble-conversion.dll \
+	libicuin${ICUVER}.dll \
+	libpcre2-16-0.dll \
+	Qt5Core.dll \
+	Qt5Gui.dll \
+	Qt5Widgets.dll
+
+install-ruledit-qt5: install-ruledit-common
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(RULEDIT_QT5_DLLS)) $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	# Add additional Qt5 files
+	cp -R /$(ARCHDIR)/share/qt5/plugins $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	cp -R /usr/share/locale $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/share/
+	find $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/share/locale -type f -not -name "freeciv-*.mo" -delete
+
+RULEDIT_QT6_DLLS := \
+	libmd4c.dll \
+	libdouble-conversion.dll \
+	libb2-1.dll \
+	libicuin${ICUVER}.dll \
+	libpcre2-16-0.dll \
+	Qt6Core.dll \
+	Qt6Gui.dll \
+	Qt6Widgets.dll
+
+install-ruledit-qt6: install-ruledit-common
+	# Add DLLs
+	cp -R $(addprefix $(DLLPATH_PREFIX), $(RULEDIT_QT6_DLLS)) $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	# Add additional Qt6 files
+	cp -R /$(ARCHDIR)/share/qt6/plugins $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/
+	cp -R /usr/share/locale $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/share/
+	find $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)/share/locale -type f -not -name "freeciv-*.mo" -delete
+
+# Cleanup
+
+clean-build-common:
+	rm -rf $(BUILD_DIR)/*-$(GUI)
+
+clean-install-client:
+	rm -rf $(INST_DIR)/*-client-$(GUI)
+
+clean-install-client-arch:
+	rm -rf $(INST_DIR)/$(WINARCH)-client-$(GUI)
+
+clean-installer-common:
+	rm -f $(OUT_DIR)/Freeciv-*-$(GUI)-setup.exe
+	rm -f $(NSI_DIR)/*-$(GUI).nsi
+
+clean-ruledit-install:
+	rm -rf $(INST_DIR)/*-ruledit-$(GUI)
+
+clean-ruledit-install-arch:
+	rm -rf $(INST_DIR)/$(WINARCH)-ruledit-$(GUI)
+
+clean-ruledit-common:
+	rm -f $(OUT_DIR)/Freeciv-ruledit-*-setup.exe
+	rm -f $(NSI_DIR)/*-ruledit-$(GUI).nsi
+
+clean:
+	make -f $(MAKEFILE_NAME) GUI=gtk3.22 clean-build-common clean-install-client clean-installer-common
+	make -f $(MAKEFILE_NAME) GUI=gtk4 clean-build-common clean-install-client clean-installer-common
+	make -f $(MAKEFILE_NAME) GUI=sdl2 clean-build-common clean-install-client clean-installer-common
+	make -f $(MAKEFILE_NAME) GUI=qt5 clean-build-common clean-install-client clean-installer-common
+	make -f $(MAKEFILE_NAME) GUI=qt6 clean-build-common clean-install-client clean-installer-common
+	make -f $(MAKEFILE_NAME) GUI=qt5 clean-build-common clean-install-client clean-ruledit-common
+	make -f $(MAKEFILE_NAME) GUI=qt6 clean-build-common clean-ruledit-install clean-ruledit-common

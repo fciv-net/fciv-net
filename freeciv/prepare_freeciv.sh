@@ -5,22 +5,6 @@ cd "${DIR}"
 
 . ./version.txt
 
-# Allow the user to override how Freeciv is downloaded.
-if test -f dl_freeciv.sh ; then
-  DL_FREECIV=dl_freeciv.sh
-else
-  DL_FREECIV=dl_freeciv_default.sh
-fi
-
-if ! ./$DL_FREECIV $FCREV ; then
-  echo "Git checkout failed" >&2
-  exit 1
-fi
-
-if ! ./apply_patches.sh ; then
-  echo "Patching failed" >&2
-  exit 1
-fi
 
   mkdir -p build
 

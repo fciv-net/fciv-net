@@ -1,0 +1,238 @@
+
+ MSYS2 Windows Installer build notes
+====================================
+
+This document is about building Freeciv Windows Installer packages
+using MSYS2 from https://www.msys2.org/
+
+
+ MSYS2 Version
+==============
+
+Current official premade MSYS2 environment version info:
+[premade]:  msys2-freeciv-win64-230220.7z
+[upstream]: https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20230127.exe
+
+See chapter "Premade environment" for what these mean. The info
+is located here for quick reference for the specific freeciv revision.
+
+
+ Status
+====================================
+
+- With premade environment, buildable clients are:
+  For "win64":    gtk3.22, gtk4, sdl2, Qt5
+  For "win64-10": gtk3.22, gtk4, sdl2, Qt6
+
+- With custom environment (see "Setup" chapter below)
+  one can also build all the clients for "win32" targets
+
+
+ Setup
+====================================
+
+ This chapter is about creating new msys2 build environment.
+
+ If you want to reproduce more official freeciv builds, the environment
+ used to make those builds is documented in the next chapter ("Premade environment"),
+ with listing of versions current at the time of this freeciv version.
+
+ "<arch>" in the package names depends on the build target:
+ - win32    -> "i686"
+ - win64    -> "x86_64"
+ - win64-10 -> "ucrt-x86_64"
+
+1) Install MSYS2 following the documentation on their homepage
+
+1.1) Download
+ package indicated by [upstream] URL in the "MSYS2 Version"
+ chapter near top of this document.
+
+1.2) Run it to install MSYS2 on build system
+
+1.3) Launch msys2_shell to update packages
+> pacman -Syu
+
+2) Install following packages with 'pacman -Su --needed'
+
+2.1) Packages needed for building freeciv
+ These packages are needed even if you don't plan to make installer,
+ but only build freeciv for local use.
+
+2.1.1) Arch independent packages needed for building freeciv
+
+2.1.1.1) Arch independent packages always needed for building freeciv
+ With these packages it's possible to build freeciv source tree that
+ has already such generated files present that are created for the
+ release tarball.
+
+ - make
+ - gettext
+
+2.1.1.2) Arch independent packages needed for getting and extracting freeciv
+ source tarball
+
+ - tar
+
+2.1.1.3) Arch independent packages needed for building freeciv from repository
+ checkout. These are needed in addition to the ones always needed for building
+ freeciv.
+
+ - git
+ - automake1.16
+ - libtool
+ - autoconf2.71
+ - autoconf-wrapper
+
+2.1.2) Arch-specific packages needed for building freeciv
+
+2.1.2.1) Arch-specific packages for building common parts
+ - mingw-w64-<arch>-gcc
+ - mingw-w64-<arch>-pkgconf
+ - mingw-w64-<arch>-icu
+ - mingw-w64-<arch>-curl
+ - mingw-w64-<arch>-imagemagick
+ - mingw-w64-<arch>-SDL2_mixer
+
+2.1.2.1.2) Arch-specific optional packages for building common parts
+ - mingw-w64-<arch>-drmingw
+ - mingw-w64-<arch>-meson
+ - mingw-w64-<arch>-tolua
+
+2.1.2.2) Arch-specific packages for building gtk3.22-client
+ - mingw-w64-<arch>-gtk3
+
+2.1.2.3) Arch-specific packages for building gtk4-client
+ - mingw-w64-<arch>-gtk4
+
+2.1.2.4) Arch-specific packages for buildind Qt5-client and/or Qt5 Ruledit
+ - mingw-w64-<arch>-qt5-base
+
+2.1.2.5) Arch-specific packages for building Qt6-client and/or Qt6 Ruledit
+ - mingw-w64-<arch>-qt6-base
+
+2.1.2.6) Arch-specific packages for building sdl2-client
+ - mingw-w64-<arch>-SDL2_image
+ - mingw-w64-<arch>-SDL2_ttf
+ - mingw-w64-<arch>-SDL2_gfx
+
+2.2) Packages needed for building installer package
+ These are needed in addition to above ones used in the
+ building step already.
+
+2.2.1) Arch-specific packages needed for building installer
+ package
+
+ - mingw-w64-<arch>-nsis
+
+
+ Premade environment
+====================================
+
+Premade msys2 environment is available for download from
+https://files.freeciv.org/packages/windows/msys2/
+We have environment available for win64 host only,
+but for building freeciv for multiple targets.
+
+For version info, see chapter "MSYS2 Version" near top of
+this document. Upstream snapshot was used as the base,
+and then packages were updated to the level indicated
+by the date (YYMMDD) in the freeciv msys2 environment
+.7z package name.
+
+Most packages are included for all of win32, win64 and
+ucrt64 (win64, with minimum requirement of Windows 10) targets.
+For each package listed below with <arch> in the name, actually
+three packages are installed;
+one with a name where <arch> is replaced by 'i686',
+one where <arch> is replaced by 'x86_64', and
+one where <arch> is replaced by 'ucrt-x86_64'
+
+
+Following packages have been installed:
+- make
+- tar
+- git
+- patch
+- automake1.16
+- libtool
+- autoconf2.71
+- autoconf-wrapper
+- gdb
+- mingw-w64-<arch>-gcc
+- mingw-w64-<arch>-pkgconf
+- mingw-w64-<arch>-icu
+- mingw-w64-<arch>-curl
+- mingw-w64-<arch>-sqlite3
+- mingw-w64-<arch>-gtk3
+- mingw-w64-<arch>-gtk4
+- mingw-w64-<arch>-nsis
+- mingw-w64-<arch>-SDL2_mixer
+- mingw-w64-<arch>-SDL2_image
+- mingw-w64-<arch>-SDL2_ttf
+- mingw-w64-<arch>-SDL2_gfx
+- mingw-w64-<arch>-imagemagick
+- mingw-w64-i686-qt5-base, mingw-w64-x86_64-qt5-base
+- mingw-w64-<arch>-drmingw
+- mingw-w64-<arch>-meson
+- mingw-w64-<arch>-tolua
+- mingw-w64-ucrt-x86_64-qt6-base
+
+After all the packages were installed 'pacman -Scc' was run to completely
+empty the package cache for having smaller environment package.
+
+
+ Build
+====================================
+
+Launch build target specific msys2 shell;
+ucrt64.exe, mingw64.exe or mingw32.exe.
+Get the freeciv sources there somehow. Some options are:
+1) Download freeciv tarball within msys2 shell with wget
+2) Use git within msys2 shell to get them from version control
+3) Copy them from Windows folder where they are to a directory that
+   is within msys2
+
+> cd windows/installer_msys2
+> make -f Makefile.autotools <targets>
+
+  Target can be:
+  - "all" (default), build all installers, except that Qt5/Qt6
+    selection depends on arch
+  - "<gui>-installer", where <gui> is
+     - gtk3.22
+     - gtk4
+     - sdl2
+     - qt5
+     - qt6
+  - "ruledit-installer"
+  - "snapshot", if your freeciv sources are in git checkout directory,
+                builds all installers with commit id in version number
+
+ You can also set minimum Windows version targeted. While setting this
+ to an older version allows those Windows versions to run the created
+ executables, it may come with the cost of disabling functionality that
+ newer Windows versions could otherwise have.
+ The version is set via MIN_WIN_VER variable. For values to use, see
+ list in: https://msdn.microsoft.com/en-us/library/6sehtctf.aspx
+ Current default is 0x0603 (Windows 8.1) for "win32" and "win64".
+ This is also the lowest value that msys2 upstream supports.
+ For "win64-10" the default is 0x0A00 (Windows 10)
+
+ It's possible to set number of make jobs used in the build by
+ setting suitable make parameter to MAKE_PARAMS environment variable, e,g,
+ MAKE_PARAMS="-j3". The default is job count equal to number of
+ processor cores in the system.
+
+
+ Problems
+====================================
+
+- Freeciv linked against readline in msys2 does not work.
+  Configure freeciv with --without-readline
+
+
+ TODO
+====================================
+
+- Readline support

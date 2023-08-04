@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.0"
+   width="300"
+   height="200"
+   id="svg11"
+   sodipodi:docname="samoa.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs15" />
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="3.595"
+     inkscape:cx="149.93046"
+     inkscape:cy="99.860918"
+     inkscape:window-width="1235"
+     inkscape:window-height="925"
+     inkscape:window-x="353"
+     inkscape:window-y="46"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg11" />
+  <rect
+     width="300"
+     height="200"
+     fill="#ce1126"
+     id="rect2" />
+  <rect
+     width="150"
+     height="100"
+     fill="#002b7f"
+     id="rect4" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(14.603642,0,0,14.603642,74.999661,84.018742)"
+     id="polygon1441"
+     style="fill:#ffffff" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(11.682911,0,0,11.516383,44.444109,40.683056)"
+     id="polygon1449"
+     style="fill:#ffffff" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(10.95273,0,0,10.748625,106.24966,35.748625)"
+     id="polygon1451"
+     style="fill:#ffffff" />
+  <use
+     transform="translate(30.555556,-25)"
+     id="use2402"
+     x="0"
+     y="0"
+     width="288"
+     height="144"
+     xlink:href="#polygon1449" />
+  <polygon
+     points="-0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 0,-1 0.58778525,0.80901699 "
+     transform="matrix(7.3018188,0,0,7.3018188,90.277441,57.981568)"
+     id="polygon1455"
+     style="fill:#ffffff" />
+</svg>

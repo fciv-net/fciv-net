@@ -1,0 +1,93 @@
+option('clients',
+       type: 'array',
+       choices: ['gtk3.22','sdl2', 'qt', 'gtk4', 'stub', 'gtk4x'],
+       value: ['gtk3.22'],
+       description: 'Clients to build')
+
+option('fcmp',
+       type: 'array',
+       choices: ['gtk3','qt','cli','gtk4'],
+       value: ['gtk3'],
+       description: 'Modpack installer UIs to build')
+
+option('cacert-path',
+       type: 'string',
+       value: '',
+       description: 'Custom path to CA cert bundle')
+
+option('followtag',
+       type: 'string',
+       value: '',
+       description: 'Custom followtag')
+
+option('json-protocol',
+       type: 'boolean',
+       value: false,
+       description: 'Build in json-protocol support')
+
+option('syslua',
+       type: 'combo',
+       choices: ['try', 'true', 'false'],
+       description: 'Use lua from system')
+
+option('sys-tolua-cmd',
+       type: 'boolean',
+       value: false,
+       description: 'Use tolua cmd from the system even for native builds')
+
+option('mwand',
+       type: 'combo',
+       choices: ['try', 'true', 'false'],
+       description: 'Build MagickWand support to mapimg')
+
+option('readline',
+       type: 'combo',
+       choices: ['try', 'true', 'false'],
+       description: 'Enable readline functionality')
+
+option('audio',
+       type: 'boolean',
+       value: true,
+       description: 'Build in sound support')
+
+option('ruledit',
+       type: 'boolean',
+       value: true,
+       description: 'Build ruleset editor')
+
+option('nls',
+       type: 'boolean',
+       value: true,
+       description: 'Native Language Support')
+
+option('gitrev',
+       type: 'boolean',
+       value: false,
+       description: 'Include git commit id to the version string')
+
+option('server',
+       type: 'combo',
+       choices: ['disabled', 'enabled', 'freeciv-web' ],
+       value: 'enabled',
+       description: 'What kind of server should be build, if any')
+
+option('gen-packets-args',
+       type: 'array',
+       value: [],
+       description: 'Additional arguments for the packet generator')
+
+option('qtver',
+       type: 'combo',
+       choices: ['qt5', 'qt6', 'qt6x'],
+       value: 'qt6',
+       description: 'Whether to build Qt5, Qt6, or experimental Qt6 versions of the binaries')
+
+option('project-definition',
+       type: 'string',
+       value: '',
+       description: 'File with project defition')
+
+option('min-win-ver',
+       type: 'string',
+       value: '',
+       description: 'Minimum Windows version to support')

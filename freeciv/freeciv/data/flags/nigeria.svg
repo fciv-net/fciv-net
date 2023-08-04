@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="744.09424pt"
+   height="496.05951pt"
+   id="svg378"
+   sodipodi:version="0.32"
+   sodipodi:docname="nigeria.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+  <metadata
+     id="metadata3730">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     id="base"
+     inkscape:zoom="0.43262028"
+     inkscape:cx="507.91086"
+     inkscape:cy="296.45105"
+     inkscape:window-width="1008"
+     inkscape:window-height="781"
+     inkscape:window-x="164"
+     inkscape:window-y="35"
+     inkscape:current-layer="svg378"
+     showgrid="false"
+     inkscape:window-maximized="0"
+     inkscape:document-rotation="0" />
+  <defs
+     id="defs380">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 308.65933 : 1"
+       inkscape:vp_y="0 : 1066.6667 : 0"
+       inkscape:vp_z="1058.2677 : 308.65933 : 1"
+       inkscape:persp3d-origin="529.13386 : 191.0749 : 1"
+       id="perspective4038" />
+  </defs>
+  <rect
+     id="rect171"
+     style="font-size:12px;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     y="0"
+     x="0"
+     height="661.41266"
+     width="992.12378" />
+  <rect
+     id="rect135"
+     style="font-size:12px;fill:#008751;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     y="2.0344902e-05"
+     x="661.41681"
+     height="661.41266"
+     width="330.70886" />
+  <rect
+     id="rect403"
+     style="font-size:12px;fill:#008751;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
+     y="2.0344902e-05"
+     x="0"
+     height="661.41266"
+     width="330.70886" />
+</svg>

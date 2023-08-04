@@ -1,0 +1,164 @@
+/***********************************************************************
+ Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2, or (at your option)
+   any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+***********************************************************************/
+
+/* This header is generated from gen_headers/meson_freeciv_config.h.in.
+ * It contains values to specific freeciv build, but only such
+ * values that should not conflict with configuration headers from
+ * other, typically autotools based, projects. This is meant to be usable
+ * for external projects building against some freeciv components. */
+
+/* This header file is shipped in some binary distributions.
+ * It is included purely for reference as to how the executables were built,
+ * and changing it will have no functional effect on pre-built binaries. */
+
+#ifndef FC__FREECIV_CONFIG_H
+#define FC__FREECIV_CONFIG_H
+
+/* Is this freeciv-web instead of regular build */
+#mesondefine FREECIV_WEB
+
+/* Version tag to follow */
+#mesondefine FOLLOWTAG
+
+/* nullptr available at C */
+#mesondefine FREECIV_HAVE_C23_NULLPTR
+
+/* nullptr available at C++ */
+#mesondefine FREECIV_HAVE_CXX_NULLPTR
+
+/* C++20 capture this supported */
+#mesondefine FREECIV_HAVE_CXX20_CAPTURE_THIS
+
+/* __builtin_unreachable() available */
+#mesondefine FREECIV_HAVE_UNREACHABLE
+
+/* Use pthreads as thread implementation */
+#mesondefine FREECIV_HAVE_PTHREAD
+
+/* Use tinycthread as thread implementation */
+#mesondefine FREECIV_HAVE_TINYCTHR
+
+/* Has thread condition variable implementation */
+#define FREECIV_HAVE_THREAD_COND
+
+/* Max number of AI modules */
+#define FREECIV_AI_MOD_LAST @FREECIV_AI_MOD_LAST@
+
+/* Have socklen_t type defined */
+#define FREECIV_HAVE_SOCKLEN_T
+
+/* Location for freeciv to store its information */
+#mesondefine FREECIV_STORAGE_DIR
+
+/* Metaserver URL */
+#mesondefine FREECIV_META_URL
+
+#ifndef __EMSCRIPTEN__
+#define FREECIV_META_ENABLED
+#endif /* __EMSCRIPTEN__ */
+
+/* Default modpack list URL */
+#mesondefine MODPACK_LIST_URL
+
+/* IPv6 Support built in */
+#mesondefine FREECIV_IPV6_SUPPORT
+
+/* MS Windows host */
+#mesondefine FREECIV_MSWINDOWS
+
+/* Native language support enabled */
+#mesondefine FREECIV_ENABLE_NLS
+
+/* This is crosser-based build */
+#mesondefine FREECIV_CROSSER
+
+/* MagickWand version 7 API in use */
+#mesondefine FREECIV_MWAND7
+
+/* Produce debug version */
+#mesondefine FREECIV_DEBUG
+
+/* Testmatic integration enabled */
+#mesondefine FREECIV_TESTMATIC
+
+/* Winsock available */
+#mesondefine FREECIV_HAVE_WINSOCK
+
+/* locale.h available */
+#mesondefine FREECIV_HAVE_LOCALE_H
+
+/* libintl.h available */
+#mesondefine FREECIV_HAVE_LIBINTL_H
+
+/* inttypes.h available */
+#mesondefine FREECIV_HAVE_INTTYPES_H
+
+/* stdint.h available */
+#mesondefine FREECIV_HAVE_STDINT_H
+
+/* ws2tcpip.h available */
+#mesondefine FREECIV_HAVE_WS2TCPIP_H
+
+/* sys/types.h available */
+#mesondefine FREECIV_HAVE_SYS_TYPES_H
+
+/* unistd.h available */
+#mesondefine FREECIV_HAVE_UNISTD_H
+
+/* sys/time.h available */
+#mesondefine FREECIV_HAVE_SYS_TIME_H
+
+/* sys/socket.h available */
+#mesondefine FREECIV_HAVE_SYS_SOCKET_H
+
+/* sys/select.h available */
+#mesondefine FREECIV_HAVE_SYS_SELECT_H
+
+/* netinet/in.h available */
+#mesondefine FREECIV_HAVE_NETINET_IN_H
+
+/* dirent.h available */
+#mesondefine FREECIV_HAVE_DIRENT_H
+
+/* stdbool.h available */
+#mesondefine FREECIV_HAVE_STDBOOL_H
+
+/* Readline support */
+#mesondefine FREECIV_HAVE_LIBREADLINE
+
+/* liblzma is available */
+#mesondefine FREECIV_HAVE_LIBLZMA
+
+/* libzstd is available */
+#mesondefine FREECIV_HAVE_LIBZSTD
+
+/* winsock2.h available */
+#mesondefine FREECIV_HAVE_WINSOCK2_H
+
+#ifdef FREECIV_HAVE_WINSOCK2_H
+#define FREECIV_HAVE_WINSOCK2 1
+#endif
+
+/* socket zero isn't same as stdin */
+#mesondefine FREECIV_SOCKET_ZERO_NOT_STDIN
+
+/* jansson network protocol in use */
+#mesondefine FREECIV_JSON_CONNECTION
+
+/* Json Connection TCP Port; Default of the raw-protocol + 1000 */
+#define FREECIV_JSON_PORT 6556
+
+/* Delta protocol enabled */
+#mesondefine FREECIV_DELTA_PROTOCOL
+
+#endif /* FC__FREECIV_CONFIG_H */

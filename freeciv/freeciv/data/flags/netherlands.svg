@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+
+<!-- /Creative Commons Public Domain -->
+
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="">
+   <dc:title>SVG Graphic of the Dutch flag</dc:title>
+   <dc:rights><Agent>
+      <dc:title>Marc Maurer</dc:title>
+   </Agent></dc:rights>
+   <license rdf:resource="http://web.resource.org/cc/PublicDomain" />
+</Work>
+
+<License rdf:about="http://web.resource.org/cc/PublicDomain">
+   <permits rdf:resource="http://web.resource.org/cc/Reproduction" />
+   <permits rdf:resource="http://web.resource.org/cc/Distribution" />
+   <permits rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+</License>
+</rdf:RDF>
+-->
+
+<svg
+   version="1"
+   x="0.00000000"
+   y="0.00000000"
+   width="1062.98999"
+   height="708.661011"
+   id="svg378"
+   sodipodi:docname="netherlands.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.0145895"
+     inkscape:cx="531.74216"
+     inkscape:cy="353.8377"
+     inkscape:window-width="1222"
+     inkscape:window-height="907"
+     inkscape:window-x="388"
+     inkscape:window-y="63"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg378" />
+  <defs
+     id="defs380" />
+  <rect
+     width="1062.98999"
+     height="708.661011"
+     rx="0.00000000"
+     ry="0.00000000"
+     x="0.00000000"
+     y="0.00000000"
+     style="font-size:12;fill:#ffffff;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect171" />
+  <rect
+     width="1062.98999"
+     height="236.220001"
+     rx="0.00000000"
+     ry="0.00000000"
+     x="0.00000000"
+     y="475.558563"
+     style="font-size:12;fill:#21468b;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect256" />
+  <rect
+     width="1062.98999"
+     height="236.220001"
+     x="0.00000000"
+     y="0.00000000"
+     style="font-size:12;fill:#ae1c28;fill-rule:evenodd;stroke-width:1pt;"
+     id="rect255" />
+</svg>

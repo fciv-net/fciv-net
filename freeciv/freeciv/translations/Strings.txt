@@ -1,0 +1,46 @@
+This file contains strings that should be translated, but
+are for some reason not available to be collected from any source
+files. They are collected from this file instead.
+
+------------------------------------------------------------------
+
+Version tags
+
+These are sent by metaserver
+
+While the follow tag compared to one received from the metaserver
+does not contain qualifiers, we do pass string with the qualifier
+added to gettext to get the translation.
+/* TRANS: Version tag name received from metaserver */
+_("?vertag:stable")
+_("?vertag:windows")
+_("?vertag:macos")
+_("?vertag:S3_1")
+_("?vertag:S3_2")
+_("?vertag:S3_3")
+_("?vertag:crosser")
+_("?vertag:windows-S3_1")
+_("?vertag:windows-S3_2")
+_("?vertag:windows-S3_3")
+_("?vertag:macos-S3_2")
+_("?vertag:macos-S3_3")
+
+
+Generated version header
+
+/* TRANS: part of revision based version number string
+          "(modified 855bfb8e2f)" (the second 'word' is a git hash)
+          (Preserve the trailing space.) */
+_("modified ")
+
+
+Typical Modpack subtypes
+
+/* TRANS: Modpack subtype, "isometric" */
+_("iso")
+/* TRANS: Modpack subtype */
+_("hex")
+/* TRANS: Modpack subtype, isometric hex */
+_("hex & iso")
+/* TRANS: Modpack subtype, overhead tileset */
+_("overhead")

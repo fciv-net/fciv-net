@@ -1,0 +1,105 @@
+#!/bin/sh
+
+#
+#  Copyright (C) 2004-2008 Freeciv team
+
+# Version definition for Freeciv.
+
+MAJOR_VERSION="3"
+MINOR_VERSION="2"
+PATCH_VERSION="90"
+EMERGENCY_VERSION="2"
+VERSION_LABEL="-dev"
+
+# Type is either "development" or "stable"
+# Date and NEWS URL are relevant only for "stable" releases
+if test "$VERSION_LABEL" = "" ; then
+  RELEASE_TYPE="stable"
+  #RELEASE_DATE="2023-03-22"
+  NEWS_URL="https://www.freeciv.org/wiki/NEWS-${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
+else
+  RELEASE_TYPE="development"
+  #NEWS_URL="https://www.freeciv.org/wiki/NEWS-3.3.0"
+fi
+
+#
+# At the time being these same updates need to be made to the meson.build,
+# it does not get them automatically from here.
+#
+# 1) Development until MAJOR and MINOR version numbers are
+#    set to new release series:
+#   - IS_DEVEL_VERSION=1
+#   - IS_FREEZE_VERSION=0
+#   - IS_BETA_VERSION=0
+#
+# 2) Development from version number bump to entering beta mode:
+#   - IS_DEVEL_VERSION=1
+#   - IS_FREEZE_VERSION=1
+#   - IS_BETA_VERSION=0
+#
+# 3) Development during beta mode, starting latest from beta1,
+#    until first RC:
+#   - IS_DEVEL_VERSION=0
+#   - IS_FREEZE_VERSION=0
+#   - IS_BETA_VERSION=1
+#
+# 4) Stable, starting from first RC:
+#   - IS_DEVEL_VERSION=0
+#   - IS_FREEZE_VERSION=0
+#   - IS_BETA_VERSION=0
+#
+# 5) Final.
+# Update DEFAULT_FOLLOW_TAG to "stable", and also
+# windows/installer_msys2/Makefile.autotools --with-followtag to "windows"
+# platforms/macos/homebrew-appbundle.sh -Dfollowtag to "macos"
+
+IS_DEVEL_VERSION=1
+IS_FREEZE_VERSION=0
+IS_BETA_VERSION=0
+
+NEXT_STABLE_VERSION="3.3.0"
+
+# 0 to disable display of release month until we can make better estimate
+RELEASE_MONTH=0
+
+MAIN_VERSION=3.3
+DATASUBDIR=dev
+DEFAULT_FOLLOW_TAG=S3_3
+
+# Freeciv network capstring: see documentation in common/capstr.c
+#
+# +Freeciv.Devel-V.V-YYYY.MMM.DD is the base capability string.
+#
+#   - No new mandatory capabilities can be added to the release branch; doing
+#     so would break network capability of supposedly "compatible" releases.
+#
+# On FREECIV_DEBUG builds, optional capability "debug" gets automatically
+# appended to this.
+#
+NETWORK_CAPSTRING="+Freeciv.Web.Devel-3.3"
+FREECIV_DISTRIBUTOR=""
+
+if test "x$FREECIV_LABEL_FORCE" != "x" ; then
+  VERSION_LABEL=$(echo $FREECIV_LABEL_FORCE | sed "s/<base>/$VERSION_LABEL/g")
+fi
+
+if test x$VERSION_REVTYPE = xgit && command -v git > /dev/null ; then
+  VERSION_REV="$(git rev-parse --short HEAD)"
+else
+  VERSION_REV=""
+fi
+if test "x$VERSION_REV" != "x" ; then
+  case "x$VERSION_LABEL" in
+    x*+) ;;
+    *) VERSION_REV="+${VERSION_REV}" ;;
+  esac
+fi
+
+if test x$EMERGENCY_VERSION != x ; then
+  EMERG_PART=".${EMERGENCY_VERSION}"
+fi
+
+VERSION_STRING=${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}${EMERG_PART}${VERSION_LABEL}
+if test x$VERSION_SCRIPT_SILENT != xyes ; then
+  echo ${VERSION_STRING}${VERSION_REV}
+fi
