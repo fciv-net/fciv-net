@@ -1,3 +1,4 @@
-This directory contains patches containing the modifications
-against standard Freeciv Git revision listed in version.txt in parent
-directory, to make the webclient work.
+Freeciv C patches. 
+
+There are now already applied to the /freeciv directory, and included here only for reference.
+
