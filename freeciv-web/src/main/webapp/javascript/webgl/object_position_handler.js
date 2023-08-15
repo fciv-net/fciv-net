@@ -457,6 +457,7 @@ function add_city_buildings(ptile, pcity, scene) {
     add_city_building(ptile, pcity, scene, "Colosseum");
     add_city_building(ptile, pcity, scene, "Aqueduct");
     add_city_building(ptile, pcity, scene, "Cathedral");
+    add_city_building(ptile, pcity, scene, "Courthouse");
     add_spaceship(ptile, pcity, scene);
 
 }
@@ -550,6 +551,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
         height += 1.0;
       }
       if (building_name.indexOf("Barracks") >= 0) {
+        height -= 0.9;
+      }
+      if (building_name.indexOf("Courthouse") >= 0) {
         height -= 0.9;
       }
       if (building_name.indexOf("Cathedral") >= 0) {

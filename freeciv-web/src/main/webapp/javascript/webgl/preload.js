@@ -372,22 +372,25 @@ function load_model(filename)
     modelscale = 2.6;
   }
   if (filename == "Temple") {
-    modelscale = 2.2;
+    modelscale = 2.1;
   }
   if (filename.indexOf("Barracks") >= 0) {
-    modelscale = 0.8;
+    modelscale = 0.7;
   }
   if (filename == "Granary") {
-    modelscale = 1.5;
+    modelscale = 1.4;
   }
   if (filename == "Colosseum") {
-    modelscale = 1.5;
+    modelscale = 1.4;
   }
   if (filename == "Aqueduct") {
-    modelscale = 0.68;
+    modelscale = 0.50;
   }
   if (filename == "Cathedral") {
-    modelscale = 1.8;
+    modelscale = 1.6;
+  }
+  if (filename == "Courthouse") {
+    modelscale = 1.1;
   }
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
