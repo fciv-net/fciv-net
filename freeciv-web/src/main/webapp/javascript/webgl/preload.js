@@ -226,172 +226,178 @@ function load_model(filename)
       }
     });
 
-  var modelscale = 12;
-  if (filename == 'Horsemen' || filename == 'Knights') {
+var modelscale = 12;
+switch (filename) {
+  case 'Horsemen':
+  case 'Knights':
     modelscale = 10;
-  }
-  if (filename == 'Trireme') {
+    break;
+  case 'Trireme':
     modelscale = 4.5;
-  }
-  if (filename == 'Caravel') {
+    break;
+  case 'Caravel':
     modelscale = 7;
-  }
-  if (filename == 'Chariot') {
-    modelscale = 6;
-  }
-  if (filename == 'Mech. Inf.') {
-    modelscale = 9;
-  }
-
-  if (filename == "Tree1" || filename == "Tree2" || filename == "Tree3" ) {
-    modelscale = 29.5;
-  }
-  if (filename == "Palm1" || filename == "Palm2") {
-    modelscale = 31;
-  }
-  if (filename == "Cactus1") {
-    modelscale = 47;
-  }
-  if (filename == "Pine1" || filename == "Pine2") {
-    modelscale = 40.5;
-  }
-  if (filename == "Fish1") {
-    modelscale = 2.1;
-  }
-  if (filename == "Fish2") {
-    modelscale = 1.9;
-  }
-  if (filename == "Fish3") {
-    modelscale = 2.1;
-  }
-
-  if (filename == "Whales") {
-    modelscale = 1.65;
-  }
-
-  if (filename == "Hut") {
-    modelscale = 8;
-  }
-
-  if (filename == "Mine") {
-    modelscale = 15;
-  }
-  if (filename == "Oil") {
-    modelscale = 18;
-  }
-
-  if (filename == "Zeppelin") {
-    modelscale = 7;
-  }
-  if (filename == "Pyramids") {
-    modelscale = 5.0;
-  }
-  if (filename == "StatueOfLiberty") {
-    modelscale = 5.4;
-  }
-  if (filename == "EiffelTower") {
-    modelscale = 8;
-  }
-  if (filename == "Lighthouse") {
-    modelscale = 4.8;
-  }
-  if (filename == 'Iron') {
-    modelscale = 9;
-  }
-  if (filename == 'Furs') {
-    modelscale = 4;
-  }
-  if (filename == 'Gems') {
-    modelscale = 3;
-  }
-  if (filename == 'Coal') {
-    modelscale = 9;
-  }
-  if (filename == 'Fruit') {
-    modelscale = 6;
-  }
-  if (filename == 'Silk') {
-    modelscale = 4;
-  }
-  if (filename == 'Resources') {
-    modelscale = 3.5;
-  }
-  if (filename == 'Fallout') {
-    modelscale = 6;
-  }
-  if (filename == 'Game') {
-    modelscale = 3.7;
-  }
-  if (filename == 'Ivory') {
-    modelscale = 6;
-  }
-  if (filename == 'Buffalo') {
-    modelscale = 3.0;
-  }
-  if (filename == 'Pheasant') {
-    modelscale = 1.5;
-  }
-  if (filename == 'Wheat') {
-    modelscale = 2.7;
-  }
-  if (filename == 'Galleon') {
-    modelscale = 4.4;
-  }
-  if (filename == 'Frigate') {
-    modelscale = 5.3;
-  }
-  if (filename == 'Airbase') {
-    modelscale = 8;
-  }
-  if (filename == 'Fortress') {
-    modelscale = 8;
-  }
-  if (filename == 'Engineers') {
-    modelscale = 8.5;
-  }
-  if (filename == 'Nuclear') {
-    modelscale = 9;
-  }
-  if (filename == 'Settlers') {
+    break;
+  case 'Workers':
     modelscale = 10;
-  }
-  if (filename == 'Spaceship' || filename == 'Spaceship_launched') {
-    modelscale = 3.3;
-  }
-  if (filename == 'Ironclad') {
-    modelscale = 2.9;
-  }
-  if (filename == 'city_roman_0' || filename == 'city_roman_1' || filename == 'city_roman_2' || filename == 'city_roman_3'
-      || filename == 'city_roman_4' || filename == 'city_roman_capital') {
+    break;
+  case 'Explorer':
+    modelscale = 11;
+    break;
+  case 'Chariot':
+    modelscale = 6;
+    break;
+  case 'Mech. Inf.':
+    modelscale = 9;
+    break;
+  case 'Tree1':
+  case 'Tree2':
+  case 'Tree3':
+    modelscale = 29.5;
+    break;
+  case 'Palm1':
+  case 'Palm2':
+    modelscale = 31;
+    break;
+  case 'Cactus1':
+    modelscale = 47;
+    break;
+  case 'Pine1':
+  case 'Pine2':
+    modelscale = 40.5;
+    break;
+  case 'Fish1':
     modelscale = 2.1;
-  }
-  if (filename == 'Ruins') {
+    break;
+  case 'Fish2':
+  case 'Fish3':
+    modelscale = 1.9;
+    break;
+  case 'Whales':
+    modelscale = 1.65;
+    break;
+  case 'Hut':
+    modelscale = 8;
+    break;
+  case 'Mine':
+    modelscale = 15;
+    break;
+  case 'Oil':
+    modelscale = 18;
+    break;
+  case 'Zeppelin':
     modelscale = 7;
-  }
-  if (filename == "Library") {
-    modelscale = 2.6;
-  }
-  if (filename == "Temple") {
+    break;
+  case 'Pyramids':
+    modelscale = 5.0;
+    break;
+  case 'StatueOfLiberty':
+    modelscale = 5.4;
+    break;
+  case 'EiffelTower':
+    modelscale = 8;
+    break;
+  case 'Lighthouse':
+    modelscale = 4.8;
+    break;
+  case 'Iron':
+    modelscale = 9;
+    break;
+  case 'Furs':
+    modelscale = 4;
+    break;
+  case 'Gems':
+    modelscale = 3;
+    break;
+  case 'Coal':
+    modelscale = 9;
+    break;
+  case 'Fruit':
+    modelscale = 6;
+    break;
+  case 'Silk':
+    modelscale = 3;
+    break;
+  case 'Resources':
+    modelscale = 3.5;
+    break;
+  case 'Fallout':
+    modelscale = 6;
+    break;
+  case 'Game':
+    modelscale = 3.7;
+    break;
+  case 'Ivory':
+    modelscale = 6;
+    break;
+  case 'Buffalo':
+    modelscale = 2.4;
+    break;
+  case 'Pheasant':
+    modelscale = 1.4;
+    break;
+  case 'Wheat':
+    modelscale = 2.7;
+    break;
+  case 'Galleon':
+    modelscale = 4.4;
+    break;
+  case 'Frigate':
+    modelscale = 5.3;
+    break;
+  case 'Airbase':
+  case 'Fortress':
+  case 'Engineers':
+  case 'Nuclear':
+  case 'Settlers':
+    modelscale = 8.5;
+    break;
+  case 'Spaceship':
+  case 'Spaceship_launched':
+    modelscale = 3.3;
+    break;
+  case 'Ironclad':
+    modelscale = 2.9;
+    break;
+  case 'city_roman_0':
+  case 'city_roman_1':
+  case 'city_roman_2':
+  case 'city_roman_3':
+  case 'city_roman_4':
+  case 'city_roman_capital':
     modelscale = 2.1;
+    break;
+  case 'Ruins':
+    modelscale = 7;
+    break;
+  case 'Library':
+    modelscale = 2.6;
+    break;
+  case 'Temple':
+    modelscale = 2.1;
+    break;
+  default:
+    if (filename.indexOf("Barracks") >= 0) {
+      modelscale = 0.7;
+    }
+    else if (filename == "Granary" || filename == "Colosseum") {
+      modelscale = 1.4;
+    }
+    else if (filename == "Aqueduct") {
+      modelscale = 0.50;
+    }
+    else if (filename == "Cathedral") {
+      modelscale = 1.6;
+    }
+    else if (filename == "Courthouse") {
+      modelscale = 1.1;
+    }
+    else if (filename == "Colossus") {
+      modelscale = 8.5;
+    }
+    break;
   }
-  if (filename.indexOf("Barracks") >= 0) {
-    modelscale = 0.7;
-  }
-  if (filename == "Granary") {
-    modelscale = 1.4;
-  }
-  if (filename == "Colosseum") {
-    modelscale = 1.4;
-  }
-  if (filename == "Aqueduct") {
-    modelscale = 0.50;
-  }
-  if (filename == "Cathedral") {
-    modelscale = 1.6;
-  }
-  if (filename == "Courthouse") {
-    modelscale = 1.1;
-  }
+
     model.scale.x = model.scale.y = model.scale.z = modelscale;
     webgl_models[filename] = model;
 

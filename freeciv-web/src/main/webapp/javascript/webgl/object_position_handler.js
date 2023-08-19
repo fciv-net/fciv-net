@@ -444,21 +444,13 @@ function update_tile_extras(ptile) {
   Adds city buildings
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
-    add_wonder(ptile, pcity, scene, "Pyramids");
-    add_wonder(ptile, pcity, scene, "Lighthouse");
-    add_wonder(ptile, pcity, scene, "Statue of Liberty");
-    add_wonder(ptile, pcity, scene, "Eiffel Tower");
-    add_city_building(ptile, pcity, scene, "Library");
-    add_city_building(ptile, pcity, scene, "Temple");
-    add_city_building(ptile, pcity, scene, "Barracks");
-    add_city_building(ptile, pcity, scene, "Barracks II");
-    add_city_building(ptile, pcity, scene, "Barracks III");
-    add_city_building(ptile, pcity, scene, "Granary");
-    add_city_building(ptile, pcity, scene, "Colosseum");
-    add_city_building(ptile, pcity, scene, "Aqueduct");
-    add_city_building(ptile, pcity, scene, "Cathedral");
-    add_city_building(ptile, pcity, scene, "Courthouse");
-    add_spaceship(ptile, pcity, scene);
+  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower"];
+  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse"];
+
+  wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
+  cityBuildings.forEach(building => add_city_building(ptile, pcity, scene, building));
+
+  add_spaceship(ptile, pcity, scene);
 
 }
 
@@ -466,52 +458,63 @@ function add_city_buildings(ptile, pcity, scene) {
   Adds a wonder 3d model.
 ****************************************************************************/
 function add_wonder(ptile, pcity, scene, wonder_name) {
-    if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
-      var wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
-      if (wonder == null) {
-        return;
-      }
-      var nexttile = ptile;
-      for (var i = 0; i < 30; i++) {
-        var dir = Math.floor(Math.random() * 8);
-        var ntile = mapstep(ptile, dir);
-        var nexttile = mapstep(ntile, dir);
-        if (is_ocean_tile(nexttile)) {
-          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
-          continue;
-        }
-        if (city_positions[nexttile['index']] != null || city_building_positions[nexttile['index']] != null) {
-          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
-          continue;
-        }
-        if (wonder_name == 'Lighthouse' && !is_ocean_tile_near(nexttile)) {
-          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
-          continue;
-        }
-        if (nexttile != null) {
-          break;
-        }
-      }
-      if (nexttile == null) return;
-
-      var height = 5 + nexttile['height'] * 100;
-      if (wonder_name == 'Lighthouse') height += 4.2;
-      if (wonder_name == 'Statue of Liberty' && is_ocean_tile(nexttile)) height += 20.1;
-      if (wonder_name == 'Statue of Liberty' && !is_ocean_tile(nexttile)) height += 21.3;
-
-      if (wonder_name == 'Eiffel Tower') {
-        pos = map_to_scene_coords(ntile['x'] - 0.4, ntile['y'] - 0.4);
-        height = 22 + ntile['height'] * 100;
-
-      } else {
-        pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
-      }
-
-      wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
-      pcity[wonder_name + '_added'] = true;
-      city_building_positions[nexttile['index']] = true;
-      scene.add(wonder);
+  if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
+    var wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
+    if (wonder == null) {
+      return;
     }
+    var nexttile = ptile;
+    for (var i = 0; i < 30; i++) {
+      var dir = Math.floor(Math.random() * 8);
+      var ntile = mapstep(ptile, dir);
+      var nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
+      if (is_ocean_tile(nexttile)) {
+        ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        continue;
+      }
+      if (city_positions[nexttile['index']] != null || city_building_positions[nexttile['index']] != null) {
+        ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        continue;
+      }
+      if (wonder_name == 'Lighthouse' && !is_ocean_tile_near(nexttile)) {
+        ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        continue;
+      }
+      if (nexttile != null) {
+        break;
+      }
+    }
+    if (nexttile == null) return;
+
+    var height = 5 + nexttile['height'] * 100;
+    if (wonder_name == 'Lighthouse') {
+      height += 4.2;
+    }
+
+    if (wonder_name == 'Statue of Liberty') {
+      if (is_ocean_tile(nexttile)) {
+        height += 20.1;
+      } else {
+        height += 21.3;
+      }
+    }
+
+    var pos;
+    if (wonder_name == 'Colossus') {
+      pos = map_to_scene_coords(ntile['x'] - 0.4, ntile['y'] - 0.4);
+      height += 4.2;
+    } else if (wonder_name == 'Eiffel Tower') {
+      pos = map_to_scene_coords(ntile['x'] - 0.4, ntile['y'] - 0.4);
+      height = 22 + ntile['height'] * 100;
+    } else {
+      pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
+    }
+
+    wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
+    pcity[wonder_name + '_added'] = true;
+    city_building_positions[nexttile['index']] = true;
+    scene.add(wonder);
+  }
 }
 
 /****************************************************************************
