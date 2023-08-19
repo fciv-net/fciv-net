@@ -247,6 +247,12 @@ switch (filename) {
   case 'Chariot':
     modelscale = 6;
     break;
+  case 'Warriors':
+    modelscale = 10;
+    break;
+  case 'Legion':
+    modelscale = 7;
+    break;
   case 'Mech. Inf.':
     modelscale = 9;
     break;
