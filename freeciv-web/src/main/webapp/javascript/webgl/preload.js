@@ -351,6 +351,9 @@ switch (filename) {
   case 'Frigate':
     modelscale = 5.3;
     break;
+  case 'Destroyer':
+    modelscale = 1.05;
+    break;
   case 'Airbase':
   case 'Fortress':
   case 'Engineers':
