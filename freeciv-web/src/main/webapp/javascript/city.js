@@ -2078,3 +2078,19 @@ function get_citywalls_scale(pcity)
   return scale;
 }
 
+
+/**************************************************************************
+ ...
+**************************************************************************/
+function get_num_cities()
+{
+  var count = 0;
+
+  for (var city_id in cities){
+    var pcity = cities[city_id];
+    if (client.conn.playing != null && city_owner(pcity) != null && city_owner(pcity).playerno == client.conn.playing.playerno) {
+      count++;
+    }
+  }
+  return count;
+}

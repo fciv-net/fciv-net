@@ -445,7 +445,7 @@ function update_tile_extras(ptile) {
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
   const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower"];
-  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse"];
+  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse", "University"];
 
   wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
   cityBuildings.forEach(building => add_city_building(ptile, pcity, scene, building));
@@ -546,9 +546,14 @@ function add_city_building(ptile, pcity, scene, building_name) {
       if (nexttile == null) return;
 
       var height = 7 + nexttile['height'] * 100;
+      var y_offset = 0;
 
       if (building_name == "Temple") {
         height -= 0.6;
+      }
+      if (building_name == "University") {
+        height -= 0.8;
+        y_offset = 12;
       }
       if (building_name == "Granary") {
         height += 1.0;
@@ -564,7 +569,7 @@ function add_city_building(ptile, pcity, scene, building_name) {
       }
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
 
-      building.position.set(pos['x'] - 14, height - 5, pos['y'] - 14);
+      building.position.set(pos['x'] - 14, height - 5, pos['y'] - 14 + y_offset);
       pcity[building_name + '_added'] = true;
       city_building_positions[nexttile['index']] = true;
       scene.add(building);

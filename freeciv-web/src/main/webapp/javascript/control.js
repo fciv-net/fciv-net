@@ -2830,6 +2830,13 @@ function request_unit_act_sel_vs_own_tile()
 **************************************************************************/
 function key_unit_auto_settle()
 {
+
+  if (get_num_cities() == 0) {
+    var message = "Can't activate Auto Settlers, because no cities are built yet.";
+    message_log.update({ event: E_CONNECTION, message: message });
+    return;
+  }
+
   var funits = get_units_in_focus();
   for (var i = 0; i < funits.length; i++) {
     var punit = funits[i];

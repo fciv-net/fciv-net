@@ -385,6 +385,9 @@ switch (filename) {
   case 'Temple':
     modelscale = 2.1;
     break;
+  case 'University':
+    modelscale = 1.95;
+    break;
   default:
     if (filename.indexOf("Barracks") >= 0) {
       modelscale = 0.7;
