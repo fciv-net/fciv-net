@@ -46,6 +46,9 @@ function get_unit_height_offset(punit)
   if (ptype['name'] == "Destroyer") {
     return 4.0;
   }
+  if (ptype['name'] == "Battleship") {
+    return 4.0;
+  }
 
   if (ptype['name'] == "Ironclad") {
     return 4.2;

@@ -354,6 +354,9 @@ switch (filename) {
   case 'Destroyer':
     modelscale = 1.05;
     break;
+  case 'Battleship':
+    modelscale = 1.05;
+    break;
   case 'Airbase':
   case 'Fortress':
   case 'Engineers':
