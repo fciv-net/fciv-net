@@ -199,6 +199,7 @@ function init_webgl_mapview() {
     borders: { type: "t", value: update_borders_image() },
     map_x_size: { type: "f", value: map['xsize'] },
     map_y_size: { type: "f", value: map['ysize'] },
+    is_hex: { type: "bool", value: is_hex() },
     roadsmap: { type: "t", value: update_roads_image()},
     roadsprites: {type: "t", value: webgl_textures["roads"]},
     railroadsprites: {type: "t", value: webgl_textures["railroads"]},
@@ -211,14 +212,21 @@ function init_webgl_mapview() {
   }
 
   // Low-resolution terrain mesh used for raycasting to find mouse postition.
-  create_heightmap(2);
+  create_heightmap(is_hex() ? 6 : 2);
   var lofiMaterial = new THREE.MeshStandardMaterial({"color" : 0x00ff00});
   lofiGeometry = new THREE.BufferGeometry();
-  create_land_geometry(lofiGeometry, 2);
+  create_land_geometry(lofiGeometry, is_hex() ? 6 : 2);
   lofiMesh = new THREE.Mesh( lofiGeometry, lofiMaterial );
   lofiMesh.layers.set(6);
   scene.add(lofiMesh);
 
+  if (is_hex()) {
+    if (graphics_quality == QUALITY_HIGH) {
+      terrain_quality = 10;
+    } else {
+      terrain_quality = 8;
+    }
+  }
   // High-resolution terrain-mesh shown in mapview.
   create_heightmap(terrain_quality);
   var terrain_material = new THREE.ShaderMaterial({

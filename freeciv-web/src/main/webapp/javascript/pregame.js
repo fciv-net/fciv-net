@@ -439,6 +439,11 @@ function pregame_settings()
       "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
       "   </ul>" +
       "<div id='pregame_settings_tabs-1'><br><table id='settings_table'> " +
+      "<tr title='Hexagonal or square map tiles.'><td>Map topology (Isometric vs Hexagonal):</td>" +
+          "<td><select name='topology' id='topology'>" +
+              "<option value='0'>Isometric</option>" +
+              "<option value='1'>Hexagonal</option>" +
+      "</select></td></tr>" +
       "<tr title='Ruleset version'><td>Ruleset:</td>" +
       "<td><select name='ruleset' id='ruleset'>" +
       "<option value='classic'>Classic</option>" +
@@ -603,6 +608,15 @@ function pregame_settings()
                         server_settings['generator']['val']]);
   }
 
+  if (server_settings['topology'] != null
+        && server_settings['topology']['val'] != null) {
+    if (server_settings['topology']['val'] == 2) {
+      $("#topology").val(1); //hex
+    } else {
+      $("#topology").val(server_settings['topology']['val']);
+    }
+  }
+
   $("#3d_antialiasing_label").prop("innerHTML", "Antialiasing:");
 
   var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
@@ -703,6 +717,14 @@ function pregame_settings()
 
   $('#generator').change(function() {
     send_message("/set generator " + $('#generator').val());
+  });
+
+  $('#topology').change(function() {
+    if ($('#topology').val() == 0) {
+      send_message("/set topology="); // Not HEX, so it's ISO (but not really iso).
+    } else {
+      send_message("/set topology " + server_settings['topology']['support_names'][$('#topology').val()]);
+    }
   });
 
   /* Make the long ruleset description available in the pregame. The

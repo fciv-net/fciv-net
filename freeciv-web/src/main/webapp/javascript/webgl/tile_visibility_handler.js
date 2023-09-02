@@ -60,15 +60,31 @@ function update_tiles_known_vertex_colors()
 
   for ( let iy = 0; iy < gridY1; iy ++ ) {
     for ( let ix = 0; ix < gridX1; ix ++ ) {
-      var sx = ix % xquality, sy = iy % yquality;
-      var mx = Math.floor((sx / terrain_quality) - 0.040), my = Math.floor((sy / terrain_quality) - 0.040);
-      var ptile = map_pos_to_tile(mx, my);
-      if (ptile != null) {
-        var c = get_vertex_color_from_tile(ptile, ix, iy);
-        colors.push(c[0], c[1], c[2]);
+      if (is_hex()) {
+        var sx = ix % xquality, sy = iy % yquality;
+        var mx = (sx / terrain_quality), my = (sy / terrain_quality) ;
+        var hvec = map_hex_coords(new THREE.Vector2(mx, my));
+        var gx = Math.floor(hvec.x);
+        var gy = Math.floor(hvec.y);
+        var ptile = map_pos_to_tile(gx, gy);
+        if (ptile != null) {
+          var c = get_vertex_color_from_tile(ptile, ix, iy);
+          colors.push(c[0], c[1], c[2]);
+        } else {
+          colors.push(0,0,0);
+        }
       } else {
-        colors.push(0,0,0);
+        var sx = ix % xquality, sy = iy % yquality;
+        var mx = Math.floor((sx / terrain_quality) - 0.040), my = Math.floor((sy / terrain_quality) - 0.040);
+        var ptile = map_pos_to_tile(mx, my);
+        if (ptile != null) {
+          var c = get_vertex_color_from_tile(ptile, ix, iy);
+          colors.push(c[0], c[1], c[2]);
+        } else {
+          colors.push(0,0,0);
+        }
       }
+
     }
   }
 

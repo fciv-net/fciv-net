@@ -24,7 +24,7 @@ set minp 2
 set generator FAIR
 
 set wetness 25
-set topology ""
+set topology=hex
 set wrap=
 set steepness 12
 

@@ -1338,8 +1338,7 @@ static bool topology_callback(unsigned value, struct connection *caller,
   /* Are you removing this because Freeciv-web gained the ability to
    * display isometric maps? Why don't you remove the Freeciv-web
    * specific MAP_DEFAULT_TOPO too? */
-  if ((value & (TF_ISO)) != 0
-      || (value & (TF_HEX)) != 0) {
+  if ((value & (TF_ISO)) != 0) {
     /* The Freeciv-web client can't display these topologies yet. */
     settings_snprintf(reject_msg, reject_msg_len,
                       _("Freeciv-web doesn't support this topology."));
