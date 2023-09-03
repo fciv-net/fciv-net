@@ -351,11 +351,17 @@ switch (filename) {
   case 'Frigate':
     modelscale = 5.3;
     break;
+  case 'AEGIS Cruiser':
+     modelscale = 9;
+     break;
   case 'Destroyer':
-    modelscale = 1.05;
+    modelscale = 0.90;
     break;
   case 'Battleship':
-    modelscale = 1.05;
+    modelscale = 1.20;
+    break;
+  case 'Cruiser':
+    modelscale = 0.85;
     break;
   case 'Airbase':
   case 'Fortress':
