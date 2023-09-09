@@ -442,7 +442,7 @@ function pregame_settings()
       "<tr title='Hexagonal or square map tiles.'><td>Map topology (Isometric vs Hexagonal):</td>" +
           "<td><select name='topology' id='topology'>" +
               "<option value='0'>Isometric</option>" +
-              "<option value='1'>Hexagonal (Beta!)</option>" +
+              //"<option value='1'>Hexagonal (Beta!)</option>" +
       "</select></td></tr>" +
       "<tr title='Ruleset version'><td>Ruleset:</td>" +
       "<td><select name='ruleset' id='ruleset'>" +
