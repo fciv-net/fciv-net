@@ -235,6 +235,15 @@ switch (filename) {
   case 'Trireme':
     modelscale = 4.5;
     break;
+  case 'Armor':
+    modelscale = 5.8;
+    break;
+  case 'Howitzer':
+    modelscale = 8;
+    break;
+  case 'Mech. Inf.':
+    modelscale = 9;
+    break;
   case 'Caravel':
     modelscale = 7;
     break;
