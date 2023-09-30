@@ -439,11 +439,6 @@ function pregame_settings()
       "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
       "   </ul>" +
       "<div id='pregame_settings_tabs-1'><br><table id='settings_table'> " +
-      "<tr title='Hexagonal or square map tiles.'><td>Map topology (Isometric vs Hexagonal):</td>" +
-          "<td><select name='topology' id='topology'>" +
-              "<option value='0'>Isometric</option>" +
-              //"<option value='1'>Hexagonal (Beta!)</option>" +
-      "</select></td></tr>" +
       "<tr title='Ruleset version'><td>Ruleset:</td>" +
       "<td><select name='ruleset' id='ruleset'>" +
       "<option value='classic'>Classic</option>" +
@@ -882,9 +877,10 @@ function change_ruleset(to) {
     send_message("/rulesetdir " + to);
     // reset some ruleset defined settings.
     send_message("/set nationset all");
-    if (chosen_nation != -1) {
-      swal("Ruleset changed. You need to select your nation again.");
-    }
+
+    swal("Ruleset changed. Settings have been reset.");
+
+    setTimeout(pregame_settings, 800);
   }
 
 

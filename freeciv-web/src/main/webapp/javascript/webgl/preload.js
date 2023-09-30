@@ -26,7 +26,7 @@ var webgl_materials = {};
 
 var meshes = {};
 
-var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0", "Warriors", "citywalls",
+var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0",  "city_babylonian_0", "Warriors", "citywalls",
                                "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Fish1", "Fish2", "Fish3", "Whales"];
 var tiles_of_unloaded_models_map = {};
 var models_loading_map = {}; // used to keep track of which models are loading, to prevent loading the same models multiple times.
@@ -268,18 +268,18 @@ switch (filename) {
   case 'Tree1':
   case 'Tree2':
   case 'Tree3':
-    modelscale = 29.5;
+    modelscale = 27.5;
     break;
   case 'Palm1':
   case 'Palm2':
-    modelscale = 31;
+    modelscale = 28;
     break;
   case 'Cactus1':
-    modelscale = 47;
+    modelscale = 44;
     break;
   case 'Pine1':
   case 'Pine2':
-    modelscale = 40.5;
+    modelscale = 38.5;
     break;
   case 'Fish1':
     modelscale = 2.1;
@@ -295,10 +295,10 @@ switch (filename) {
     modelscale = 8;
     break;
   case 'Mine':
-    modelscale = 15;
+    modelscale = 13;
     break;
   case 'Oil':
-    modelscale = 18;
+    modelscale = 15;
     break;
   case 'Zeppelin':
     modelscale = 7;
@@ -325,7 +325,7 @@ switch (filename) {
     modelscale = 3;
     break;
   case 'Coal':
-    modelscale = 9;
+    modelscale = 8;
     break;
   case 'Fruit':
     modelscale = 6;
@@ -394,36 +394,51 @@ switch (filename) {
   case 'city_roman_capital':
     modelscale = 2.1;
     break;
+  case 'city_babylonian_0':
+  case 'city_babylonian_1':
+  case 'city_babylonian_2':
+  case 'city_babylonian_3':
+  case 'city_babylonian_4':
+    modelscale = 2.1;
+    break;
+  case 'city_modern_1':
+  case 'city_modern_2':
+    modelscale = 8;
+    break;
+  case 'city_modern_3':
+  case 'city_modern_4':
+    modelscale = 9;
+    break;
   case 'Ruins':
     modelscale = 7;
     break;
   case 'Library':
-    modelscale = 2.6;
+    modelscale = 2.4;
     break;
   case 'Temple':
-    modelscale = 2.1;
+    modelscale = 2.0;
     break;
   case 'University':
-    modelscale = 1.95;
+    modelscale = 1.5;
     break;
   default:
     if (filename.indexOf("Barracks") >= 0) {
-      modelscale = 0.7;
+      modelscale = 0.65;
     }
     else if (filename == "Granary" || filename == "Colosseum") {
-      modelscale = 1.4;
+      modelscale = 1.35;
     }
     else if (filename == "Aqueduct") {
-      modelscale = 0.50;
+      modelscale = 0.40;
     }
     else if (filename == "Cathedral") {
-      modelscale = 1.6;
+      modelscale = 1.5;
     }
     else if (filename == "Courthouse") {
-      modelscale = 1.1;
+      modelscale = 1.05;
     }
     else if (filename == "Colossus") {
-      modelscale = 8.5;
+      modelscale = 8.8;
     }
     break;
   }

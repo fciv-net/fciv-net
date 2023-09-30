@@ -1200,6 +1200,7 @@ function handle_end_turn(packet)
   if (!observing) {
     $("#turn_done_button").button( "option", "disabled", true);
   }
+  close_city_dialog();
 }
 
 function handle_freeze_client(packet)

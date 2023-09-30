@@ -177,11 +177,11 @@ var fcwDebug=<%= fcwDebug %>;
     <div class="container">
         <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
 
-            <div class="row" style="position: relative; z-index: 1000; padding-top: 0px;  margin-left: 30px;">
+            <div class="row" style="position: relative; z-index: 1000; padding-top: 60px;  margin-left: -56px;">
                     <div class="col-md-3"></div>
                     <div class="col-md-9">
 
-                    <%--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9958178836739125"
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9958178836739125"
                          crossorigin="anonymous"></script>
                     <!-- HORIZONAL-GOOD-SIZE -->
                     <ins class="adsbygoogle"
@@ -190,11 +190,8 @@ var fcwDebug=<%= fcwDebug %>;
                          data-ad-slot="9479544084"></ins>
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>--%>
+                    </script>
 
-
-                    <iframe width="460" height="255" src="https://www.youtube.com/embed/qny5MigpScU?si=z2OZu9H9iBuJjIqi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    
        </div>
     </div>
 

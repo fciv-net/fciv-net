@@ -22,6 +22,7 @@ var nuke_start_tile = null;
 var nuke_objects = [];
 var nuke_mushroom_objects = [];
 var nuke_other_objects = [];
+var nuke_active = false;
 
 /****************************************************************************
  Renders a nuclear explosion animation on the given tile.
@@ -32,6 +33,7 @@ function render_nuclear_explosion(ptile)
 
   center_tile_mapcanvas_3d(ptile);
   setTimeout("create_nuke(" + ptile['index'] + ");", 500);
+  nuke_active = true;
 }
 
 /****************************************************************************
@@ -189,6 +191,7 @@ function clear_nuke()
   nuke_objects = [];
   nuke_mushroom_objects = [];
   nuke_other_objects = [];
+  nuke_active = false;
 }
 
 /****************************************************************************

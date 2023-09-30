@@ -925,7 +925,7 @@ function control_unit_killed(punit)
 **************************************************************************/
 function update_unit_focus()
 {
-  if (active_city != null) return; /* don't change focus while city dialog is active.*/
+  if (active_city != null || nuke_active) return; /* don't change focus while city dialog is active.*/
 
   if (C_S_RUNNING != client_state()) return;
 
@@ -971,7 +971,7 @@ function advance_unit_focus()
   var candidate;
   var i;
 
-  if (client_is_observer()) return;
+  if (client_is_observer() || nuke_active) return;
 
   if (urgent_focus_queue.length > 0) {
     var focus_tile = (current_focus != null && current_focus.length > 0
@@ -2373,6 +2373,7 @@ function send_end_turn()
   var packet = {"pid" : packet_player_phase_done, "turn" : game_info['turn']};
   send_request(JSON.stringify(packet));
   update_turn_change_timer();
+  close_city_dialog();
 
 }
 
@@ -2619,6 +2620,11 @@ function key_unit_nuke()
 
   /* The last order of the goto is the nuclear detonation. */
   activate_goto_last(ORDER_PERFORM_ACTION, ACTION_NUKE);
+
+  message_log.update({
+    event: E_BEGINNER_HELP,
+    message: "Nuke ready for detonation. Select the destination tile for nuclean detonation. Ensure that you have declared war with the nation, and that your government allows using nuclear weapons."
+  });
 
 }
 

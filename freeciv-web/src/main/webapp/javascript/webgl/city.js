@@ -31,7 +31,7 @@ function show_city_worked_tiles()
   if (city_tile(active_city) != null && city_label_positions[city_tile(active_city)['index']] != null) {
     city_label_positions[city_tile(active_city)['index']].visible = false;
   }
-  var other_city_material = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.4} );
+  var other_city_material = new THREE.MeshBasicMaterial( { color: 0xc33b3b, transparent: true, opacity: 0.4} );
 
   for (var tile_id in tiles) {
     var ptile = tiles[tile_id];

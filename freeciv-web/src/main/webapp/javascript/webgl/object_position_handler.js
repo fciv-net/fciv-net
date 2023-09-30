@@ -671,7 +671,7 @@ function update_tile_forest(ptile)
     } else if (rnd == 4) {
       modelname = "Pine2";
     }
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 10; i++) {
       var model = webgl_get_model(modelname, ptile);
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (12 - Math.floor(Math.random() * 25)));
@@ -710,7 +710,7 @@ function update_tile_jungle(ptile)
     } else if (rnd == 1) {
       modelname = "Palm2";
     }
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 6; i++) {
       var model = webgl_get_model(modelname, ptile);
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (12 - Math.floor(Math.random() * 25)));
