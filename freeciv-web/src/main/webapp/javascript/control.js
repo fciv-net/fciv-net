@@ -2623,7 +2623,7 @@ function key_unit_nuke()
 
   message_log.update({
     event: E_BEGINNER_HELP,
-    message: "Nuke ready for detonation. Select the destination tile for nuclean detonation. Ensure that you have declared war with the nation, and that your government allows using nuclear weapons."
+    message: "Nuke ready for detonation. Select the destination tile for nuclear detonation. Ensure that you have declared war with the nation, and that your government allows using nuclear weapons."
   });
 
 }
