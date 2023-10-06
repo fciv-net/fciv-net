@@ -113,6 +113,8 @@ function init_options_dialog()
   $("#surrender_button").button("option", "label", "Surrender Game");
   $("#end_button").button("option", "label", "End Game");
   $("#fullscreen_button").button("option", "label", "Fullscreen");
+  $("#stl_export_button").button("option", "label", "STL Export");
+
 
   $("#metamessage_setting").val(server_settings['metamessage']['val']);
   $('#metamessage_setting').change(function() {

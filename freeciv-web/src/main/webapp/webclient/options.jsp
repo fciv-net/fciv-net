@@ -91,6 +91,14 @@
     <button id="hof_button" type="button" class="button setting_button" onClick="submit_game_of_the_day();">Submit Game of the Day</button>
   </td>
 </tr>
+
+<tr>
+<td>
+  <div class="main_menu_buttons">
+    <button id="stl_export_button" type="button" class="button setting_button" onClick="stl_export();" title="Export map to STL" ></button>
+  </div>
+</td>
+</tr>
 </table>
 
 </div>
