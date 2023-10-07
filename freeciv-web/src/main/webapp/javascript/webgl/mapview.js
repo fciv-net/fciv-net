@@ -80,7 +80,7 @@ function webgl_start_renderer()
   clock = new THREE.Clock();
 
   // Lights
-  var ambientLight = new THREE.AmbientLight( 0x606060, 24 * Math.PI );
+  var ambientLight = new THREE.AmbientLight( 0x606060, 26 * Math.PI );
   scene.add(ambientLight);
 
   spotlight = new THREE.SpotLight( 0xffffff, 2.9 * Math.PI, 0, Math.PI / 3, 0.001, 0.5);
@@ -244,7 +244,7 @@ function init_webgl_mapview() {
 
   if (graphics_quality == QUALITY_HIGH) {
     var shadowMaterial = new THREE.ShadowMaterial();
-    shadowMaterial.opacity = 0.8;
+    shadowMaterial.opacity = 0.85;
     shadowmesh = new THREE.Mesh( landGeometry, shadowMaterial);
     shadowmesh.receiveShadow = true;
     shadowmesh.castShadow = false;

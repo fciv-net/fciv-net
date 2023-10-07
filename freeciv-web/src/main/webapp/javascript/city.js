@@ -2055,8 +2055,8 @@ function city_to_3d_model_name(pcity)
       return "city_roman_capital";
     }
   }
-  if (city_rule['rule_name'] == "Babylonian") {
-    city_style_name = "babylonian";
+  if (city_rule['rule_name'] == "Asian") {
+    city_style_name = "chinese";
   }
 
   return "city_" + city_style_name + "_" + size;

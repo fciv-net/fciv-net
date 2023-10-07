@@ -272,6 +272,7 @@ function update_city_position(ptile) {
     }
     city_positions[ptile['index']] = new_city;
     if (pcity['style'] == 1) height -= 0.82;
+    if (pcity['style'] == 3) height -= 2;
 
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_city.position.set(pos['x'] - 12, height - 2, pos['y'] - 11);
@@ -321,6 +322,7 @@ function update_city_position(ptile) {
       pcity['webgl_model_name'] = model_name;
       city_positions[ptile['index']] = new_city;
       if (pcity['style'] == 1) height -= 0.82;
+      if (pcity['style'] == 3) height -= 2;
 
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_city.position.set(pos['x'] - 12, height - 2, pos['y'] - 10);
@@ -468,7 +470,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       var dir = Math.floor(Math.random() * 8);
       var ntile = mapstep(ptile, dir);
       var nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
-      if (is_ocean_tile(nexttile)) {
+      if (is_ocean_tile(nexttile)
+          || tile_get_known(nexttile) == TILE_UNKNOWN
+          || city_owner_player_id(pcity) != tile_owner(nexttile)
+          || tile_city(nexttile) != null) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
         continue;
       }
@@ -530,7 +535,12 @@ function add_city_building(ptile, pcity, scene, building_name) {
       for (var i = 0; i < 30; i++) {
         var dir = Math.floor(Math.random() * 8);
         var nexttile = mapstep(ptile, dir);
-        if (is_ocean_tile(nexttile) || tile_has_extra(nexttile, EXTRA_RIVER)) {
+
+        if (is_ocean_tile(nexttile)
+            || tile_has_extra(nexttile, EXTRA_RIVER)
+            || tile_get_known(nexttile) == TILE_UNKNOWN
+            || city_owner_player_id(pcity) != tile_owner(nexttile)
+            || tile_city(nexttile) != null) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
           continue;
         }
