@@ -76,9 +76,6 @@ var fcwDebug=<%= fcwDebug %>;
   import { Water } from '/javascript/webgl/libs/Water2.js?ts=${initParam.buildTimeStamp}';
   window.Water = Water;
 
-  import { STLExporter } from '/javascript/webgl/libs/STLExporter.js?ts=${initParam.buildTimeStamp}';
-  window.STLExporter = STLExporter;
-
 </script>
 
 
