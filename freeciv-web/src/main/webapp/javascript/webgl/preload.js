@@ -242,10 +242,13 @@ switch (filename) {
     modelscale = 8;
     break;
   case 'Mech. Inf.':
-    modelscale = 9;
+    modelscale = 5.5;
     break;
   case 'Caravel':
     modelscale = 7;
+    break;
+  case 'Caravan':
+    modelscale = 8;
     break;
   case 'Workers':
     modelscale = 10;
@@ -406,7 +409,7 @@ switch (filename) {
   case 'city_chinese_2':
   case 'city_chinese_3':
   case 'city_chinese_4':
-    modelscale = 2.05;
+    modelscale = 1.95;
     break;
   case 'city_modern_1':
   case 'city_modern_2':
