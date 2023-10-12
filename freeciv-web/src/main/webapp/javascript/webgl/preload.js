@@ -238,6 +238,9 @@ switch (filename) {
   case 'Armor':
     modelscale = 5.8;
     break;
+  case 'Helicopter':
+    modelscale = 8.2;
+    break;
   case 'Howitzer':
     modelscale = 8;
     break;

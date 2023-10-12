@@ -227,7 +227,7 @@ function create_city_label_sprite(pcity)
   texture_cache[key] = texture;
 
   var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
-  sprite.scale.set(width * 0.45 + 10, 10, 1);
+  sprite.scale.set(width * 0.42 + 10, 9.5, 1);
   return sprite;
 }
 
