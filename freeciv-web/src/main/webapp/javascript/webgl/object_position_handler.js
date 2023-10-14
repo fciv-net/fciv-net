@@ -41,7 +41,7 @@ var unit_health_positions = {};
 var unit_healthpercentage_positions = {};
 
 // stores tile extras (eg specials), key is extra + "." + tile_index.
-var tile_extra_positions = {};
+var tile_extra_positions_list = {};
 
 // key is tile is, value is list of three.js tree models.
 var tile_models_list = {};
@@ -401,44 +401,12 @@ function update_tile_extras(ptile) {
   update_tile_forest(ptile);
   update_tile_jungle(ptile);
   update_tile_cactus(ptile);
-  update_tile_wheat(ptile);
 
-  // Render tile specials (extras), as 2D sprites from the 2D version.
   const extra_id = tile_resource(ptile);
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
-  if (extra_resource != null && scene != null && tile_extra_positions[extra_resource['id'] + "." + ptile['index']] == null) {
+  if (extra_resource != null && scene != null && tile_extra_positions_list[extra_resource['id'] + "." + ptile['index']] == null) {
     if (special_resources.includes(extra_resource['rule_name'])) {
       update_tile_extra_update_model(extra_resource['id'], extra_resource['rule_name'], ptile);
-    } else {
-      var key = extra_resource['graphic_str'];
-      var extra_texture = get_extra_texture(key);
-      var terrain_name = tile_terrain(ptile).name;
-
-      if (tile_has_extra(ptile, EXTRA_RIVER)) {
-        height += 5;
-      }
-      if (extra_resource['name'] == "Gold" || extra_resource['name'] == "Iron") {
-        height -= 5;
-        if ((is_ocean_tile_near(ptile) || tile_has_extra(ptile, EXTRA_RIVER)) && tile_terrain(ptile)['name'] == "Mountains") {
-          height -= 18;
-        }
-      }
-      if (tile_terrain(ptile) != null && tile_terrain(ptile)['name'].indexOf("Forest") >= 0) {
-        height += 1;
-      }
-      if (terrain_name == "Forest" || terrain_name == "Jungle") {
-        height += 4.5;
-      }
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      const extra_vertices = [];
-      extra_vertices.push(pos['x'] - 10, height, pos['y'] - 10);
-
-      var extra_geometry = new THREE.BufferGeometry();
-      extra_geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( extra_vertices, 3 ));
-      var extra_material = new THREE.PointsMaterial( { size: 42, sizeAttenuation: true, map: extra_texture,  alphaTest: 0.2, transparent: true, opacity: 1.0 } );
-      var extra_points = new THREE.Points( extra_geometry, extra_material );
-      extra_material.transparent = true;
-      scene.add(extra_points);
     }
   }
 
@@ -593,14 +561,23 @@ function add_city_building(ptile, pcity, scene, building_name) {
 ****************************************************************************/
 function update_tile_extra_update_model(extra_type, extra_name, ptile)
 {
-  if (tile_extra_positions[extra_type + "." + ptile['index']] == null && tile_has_extra(ptile, extra_type)) {
+  if (tile_extra_positions_list[extra_type + "." + ptile['index']] == null && tile_has_extra(ptile, extra_type)) {
+    var num_models = 1;
     var height = 5 + ptile['height'] * 100;
     if (extra_name == "Hut") {
       height -= 5;
     }
     if (extra_name == "Fish") {
       extra_name = extra_name +  Math.floor(1 + Math.random() * 3);
-      height += 0.00;
+      height -= 0.50;
+      num_models = 3;
+    }
+    if (extra_name == "Buffalo") {
+      num_models = 3;
+      height -= 1.9;
+    }
+    if (extra_name == "Fruit") {
+      num_models = 5;
     }
     if (extra_name == "Whales") {
       height += 0.3;
@@ -608,11 +585,23 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     if (extra_name == "Mine") {
       height -= 7;
     }
-    if (extra_name == "Wine" || extra_name == "Iron" || extra_name == "Spice" || extra_name == "Ivory"  || extra_name == "Coal"  || extra_name == "Gold" ) {
+    if (extra_name == "Spice") {
+      num_models = 2;
       height -= 7;
+    }
+    if (extra_name == "Wine" || extra_name == "Iron" || extra_name == "Ivory"  || extra_name == "Coal"  || extra_name == "Gold" ) {
+      height -= 7.5;
     }
     if (extra_name == "Oil") {
       height -= 6;
+    }
+    if (extra_name == "Gems") {
+      num_models = 3;
+      height -= 2;
+    }
+    if (extra_name == "Wheat") {
+      num_models = 15;
+      height -= 0.5;
     }
     if (extra_name == "Ruins") {
       height -= 8;
@@ -624,13 +613,15 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 2;
     }
     if (extra_name == "Resources") {
-      height -= 6;
+      height -= 6.2;
     }
     if (extra_name == "Game") {
       height += 2.2;
+      num_models = 3;
     }
     if (extra_name == "Pheasant") {
       height += 1.5;
+      num_models = 2;
     }
     if (extra_name == "Airbase") {
       height -= 4.9;
@@ -639,22 +630,29 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 3.5;
     }
 
-    var model = webgl_get_model(extra_name, ptile);
-    if (model == null) {
-      return;
-    }
+    for (var i = 0; i < num_models; i++) {
+      var model = webgl_get_model(extra_name, ptile);
+      if (model == null) {
+        return;
+      }
 
-    tile_extra_positions[extra_type + "." + ptile['index']] = model;
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-    model.position.set( pos['x'] - 10, height + 1,  pos['y'] - 10);
-    model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
-    if (extra_name == "Furs" || extra_name == "Silk"  || extra_name == "Resources") {
-      model.rotateOnAxis(new THREE.Vector3(1,0,0).normalize(), -1 * (Math.PI  / 2));
+      tile_extra_positions_list[extra_type + "." + ptile['index']] = [];
+      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      model.position.set( pos['x'] - 10 + (num_models == 1 ? 0 : (12 - Math.floor(Math.random() * 25))),
+                         height + 1,
+                         pos['y'] - 10 + (num_models == 1 ? 0 : (12 - Math.floor(Math.random() * 25))));
+      model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
+      if (extra_name == "Furs" || extra_name == "Silk"  || extra_name == "Resources") {
+        model.rotateOnAxis(new THREE.Vector3(1,0,0).normalize(), -1 * (Math.PI  / 2));
+      }
+      tile_extra_positions_list[extra_type + "." + ptile['index']].push(model);
+      if (scene != null) scene.add(model);
     }
-    if (scene != null) scene.add(model);
-
-  } else if (scene != null && tile_extra_positions[extra_type + "." + ptile['index']] != null && !tile_has_extra(ptile, extra_type)) {
-    scene.remove(tile_extra_positions[extra_type + "." + ptile['index']]);
+  } else if (scene != null && tile_extra_positions_list[extra_type + "." + ptile['index']] != null && !tile_has_extra(ptile, extra_type)) {
+    for (var i = 0; i < tile_extra_positions_list[extra_type + "." + ptile['index']].length; i++) {
+      scene.remove(tile_extra_positions_list[extra_type + "." + ptile['index']][i]);
+    }
+    tile_extra_positions_list[extra_type + "." + ptile['index']] = null;
   }
 }
 
@@ -694,7 +692,7 @@ function update_tile_forest(ptile)
       if (scene != null) scene.add(model);
     }
 
-  } else if (scene != null && tile_models_list[ptile['index']] != null && (extra_resource == null || extra_resource['name'] != "Wheat") && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_models_list[ptile['index']] != null && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_models_list[ptile['index']].length; i++) {
       scene.remove(tile_models_list[ptile['index']][i]);
     }
@@ -733,7 +731,7 @@ function update_tile_jungle(ptile)
       if (scene != null) scene.add(model);
     }
 
-  } else if (scene != null && tile_models_list[ptile['index']] != null && terrain_name != "Jungle" && (extra_resource == null || extra_resource['name'] != "Wheat") && terrain_name != "Forest"  && tile_get_known(ptile) != TILE_UNKNOWN) {
+  } else if (scene != null && tile_models_list[ptile['index']] != null && terrain_name != "Jungle"  && terrain_name != "Forest"  && tile_get_known(ptile) != TILE_UNKNOWN) {
     for (var i = 0; i < tile_models_list[ptile['index']].length; i++) {
       scene.remove(tile_models_list[ptile['index']][i]);
     }
@@ -768,41 +766,6 @@ function update_tile_cactus(ptile)
 }
 
 /****************************************************************************
-  Adds wheat
-****************************************************************************/
-function update_tile_wheat(ptile)
-{
-  var terrain_name = tile_terrain(ptile).name;
-  const extra_id = tile_resource(ptile);
-  var extra_resource = (extra_id === null) ? null : extras[extra_id];
-
-  if (scene != null && extra_resource != null && tile_models_list[ptile['index']] == null && extra_resource['name'] == "Wheat" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
-    tile_models_list[ptile['index']] = [];
-    var modelname = "Wheat";
-    for (var i = 0; i < 10; i++) {
-      var model = webgl_get_model(modelname, ptile);
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      if (pos != null && model != null) {
-        model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (15 - Math.floor(Math.random() * 30)));
-        model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height + 6);
-        model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (15 - Math.floor(Math.random() * 30)));
-        model.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
-        tile_models_list[ptile['index']].push(model);
-        if (scene != null) scene.add(model);
-      }
-    }
-
-  } else if (scene != null && tile_models_list[ptile['index']] != null && (extra_resource == null || extra_resource['name'] != "Wheat") && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    for (var i = 0; i < tile_models_list[ptile['index']].length; i++) {
-      scene.remove(tile_models_list[ptile['index']][i]);
-    }
-    tile_models_list[ptile['index']] = null;
-  }
-
-}
-
-/****************************************************************************
   Clears the selected unit indicator.
 ****************************************************************************/
 function webgl_clear_unit_focus()
@@ -827,7 +790,7 @@ function add_all_objects_to_scene()
   unit_activities_positions = {};
   unit_health_positions = {};
   unit_healthpercentage_positions = {};
-  tile_extra_positions = {};
+  tile_extra_positions_list = {};
   road_positions = {};
   rail_positions = {};
 

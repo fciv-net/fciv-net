@@ -194,7 +194,7 @@ function show_new_game_message()
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
-    message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! You can write questions to the AI assistant (ChatGPT) here. Have fun!";
+    message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! You can ask questions to the AI assistant here. Have fun!";
 
   } else if (game_loaded) {
     message = "Welcome back, " + username;

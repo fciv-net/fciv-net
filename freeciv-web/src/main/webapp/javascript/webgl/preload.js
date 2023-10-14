@@ -288,14 +288,14 @@ switch (filename) {
     modelscale = 38.5;
     break;
   case 'Fish1':
-    modelscale = 2.1;
+    modelscale = 1.8;
     break;
   case 'Fish2':
   case 'Fish3':
-    modelscale = 1.9;
+    modelscale = 1.3;
     break;
   case 'Whales':
-    modelscale = 1.65;
+    modelscale = 1.55;
     break;
   case 'Hut':
     modelscale = 8;
@@ -328,13 +328,13 @@ switch (filename) {
     modelscale = 4;
     break;
   case 'Gems':
-    modelscale = 3;
+    modelscale = 1.5;
     break;
   case 'Coal':
     modelscale = 8;
     break;
   case 'Fruit':
-    modelscale = 6;
+    modelscale = 3;
     break;
   case 'Silk':
     modelscale = 3;
@@ -345,17 +345,26 @@ switch (filename) {
   case 'Fallout':
     modelscale = 6;
     break;
+  case 'Gold':
+    modelscale = 9;
+    break;
+  case 'Spice':
+    modelscale = 9;
+    break;
   case 'Game':
-    modelscale = 3.7;
+    modelscale = 2.8;
     break;
   case 'Ivory':
     modelscale = 6;
     break;
+  case 'Wine':
+    modelscale = 8;
+    break;
   case 'Buffalo':
-    modelscale = 2.4;
+    modelscale = 1.9;
     break;
   case 'Pheasant':
-    modelscale = 1.4;
+    modelscale = 1.2;
     break;
   case 'Wheat':
     modelscale = 2.7;
