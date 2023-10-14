@@ -615,7 +615,7 @@ int map_signed_latitude(const struct tile *ptile);
 #ifdef FREECIV_WEB
 #define MAP_DEFAULT_SIZE         3
 #define MAP_MIN_SIZE             0
-#define MAP_MAX_SIZE             38
+#define MAP_MAX_SIZE             150
 #else  /* FREECIV_WEB */
 #define MAP_DEFAULT_SIZE         4
 #define MAP_MIN_SIZE             0
