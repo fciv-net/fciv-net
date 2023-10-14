@@ -54,6 +54,7 @@ function show_help()
   show_help_intro();
   $("#tabs-hel").css("height", $(window).height() - 60);
   $("#help_info_page").css("max-width", $(window).width() - $("#help_menu").width() - 60);
+  allow_right_click = true;
 }
 
 /**************************************************************************

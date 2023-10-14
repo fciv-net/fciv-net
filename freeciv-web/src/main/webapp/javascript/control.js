@@ -146,7 +146,7 @@ function control_init()
 
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
-  document.onselectstart = function(){ return false; };
+  document.onselectstart = function(){ return allow_right_click; };
 
   /* disable right clicks. */
   window.addEventListener('contextmenu', function (e) {
