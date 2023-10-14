@@ -220,13 +220,10 @@ function init_webgl_mapview() {
   lofiMesh.layers.set(6);
   scene.add(lofiMesh);
 
-  if (is_hex()) {
-    if (graphics_quality == QUALITY_HIGH) {
-      terrain_quality = 10;
-    } else {
-      terrain_quality = 8;
-    }
+  if (map.xsize > 200 || map.ysize > 200) {
+    terrain_quality = 2;
   }
+
   // High-resolution terrain-mesh shown in mapview.
   create_heightmap(terrain_quality);
   var terrain_material = new THREE.ShaderMaterial({
