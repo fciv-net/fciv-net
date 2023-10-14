@@ -27,7 +27,7 @@ var webgl_materials = {};
 var meshes = {};
 
 var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0",  "city_babylonian_0", "city_chinese_0", "Warriors", "citywalls",
-                               "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Fish1", "Fish2", "Fish3", "Whales"];
+                               "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Tree4", "Fish1", "Fish2", "Fish3", "Whales"];
 var tiles_of_unloaded_models_map = {};
 var models_loading_map = {}; // used to keep track of which models are loading, to prevent loading the same models multiple times.
 
@@ -274,7 +274,7 @@ switch (filename) {
   case 'Tree1':
   case 'Tree2':
   case 'Tree3':
-    modelscale = 27.5;
+    modelscale = 28.5;
     break;
   case 'Palm1':
   case 'Palm2':
@@ -286,6 +286,9 @@ switch (filename) {
   case 'Pine1':
   case 'Pine2':
     modelscale = 38.5;
+    break;
+  case 'Tree4':
+    modelscale = 1.2;
     break;
   case 'Fish1':
     modelscale = 1.8;

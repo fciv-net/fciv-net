@@ -87,9 +87,9 @@ function get_forest_offset(ptile)
 {
     if (!is_ocean_tile(ptile) && is_ocean_tile_near(ptile)) {
       if (tile_terrain(ptile)['name'] == "Hills") {
-        return  -10;
+        return  -8;
       } else if (tile_terrain(ptile)['name'] == "Mountains") {
-        return -14;
+        return -12;
       } else {
         return  -7;
       }

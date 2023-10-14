@@ -666,10 +666,10 @@ function update_tile_forest(ptile)
   var extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Forest" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
+    var height = 4.8 + ptile['height'] * 100 + get_forest_offset(ptile);
     tile_models_list[ptile['index']] = [];
     var modelname;
-    var rnd = Math.floor(Math.random() * 5);
+    var rnd = Math.floor(Math.random() * 6);
     if (rnd == 0) {
       modelname = "Tree1";
     } else if (rnd == 1) {
@@ -680,6 +680,9 @@ function update_tile_forest(ptile)
       modelname = "Pine1";
     } else if (rnd == 4) {
       modelname = "Pine2";
+    } else if (rnd == 5) {
+      modelname = "Tree4";
+      height -= 1.2;
     }
     for (var i = 0; i < 10; i++) {
       var model = webgl_get_model(modelname, ptile);
