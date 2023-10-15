@@ -620,7 +620,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       num_models = 3;
     }
     if (extra_name == "Pheasant") {
-      height += 1.5;
+      height += 0.5;
       num_models = 2;
     }
     if (extra_name == "Airbase") {

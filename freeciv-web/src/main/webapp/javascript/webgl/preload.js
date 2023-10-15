@@ -274,7 +274,7 @@ switch (filename) {
   case 'Tree1':
   case 'Tree2':
   case 'Tree3':
-    modelscale = 28.5;
+    modelscale = 29.5;
     break;
   case 'Palm1':
   case 'Palm2':
@@ -288,7 +288,7 @@ switch (filename) {
     modelscale = 38.5;
     break;
   case 'Tree4':
-    modelscale = 1.2;
+    modelscale = 1.3;
     break;
   case 'Fish1':
     modelscale = 1.8;
@@ -367,7 +367,7 @@ switch (filename) {
     modelscale = 1.9;
     break;
   case 'Pheasant':
-    modelscale = 1.2;
+    modelscale = 1.0;
     break;
   case 'Wheat':
     modelscale = 2.7;
