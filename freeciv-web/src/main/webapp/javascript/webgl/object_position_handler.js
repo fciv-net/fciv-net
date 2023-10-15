@@ -52,7 +52,7 @@ var selected_unit_material_counter = 0;
 
 var sun_mesh = null;
 
-var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo", "Pheasant", "Wheat"];
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo", "Pheasant", "Wheat", "Peat"];
 
 /****************************************************************************
   Handles unit positions
@@ -628,6 +628,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (extra_name == "Fortress") {
       height -= 3.5;
+    }
+    if (extra_name == "Peat") {
+      height -= 6.0;
     }
 
     for (var i = 0; i < num_models; i++) {

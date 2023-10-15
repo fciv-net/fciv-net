@@ -309,6 +309,9 @@ switch (filename) {
   case 'Zeppelin':
     modelscale = 7;
     break;
+  case 'Peat':
+    modelscale = 5.5;
+    break;
   case 'Pyramids':
     modelscale = 5.0;
     break;
