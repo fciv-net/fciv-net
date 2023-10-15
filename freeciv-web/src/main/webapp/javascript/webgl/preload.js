@@ -147,10 +147,7 @@ function webgl_preload()
       nuke_glow.needsUpdate = true;
   } );
 
-  var hours = new Date().getHours();
-  var is_day = hours > 6 && hours < 20;
-
-  imgurl = (is_day || is_small_screen()) ? '/textures/sky.jpg' : '/textures/sky_night.png';
+  imgurl = '/textures/sky.jpg';
   textureLoader.load(imgurl, (function (url) {
           return function (image) {
                 webgl_textures["skybox"] = new THREE.Texture();

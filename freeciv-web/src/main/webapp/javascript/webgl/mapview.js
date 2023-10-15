@@ -123,9 +123,18 @@ function webgl_start_renderer()
     anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
   }
 
-  const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
-  sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
-  scene.background = sky.texture;
+  var hours = new Date().getHours();
+  var is_day = hours > 6 && hours < 20;
+
+  if (is_day) {
+    const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
+    sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
+    scene.background = sky.texture;
+  } else {
+    const sky = new THREE.WebGLCubeRenderTarget(2000);
+    sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5000, 2000));
+    scene.background = sky.texture;
+  }
 
   animate();
 

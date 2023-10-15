@@ -418,3 +418,30 @@ function create_tile_label_sprite(label_text)
   sprite.scale.set(Math.floor(txt_measure.width) + 5, 11, 1);
   return sprite;
 }
+
+/****************************************************************************
+ Create stars texture.
+****************************************************************************/
+function create_star_sky_texture(num_stars, width, height) {
+    var canvas = document.createElement('canvas');
+	canvas.width = width;
+	canvas.height = height;
+	var ctx = canvas.getContext('2d');
+	ctx.fillStyle="black";
+	ctx.fillRect(0, 0, width, height);
+	for (var i = 0; i < num_stars; ++i) {
+		var radius = Math.random() * 1.3;
+		var x = Math.floor(Math.random() * width);
+		var y = Math.floor(Math.random() * height);
+		if (y > height * 0.6) continue;
+
+		ctx.beginPath();
+		ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+		ctx.fillStyle = 'rgb(' + (255 - (Math.random() * 80) + (Math.random() * 20)) +  ','  + (255 - (Math.random() * 80) + (Math.random() * 20))  + ' , ' + (220 - (Math.random() * 80)) + ')';
+		ctx.fill();
+	}
+
+	var texture = new THREE.Texture(canvas);
+	texture.needsUpdate = true;
+	return texture;
+};
