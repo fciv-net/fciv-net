@@ -430,7 +430,7 @@ function create_star_sky_texture(num_stars, width, height) {
 	ctx.fillStyle="black";
 	ctx.fillRect(0, 0, width, height);
 	for (var i = 0; i < num_stars; ++i) {
-		var radius = Math.random() * 1.3;
+		var radius = Math.random() * 0.80;
 		var x = Math.floor(Math.random() * width);
 		var y = Math.floor(Math.random() * height);
 		if (y > height * 0.6) continue;
