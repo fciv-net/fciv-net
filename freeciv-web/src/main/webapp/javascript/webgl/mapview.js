@@ -132,7 +132,7 @@ function webgl_start_renderer()
     scene.background = sky.texture;
   } else {
     const sky = new THREE.WebGLCubeRenderTarget(2000);
-    sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5000, 2000));
+    sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5500, 2500));
     scene.background = sky.texture;
   }
 
