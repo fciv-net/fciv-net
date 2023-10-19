@@ -600,7 +600,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 2;
     }
     if (extra_name == "Wheat") {
-      num_models = 15;
+      num_models = 10;
       height -= 0.5;
     }
     if (extra_name == "Ruins") {
@@ -687,7 +687,7 @@ function update_tile_forest(ptile)
       modelname = "Tree4";
       height -= 1.2;
     }
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 7; i++) {
       var model = webgl_get_model(modelname, ptile);
       var pos = map_to_scene_coords(ptile['x'], ptile['y']);
       model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (12 - Math.floor(Math.random() * 25)));
