@@ -76,6 +76,9 @@ var fcwDebug=<%= fcwDebug %>;
   import { Water } from '/javascript/webgl/libs/Water2.js?ts=${initParam.buildTimeStamp}';
   window.Water = Water;
 
+  import { DRACOLoader } from '/javascript/webgl/libs/DRACOLoader.js?ts=${initParam.buildTimeStamp}';
+  window.DRACOLoader = DRACOLoader;
+
 </script>
 
 

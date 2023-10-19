@@ -31,6 +31,8 @@ var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_euro
 var tiles_of_unloaded_models_map = {};
 var models_loading_map = {}; // used to keep track of which models are loading, to prevent loading the same models multiple times.
 
+var loader;
+
 /****************************************************************************
   Preload textures and models
 ****************************************************************************/
@@ -38,6 +40,12 @@ function webgl_preload()
 {
   $.blockUI({ message: "<h2>Downloading 3D models <span id='download_progress'></span></h2>" });
   start_preload = new Date().getTime();
+
+  loader = new GLTFLoader();
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath( '/javascript/webgl/libs/' );
+  dracoLoader.setDecoderConfig( { type: 'js' } );
+  loader.setDRACOLoader(dracoLoader);
 
   var loadingManager = new THREE.LoadingManager();
   loadingManager.onLoad = function () {
@@ -196,8 +204,8 @@ function webgl_preload_models()
 ****************************************************************************/
 function load_model(filename)
 {
+
   var url = "/gltf/" + filename + ".glb";
-  const loader = new GLTFLoader();
 
   loader.load( url, function(data) {
     var model = data.scene;
