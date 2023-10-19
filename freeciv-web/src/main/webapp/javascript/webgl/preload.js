@@ -250,7 +250,7 @@ switch (filename) {
     modelscale = 8.0;
     break;
   case 'Diplomat':
-    modelscale = 8.2;
+    modelscale = 10.2;
     break;
   case 'Howitzer':
     modelscale = 8;
