@@ -246,6 +246,12 @@ switch (filename) {
   case 'Helicopter':
     modelscale = 8.2;
     break;
+  case 'Alpine Troops':
+    modelscale = 8.0;
+    break;
+  case 'Diplomat':
+    modelscale = 8.2;
+    break;
   case 'Howitzer':
     modelscale = 8;
     break;
