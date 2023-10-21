@@ -260,9 +260,6 @@ function submit_game_of_the_day() {
 ...
 **************************************************************************/
 function submit_game_of_the_day2() {
- update_game_status_panel(true);
- set_default_mapview_active();
- show_fps();
  html2canvas(document.querySelector("#mapview_canvas_div")).then(function(canvas) {
     var screenshot = canvas.toDataURL("image/png");
     $.post( "/save_game_of_the_day", screenshot);
