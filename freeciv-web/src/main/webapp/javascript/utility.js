@@ -252,7 +252,7 @@ function submit_game_of_the_day() {
  update_game_status_panel(true);
  set_default_mapview_active();
  show_fps();
- setTimeout(submit_game_of_the_day2, 200);
+ setTimeout(submit_game_of_the_day2, 1000);
 
 }
 
