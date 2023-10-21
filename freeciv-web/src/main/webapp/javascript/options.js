@@ -191,7 +191,7 @@ function show_fps()
 
     stats = new Stats();
     stats.showPanel( 0);
-    document.body.appendChild( stats.dom );
+    document.querySelector("#mapview_canvas_div").appendChild( stats.dom );
     set_default_mapview_active();
     statsview = stats.dom;
     $("#fps_button").text("Hide fps");
