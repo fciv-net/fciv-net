@@ -32,6 +32,7 @@ public class SaveGameOfTheDay extends HttpServlet {
             image = image.replace("data:image/png;base64,", "");
             byte[] image_of_the_day = Base64.getDecoder().decode(image.getBytes("UTF-8"));
             if (image_of_the_day.length > 15000000) {
+                System.out.println("Image too big.");
                 return;
             }
             ByteArrayInputStream bais = new ByteArrayInputStream(image_of_the_day);
@@ -43,6 +44,7 @@ public class SaveGameOfTheDay extends HttpServlet {
             bais.close();
 
         } catch (Exception ex) {
+            System.err.println(ex.getMessage());
         }
 
 
