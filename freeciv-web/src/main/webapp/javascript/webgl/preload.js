@@ -252,6 +252,12 @@ switch (filename) {
   case 'Diplomat':
     modelscale = 10.2;
     break;
+  case 'Cannon':
+    modelscale = 3.0;
+    break;
+  case 'Catapult':
+    modelscale = 8.2;
+    break;
   case 'Howitzer':
     modelscale = 8;
     break;
