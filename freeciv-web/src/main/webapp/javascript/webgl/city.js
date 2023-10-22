@@ -175,7 +175,7 @@ function get_citywalls_scale(pcity)
 ...
 ****************************************************************************/
 function get_citywalls_models(pcity) {
-  if (pcity['style'] == 0) {
+  if (pcity['style'] == 0 || pcity['style'] == 5) {
     return "citywalls_stone";
   } else {
     return "citywalls_roman";
