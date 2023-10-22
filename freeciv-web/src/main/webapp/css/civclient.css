@@ -1000,12 +1000,13 @@ li.tech-both::before {
 
 .diplomacy_messages {
   background: url("/images/bg-dark.jpg") repeat scroll 0 0 ;
-  min-height: 120px;
+  min-height: 20px;
   max-height: 200px;
   overflow: auto;
   border: 1px solid #555555;
   width: 100%;
   font-size: 130%;
+  margin: 3px;
 }
 
 .diplomacy_messages a {

@@ -13,7 +13,7 @@
         e.printStackTrace();
     }
 %>
-<title>Fciv.net 3D</title>
+<title>Freeciv3D - Fciv.net 3D</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="The FCIV.NET project">
