@@ -194,21 +194,21 @@ function get_ai_level_text(player)
 {
   var ai_level = player['ai_skill_level'];
   if (ai_level == 0) {
-    return "Away";
+    return "Restricted";
   } else if (ai_level == 1) {
-    return "Handicapped";
-  } else if (ai_level == 2) {
     return "Novice";
-  } else if (ai_level == 3) {
+  } else if (ai_level == 2) {
     return "Easy";
-  } else if (ai_level == 4) {
+  } else if (ai_level == 3) {
     return "Normal";
-  } else if (ai_level == 5) {
+  } else if (ai_level == 4) {
     return "Hard";
-  } else if (ai_level == 6) {
+  } else if (ai_level == 5) {
     return "Cheating";
-  } else if (ai_level == 7) {
+  } else if (ai_level == 6) {
     return "Experimental";
+  } else if (ai_level == 7) {
+       return "Away";
   }
 
   return "Unknown";

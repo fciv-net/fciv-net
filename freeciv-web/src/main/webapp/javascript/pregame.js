@@ -172,6 +172,7 @@ function update_player_info_pregame()
             "easy": {name: "Easy"},
             "normal": {name: "Normal"},
             "hard": {name: "Hard"},
+            "cheating": {name: "Cheating"},
             "sep2": "---------"
        };
 
@@ -197,6 +198,8 @@ function update_player_info_pregame()
               send_message("/normal " + name);
             } else if (key == "hard") {
               send_message("/hard " + name);
+            } else if (key == "cheating") {
+              send_message("/cheating " + name);
             }
         },
         items: pregame_context_items
@@ -458,7 +461,7 @@ function pregame_settings()
 	  "<td><input type='number' name='ysize' id='ysize' size='5' length='3' min='1' max='256' step='1'></td></tr>" +
 	  "<tr class='not_pbem' title='This setting sets the skill-level of the AI players'><td>AI skill level:</td>" +
 	  "<td><select name='skill_level' id='skill_level'>" +
-	      "<option value='1'>Handicapped</option>" +
+	      "<option value='1'>Restricted</option>" +
 	      "<option value='2'>Novice</option>" +
 	      "<option value='3'>Easy</option>" +
           "<option value='4'>Normal</option>" +
@@ -757,7 +760,7 @@ function pregame_settings()
   $('#skill_level').change(function() {
     ai_skill_level = parseFloat($('#skill_level').val());
     if (ai_skill_level == 1) {
-      send_message("/handicapped");
+      send_message("/restricted");
     } else if (ai_skill_level == 2) {
       send_message("/novice");
     } else if (ai_skill_level == 3) {
