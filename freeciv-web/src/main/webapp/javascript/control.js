@@ -260,6 +260,23 @@ function control_init()
   /* prevents keyboard input from changing tabs. */
   $('#tabs>ul>li').off('keydown');
   $('#tabs>div').off('keydown');
+
+  /****************************************************************************
+   This progressive enhancement changes full screen mode to require a long
+   press of the [Esc] key to exit, so that the player doesn't accidentally leave
+   full screen mode when they press [Esc], but can instead cancel in-game
+   dialogs by pressing [Esc].
+  ****************************************************************************/
+  const supportsKeyboardLock = ('keyboard' in navigator) && ('lock' in navigator.keyboard);
+  if (supportsKeyboardLock) {
+    document.addEventListener('fullscreenchange', async () => {
+      if (document.fullscreenElement) {
+        await navigator.keyboard.lock(['Escape']);
+        return;
+      }
+      navigator.keyboard.unlock();
+    });
+  }
 }
 
 /****************************************************************************
