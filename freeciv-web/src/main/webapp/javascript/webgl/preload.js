@@ -26,7 +26,7 @@ var webgl_materials = {};
 
 var meshes = {};
 
-var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0",  "city_babylonian_0", "city_chinese_0", "Warriors", "citywalls",
+var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0",  "city_babylonian_0", "city_chinese_0", "Warriors", "citywalls_stone", "citywalls_roman",
                                "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Tree4", "Fish1", "Fish2", "Fish3", "Whales"];
 var tiles_of_unloaded_models_map = {};
 var models_loading_map = {}; // used to keep track of which models are loading, to prevent loading the same models multiple times.
@@ -255,6 +255,9 @@ switch (filename) {
   case 'Cannon':
     modelscale = 3.0;
     break;
+  case 'Artillery':
+    modelscale = 3.4;
+    break;
   case 'Catapult':
     modelscale = 8.2;
     break;
@@ -435,9 +438,11 @@ switch (filename) {
   case 'city_babylonian_0':
   case 'city_babylonian_1':
   case 'city_babylonian_2':
+    modelscale = 2.05;
+    break;
   case 'city_babylonian_3':
   case 'city_babylonian_4':
-    modelscale = 2.05;
+    modelscale = 1.96;
     break;
   case 'city_chinese_0':
   case 'city_chinese_1':
@@ -461,6 +466,12 @@ switch (filename) {
     modelscale = 2.4;
     break;
   case 'Temple':
+    modelscale = 2.0;
+    break;
+  case 'Factory':
+    modelscale = 2.2;
+    break;
+  case 'Marketplace':
     modelscale = 2.0;
     break;
   case 'University':

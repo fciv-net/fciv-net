@@ -147,3 +147,37 @@ function hide_city_labels() {
 
 
 }
+
+/**************************************************************************
+ Returns the city walls scale of for the given city.
+**************************************************************************/
+function get_citywalls_scale(pcity)
+{
+  var style = get_citywalls_models(pcity);
+  var scale = 8;
+  if (pcity['size'] >=3 && pcity['size'] <=6) {
+    scale = 9.0;
+  } else if (pcity['size'] > 6 && pcity['size'] <= 9) {
+    scale = 9.5;
+  } else if (pcity['size'] > 9 && pcity['size'] <= 11) {
+    scale = 10.0;
+  } else if (pcity['size'] > 11) {
+    scale = 10.5;
+  }
+  if (style == "citywalls_stone") {
+    return scale;
+  } else if (style == "citywalls_roman") {
+    return scale * 0.20;
+  }
+}
+
+/****************************************************************************
+...
+****************************************************************************/
+function get_citywalls_models(pcity) {
+  if (pcity['style'] == 0) {
+    return "citywalls_stone";
+  } else {
+    return "citywalls_roman";
+  }
+}

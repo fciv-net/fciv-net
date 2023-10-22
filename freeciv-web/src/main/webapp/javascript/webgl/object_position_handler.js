@@ -284,7 +284,7 @@ function update_city_position(ptile) {
     }
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
-      var city_walls = webgl_get_model("citywalls", ptile);
+      var city_walls = webgl_get_model(get_citywalls_models(pcity), ptile);
       if (city_walls != null) {
         city_walls.position.set(pos['x'] - 10, height - 7, pos['y'] - 10);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
@@ -343,7 +343,7 @@ function update_city_position(ptile) {
     var pos = map_to_scene_coords(ptile['x'], ptile['y']);
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
-      var city_walls = webgl_get_model("citywalls", ptile);
+      var city_walls = webgl_get_model(get_citywalls_models(pcity), ptile);
       if (city_walls != null) {
         city_walls.position.set(pos['x'] - 10, height - 7, pos['y'] - 10);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
@@ -417,7 +417,7 @@ function update_tile_extras(ptile) {
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
   const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower"];
-  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse", "University"];
+  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse", "University", "Factory", "Marketplace"];
 
   wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
   cityBuildings.forEach(building => add_city_building(ptile, pcity, scene, building));
@@ -530,6 +530,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
 
       if (building_name == "Temple") {
         height -= 0.6;
+      }
+      if (building_name == "Factory" || building_name == "Marketplace") {
+        height -= 1.2;
       }
       if (building_name == "University") {
         height -= 0.8;
