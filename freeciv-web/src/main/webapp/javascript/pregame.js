@@ -947,7 +947,7 @@ function show_intro_dialog(title, message) {
 			  {
 				  text : join_game_customize_text,
 				  click : function() {
-                    if (is_touch_device() || is_small_screen()) {
+                    if (is_touch_device()) {
                       BigScreen.toggle();
                     }
 					dialog_close_trigger = "button";
