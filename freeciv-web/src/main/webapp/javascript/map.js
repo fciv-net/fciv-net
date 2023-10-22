@@ -349,12 +349,7 @@ function mapstep(ptile, dir)
     return null;
   }
 
-  if (is_hex()) {
-    var odd_offset  = (DIR_HEX_DY[dir] == -1 || DIR_HEX_DY[dir] == 1) ? ((ptile['y'] + 1) % 2) : 0;
-    return map_pos_to_tile(DIR_HEX_DX[dir] + ptile['x'] - odd_offset, DIR_HEX_DY[dir] + ptile['y']);
-  } else {
-    return map_pos_to_tile(DIR_DX[dir] + ptile['x'], DIR_DY[dir] + ptile['y']);
-  }
+  return map_pos_to_tile(DIR_DX[dir] + ptile['x'], DIR_DY[dir] + ptile['y']);
 
 }
 
@@ -499,7 +494,7 @@ function map_tile_height_adjust(ptile)
     }
 
     if (tile_has_extra(ptile, EXTRA_RIVER)) {
-      ptile['height'] = is_hex() ? 0.499 : 0.488;
+      ptile['height'] = 0.488;
     } else if (tile_terrain(ptile)['name'] == "Hills") {
       ptile['height'] =  ptile['height'] * 1.11;
     } else if (tile_terrain(ptile)['name'] == "Mountains") {

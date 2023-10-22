@@ -31,7 +31,7 @@ const TILE_INDEX_NONE = -1;
 ****************************************************************************/
 function tile_get_known(ptile)
 {
-  if (ptile['known'] == null || ptile['known'] == TILE_UNKNOWN) {
+  if (ptile == null || ptile['known'] == null || ptile['known'] == TILE_UNKNOWN) {
     return TILE_UNKNOWN;
   } else if (ptile['known'] == TILE_KNOWN_UNSEEN) {
     return TILE_KNOWN_UNSEEN;

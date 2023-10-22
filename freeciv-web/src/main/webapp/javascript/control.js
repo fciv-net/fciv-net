@@ -267,7 +267,7 @@ function control_init()
    full screen mode when they press [Esc], but can instead cancel in-game
    dialogs by pressing [Esc].
   ****************************************************************************/
-  const supportsKeyboardLock = ('keyboard' in navigator) && ('lock' in navigator.keyboard);
+  const supportsKeyboardLock = ('keyboard' in navigator) && ('keyboard' in navigator) && ('lock' in navigator.keyboard);
   if (supportsKeyboardLock) {
     document.addEventListener('fullscreenchange', async () => {
       if (document.fullscreenElement) {
