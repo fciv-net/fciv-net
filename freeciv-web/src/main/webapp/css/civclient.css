@@ -1007,6 +1007,8 @@ li.tech-both::before {
   width: 100%;
   font-size: 130%;
   margin: 3px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .diplomacy_messages a {

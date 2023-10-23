@@ -167,7 +167,7 @@ function get_citywalls_scale(pcity)
   if (style == "citywalls_stone") {
     return scale;
   } else if (style == "citywalls_roman") {
-    return scale * 0.20;
+    return scale * 0.16;
   }
 }
 
