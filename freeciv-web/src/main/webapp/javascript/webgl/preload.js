@@ -336,7 +336,7 @@ switch (filename) {
     modelscale = 5.5;
     break;
   case 'Pyramids':
-    modelscale = 5.0;
+    modelscale = 4.5;
     break;
   case 'StatueOfLiberty':
     modelscale = 5.4;
