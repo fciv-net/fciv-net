@@ -217,7 +217,7 @@ function uncapitalize(s) {
 function cleaned_text(str)
 {
   // Remove each type of ugly spurious character or escape code.
-  for (i=0; i<STRIPCHAR_LAST; i++) {
+  for (var i = 0; i < STRIPCHAR_LAST; i++) {
     str = str.replace(stripChar[i],"");
   }
   return str;

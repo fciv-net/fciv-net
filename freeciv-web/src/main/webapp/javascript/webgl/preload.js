@@ -288,9 +288,6 @@ switch (filename) {
   case 'Legion':
     modelscale = 7;
     break;
-  case 'Mech. Inf.':
-    modelscale = 9;
-    break;
   case 'Tree1':
   case 'Tree2':
   case 'Tree3':
@@ -506,7 +503,7 @@ switch (filename) {
     if (load_count == total_model_count) webgl_preload_complete();
 
     /* Update view of tiles where model now has been downloaded. */
-    for (ptile_index in tiles_of_unloaded_models_map) {
+    for (var ptile_index in tiles_of_unloaded_models_map) {
       var ptile = tiles[ptile_index];
       if (ptile == null) continue;
       var model_filename = tiles_of_unloaded_models_map[ptile_index];

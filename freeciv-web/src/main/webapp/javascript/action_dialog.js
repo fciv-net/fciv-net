@@ -280,8 +280,7 @@ function popup_action_selection(actor_unit, action_probabilities,
   $(id).html(dhtml);
 
   /* Store actor and target information in the dialog */
-  $(id).attr("actor_unit", actor_unit != null ? actor_unit['id']
-                                              : IDENTITY_NUMBER_ZERO);
+  $(id).attr("actor_unit", actor_unit['id']);
   $(id).attr("target_city", target_city != null ? target_city['id']
                                                 : IDENTITY_NUMBER_ZERO);
   $(id).attr("target_unit", target_unit != null ? target_unit['id']

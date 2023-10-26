@@ -455,9 +455,9 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
         continue;
       }
-      if (nexttile != null) {
-        break;
-      }
+
+      break;
+
     }
     if (nexttile == null) return;
 

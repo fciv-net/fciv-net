@@ -306,7 +306,7 @@ function update_city_label(pcity)
   ctx.strokeRect(0, 0, width, canvas.height - 3);
 
   var key = 'city_' + pcity['id'];
-  if (pcity != null && key in texture_cache) {
+  if (key in texture_cache) {
     var texture = texture_cache[key];
     if (texture != null) {
       texture.needsUpdate = true;
