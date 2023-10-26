@@ -17,6 +17,7 @@
  *******************************************************************************/
 package org.freeciv.servlet;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,10 +75,10 @@ public class NewPBEMUser extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
-		String password = java.net.URLDecoder.decode(request.getParameter("password"), "UTF-8");
-		String email = java.net.URLDecoder.decode(request.getParameter("email").replace("+", "%2B"), "UTF-8");
-		String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), "UTF-8");
+		String username = java.net.URLDecoder.decode(request.getParameter("username"), StandardCharsets.UTF_8);
+		String password = java.net.URLDecoder.decode(request.getParameter("password"), StandardCharsets.UTF_8);
+		String email = java.net.URLDecoder.decode(request.getParameter("email").replace("+", "%2B"), StandardCharsets.UTF_8);
+		String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), StandardCharsets.UTF_8);
 
 		String ipAddress = request.getHeader("X-Real-IP");
 		if (ipAddress == null) {
@@ -138,9 +139,24 @@ public class NewPBEMUser extends HttpServlet {
 			preparedStatement.setString(5, ipAddress);
 			preparedStatement.executeUpdate();
 
+
+			String userIdQuery =
+					"SELECT id "
+							+ "FROM auth "
+							+ "WHERE LOWER(username) = LOWER(?) "
+							+ "	AND activated = '1' LIMIT 1";
+			PreparedStatement ps1 = conn.prepareStatement(userIdQuery);
+			ps1.setString(1, username);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next()) {
+				response.getOutputStream().print("Failed");
+			} else {
+				response.getOutputStream().print("OK," + rs1.getString(1));
+			}
+
 		} catch (Exception err) {
 			response.setHeader("result", "error");
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to create user: " + err);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to create user.");
 		} finally {
 			if (conn != null)
 				try {

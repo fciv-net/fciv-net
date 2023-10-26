@@ -29,10 +29,7 @@ public class Validation {
 			return false;
 		}
 		name = name.toLowerCase();
-		if (!usernamePattern.matcher(name).matches()) {
-			return false;
-		}
-        return true;
+        return usernamePattern.matcher(name).matches();
     }
 
 }

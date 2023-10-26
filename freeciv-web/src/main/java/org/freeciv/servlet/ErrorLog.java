@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class ErrorLog extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        String stacktrace = java.net.URLDecoder.decode(request.getParameter("stacktrace"), "UTF-8");
+        String stacktrace = java.net.URLDecoder.decode(request.getParameter("stacktrace"), StandardCharsets.UTF_8);
 
         Connection conn = null;
         try {

@@ -55,7 +55,7 @@ public class ErrorList extends HttpServlet {
                     response.getOutputStream().print("<tr>");
 
                     int id = rs.getInt("id");
-                    String stacktrace = new String(Base64.getDecoder().decode(rs.getString("stacktrace").getBytes("UTF-8")), StandardCharsets.UTF_8);
+                    String stacktrace = new String(Base64.getDecoder().decode(rs.getString("stacktrace").getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
                     String timestamp = rs.getString("timestamp");
 
                     response.getOutputStream().print("<td style='padding:3px;'>" + id + "</td><td style='padding:3px;'>" + stacktrace + "</td><td style='padding:3px;'>" + timestamp + "</td>");
@@ -75,8 +75,7 @@ public class ErrorList extends HttpServlet {
             response.getOutputStream().print("</body></html>");
 
         } catch (Exception err) {
-            System.err.println(err);
-            err.printStackTrace();
+
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getOutputStream().print(INTERNAL_SERVER_ERROR);
         } finally {
@@ -84,7 +83,6 @@ public class ErrorList extends HttpServlet {
                 try {
                     conn.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
                 }
             }
         }

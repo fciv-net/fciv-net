@@ -44,7 +44,7 @@ public class Statistics {
 				record.put("playerTwo", rs.getString("playerTwo"));
 				record.put("endDate", rs.getDate("endDate") + "");
 				record.put("winsByPlayerOne", rs.getInt("winsByPlayerOne") + "");
-				record.put("winsByPlayerTwo", rs.getString("winsByPlayerTwo") + "");
+				record.put("winsByPlayerTwo", rs.getString("winsByPlayerTwo"));
 				result.add(record);
 
 			}

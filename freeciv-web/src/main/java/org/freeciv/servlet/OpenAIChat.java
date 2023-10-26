@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class OpenAIChat  extends HttpServlet {
 
-    private String model = "gpt-4";
+    private final String model = "gpt-4";
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

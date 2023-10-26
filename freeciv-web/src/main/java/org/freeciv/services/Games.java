@@ -229,8 +229,8 @@ public class Games {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			connection = ds.getConnection();
 
-			String query = "" //
-					+ "  ( " //
+			//
+			String query = "  ( " //
 					+ "    SELECT host, port, type, version, patches, state, message, " //
 					+ "    UNIX_TIMESTAMP() - UNIX_TIMESTAMP(stamp) AS duration, " //
 					+ "    (SELECT value " //

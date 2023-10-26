@@ -23,6 +23,7 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 import javax.sql.*;
@@ -47,7 +48,7 @@ public class DeactivateUser extends HttpServlet {
 			throws IOException, ServletException {
 
 		String username = request.getParameter("username");
-		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
+		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), StandardCharsets.UTF_8);
 
 		if (!validation.isValidUsername(username)) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
@@ -72,8 +73,7 @@ public class DeactivateUser extends HttpServlet {
 			ResultSet rs1 = ps1.executeQuery();
 			if (!rs1.next()) {
 				response.getOutputStream().print("Failed");
-				return;
-			} else {
+            } else {
 				String hashedPasswordFromDB = rs1.getString(1);
 				if (hashedPasswordFromDB.equals(Crypt.crypt(secure_password, hashedPasswordFromDB))) {
 
@@ -86,14 +86,12 @@ public class DeactivateUser extends HttpServlet {
 					} else {
 						response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 								"Invalid username or password.");
-						return;
-					}
+                    }
 
 				} else {
 					response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 							"Invalid username or password.");
-					return;
-				}
+                }
 			}
 
 		} catch (Exception err) {

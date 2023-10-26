@@ -18,13 +18,21 @@
 package org.freeciv.servlet;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Properties;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.freeciv.services.Validation;
+import org.freeciv.util.Constants;
 
 
 /**
@@ -61,9 +69,18 @@ public class ListSaveGames extends HttpServlet {
 					"Invalid username");
 			return;
 		}
+		String userid = request.getParameter("userid");
 
-		try {
-			File folder = new File(savegameDirectory + "/" + username);
+        try {
+			String usernameFromDB = getUsernameFromDB(username, userid);
+			if (usernameFromDB == null ) {
+				throw new Exception("Invalid");
+			}
+			File folder = new File(savegameDirectory + "/" + usernameFromDB);
+
+			if (!folder.exists()) {
+				folder = new File(savegameDirectory + "/" + StringUtils.capitalize(usernameFromDB));
+			}
 
 			if (!folder.exists()) {
 				response.getOutputStream().print(";");
@@ -95,7 +112,6 @@ public class ListSaveGames extends HttpServlet {
 
 		} catch (Exception err) {
 			response.setHeader("result", "error");
-			err.printStackTrace();
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ERROR");
 		}
 
@@ -106,6 +122,42 @@ public class ListSaveGames extends HttpServlet {
 
 		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
 
+	}
+
+
+	private String getUsernameFromDB(String username, String userid) {
+		Connection conn = null;
+		try {
+			String usernameFromDB;
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
+			conn = ds.getConnection();
+
+			String usercheck =
+					"SELECT username "
+							+ "FROM auth "
+							+ "WHERE LOWER(username) = LOWER(?) "
+							+ "	AND activated = '1'"
+							+ "	AND id = ? LIMIT 1";
+			PreparedStatement ps1 = conn.prepareStatement(usercheck);
+			ps1.setString(1, username);
+			ps1.setString(2, userid);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next()) {
+				return null;
+			} else {
+				usernameFromDB = rs1.getString(1);
+				if (!validation.isValidUsername(usernameFromDB)) {
+					return null;
+				}
+				if (!usernameFromDB.equalsIgnoreCase(username)) {
+					throw new Exception("Invalid username.");
+				}
+				return usernameFromDB;
+			}
+		} catch (Exception err) {
+			return null;
+		}
 	}
 
 }

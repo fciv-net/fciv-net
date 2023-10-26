@@ -60,8 +60,8 @@ public class RecentServerStatistics extends HttpServlet {
 			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
 			conn = ds.getConnection();
 
-			String query = "" //
-					+ "	SELECT COUNT(*) AS count " //
+			//
+			String query = "	SELECT COUNT(*) AS count " //
 					+ "	  FROM servers " //
 					+ "UNION ALL " //
 					+ "	SELECT COUNT(*) AS count " //

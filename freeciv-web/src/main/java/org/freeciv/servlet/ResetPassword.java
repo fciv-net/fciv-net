@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,7 +82,7 @@ public class ResetPassword extends HttpServlet {
             throws IOException, ServletException {
 
         String email_parameter = request.getParameter("email");
-        String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), "UTF-8");
+        String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), StandardCharsets.UTF_8);
         String username = "";
 
         if (email_parameter == null || email_parameter.length() <= 4 || email_parameter.length() > 90) {

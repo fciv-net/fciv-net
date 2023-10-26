@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,11 +41,11 @@ public class HallOfFamePost extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-        String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
-        String nation = java.net.URLDecoder.decode(request.getParameter("nation"), "UTF-8");
-        String score = java.net.URLDecoder.decode(request.getParameter("score"), "UTF-8");
-        String turn = java.net.URLDecoder.decode(request.getParameter("turn"), "UTF-8");
-        String port = java.net.URLDecoder.decode(request.getParameter("port"), "UTF-8");
+        String username = java.net.URLDecoder.decode(request.getParameter("username"), StandardCharsets.UTF_8);
+        String nation = java.net.URLDecoder.decode(request.getParameter("nation"), StandardCharsets.UTF_8);
+        String score = java.net.URLDecoder.decode(request.getParameter("score"), StandardCharsets.UTF_8);
+        String turn = java.net.URLDecoder.decode(request.getParameter("turn"), StandardCharsets.UTF_8);
+        String port = java.net.URLDecoder.decode(request.getParameter("port"), StandardCharsets.UTF_8);
         String ipAddress = request.getHeader("X-Real-IP");
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();

@@ -20,11 +20,13 @@ package org.freeciv.servlet;
 import org.apache.commons.codec.digest.Crypt;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -33,6 +35,7 @@ import javax.servlet.http.*;
 import javax.sql.DataSource;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.freeciv.services.Validation;
 import org.freeciv.util.Constants;
 
@@ -66,70 +69,40 @@ public class DeleteSaveGame extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String savegame = request.getParameter("savegame");
-		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
+		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), StandardCharsets.UTF_8);
+		String userid = request.getParameter("userid");
 
 		if (!validation.isValidUsername(username)) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					"Invalid username");
 			return;
 		}
+		String usernameFromDB = getUsernameFromDB(username, userid, secure_password);
+
 		if (savegame == null || savegame.length() > 100 || savegame.contains("/") || savegame.contains("\\") || savegame.contains(".")) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 					"Invalid savegame");
 			return;
 		}
 
-		Connection conn = null;
 		try {
-			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
-			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
-			conn = ds.getConnection();
-
-			// Salted, hashed password.
-			String saltHashQuery =
-					"SELECT secure_hashed_password "
-							+ "FROM auth "
-							+ "WHERE LOWER(username) = LOWER(?) "
-							+ "	AND activated = '1' LIMIT 1";
-			PreparedStatement ps1 = conn.prepareStatement(saltHashQuery);
-			ps1.setString(1, username);
-			ResultSet rs1 = ps1.executeQuery();
-			if (!rs1.next()) {
-				response.getOutputStream().print("Failed");
-				return;
-			} else {
-				String hashedPasswordFromDB = rs1.getString(1);
-				if (hashedPasswordFromDB != null &&
-						hashedPasswordFromDB.equals(DigestUtils.sha256Hex(secure_password))) {
-					// Login OK!
-				} else {
-					response.getOutputStream().print("Failed");
-					return;
-				}
+			if (usernameFromDB == null ) {
+				throw new Exception("Invalid");
 			}
 
-		} catch (Exception err) {
-			response.setHeader("result", "error");
-			err.printStackTrace();
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
-		} finally {
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		}
+			File folder = new File(savegameDirectory + "/" + usernameFromDB);
 
-		try {
-			File folder = new File(savegameDirectory + "/" + username);
+			if (!folder.exists()) {
+				folder = new File(savegameDirectory + "/" + StringUtils.capitalize(usernameFromDB));
+			}
+
 			if (!folder.exists()) {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 						"Save folder under the given username cannot be found.");
 				return;
 			} 
 			boolean fileFound = false;
-			for (File savegameFile: folder.listFiles()) {
+			for (File savegameFile: Objects.requireNonNull(folder.listFiles())) {
 				if (savegameFile.exists() && savegameFile.isFile()) {
 					if (savegame.equals("ALL") || savegameFile.getName().startsWith(savegame)){
 						// NOTE: the server does not distinguish saved games of different extensions when loading. So we can delete all of them.
@@ -141,11 +114,9 @@ public class DeleteSaveGame extends HttpServlet {
 			if (!fileFound) {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 						"Saved game not found.");
-				return;
-			}
+            }
 		} catch (Exception err) {
 			response.setHeader("result", "error");
-			err.printStackTrace();
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ERROR");
 		}
 
@@ -156,6 +127,45 @@ public class DeleteSaveGame extends HttpServlet {
 
 		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "This endpoint only supports the POST method.");
 
+	}
+
+	private String getUsernameFromDB(String username, String userid, String secure_password) {
+		Connection conn = null;
+		try {
+			String usernameFromDB;
+			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+			DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
+			conn = ds.getConnection();
+
+			String usercheck =
+					"SELECT username, secure_hashed_password "
+							+ "FROM auth "
+							+ "WHERE LOWER(username) = LOWER(?) "
+							+ "	AND activated = '1'"
+							+ "	AND id = ? LIMIT 1";
+			PreparedStatement ps1 = conn.prepareStatement(usercheck);
+			ps1.setString(1, username);
+			ps1.setString(2, userid);
+			ResultSet rs1 = ps1.executeQuery();
+			if (!rs1.next()) {
+				return null;
+			} else {
+				usernameFromDB = rs1.getString(1);
+				if (!validation.isValidUsername(usernameFromDB)) {
+					return null;
+				}
+				if (!usernameFromDB.equals(username)) {
+					throw new Exception("Invalid username.");
+				}
+				String hashedPwd = rs1.getString(2);
+                if (hashedPwd == null || !hashedPwd.equals(DigestUtils.sha256Hex(secure_password))) {
+                    throw new Exception("Invalid auth.");
+                }
+                return usernameFromDB;
+			}
+		} catch (Exception err) {
+			return null;
+		}
 	}
 
 }

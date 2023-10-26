@@ -111,9 +111,13 @@ function quicksave()
 **************************************************************************/
 function show_load_game_dialog()
 {
+ if (userid == null) {
+   swal("Not logged in.");
+   return;
+ }
  $.ajax({
    type: 'POST',
-   url: "/listsavegames?username=" + username,
+   url: "/listsavegames?username=" + username + "&userid=" + userid,
    success: function(data, textStatus, request){
                 show_load_game_dialog_cb(data);
    },
@@ -253,7 +257,7 @@ function delete_savegame(filename)
     $.ajax({
      type: 'POST',
      url: "/deletesavegame?username=" + encodeURIComponent(username) + "&savegame=" + encodeURIComponent(filename)
-     + "&sha_password=" + sha_password
+     + "&sha_password=" + sha_password + "&userid=" + userid
     });
   }
 }

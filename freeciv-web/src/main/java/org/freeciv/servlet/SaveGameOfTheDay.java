@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class SaveGameOfTheDay extends HttpServlet {
         try {
             image = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
             image = image.replace("data:image/png;base64,", "");
-            byte[] image_of_the_day = Base64.getDecoder().decode(image.getBytes("UTF-8"));
+            byte[] image_of_the_day = Base64.getDecoder().decode(image.getBytes(StandardCharsets.UTF_8));
             if (image_of_the_day.length > 15000000) {
                 System.out.println("Image too big.");
                 return;

@@ -21,6 +21,7 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import javax.sql.*;
 import javax.naming.*;
@@ -45,8 +46,8 @@ public class LoginUser extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		String username = java.net.URLDecoder.decode(request.getParameter("username"), "UTF-8");
-		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), "UTF-8");
+		String username = java.net.URLDecoder.decode(request.getParameter("username"), StandardCharsets.UTF_8);
+		String secure_password = java.net.URLDecoder.decode(request.getParameter("sha_password"), StandardCharsets.UTF_8);
 
 
 		if (secure_password == null || secure_password.length() <= 2) {
@@ -60,7 +61,6 @@ public class LoginUser extends HttpServlet {
 			return;
 		}
 
-
 		Connection conn = null;
 		try {
 			Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
@@ -69,7 +69,7 @@ public class LoginUser extends HttpServlet {
 
 			// Salted, hashed password.
 			String saltHashQuery =
-					"SELECT secure_hashed_password "
+					"SELECT id, secure_hashed_password "
 							+ "FROM auth "
 							+ "WHERE LOWER(username) = LOWER(?) "
 							+ "	AND activated = '1' LIMIT 1";
@@ -79,11 +79,10 @@ public class LoginUser extends HttpServlet {
 			if (!rs1.next()) {
 				response.getOutputStream().print("Failed");
 			} else {
-				String hashedPasswordFromDB = rs1.getString(1);
+				String hashedPasswordFromDB = rs1.getString(2);
 				if (hashedPasswordFromDB != null &&
 						hashedPasswordFromDB.equals(DigestUtils.sha256Hex(secure_password))) {
-					// Login OK!
-					response.getOutputStream().print("OK");
+					response.getOutputStream().print("OK," + rs1.getString(1));
 				} else {
 					response.getOutputStream().print("Failed");
 				}
@@ -92,7 +91,6 @@ public class LoginUser extends HttpServlet {
 
 		} catch (Exception err) {
 			response.setHeader("result", "error");
-			err.printStackTrace();
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to login");
 		} finally {
 			if (conn != null)

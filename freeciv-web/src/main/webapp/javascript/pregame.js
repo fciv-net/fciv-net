@@ -1074,7 +1074,9 @@ function pregame_handle_user(close_pregame)
            type: 'POST',
            url: "/login_user?username=" + encodeURIComponent(username) + "&sha_password=" + sha_password,
            success: function(data, textStatus, request){
-               if (data != null && data == "OK") {
+               if (data != null && data.substring(0,2) == "OK") {
+                 userid = data.split(",")[1];
+                 simpleStorage.set("userid", userid);
                  simpleStorage.set("username", username);
                  simpleStorage.set("password", password);
                  /* Login OK! */
@@ -1257,6 +1259,10 @@ function create_new_freeciv_user_account_request(action_type)
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);
+       if (data.substring(0,2) == "OK") {
+         userid = data.split(",")[1];
+         simpleStorage.set("userid", userid);
+       }
 
        $("#dialog").dialog('close');
        logged_in_with_password = true;

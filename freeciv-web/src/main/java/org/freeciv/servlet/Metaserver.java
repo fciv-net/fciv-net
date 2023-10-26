@@ -90,7 +90,7 @@ public class Metaserver extends HttpServlet {
 		String localAddr = request.getLocalAddr();
 		String remoteAddr = request.getRemoteAddr();
 
-		if ((localAddr == null) || (remoteAddr == null) || !localAddr.equals(remoteAddr)) {
+		if ((localAddr == null) || !localAddr.equals(remoteAddr)) {
 			response.setContentType(CONTENT_TYPE);
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			response.getOutputStream().print(FORBIDDEN);
