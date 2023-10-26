@@ -177,15 +177,10 @@ http://localhost:8080/
 Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
 
 
-Freeciv-Web continuous integration on GitHub actions
-----------------------------------------------------
-Freeciv-Web is built on GitHub actions on every commit. This is the current build status: [![Build Status](https://github.com/freeciv/freeciv-web/workflows/continuous%20integration/badge.svg)](https://github.com/freeciv/freeciv-web/actions?query=workflow%3A%22continuous+integration%22)
-
-
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/freeciv/freeciv-web/issues) on GibHub and the [TODO file](doc/TODO) for 
+If you want to contibute to Freeciv-web, see the [issues](https://github.com/fciv-net/fciv-net/issues) on GibHub and the [TODO file](doc/TODO) for 
 some tasks you can work on. Pull requests on Github is welcome! 
   
 
