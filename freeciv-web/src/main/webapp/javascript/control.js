@@ -1202,7 +1202,7 @@ function update_unit_order_commands()
       unit_actions["pillage"] = {name: "Pillage (Shift-P)"};
     }
 
-    if (pcity != null && punit != null && punit['homecity'] > 0 && punit['homecity'] != pcity['id']) {
+    if (pcity != null && punit['homecity'] > 0 && punit['homecity'] != pcity['id']) {
       unit_actions["homecity"] = {name: "Change homecity of unit (H)"};
     }
 
