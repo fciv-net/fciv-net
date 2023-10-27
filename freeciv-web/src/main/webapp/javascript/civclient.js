@@ -28,6 +28,7 @@ var debug_active = false;
 var autostart = false;
 
 var username = null;
+var userid = null;
 
 var fc_seedrandom = null;
 

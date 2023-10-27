@@ -92,7 +92,7 @@ function update_unit_position(ptile) {
     unit_positions[ptile['index']] = new_unit;
     var pos;
     if (visible_unit['anim_list'].length > 0) {
-      var stile = tiles[visible_unit['anim_list'][0]['tile']];
+      let stile = tiles[visible_unit['anim_list'][0]['tile']];
       pos = map_to_scene_coords(stile['x'], stile['y']);
       height = 5 + stile['height'] * 100  + get_unit_height_offset(visible_unit);
     } else {
@@ -144,7 +144,7 @@ function update_unit_position(ptile) {
     var unit_type_name = unit_type(visible_unit)['name'];
     var pos;
     if (visible_unit['anim_list'].length > 0) {
-      var stile = tiles[visible_unit['anim_list'][0]['tile']];
+      let stile = tiles[visible_unit['anim_list'][0]['tile']];
       pos = map_to_scene_coords(stile['x'], stile['y']);
       height = 5 + stile['height'] * 100  + get_unit_height_offset(visible_unit);
     } else {

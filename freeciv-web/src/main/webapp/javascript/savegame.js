@@ -112,19 +112,19 @@ function quicksave()
 function show_load_game_dialog()
 {
  if (userid == null) {
-   swal("Not logged in.");
-   return;
- }
- $.ajax({
-   type: 'POST',
-   url: "/listsavegames?username=" + username + "&userid=" + userid,
-   success: function(data, textStatus, request){
-                show_load_game_dialog_cb(data);
-   },
-   error: function (request, textStatus, errorThrown) {
-     swal("Loading game failed (listsavegames failed)");
-   }
-  });
+   show_scenario_dialog();
+ } else {
+   $.ajax({
+     type: 'POST',
+     url: "/listsavegames?username=" + username + "&userid=" + userid,
+     success: function(data, textStatus, request){
+                  show_load_game_dialog_cb(data);
+     },
+     error: function (request, textStatus, errorThrown) {
+       swal("Loading game failed (listsavegames failed)");
+     }
+    });
+  }
 }
 
 /**************************************************************************
