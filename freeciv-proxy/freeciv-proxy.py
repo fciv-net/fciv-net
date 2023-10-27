@@ -31,9 +31,6 @@ from civcom import *
 import json
 import uuid
 import gc
-import mysql.connector
-import configparser
-import hashlib
 
 PROXY_PORT = 8002
 CONNECTION_LIMIT = 1000
@@ -41,13 +38,6 @@ CONNECTION_LIMIT = 1000
 civcoms = {}
 
 chdir(sys.path[0])
-settings = configparser.ConfigParser()
-settings.read("settings.ini")
-
-mysql_user = settings.get("Config", "mysql_user")
-mysql_database = settings.get("Config", "mysql_database")
-mysql_password = settings.get("Config", "mysql_password")
-
 
 class IndexHandler(web.RequestHandler):
 
@@ -81,15 +71,9 @@ class WSHandler(websocket.WebSocketHandler):
             self.username = login_message['username']
             if (not validate_username(self.username)):
               logger.warn("invalid username: " + str(message))
-              self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user. If you find a bug, please report it.\",\"you_can_join\":false,\"conn_id\":-1}]")
+              self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user.\",\"you_can_join\":false,\"conn_id\":-1}]")
               return
             self.civserverport = login_message['port']
-            auth_ok = self.check_user(
-                    login_message['username'] if 'username' in login_message else None,
-                    login_message['password'] if 'password' in login_message else None)
-            if (not auth_ok):
-              self.write_message("[{\"pid\":5,\"message\":\"Error: Could not authenticate user with password. Try a different username.\",\"you_can_join\":false,\"conn_id\":-1}]")
-              return
 
             self.loginpacket = message
             self.is_ready = True
@@ -119,37 +103,6 @@ class WSHandler(websocket.WebSocketHandler):
             del(self.civcom)
             gc.collect()
 
-    # Check user authentication
-    def check_user(self, username, token):
-      cursor = None
-      cnx = None
-      try:
-        cnx = mysql.connector.connect(user=mysql_user, database=mysql_database, password=mysql_password)
-        cursor = cnx.cursor()
-
-        return self.check_user_password(cursor, username, token)
-
-      finally:
-        cursor.close()
-        cnx.close()
-
-
-    def check_user_password(self, cursor, username, password):
-        query = ("select secure_hashed_password, activated from auth where lower(username)=lower(%(usr)s)")
-        cursor.execute(query, {'usr': username, 'pwd': password})
-        result = cursor.fetchall()
-
-        if len(result) == 0:
-            # Unreserved user, no password needed
-            return True
-
-        for secure_shashed_password, active in result:
-            if (active == 0): return False
-            if secure_shashed_password == hashlib.sha256(password.encode('utf-8')).hexdigest(): return True
-
-        return False
-
-
     # enables support for allowing alternate origins. See check_origin in websocket.py
     def check_origin(self, origin):
       return True;
@@ -176,8 +129,13 @@ class WSHandler(websocket.WebSocketHandler):
 def validate_username(name):
     if (name is None or len(name) <= 2 or len(name) >= 32):
         return False
+    for civkey in civcoms.keys():
+        if name == civcoms[civkey].username:
+            logger.warn("User already connected: "  + name)
+        return False
+
     name = name.lower()
-    return name != "pbem" and re.fullmatch('[a-z][a-z0-9]*', name) is not None
+    return re.fullmatch('[a-z][a-z0-9]*', name) is not None
 
 
 if __name__ == "__main__":

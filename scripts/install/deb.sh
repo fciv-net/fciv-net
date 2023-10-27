@@ -43,7 +43,6 @@ dependencies="\
   python3-pip \
   python3-setuptools \
   python3-tornado \
-  python3-mysql.connector \
   python3-pillow \
   python3-dev \
   python3-wheel \

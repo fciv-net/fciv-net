@@ -137,8 +137,6 @@ Install this software if you are not running Freeciv-web with Vagrant:
 
 - nginx 1.11.x or later - http://nginx.org/
 
-- MySQL Connector/Python - https://github.com/mysql/mysql-connector-python
-
 - pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
 
 - Tornado 6.1 or later - http://www.tornadoweb.org/
