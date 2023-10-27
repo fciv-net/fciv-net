@@ -26,9 +26,6 @@ var SINGLE_MOVE;
 
 var ANIM_STEPS = 6;
 
-var anim_units_max = 30;
-var anim_units_count = 0;
-
 /* The unit_orders enum from unit.h */
 var ORDER_MOVE = 0;
 var ORDER_ACTIVITY = 1;
@@ -242,8 +239,6 @@ function update_unit_anim_list(old_unit, new_unit)
   /* unit is in same position. */
   if (new_unit['tile'] == old_unit['tile']) return;
 
-  if (anim_units_count > anim_units_max) return;
-
   if (old_unit['anim_list'] == null) old_unit['anim_list'] = [];
 
   if (new_unit['transported'] == true) {
@@ -252,7 +247,6 @@ function update_unit_anim_list(old_unit, new_unit)
     return;
   }
 
-  anim_units_count += 1;
   var has_old_pos = false;
   var has_new_pos = false;
   for (var i = 0; i <  old_unit['anim_list'].length; i++) {
@@ -304,7 +298,6 @@ function reset_unit_anim_list()
     var punit = units[unit_id];
     punit['anim_list'] = [];
   }
-  anim_units_count = 0;
 }
 
 /**************************************************************************

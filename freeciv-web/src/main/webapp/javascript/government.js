@@ -189,13 +189,9 @@ function government_max_rate(govt_id)
   } else if (govt_id == 5) {
     //Democracy
     return 100;
-  } else {
-    // this should not happen
-    return 100;
   }
 
-
-
+  return 100;
 }
 
 /**************************************************************************

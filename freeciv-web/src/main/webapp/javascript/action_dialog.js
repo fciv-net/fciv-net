@@ -236,6 +236,8 @@ function popup_action_selection(actor_unit, action_probabilities,
                                 target_tile, target_extra,
                                 target_unit, target_city)
 {
+  if (actor_unit == null) return;
+
   // reset dialog page.
   var id = "#act_sel_dialog_" + actor_unit['id'];
   $(id).remove();
@@ -322,9 +324,7 @@ function popup_action_selection(actor_unit, action_probabilities,
       }
       break;
     case ATK_SELF:
-      if (actor_unit != null) {
         tgt_id = actor_unit['id'];
-      }
       break;
     default:
       console.log("Unsupported action target kind " + tgt_kind);

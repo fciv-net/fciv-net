@@ -74,7 +74,6 @@ function update_animated_objects()
       punit['anim_list'] = [];
       delete anim_objs[unit_id];
       update_unit_position(tile_end);
-      anim_units_count--;
     }
 
   }

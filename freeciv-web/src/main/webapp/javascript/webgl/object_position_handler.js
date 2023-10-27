@@ -519,9 +519,7 @@ function add_city_building(ptile, pcity, scene, building_name) {
           continue;
         }
 
-        if (nexttile != null) {
-          break;
-        }
+        break;
       }
       if (nexttile == null) return;
 

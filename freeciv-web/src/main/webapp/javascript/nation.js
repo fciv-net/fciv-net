@@ -233,11 +233,11 @@ function select_a_nation()
     $('#meet_player_button').button("disable");
   }
 
-    if ((!game_type == 'singleplayer' && pplayer['flags'].isSet(PLRF_AI)) || selected_myself) {
-      $('#send_message_button').button("disable");
-    } else {
-      $('#send_message_button').button("enable");
-    }
+  if (selected_myself) {
+    $('#send_message_button').button("disable");
+  } else {
+    $('#send_message_button').button("enable");
+  }
 
   if (!client_is_observer()
       && both_alive_and_different

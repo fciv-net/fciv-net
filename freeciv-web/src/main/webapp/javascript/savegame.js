@@ -300,18 +300,13 @@ function load_game_check()
 
   } else if (load_game_id != -1) {
     $.blockUI();
-
     if (scenario == "true" || scenario_activated) {
-      if (load_game_id == -1) {
-        show_scenario_dialog();
-      } else {
         var scenario_game_id = scenarios[load_game_id]['savegame'];
         wait_for_text("You are logged in as", function () {
           load_game_real(scenario_game_id);
         });
         wait_for_text("Load complete", load_game_toggle);
       }
-    }
   } else if (scenario == "true" && $.getUrlVar('load') != "tutorial") {
     show_scenario_dialog();
   } else if ($.getUrlVar('action') == "load") {
