@@ -27,9 +27,9 @@ var heightmap_hash = -1;
 function get_unit_height_offset(punit)
 {
   if (punit == null) return 0;
-  var ptile = index_to_tile(punit['tile']);
+  let ptile = index_to_tile(punit['tile']);
   if (ptile == null) return 0;
-  var ptype = unit_type(punit);
+  let ptype = unit_type(punit);
 
   if (ptype['name'] == "Caravel") {
     return 7;
@@ -73,7 +73,7 @@ function get_unit_height_offset(punit)
   }
 
 
-  var pcity = tile_city(ptile);
+  let pcity = tile_city(ptile);
   if (pcity != null) return 4;
 
   return -2;
@@ -105,7 +105,7 @@ function get_forest_offset(ptile)
 function get_city_height_offset(pcity)
 {
   if (pcity == null) return 0;
-  var ptile = index_to_tile(pcity['tile']);
+  let ptile = index_to_tile(pcity['tile']);
   if (ptile == null) return 0;
 
   if (!is_ocean_tile(ptile) && is_ocean_tile_near(ptile)) {
@@ -128,17 +128,17 @@ function get_city_height_offset(pcity)
 ****************************************************************************/
 function create_heightmap(heightmap_quality)
 {
-  var heightmap_resolution_x = map.xsize * heightmap_quality + 1;
-  var heightmap_resolution_y = map.ysize * heightmap_quality + 1;
+  let heightmap_resolution_x = map.xsize * heightmap_quality + 1;
+  let heightmap_resolution_y = map.ysize * heightmap_quality + 1;
 
   heightmap = new Array(heightmap_resolution_x);
-  for (var hx = 0; hx < heightmap_resolution_x; hx++) {
+  for (let hx = 0; hx < heightmap_resolution_x; hx++) {
     heightmap[hx] = new Array(heightmap_resolution_y);
   }
 
-  for (var x = 0; x < map.xsize ; x++) {
-    for (var y = 0; y < map.ysize; y++) {
-      var ptile = map_pos_to_tile(x, y);
+  for (let x = 0; x < map.xsize ; x++) {
+    for (let y = 0; y < map.ysize; y++) {
+      let ptile = map_pos_to_tile(x, y);
       // Make coastline more distinct, to make it easier to distinguish ocean from land.
       if (is_ocean_tile(ptile) && is_land_tile_near(ptile)) {
         ptile['height'] = 0.45;
@@ -149,7 +149,7 @@ function create_heightmap(heightmap_quality)
 
       if (tile_get_known(ptile) == TILE_UNKNOWN) {
         ptile['height'] = 0.51;
-        var neighbours = [
+        let neighbours = [
           { "x": x - 1 , "y": y - 1},
           { "x": x - 1, "y": y },
           { "x": x - 1,  "y": y + 1 },
@@ -160,12 +160,12 @@ function create_heightmap(heightmap_quality)
           { "x": x + 1,  "y": y + 1},
           ];
 
-        for (var i = 0; i < 8; i++) {
-          var coords = neighbours[i];
+        for (let i = 0; i < 8; i++) {
+          let coords = neighbours[i];
           if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize || ptile['height'] > 0.51) {
             continue;
           }
-          var ntile = map_pos_to_tile(coords.x, coords.y);
+          let ntile = map_pos_to_tile(coords.x, coords.y);
           if (tile_get_known(ntile) != TILE_UNKNOWN) {
             ptile['height'] = ntile['height'];
           }
@@ -176,15 +176,15 @@ function create_heightmap(heightmap_quality)
   }
 
   if (is_hex()) {
-    for (var x = 0; x < heightmap_resolution_x; x++) {
-      for (var y = 0; y < heightmap_resolution_y; y++) {
-        var sx = x / heightmap_quality;
-        var sy = y / heightmap_quality;
-        var hvec = map_hex_coords(new THREE.Vector2(sx - 0.05, sy + 0.1));
-        var gx = Math.floor(hvec.x);
-        var gy = Math.floor(hvec.y);
+    for (let x = 0; x < heightmap_resolution_x; x++) {
+      for (let y = 0; y < heightmap_resolution_y; y++) {
+        let sx = x / heightmap_quality;
+        let sy = y / heightmap_quality;
+        let hvec = map_hex_coords(new THREE.Vector2(sx - 0.05, sy + 0.1));
+        let gx = Math.floor(hvec.x);
+        let gy = Math.floor(hvec.y);
 
-        var ptile = map_pos_to_tile(gx, gy);
+        let ptile = map_pos_to_tile(gx, gy);
         if (ptile != null) {
           heightmap[x][y] = ptile['height'];
         } else {
@@ -193,20 +193,20 @@ function create_heightmap(heightmap_quality)
       }
     }
 
-    for (var x = 1; x < heightmap_resolution_x - 1; x++) {
-      for (var y = 1; y < heightmap_resolution_y - 1; y++) {
+    for (let x = 1; x < heightmap_resolution_x - 1; x++) {
+      for (let y = 1; y < heightmap_resolution_y - 1; y++) {
           heightmap[x][y] = (heightmap[x][y] + heightmap[x-1][y-1] + heightmap[x-1][y+1] + heightmap[x+1][y] + heightmap[x + 1][y + 1] ) / 5;
       }
     }
 
 
   } else {
-    for (var x = 0; x < heightmap_resolution_x; x++) {
-      for (var y = 0; y < heightmap_resolution_y; y++) {
-        var gx = x / heightmap_quality - 0.5;
-        var gy = y / heightmap_quality - 0.5;
+    for (let x = 0; x < heightmap_resolution_x; x++) {
+      for (let y = 0; y < heightmap_resolution_y; y++) {
+        let gx = x / heightmap_quality - 0.5;
+        let gy = y / heightmap_quality - 0.5;
          if (Math.round(gx) == gx && Math.round(gy) == gy) {
-          var ptile = map_pos_to_tile(gx, gy);
+          let ptile = map_pos_to_tile(gx, gy);
           heightmap[x][y] = ptile['height'];
           if (tile_has_extra(ptile, EXTRA_RIVER)) {
             heightmap[x][y] = ptile['height'] * 0.98;
@@ -215,15 +215,15 @@ function create_heightmap(heightmap_quality)
             heightmap[x][y] = ptile['height'] * 1.01;
           }
         } else {
-          var neighbours = [
+          let neighbours = [
             { "x": Math.floor(gx), "y": Math.floor(gy) },
             { "x": Math.floor(gx), "y": Math.ceil(gy) },
             { "x": Math.ceil(gx),  "y": Math.floor(gy) },
             { "x": Math.ceil(gx),  "y": Math.ceil(gy) }];
 
-          var num_river_neighbours = 0;
-          for (var i = 0; i < 4; i++) {
-            var coords = neighbours[i];
+          let num_river_neighbours = 0;
+          for (let i = 0; i < 4; i++) {
+            let coords = neighbours[i];
             if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
               continue;
             }
@@ -233,20 +233,20 @@ function create_heightmap(heightmap_quality)
             }
           }
 
-          var norm = 0;
-          var sum = 0;
-          for (var i = 0; i < 4; i++) {
-            var coords = neighbours[i];
+          let norm = 0;
+          let sum = 0;
+          for (let i = 0; i < 4; i++) {
+            let coords = neighbours[i];
             if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
               continue;
             }
-            var dx = gx - coords.x;
-            var dy = gy - coords.y;
-            var distance = Math.sqrt(dx*dx + dy*dy);
-            var ptile = map_pos_to_tile(coords.x, coords.y);
-            var height = 0;
+            let dx = gx - coords.x;
+            let dy = gy - coords.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+            let ptile = map_pos_to_tile(coords.x, coords.y);
+            let height = 0;
             if (tile_terrain(ptile)['name'] == "Hills" || tile_terrain(ptile)['name'] == "Mountains") {
-              var rnd = ((x * y) % 10) / 10;
+              let rnd = ((x * y) % 10) / 10;
               height = ptile['height'] + ((rnd - 0.5) / 50) - 0.01;
             } else {
               height = ptile['height'];
@@ -271,11 +271,11 @@ function create_heightmap(heightmap_quality)
  Creates a hash of the map heightmap.
 ****************************************************************************/
 function generate_heightmap_hash() {
-  var hash = 0;
+  let hash = 0;
 
-  for (var x = 0; x < map.xsize ; x++) {
-    for (var y = 0; y < map.ysize; y++) {
-      var ptile = map_pos_to_tile(x, y);
+  for (let x = 0; x < map.xsize ; x++) {
+    for (let y = 0; y < map.ysize; y++) {
+      let ptile = map_pos_to_tile(x, y);
       hash += ptile['height']
     }
   }
