@@ -4,7 +4,7 @@
  * Copyright 2011-2013 John-David Dalton
  * Available under MIT license
  */
-;(function() {
+(function() {
   'use strict';
 
   /** Used to determine if values are of the language type `Object`. */

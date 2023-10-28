@@ -444,4 +444,4 @@ function create_star_sky_texture(num_stars, width, height) {
 	var texture = new THREE.Texture(canvas);
 	texture.needsUpdate = true;
 	return texture;
-};
+}

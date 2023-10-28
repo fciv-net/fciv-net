@@ -1,7 +1,7 @@
 body { 
     font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
 	font-size: 14px;
-	margin: 0px 0px 0px 0px; 
+	margin: 0px; 
 	background-color: #000000;
 }
 
@@ -43,7 +43,7 @@ body {
 
 #pregame_game_info:empty {
   display: none;
-  padding: 0px 0px;
+  padding: 0px;
   border: 0px;
 }
 
@@ -54,7 +54,7 @@ body {
   width: 78%;
   overflow: auto;
   float: left;
-  padding: 5px 5px;
+  padding: 5px;
   border: 1px solid black;
 }
 
@@ -63,7 +63,7 @@ body {
   color: #000000;
   overflow: auto;
   float: left;
-  padding: 5px 5px;
+  padding: 5px;
   border: 1px solid black;
   list-style-type: none;
   margin: 0px;
