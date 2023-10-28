@@ -80,7 +80,7 @@ function webgl_preload()
                 webgl_textures["roads"].minFilter = THREE.LinearFilter;
                 webgl_textures["roads"].needsUpdate = true;
             }
-    })(imgurl)
+    })()
   );
 
   /* Preload railroads textures. */
@@ -96,7 +96,7 @@ function webgl_preload()
                 webgl_textures["railroads"].minFilter = THREE.LinearFilter;
                 webgl_textures["railroads"].needsUpdate = true;
             }
-    })(imgurl)
+    })()
   );
 
   var city_light = new THREE.Texture();
@@ -166,7 +166,7 @@ function webgl_preload()
                 webgl_textures["skybox"].minFilter = THREE.LinearFilter;
                 webgl_textures["skybox"].needsUpdate = true;
             }
-    })(imgurl)
+    })()
   );
 
 }
