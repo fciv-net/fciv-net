@@ -102,7 +102,6 @@ function create_unit_label_sprite(punit, ptile)
                   24, 24,
                   24, 24,
                   width - 10, -10, 36, 36);
-      width += 28;
     }
 
     texture = new THREE.Texture(fcanvas);

@@ -222,7 +222,7 @@ function update_unit_position(ptile) {
     }
 
     /* add flag. */
-    var pflag = get_unit_nation_flag_sprite(visible_unit);
+    let pflag = get_unit_nation_flag_sprite(visible_unit);
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
       new_flag = create_flag_sprite(pflag['key']);
