@@ -35,6 +35,8 @@ var water;
 
 var lofiGeometry;
 var lofiMesh;  // low resolution mesh used for raycasting.
+var freeciv_uniforms;
+var terrain_material;
 
 var mapview_model_width;
 var mapview_model_height;
@@ -203,12 +205,13 @@ function init_webgl_mapview() {
   }
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
-  var freeciv_uniforms = {
+  freeciv_uniforms = {
     maptiles: { type: "t", value: maptiletypes },
     borders: { type: "t", value: update_borders_image() },
     map_x_size: { type: "f", value: map['xsize'] },
     map_y_size: { type: "f", value: map['ysize'] },
-    is_hex: { type: "bool", value: is_hex() },
+    mouse_x: { type: "i", value: 15 },
+    mouse_y: { type: "i", value: 15 },
     roadsmap: { type: "t", value: update_roads_image()},
     roadsprites: {type: "t", value: webgl_textures["roads"]},
     railroadsprites: {type: "t", value: webgl_textures["railroads"]},
@@ -235,7 +238,7 @@ function init_webgl_mapview() {
 
   // High-resolution terrain-mesh shown in mapview.
   create_heightmap(terrain_quality);
-  var terrain_material = new THREE.ShaderMaterial({
+  terrain_material = new THREE.ShaderMaterial({
     uniforms: freeciv_uniforms,
     vertexShader: vertex_shader,
     fragmentShader: fragment_shader,

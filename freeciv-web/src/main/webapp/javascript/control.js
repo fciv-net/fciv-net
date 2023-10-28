@@ -358,7 +358,7 @@ function mouse_moved_cb(e)
 ****************************************************************************/
 function update_mouse_cursor()
 {
-  if (C_S_RUNNING != client_state()) return;
+  if (C_S_RUNNING != client_state() && C_S_OVER != client_state()) return;
 
   if (tech_dialog_active && !is_touch_device()) {
     update_tech_dialog_cursor();
@@ -368,6 +368,11 @@ function update_mouse_cursor()
   var ptile = webgl_canvas_pos_to_tile(mouse_x, mouse_y);
 
   if (ptile == null) return;
+
+  terrain_material.uniforms.mouse_x.value = ptile.x;
+  terrain_material.uniforms.mouse_x.needsUpdate = true;
+  terrain_material.uniforms.mouse_y.value = ptile.y;
+  terrain_material.uniforms.mouse_y.needsUpdate = true;
 
   var punit = find_visible_unit(ptile);
   var pcity = tile_city(ptile);

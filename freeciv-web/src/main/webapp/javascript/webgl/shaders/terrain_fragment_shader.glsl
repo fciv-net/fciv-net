@@ -46,7 +46,9 @@ uniform sampler2D irrigation;
 
 uniform float map_x_size;
 uniform float map_y_size;
-uniform bool is_hex;
+
+uniform int mouse_x;
+uniform int mouse_y;
 
 varying vec2 vUv;
 varying vec3 vPosition;
@@ -520,6 +522,10 @@ void main(void)
     c = mix(c, Cb.rgb, x);
 
     float shade_factor = 0.32 + 1.42 * max(0., dot(vNormal, normalize(light)));
+
+    if (mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
+        shade_factor = shade_factor * 2.0;
+    }
 
     // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
     c = c * vColor.r;
