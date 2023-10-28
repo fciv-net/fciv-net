@@ -69,7 +69,7 @@ function webgl_preload()
 
   /* Preload road textures. */
   var imgurl = "/textures/large/roads.png";
-  textureLoader.load(imgurl, (function (url) {
+  textureLoader.load(imgurl, (function () {
           return function (image) {
                 $("#download_progress").html(" road textures 15%");
                 webgl_textures["roads"] = new THREE.Texture();
@@ -85,7 +85,7 @@ function webgl_preload()
 
   /* Preload railroads textures. */
   imgurl = "/textures/large/railroads.png";
-  textureLoader.load(imgurl, (function (url) {
+  textureLoader.load(imgurl, (function () {
           return function (image) {
                 $("#download_progress").html(" railroad textures 25%");
                 webgl_textures["railroads"] = new THREE.Texture();
@@ -156,7 +156,7 @@ function webgl_preload()
   } );
 
   imgurl = '/textures/sky.jpg';
-  textureLoader.load(imgurl, (function (url) {
+  textureLoader.load(imgurl, (function () {
           return function (image) {
                 webgl_textures["skybox"] = new THREE.Texture();
                 webgl_textures["skybox"].image = image;
