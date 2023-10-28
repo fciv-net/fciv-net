@@ -98,7 +98,7 @@ function road_image_color(map_x, map_y)
     var adj_road_count = 0;
     for (var dir = 0; dir < 8; dir++) {
       if (dir != 1 && dir != 3 && dir != 4 && dir != 6) continue;
-      var checktile = mapstep(ptile, dir);
+      let checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) {
         if (dir == 1) result[adj_road_count] = 12;
         if (dir == 3) result[adj_road_count] = 18;
@@ -106,7 +106,7 @@ function road_image_color(map_x, map_y)
         if (dir == 6) result[adj_road_count] = 16;
         adj_road_count++;
         if (adj_road_count > 2) {
-          var checktile = mapstep(ptile, 6);
+          let checktile = mapstep(ptile, 6);
           if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) return "rgb(43,0,0)";  //special case, 4 connected rails.
           break;
         }
@@ -114,7 +114,7 @@ function road_image_color(map_x, map_y)
     }
     for (var dir = 0; dir < 8; dir++) {
       if (dir != 0 && dir != 2 && dir != 5 && dir != 7) continue;
-      var checktile = mapstep(ptile, dir);
+      let checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) {
         if (dir == 0) result[adj_road_count] = 19;
         if (dir == 2) result[adj_road_count] = 13;
@@ -137,7 +137,7 @@ function road_image_color(map_x, map_y)
     var adj_road_count = 0;
     for (var dir = 0; dir < 8; dir++) {
       if (dir != 1 && dir != 3 && dir != 4 && dir != 6) continue;
-      var checktile = mapstep(ptile, dir);
+      let checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) {
         if (dir == 1) result[adj_road_count] = 2;
         if (dir == 3) result[adj_road_count] = 8;
@@ -145,7 +145,7 @@ function road_image_color(map_x, map_y)
         if (dir == 6) result[adj_road_count] = 6;
         adj_road_count++;
         if (adj_road_count > 2) {
-          var checktile = mapstep(ptile, 6);
+          let checktile = mapstep(ptile, 6);
           if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) return "rgb(42,0,0)"; //special case, 4 connected roads.
           break;
         }
@@ -153,7 +153,7 @@ function road_image_color(map_x, map_y)
     }
     for (var dir = 0; dir < 8; dir++) {
       if (dir != 0 && dir != 2 && dir != 5 && dir != 7) continue;
-      var checktile = mapstep(ptile, dir);
+      let checktile = mapstep(ptile, dir);
       if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) {
         if (dir == 0) result[adj_road_count] = 9;
         if (dir == 2) result[adj_road_count] = 3;

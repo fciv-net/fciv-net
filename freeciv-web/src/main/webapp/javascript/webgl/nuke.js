@@ -123,12 +123,12 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * shock_radius) - (shock_radius / 2);
     var h = height + mushroom_height + (Math.random() * shock_radius) - (shock_radius / 2);
     var y = pos['y']  + (Math.random() * shock_radius) - (shock_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (120 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (120 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (shock_radius / 2) || dist < 115) {
       continue;
     }
 
-    var sprite = new THREE.Sprite(shockMaterial);
+    let sprite = new THREE.Sprite(shockMaterial);
     sprite.scale.set(0.5 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);

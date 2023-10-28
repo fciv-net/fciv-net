@@ -141,7 +141,7 @@ function update_unit_position(ptile) {
   } else if (unit_positions[ptile['index']] != null && visible_unit != null) {
     // Update of visible unit.
     // TODO: update_unit_position() contains _almost_ the same code twice. this is the duplicate part.
-    var unit_type_name = unit_type(visible_unit)['name'];
+    let unit_type_name = unit_type(visible_unit)['name'];
     var pos;
     if (visible_unit['anim_list'].length > 0) {
       let stile = tiles[visible_unit['anim_list'][0]['tile']];
@@ -184,7 +184,7 @@ function update_unit_position(ptile) {
     }
 
     /* indicate focus unit*/
-    var funit = get_focus_unit_on_tile(ptile);
+    let funit = get_focus_unit_on_tile(ptile);
     var selected_mesh;
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
@@ -225,7 +225,7 @@ function update_unit_position(ptile) {
     var pflag = get_unit_nation_flag_sprite(visible_unit);
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
-      var new_flag = create_flag_sprite(pflag['key']);
+      new_flag = create_flag_sprite(pflag['key']);
       new_flag.position.set(pos['x'] - flag_dx, height + flag_dz, pos['y'] - flag_dy - 10);
       scene.add(new_flag);
       unit_flag_positions[ptile['index']] = new_flag;

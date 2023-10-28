@@ -2131,9 +2131,10 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
 
     case 107:
       //zoom in
-      var new_camera_dy = camera_dy - 60;
-      var new_camera_dx = camera_dx - 45;
-      var new_camera_dz = camera_dz - 45;
+      {
+      let new_camera_dy = camera_dy - 60;
+      let new_camera_dx = camera_dx - 45;
+      let new_camera_dz = camera_dz - 45;
       if (new_camera_dy < 250 || new_camera_dy > 1300) {
         return;
       } else {
@@ -2142,14 +2143,15 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
         camera_dz = new_camera_dz;
       }
       camera_look_at(camera_current_x, camera_current_y, camera_current_z);
-
+      }
       break;
 
     case 109:
       //zoom out
-      var new_camera_dy = camera_dy + 60;
-      var new_camera_dx = camera_dx + 45;
-      var new_camera_dz = camera_dz + 45;
+      {
+      let new_camera_dy = camera_dy + 60;
+      let new_camera_dx = camera_dx + 45;
+      let new_camera_dz = camera_dz + 45;
       if (new_camera_dy < 250 || new_camera_dy > 1300) {
         return;
       } else {
@@ -2158,7 +2160,7 @@ map_handle_key(keyboard_key, key_code, ctrl, alt, shift, the_event)
         camera_dz = new_camera_dz;
       }
       camera_look_at(camera_current_x, camera_current_y, camera_current_z);
-
+      }
       break;
 
   }

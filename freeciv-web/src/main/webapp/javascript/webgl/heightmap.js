@@ -227,7 +227,7 @@ function create_heightmap(heightmap_quality)
             if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
               continue;
             }
-            var ptile = map_pos_to_tile(coords.x, coords.y);
+            let ptile = map_pos_to_tile(coords.x, coords.y);
             if (tile_has_extra(ptile, EXTRA_RIVER)) {
               num_river_neighbours++;
             }
