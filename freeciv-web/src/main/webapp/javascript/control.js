@@ -1192,8 +1192,6 @@ function update_unit_order_commands()
     if (utype_can_do_action_result(ptype, ACTRES_PARADROP)
         || utype_can_do_action_result(ptype, ACTRES_PARADROP_CONQUER)) {
       unit_actions["paradrop"] = {name: "Paradrop"};
-    } else {
-
     }
 
     if (!client_is_observer() && client.conn.playing != null

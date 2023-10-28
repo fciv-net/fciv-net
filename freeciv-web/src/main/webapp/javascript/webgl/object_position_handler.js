@@ -58,8 +58,8 @@ var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Iv
   Handles unit positions
 ****************************************************************************/
 function update_unit_position(ptile) {
-  var visible_unit = find_visible_unit(ptile);
-  var height = 5 + Math.max(ptile['height'], 0.45) * 100 + get_unit_height_offset(visible_unit);
+  let visible_unit = find_visible_unit(ptile);
+  let height = 5 + Math.max(ptile['height'], 0.45) * 100 + get_unit_height_offset(visible_unit);
 
   if (unit_positions[ptile['index']] != null && visible_unit == null) {
     // tile has no visible units, remove it from unit_positions.
@@ -80,17 +80,17 @@ function update_unit_position(ptile) {
 
   if (unit_positions[ptile['index']] == null && visible_unit != null) {
     // add new unit to the unit_positions
-    var unit_type_name = unit_type(visible_unit)['name'];
+    let unit_type_name = unit_type(visible_unit)['name'];
     if (unit_type_name == null) {
       return;
     }
 
-    var new_unit = webgl_get_model(unit_type_name, ptile);
+    let new_unit = webgl_get_model(unit_type_name, ptile);
     if (new_unit == null) {
       return;
     }
     unit_positions[ptile['index']] = new_unit;
-    var pos;
+    let pos;
     if (visible_unit['anim_list'].length > 0) {
       let stile = tiles[visible_unit['anim_list'][0]['tile']];
       pos = map_to_scene_coords(stile['x'], stile['y']);
@@ -100,7 +100,7 @@ function update_unit_position(ptile) {
     }
     new_unit.matrixAutoUpdate = false;
     new_unit.position.set(pos['x'] - 12, height - 2, pos['y'] - 4);
-    var rnd_rotation = Math.floor(Math.random() * 8);
+    let rnd_rotation = Math.floor(Math.random() * 8);
     new_unit.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (convert_unit_rotation(rnd_rotation, unit_type(visible_unit)['name'])));
     new_unit.updateMatrix();
 
@@ -108,18 +108,18 @@ function update_unit_position(ptile) {
       scene.add(new_unit);
     }
     /* add flag. */
-    var pflag = get_unit_nation_flag_sprite(visible_unit);
+    let pflag = get_unit_nation_flag_sprite(visible_unit);
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
-      var new_flag = create_flag_sprite(pflag['key']);
+      new_flag = create_flag_sprite(pflag['key']);
       new_flag.position.set(pos['x'] - 10, height + 20, pos['y'] - 20);
       scene.add(new_flag);
       unit_flag_positions[ptile['index']] = new_flag;
     }
 
     /* indicate focus unit*/
-    var funit = get_focus_unit_on_tile(ptile);
-    var selected_mesh;
+    let funit = get_focus_unit_on_tile(ptile);
+    let selected_mesh;
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
@@ -142,7 +142,7 @@ function update_unit_position(ptile) {
     // Update of visible unit.
     // TODO: update_unit_position() contains _almost_ the same code twice. this is the duplicate part.
     let unit_type_name = unit_type(visible_unit)['name'];
-    var pos;
+    let pos;
     if (visible_unit['anim_list'].length > 0) {
       let stile = tiles[visible_unit['anim_list'][0]['tile']];
       pos = map_to_scene_coords(stile['x'], stile['y']);
@@ -157,7 +157,7 @@ function update_unit_position(ptile) {
     if (scene != null && unit_flag_positions[ptile['index']] != null) scene.remove(unit_flag_positions[ptile['index']]);
     delete unit_flag_positions[ptile['index']];
 
-    var activity;
+    let activity;
     if (unit_activities_positions[ptile['index']] != get_unit_activity_text(visible_unit) + tile_units(ptile).length
         && visible_unit['anim_list'].length == 0) {
       // add unit activity label
@@ -171,7 +171,7 @@ function update_unit_position(ptile) {
       unit_activities_positions[ptile['index']] = get_unit_activity_text(visible_unit) + tile_units(ptile).length;
     }
 
-    var new_unit_health_bar;
+    let new_unit_health_bar;
     if (unit_healthpercentage_positions[ptile['index']] != visible_unit['hp'] && visible_unit['anim_list'].length == 0) {
       if (scene != null && unit_health_positions[ptile['index']] != null) scene.remove(unit_health_positions[ptile['index']]);
       new_unit_health_bar = create_unit_health_sprite(visible_unit);
@@ -185,7 +185,7 @@ function update_unit_position(ptile) {
 
     /* indicate focus unit*/
     let funit = get_focus_unit_on_tile(ptile);
-    var selected_mesh;
+    let selected_mesh;
     if (scene != null && funit != null && funit['id'] == visible_unit['id']) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
@@ -205,7 +205,7 @@ function update_unit_position(ptile) {
       return;
     }
 
-    var new_unit = webgl_get_model(unit_type_name, ptile);
+    let new_unit = webgl_get_model(unit_type_name, ptile);
     if (new_unit == null) {
       return;
     }
@@ -223,7 +223,7 @@ function update_unit_position(ptile) {
 
     /* add flag. */
     let pflag = get_unit_nation_flag_sprite(visible_unit);
-    var new_flag;
+    let new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
       new_flag = create_flag_sprite(pflag['key']);
       new_flag.position.set(pos['x'] - flag_dx, height + flag_dz, pos['y'] - flag_dy - 10);
@@ -241,10 +241,10 @@ function update_unit_position(ptile) {
 ****************************************************************************/
 function update_city_position(ptile) {
 
-  var pcity = tile_city(ptile);
-  var punits = tile_units(ptile);
+  let pcity = tile_city(ptile);
+  let punits = tile_units(ptile);
 
-  var height = 5 + ptile['height'] * 100 + get_city_height_offset(pcity);
+  let height = 5 + ptile['height'] * 100 + get_city_height_offset(pcity);
 
   if (city_positions[ptile['index']] != null && pcity == null) {
     // tile has no city, remove it from unit_positions.
@@ -264,9 +264,9 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] == null && pcity != null) {
     // add new city
-    var model_name = city_to_3d_model_name(pcity);
+    let model_name = city_to_3d_model_name(pcity);
     pcity['webgl_model_name'] = model_name;
-    var new_city = webgl_get_model(model_name, ptile);
+    let new_city = webgl_get_model(model_name, ptile);
     if (new_city == null) {
       return;
     }
@@ -275,7 +275,7 @@ function update_city_position(ptile) {
     if (pcity['style'] == 3) height -= 2;
     if (pcity['style'] == 4) height -= 1;
 
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    let pos = map_to_scene_coords(ptile['x'], ptile['y']);
     new_city.position.set(pos['x'] - 12, height - 2, pos['y'] - 11);
     new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
@@ -284,7 +284,7 @@ function update_city_position(ptile) {
     }
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
-      var city_walls = webgl_get_model(get_citywalls_models(pcity), ptile);
+      let city_walls = webgl_get_model(get_citywalls_models(pcity), ptile);
       if (city_walls != null) {
         city_walls.position.set(pos['x'] - 11, height - 6, pos['y'] - 11);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
@@ -293,7 +293,7 @@ function update_city_position(ptile) {
       }
     }
 
-    var city_label = create_city_label_sprite(pcity);
+    let city_label = create_city_label_sprite(pcity);
     city_label_positions[ptile['index']] = city_label;
     city_label.position.set(pos['x'] + 10 , height + 27, pos['y'] - 25);
 
@@ -303,7 +303,7 @@ function update_city_position(ptile) {
     add_city_buildings(ptile, pcity, scene);
 
     if (scene != null && city_light_positions[ptile['index']] == null ) {
-      var city_light = add_city_lights(pos['x'], pos['y'], height);
+      let city_light = add_city_lights(pos['x'], pos['y'], height);
       city_light_positions[ptile['index']] = city_light;
     }
     return;
@@ -311,11 +311,11 @@ function update_city_position(ptile) {
 
   if (city_positions[ptile['index']] != null && pcity != null) {
     // Update of visible city.
-    var model_name = city_to_3d_model_name(pcity);
+    let model_name = city_to_3d_model_name(pcity);
     if (pcity['webgl_model_name'] != model_name) {
       // update city model to a different size.
 
-      var new_city = webgl_get_model(model_name, ptile);
+      let new_city = webgl_get_model(model_name, ptile);
       if (new_city == null) {
         return;
       }
@@ -326,7 +326,7 @@ function update_city_position(ptile) {
       if (pcity['style'] == 3) height -= 2;
       if (pcity['style'] == 4) height -= 1;
 
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      let pos = map_to_scene_coords(ptile['x'], ptile['y']);
       new_city.position.set(pos['x'] - 12, height - 2, pos['y'] - 10);
       new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
 
@@ -340,10 +340,10 @@ function update_city_position(ptile) {
         delete city_walls_positions[ptile['index']];
       }
     }
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    let pos = map_to_scene_coords(ptile['x'], ptile['y']);
 
     if (scene != null && pcity['walls'] && city_walls_positions[ptile['index']] == null) {
-      var city_walls = webgl_get_model(get_citywalls_models(pcity), ptile);
+      let city_walls = webgl_get_model(get_citywalls_models(pcity), ptile);
       if (city_walls != null) {
         city_walls.position.set(pos['x'] - 11, height - 6, pos['y'] - 11);
         city_walls.scale.x = city_walls.scale.y = city_walls.scale.z = get_citywalls_scale(pcity);
@@ -355,7 +355,7 @@ function update_city_position(ptile) {
     add_city_buildings(ptile, pcity, scene);
 
     if (scene != null && city_light_positions[ptile['index']] == null) {
-      var city_light = add_city_lights(pos['x'], pos['y'], height);
+      let city_light = add_city_lights(pos['x'], pos['y'], height);
       city_light_positions[ptile['index']] = city_light;
     }
 
@@ -368,7 +368,7 @@ function update_city_position(ptile) {
   // City civil disorder label
   if (scene != null && pcity != null) {
     if (city_disorder_positions[ptile['index']] == null && pcity['unhappy']) {
-        var city_disorder_sprite = create_city_disorder_sprite();
+        let city_disorder_sprite = create_city_disorder_sprite();
         city_disorder_sprite.position.set(pos['x'] - 5, height + 25, pos['y'] - 10);
         scene.add(city_disorder_sprite);
         city_disorder_positions[ptile['index']] = city_disorder_sprite;
@@ -389,7 +389,7 @@ function update_tile_extras(ptile) {
 
   if (ptile == null || tile_get_known(ptile) == TILE_UNKNOWN) return;
 
-  var height = 4 + ptile['height'] * 100;
+  let height = 4 + ptile['height'] * 100;
 
   webgl_update_farmland_irrigation_vertex_colors(ptile);
 
@@ -403,7 +403,7 @@ function update_tile_extras(ptile) {
   update_tile_cactus(ptile);
 
   const extra_id = tile_resource(ptile);
-  var extra_resource = (extra_id === null) ? null : extras[extra_id];
+  let extra_resource = (extra_id === null) ? null : extras[extra_id];
   if (extra_resource != null && scene != null && tile_extra_positions_list[extra_resource['id'] + "." + ptile['index']] == null) {
     if (special_resources.includes(extra_resource['rule_name'])) {
       update_tile_extra_update_model(extra_resource['id'], extra_resource['rule_name'], ptile);
@@ -431,15 +431,15 @@ function add_city_buildings(ptile, pcity, scene) {
 ****************************************************************************/
 function add_wonder(ptile, pcity, scene, wonder_name) {
   if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
-    var wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
+    let wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
     if (wonder == null) {
       return;
     }
-    var nexttile = ptile;
-    for (var i = 0; i < 30; i++) {
-      var dir = Math.floor(Math.random() * 8);
-      var ntile = mapstep(ptile, dir);
-      var nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
+    let nexttile = ptile;
+    for (let i = 0; i < 30; i++) {
+      let dir = Math.floor(Math.random() * 8);
+      let ntile = mapstep(ptile, dir);
+      let nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
       if (is_ocean_tile(nexttile)
           || tile_get_known(nexttile) == TILE_UNKNOWN
           || city_owner_player_id(pcity) != tile_owner(nexttile)
@@ -461,7 +461,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     }
     if (nexttile == null) return;
 
-    var height = 5 + nexttile['height'] * 100;
+    let height = 5 + nexttile['height'] * 100;
     if (wonder_name == 'Lighthouse') {
       height += 4.2;
     }
@@ -474,7 +474,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       }
     }
 
-    var pos;
+    let pos;
     if (wonder_name == 'Colossus') {
       pos = map_to_scene_coords(ntile['x'] - 0.4, ntile['y'] - 0.4);
       height += 4.2;
@@ -497,14 +497,14 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
 ****************************************************************************/
 function add_city_building(ptile, pcity, scene, building_name) {
     if (city_has_building(pcity, improvement_id_by_name(building_name)) && pcity[building_name + '_added'] == null) {
-      var building = webgl_get_model(building_name.replaceAll(" ", ""), ptile);
+      let building = webgl_get_model(building_name.replaceAll(" ", ""), ptile);
       if (building == null) {
         return;
       }
-      var nexttile = ptile;
-      for (var i = 0; i < 30; i++) {
-        var dir = Math.floor(Math.random() * 8);
-        var nexttile = mapstep(ptile, dir);
+      let nexttile = ptile;
+      for (let i = 0; i < 30; i++) {
+        let dir = Math.floor(Math.random() * 8);
+        let nexttile = mapstep(ptile, dir);
 
         if (is_ocean_tile(nexttile)
             || tile_has_extra(nexttile, EXTRA_RIVER)
@@ -523,8 +523,8 @@ function add_city_building(ptile, pcity, scene, building_name) {
       }
       if (nexttile == null) return;
 
-      var height = 7 + nexttile['height'] * 100;
-      var y_offset = 0;
+      let height = 7 + nexttile['height'] * 100;
+      let y_offset = 0;
 
       if (building_name == "Temple") {
         height -= 0.6;
@@ -563,8 +563,8 @@ function add_city_building(ptile, pcity, scene, building_name) {
 function update_tile_extra_update_model(extra_type, extra_name, ptile)
 {
   if (tile_extra_positions_list[extra_type + "." + ptile['index']] == null && tile_has_extra(ptile, extra_type)) {
-    var num_models = 1;
-    var height = 5 + ptile['height'] * 100;
+    let num_models = 1;
+    let height = 5 + ptile['height'] * 100;
     if (extra_name == "Hut") {
       height -= 5;
     }
@@ -634,14 +634,14 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 6.0;
     }
 
-    for (var i = 0; i < num_models; i++) {
-      var model = webgl_get_model(extra_name, ptile);
+    for (let i = 0; i < num_models; i++) {
+      let model = webgl_get_model(extra_name, ptile);
       if (model == null) {
         return;
       }
 
       tile_extra_positions_list[extra_type + "." + ptile['index']] = [];
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      let pos = map_to_scene_coords(ptile['x'], ptile['y']);
       model.position.set( pos['x'] - 10 + (num_models == 1 ? 0 : (12 - Math.floor(Math.random() * 25))),
                          height + 1,
                          pos['y'] - 10 + (num_models == 1 ? 0 : (12 - Math.floor(Math.random() * 25))));
@@ -653,7 +653,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       if (scene != null) scene.add(model);
     }
   } else if (scene != null && tile_extra_positions_list[extra_type + "." + ptile['index']] != null && !tile_has_extra(ptile, extra_type)) {
-    for (var i = 0; i < tile_extra_positions_list[extra_type + "." + ptile['index']].length; i++) {
+    for (let i = 0; i < tile_extra_positions_list[extra_type + "." + ptile['index']].length; i++) {
       scene.remove(tile_extra_positions_list[extra_type + "." + ptile['index']][i]);
     }
     tile_extra_positions_list[extra_type + "." + ptile['index']] = null;
@@ -665,15 +665,15 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
 ****************************************************************************/
 function update_tile_forest(ptile)
 {
-  var terrain_name = tile_terrain(ptile).name;
+  let terrain_name = tile_terrain(ptile).name;
   const extra_id = tile_resource(ptile);
-  var extra_resource = (extra_id === null) ? null : extras[extra_id];
+  let extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Forest" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    var height = 4.8 + ptile['height'] * 100 + get_forest_offset(ptile);
+    let height = 4.8 + ptile['height'] * 100 + get_forest_offset(ptile);
     tile_models_list[ptile['index']] = [];
-    var modelname;
-    var rnd = Math.floor(Math.random() * 6);
+    let modelname;
+    let rnd = Math.floor(Math.random() * 6);
     if (rnd == 0) {
       modelname = "Tree1";
     } else if (rnd == 1) {
@@ -688,9 +688,9 @@ function update_tile_forest(ptile)
       modelname = "Tree4";
       height -= 1.2;
     }
-    for (var i = 0; i < 7; i++) {
-      var model = webgl_get_model(modelname, ptile);
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    for (let i = 0; i < 7; i++) {
+      let model = webgl_get_model(modelname, ptile);
+      let pos = map_to_scene_coords(ptile['x'], ptile['y']);
       model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (12 - Math.floor(Math.random() * 25)));
       model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
       model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (12 - Math.floor(Math.random() * 25)));
@@ -700,7 +700,7 @@ function update_tile_forest(ptile)
     }
 
   } else if (scene != null && tile_models_list[ptile['index']] != null && terrain_name != "Forest" && terrain_name != "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    for (var i = 0; i < tile_models_list[ptile['index']].length; i++) {
+    for (let i = 0; i < tile_models_list[ptile['index']].length; i++) {
       scene.remove(tile_models_list[ptile['index']][i]);
     }
     tile_models_list[ptile['index']] = null;
@@ -713,23 +713,23 @@ function update_tile_forest(ptile)
 ****************************************************************************/
 function update_tile_jungle(ptile)
 {
-  var terrain_name = tile_terrain(ptile).name;
+  let terrain_name = tile_terrain(ptile).name;
   const extra_id = tile_resource(ptile);
-  var extra_resource = (extra_id === null) ? null : extras[extra_id];
+  let extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
+    let height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
     tile_models_list[ptile['index']] = [];
-    var modelname;
-    var rnd = Math.floor(Math.random() * 2);
+    let modelname;
+    let rnd = Math.floor(Math.random() * 2);
     if (rnd == 0) {
       modelname = "Palm1";
     } else if (rnd == 1) {
       modelname = "Palm2";
     }
-    for (var i = 0; i < 6; i++) {
-      var model = webgl_get_model(modelname, ptile);
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    for (let i = 0; i < 6; i++) {
+      let model = webgl_get_model(modelname, ptile);
+      let pos = map_to_scene_coords(ptile['x'], ptile['y']);
       model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (12 - Math.floor(Math.random() * 25)));
       model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
       model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (12 - Math.floor(Math.random() * 25)));
@@ -739,7 +739,7 @@ function update_tile_jungle(ptile)
     }
 
   } else if (scene != null && tile_models_list[ptile['index']] != null && terrain_name != "Jungle"  && terrain_name != "Forest"  && tile_get_known(ptile) != TILE_UNKNOWN) {
-    for (var i = 0; i < tile_models_list[ptile['index']].length; i++) {
+    for (let i = 0; i < tile_models_list[ptile['index']].length; i++) {
       scene.remove(tile_models_list[ptile['index']][i]);
     }
     tile_models_list[ptile['index']] = null;
@@ -751,17 +751,17 @@ function update_tile_jungle(ptile)
 ****************************************************************************/
 function update_tile_cactus(ptile)
 {
-  var terrain_name = tile_terrain(ptile).name;
+  let terrain_name = tile_terrain(ptile).name;
 
-  var rnd = Math.floor(Math.random() * 12);
+  let rnd = Math.floor(Math.random() * 12);
   if (rnd != 1) return;
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Desert" && tile_get_known(ptile) != TILE_UNKNOWN) {
-    var height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
+    let height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
     tile_models_list[ptile['index']] = [];
-    var modelname = "Cactus1";
-    var model = webgl_get_model(modelname, ptile);
-    var pos = map_to_scene_coords(ptile['x'], ptile['y']);
+    let modelname = "Cactus1";
+    let model = webgl_get_model(modelname, ptile);
+    let pos = map_to_scene_coords(ptile['x'], ptile['y']);
     model.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), pos['x'] - 10 + (15 - Math.floor(Math.random() * 30)));
     model.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), height);
     model.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), pos['y'] - 10 + (15 - Math.floor(Math.random() * 30)));
@@ -801,18 +801,18 @@ function add_all_objects_to_scene()
   road_positions = {};
   rail_positions = {};
 
-  for (var unit_id in units) {
-    var punit = units[unit_id];
-    var ptile = index_to_tile(punit['tile']);
+  for (let unit_id in units) {
+    let punit = units[unit_id];
+    let ptile = index_to_tile(punit['tile']);
     update_unit_position(ptile);
   }
 
-  for (var city_id in cities) {
-    var pcity = cities[city_id];
+  for (let city_id in cities) {
+    let pcity = cities[city_id];
     update_city_position(city_tile(pcity));
   }
 
-  for (var tile_id in tiles) {
+  for (let tile_id in tiles) {
     update_tile_extras(tiles[tile_id]);
   }
 
@@ -823,8 +823,8 @@ function add_all_objects_to_scene()
  Add city lights
 ****************************************************************************/
 function add_city_lights(x, y, height) {
-  var texture = webgl_textures["city_light"];
-  var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
+  let texture = webgl_textures["city_light"];
+  let sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: texture}));
   sprite.scale.set(30, 30, 1);
   sprite.renderOrder = 0.1;
   sprite.position.set(x - 10, height + 3, y - 10);
