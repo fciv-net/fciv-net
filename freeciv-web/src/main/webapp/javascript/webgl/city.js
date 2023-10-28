@@ -137,7 +137,7 @@ function hide_city_labels() {
     city_labels_visible = false;
     $("#city_labels_hide_button").text("Show city labels");
   } else {
-    for (var cid in city_label_positions) {
+    for (let cid in city_label_positions) {
       var city_label = city_label_positions[cid];
       city_label.visible = true;
     }

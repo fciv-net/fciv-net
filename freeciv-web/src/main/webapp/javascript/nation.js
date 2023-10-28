@@ -116,7 +116,7 @@ function update_nation_screen()
     $('#take_player_button').hide();
   }
 
-  for (var player_id in players) {
+  for (let player_id in players) {
     var pplayer = players[player_id];
     var flag_canvas = $('#nation_dlg_flags_' + player_id);
     if (flag_canvas.length > 0) {
