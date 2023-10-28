@@ -56,7 +56,7 @@ function show_city_worked_tiles()
       shield_output = Math.floor(shield_output / game_info.granularity);
       trade_output = Math.floor(trade_output / game_info.granularity);
 
-      if (city_worked_positions[ptile['index']] == null && food_output != null && shield_output != null && trade_output != null) {
+      if (city_worked_positions[ptile['index']] == null) {
         var mesh = create_city_worked_sprite(food_output, shield_output, trade_output);
         city_worked_positions[ptile['index']] = mesh;
         mesh.position.set(pos['x'] + 2, height + 10, pos['y'] - 4);

@@ -1219,7 +1219,7 @@ function update_unit_order_commands()
 
     // Load unit on transport
     if (pcity != null) {
-      var units_on_tile = tile_units(ptile);
+      let units_on_tile = tile_units(ptile);
       for (var r = 0; r < units_on_tile.length; r++) {
         var tunit = units_on_tile[r];
         if (tunit['id'] == punit['id']) continue;
@@ -1229,7 +1229,7 @@ function update_unit_order_commands()
     }
 
     // Unload unit from transport
-    var units_on_tile = tile_units(ptile);
+    let units_on_tile = tile_units(ptile);
     if (ptype['transport_capacity'] > 0 && units_on_tile.length >= 2) {
       for (var r = 0; r < units_on_tile.length; r++) {
         var tunit = units_on_tile[r];
