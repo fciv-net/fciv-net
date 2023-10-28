@@ -56,7 +56,7 @@ function EventAggregator(handler, timeout, dataPolicy, latency, maxDelays, delay
   this.dataPolicy = dataPolicy || EventAggregator.DP_NONE;
   this.timer = null;
   this.clear();
-};
+}
 
 EventAggregator.DP_NONE  = 0; // Don't keep data
 EventAggregator.DP_FIRST = 1; // Keep only first
