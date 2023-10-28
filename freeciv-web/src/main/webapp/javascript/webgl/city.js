@@ -31,24 +31,24 @@ function show_city_worked_tiles()
   if (city_tile(active_city) != null && city_label_positions[city_tile(active_city)['index']] != null) {
     city_label_positions[city_tile(active_city)['index']].visible = false;
   }
-  var other_city_material = new THREE.MeshBasicMaterial( { color: 0xc33b3b, transparent: true, opacity: 0.4} );
+  let other_city_material = new THREE.MeshBasicMaterial( { color: 0xc33b3b, transparent: true, opacity: 0.4} );
 
   for (var tile_id in tiles) {
     var ptile = tiles[tile_id];
     if (active_city != null && ptile != null && ptile['worked'] != null
           && active_city['id'] == ptile['worked'] && active_city['output_food'] != null) {
-      var ctile = city_tile(active_city);
-      var d = map_distance_vector(ctile, ptile);
-      var idx = get_city_dxy_to_index(d[0], d[1], active_city);
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      var height = 5 + ptile['height'] * 100;
+      let ctile = city_tile(active_city);
+      let d = map_distance_vector(ctile, ptile);
+      let idx = get_city_dxy_to_index(d[0], d[1], active_city);
+      let pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      let height = 5 + ptile['height'] * 100;
       if (ctile['index'] == ptile['index']) {
         height += 15;
       }
 
-      var food_output = active_city['output_food'][idx];
-      var shield_output = active_city['output_shield'][idx];
-      var trade_output = active_city['output_trade'][idx];
+      let food_output = active_city['output_food'][idx];
+      let shield_output = active_city['output_shield'][idx];
+      let trade_output = active_city['output_trade'][idx];
 
       /* The ruleset may use large values scaled down to get greater
        * granularity. */
@@ -67,14 +67,14 @@ function show_city_worked_tiles()
     } else if (active_city != null && ptile != null && ptile['worked'] != null
                 && active_city['id'] != ptile['worked'] && ptile['worked'] > 0) {
       // tile worked by other city
-      var ctile = city_tile(active_city);
-      var d = map_distance_vector(ctile, ptile);
-      var idx = get_city_dxy_to_index(d[0], d[1], active_city);
-      var pos = map_to_scene_coords(ptile['x'], ptile['y']);
-      var height = 5 + ptile['height'] * 100;
+      let ctile = city_tile(active_city);
+      let d = map_distance_vector(ctile, ptile);
+      let idx = get_city_dxy_to_index(d[0], d[1], active_city);
+      let pos = map_to_scene_coords(ptile['x'], ptile['y']);
+      let height = 5 + ptile['height'] * 100;
 
       if (city_worked_positions[ptile['index']] == null && Math.abs(d[0]) <= 2 && Math.abs(d[1]) <= 2) {
-        var mesh = new THREE.Mesh( new THREE.RingGeometry( 1, 15, 30), other_city_material );
+        let mesh = new THREE.Mesh( new THREE.RingGeometry( 1, 15, 30), other_city_material );
         city_worked_positions[ptile['index']] = mesh;
         mesh.position.set(pos['x'] - 12, height + 3, pos['y'] - 9);
         mesh.rotation.x = -1 * Math.PI / 2;
