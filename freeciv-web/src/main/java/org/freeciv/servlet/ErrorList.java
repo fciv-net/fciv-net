@@ -83,6 +83,8 @@ public class ErrorList extends HttpServlet {
                 try {
                     conn.close();
                 } catch (SQLException e) {
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    response.getOutputStream().print(INTERNAL_SERVER_ERROR);
                 }
             }
         }
