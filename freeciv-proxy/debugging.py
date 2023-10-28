@@ -54,7 +54,7 @@ def get_debug_info(civcoms):
                 (civcoms[key].username,
                  civcoms[key].civserverport,
                  time.time() - civcoms[key].connect_time))
-    except:
+    except Exception:
         print(("Unexpected error:" + str(sys.exc_info()[0])))
         raise
 

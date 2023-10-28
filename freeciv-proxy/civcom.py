@@ -191,7 +191,7 @@ class CivCom(Thread):
                     header +
                     utf8_encoded +
                     b'\0')
-        except:
+        except Exception:
             self.send_error_to_client(
                 "Proxy unable to communicate with civserver on port " + str(self.civserverport))
         finally:
