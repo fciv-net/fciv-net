@@ -329,7 +329,11 @@ function create_diplomacy_dialog(counterpart, template) {
 				},
 				"Cancel meeting" : function() {
 				    cancel_meeting_req(counterpart_id);
-				}
+				},
+                "Declare war": function() {
+                    diplomacy_cancel_treaty(counterpart_id);
+                    cancel_meeting_req(counterpart_id);
+                }
 			},
 			close: function() {
 			     cancel_meeting_req(counterpart_id);

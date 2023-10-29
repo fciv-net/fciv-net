@@ -443,7 +443,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     for (let i = 0; i < 30; i++) {
       let dir = Math.floor(Math.random() * 8);
       let ntile = mapstep(ptile, dir);
-      let nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
+      nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
       if (is_ocean_tile(nexttile)
           || tile_get_known(nexttile) == TILE_UNKNOWN
           || city_owner_player_id(pcity) != tile_owner(nexttile)
@@ -508,7 +508,7 @@ function add_city_building(ptile, pcity, scene, building_name) {
       let nexttile = ptile;
       for (let i = 0; i < 30; i++) {
         let dir = Math.floor(Math.random() * 8);
-        let nexttile = mapstep(ptile, dir);
+        nexttile = mapstep(ptile, dir);
 
         if (is_ocean_tile(nexttile)
             || tile_has_extra(nexttile, EXTRA_RIVER)
