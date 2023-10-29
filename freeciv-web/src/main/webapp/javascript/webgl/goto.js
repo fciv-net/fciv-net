@@ -29,7 +29,7 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
   var ptile = start_tile;
 
   var material = new THREE.MeshBasicMaterial( { color: 0x55c0ff, side:THREE.DoubleSide, transparent: false } );
-  var goto_width = 2;
+  var goto_width = 2.5;
 
   for (var i = 0; i < goto_packet_dir.length; i++) {
     if (ptile == null) break;

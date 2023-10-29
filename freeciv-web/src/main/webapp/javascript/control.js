@@ -369,10 +369,7 @@ function update_mouse_cursor()
 
   if (ptile == null) return;
 
-  terrain_material.uniforms.mouse_x.value = ptile.x;
-  terrain_material.uniforms.mouse_x.needsUpdate = true;
-  terrain_material.uniforms.mouse_y.value = ptile.y;
-  terrain_material.uniforms.mouse_y.needsUpdate = true;
+  highlight_map_tile_mouse(ptile.x, ptile.y);
 
   var punit = find_visible_unit(ptile);
   var pcity = tile_city(ptile);
@@ -1386,10 +1383,12 @@ function set_unit_focus(punit)
   current_focus = [];
   if (punit == null) {
     current_focus = [];
+    highlight_map_tile_selected(-1, -1);
   } else {
     current_focus[0] = punit;
     action_selection_next_in_focus(IDENTITY_NUMBER_ZERO);
     update_unit_position(index_to_tile(punit['tile']));
+    highlight_map_tile_selected(index_to_tile(punit['tile']).x, index_to_tile(punit['tile']).y);
   }
   update_active_units_dialog();
 }
@@ -1408,6 +1407,7 @@ function set_unit_focus_and_redraw(punit)
     current_focus[0] = punit;
     action_selection_next_in_focus(IDENTITY_NUMBER_ZERO);
     update_unit_position(index_to_tile(punit['tile']));
+    highlight_map_tile_selected(index_to_tile(punit['tile']).x, index_to_tile(punit['tile']).y);
   }
 
   auto_center_on_focus_unit();

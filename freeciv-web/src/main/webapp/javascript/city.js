@@ -164,6 +164,7 @@ function show_city_dialog(pcity)
 
   $("#city_dialog").html(Handlebars.templates['city'](city_data));
 
+  highlight_map_tile_selected(city_tile(pcity).x, city_tile(pcity).y);
 
   show_city_traderoutes();
 
@@ -771,6 +772,7 @@ function close_city_dialog_trigger()
 function close_city_dialog()
 {
   $("#city_dialog").dialog('close');
+  highlight_map_tile_selected(-1, -1);
 }
 
 /**************************************************************************

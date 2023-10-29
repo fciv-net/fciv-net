@@ -124,6 +124,7 @@ function update_unit_position(ptile) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
         selected_unit_indicator = null;
+        highlight_map_tile_selected(-1, -1);
       }
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
@@ -132,6 +133,7 @@ function update_unit_position(ptile) {
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
+        highlight_map_tile_selected(ptile.x, ptile.y);
       }
     }
 
@@ -190,6 +192,7 @@ function update_unit_position(ptile) {
       if (selected_unit_indicator != null) {
         scene.remove(selected_unit_indicator);
         selected_unit_indicator = null;
+        highlight_map_tile_selected(-1, -1);
       }
       if (visible_unit['anim_list'].length == 0) {
         selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
@@ -197,6 +200,7 @@ function update_unit_position(ptile) {
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);
         selected_unit_indicator = selected_mesh;
+        highlight_map_tile_selected(ptile.x, ptile.y);
       }
     }
 
@@ -781,6 +785,7 @@ function webgl_clear_unit_focus()
     scene.remove(selected_unit_indicator);
     selected_unit_indicator = null;
   }
+  highlight_map_tile_selected(-1, -1);
 }
 
 /****************************************************************************

@@ -50,6 +50,9 @@ uniform float map_y_size;
 uniform int mouse_x;
 uniform int mouse_y;
 
+uniform int selected_x;
+uniform int selected_y;
+
 varying vec2 vUv;
 varying vec3 vPosition;
 varying vec3 vPosition_camera;
@@ -169,6 +172,11 @@ void main(void)
 
     if (vColor.r == 0.0) {
         gl_FragColor.rgb = vec3(0, 0, 0);
+
+        if (mouse_x >= 0 && mouse_y >= 0 && mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
+            gl_FragColor.rgb = vec3(0.3, 0.3, 0.3);
+        }
+
         return;
     }
 
@@ -523,8 +531,11 @@ void main(void)
 
     float shade_factor = 0.32 + 1.42 * max(0., dot(vNormal, normalize(light)));
 
-    if (mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
-        shade_factor = shade_factor * 2.0;
+    if (mouse_x >= 0 && mouse_y >= 0 && mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
+        shade_factor += + 0.6;
+    }
+    if (selected_x >= 0 && selected_y >= 0 && selected_x == int(floor((map_x_size * vUv.x ))) && selected_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
+        shade_factor += + 1.0;
     }
 
     // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
