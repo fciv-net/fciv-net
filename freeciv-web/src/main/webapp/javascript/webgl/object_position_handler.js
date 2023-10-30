@@ -440,9 +440,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       return;
     }
     let nexttile = ptile;
+    let ntile = ptile;
     for (let i = 0; i < 30; i++) {
       let dir = Math.floor(Math.random() * 8);
-      let ntile = mapstep(ptile, dir);
+      ntile = mapstep(ptile, dir);
       nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
       if (is_ocean_tile(nexttile)
           || tile_get_known(nexttile) == TILE_UNKNOWN
@@ -463,7 +464,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       break;
 
     }
-    if (nexttile == null) return;
+    if (nexttile == null || ntile == null) return;
 
     let height = 5 + nexttile['height'] * 100;
     if (wonder_name == 'Lighthouse') {
