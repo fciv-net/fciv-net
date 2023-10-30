@@ -154,15 +154,15 @@ function hide_city_labels() {
 function get_citywalls_scale(pcity)
 {
   var style = get_citywalls_models(pcity);
-  var scale = 8;
+  var scale = 9;
   if (pcity['size'] >=3 && pcity['size'] <=6) {
-    scale = 9.0;
-  } else if (pcity['size'] > 6 && pcity['size'] <= 9) {
     scale = 9.5;
-  } else if (pcity['size'] > 9 && pcity['size'] <= 11) {
-    scale = 10.0;
-  } else if (pcity['size'] > 11) {
+  } else if (pcity['size'] > 6 && pcity['size'] <= 9) {
     scale = 10.5;
+  } else if (pcity['size'] > 9 && pcity['size'] <= 11) {
+    scale = 11.0;
+  } else if (pcity['size'] > 11) {
+    scale = 12.5;
   }
   if (style == "citywalls_stone") {
     return scale;
