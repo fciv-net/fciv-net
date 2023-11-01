@@ -420,7 +420,7 @@ function update_tile_extras(ptile) {
   Adds city buildings
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
-  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower"];
+  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens"];
   const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse", "University", "Factory", "Marketplace"];
 
   wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
@@ -470,7 +470,9 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     if (wonder_name == 'Lighthouse') {
       height += 4.2;
     }
-
+    if (wonder_name == 'Hanging Gardens') {
+      height -= 0.1;
+    }
     if (wonder_name == 'Statue of Liberty') {
       if (is_ocean_tile(nexttile)) {
         height += 20.1;
@@ -490,7 +492,7 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
     }
 
-    wonder.position.set(pos['x'] - 1, height - 7, pos['y'] - 1);
+    wonder.position.set(pos['x'] - 10, height - 7, pos['y'] - 6);
     pcity[wonder_name + '_added'] = true;
     city_building_positions[nexttile['index']] = true;
     scene.add(wonder);
