@@ -132,7 +132,7 @@ def validate_username(name):
     for civkey in civcoms.keys():
         if name == civcoms[civkey].username:
             logger.warn("User already connected: "  + name)
-        return False
+            return False
 
     name = name.lower()
     return re.fullmatch('[a-z][a-z0-9]*', name) is not None
