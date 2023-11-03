@@ -32,7 +32,10 @@ function webgl_benchmark_run()
   $("#pregame_settings").dialog('close');
   send_message("/set mapseed 420");
   send_message("/set gameseed 420");
+  send_message("/set revealmap start");
   send_message("/start");
+  dialogs_minimized_setting = true;
+  show_fps();
   setTimeout(benchmark_check, 1000);
 }
 
@@ -52,7 +55,7 @@ function benchmark_check()
     $("#tech_dialog").dialog('close');
   } catch (err)  {}
 
-  if (game_info != null && game_info['turn'] >= 30) {
+  if (game_info != null && game_info['turn'] >= 50) {
     var time_elapsed =  (new Date().getTime() - benchmark_start) / 1000;
     var fps = Math.floor(benchmark_frames_count / time_elapsed);
 
