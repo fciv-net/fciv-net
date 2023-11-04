@@ -371,7 +371,7 @@ function update_city_position(ptile) {
   if (scene != null && pcity != null) {
     if (city_disorder_positions[ptile['index']] == null && pcity['unhappy']) {
         let city_disorder_sprite = create_city_disorder_sprite();
-        city_disorder_sprite.position.set(pos['x'] - 5, height + 19, pos['y'] - 10);
+        city_disorder_sprite.position.set(pos['x'] - 5, height + 14, pos['y'] - 10);
         scene.add(city_disorder_sprite);
         city_disorder_positions[ptile['index']] = city_disorder_sprite;
 

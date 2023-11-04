@@ -478,9 +478,6 @@ function pregame_settings()
 	  "<td><input type='number' name='citymindist' id='citymindist' size='4' length='4' min='1' max='9' step='1'></td></tr>" +
           "<tr title='The game will end at the end of the given turn.'><td>End turn:</td>" +
 	  "<td><input type='number' name='endturn' id='endturn' size='4' length='4' min='0' max='32767' step='1'></td></tr>" +
-	  "<tr class='not_pbem' title='Enables score graphs for all players, showing score, population, techs and more."+
-          " This will lead to information leakage about other players.'><td>Score graphs</td>" +
-          "<td><input type='checkbox' name='scorelog_setting' id='scorelog_setting' checked>Enable score graphs</td></tr>" +
       "<tr id='killstack_area'><td id='killstack_label'></td>" +
           "<td><input type='checkbox' id='killstack_setting'>Enable killstack</td></tr>" +
 	  "<tr title='Method used to generate map'><td>Map generator:</td>" +
@@ -771,15 +768,6 @@ function pregame_settings()
       send_message("/hard");
     } else if (ai_skill_level == 6) {
       send_message("/cheating");
-    }
-  });
-
-  $('#scorelog_setting').change(function() {
-    var scorelog_enabled = $('#scorelog_setting').prop('checked');  
-    if (scorelog_enabled) {
-      send_message("/set scorelog enabled");
-    } else {
-      send_message("/set scorelog disabled");
     }
   });
 
