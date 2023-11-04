@@ -125,6 +125,10 @@ function convert_unit_rotation(facing_dir, unit_type_name)
   if (unit_type_name == "Ironclad" || unit_type_name == "Artillery") {
     return rotation_rad * Math.PI * 2 / 8 - (Math.PI / 2);
   }
+  if (unit_type_name == "Catapult") {
+    return rotation_rad * Math.PI * 2 / 8 + (Math.PI / 2);
+  }
+
 
   return rotation_rad * Math.PI * 2 / 8
 

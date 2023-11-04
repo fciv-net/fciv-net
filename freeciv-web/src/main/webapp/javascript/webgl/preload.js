@@ -259,9 +259,15 @@ switch (filename) {
     modelscale = 3.4;
     break;
   case 'Catapult':
-    modelscale = 8.2;
+    modelscale = 2.1;
+    break;
+  case 'OilWell':
+    modelscale = 2.4;
     break;
   case 'Howitzer':
+    modelscale = 8;
+    break;
+  case 'Freight':
     modelscale = 8;
     break;
   case 'Mech. Inf.':
@@ -371,6 +377,9 @@ switch (filename) {
   case 'Fallout':
     modelscale = 6;
     break;
+  case 'Pollution':
+    modelscale = 1.5;
+    break;
   case 'Gold':
     modelscale = 9;
     break;
@@ -413,8 +422,10 @@ switch (filename) {
   case 'Cruiser':
     modelscale = 0.85;
     break;
-  case 'Airbase':
   case 'Fortress':
+    modelscale = 3.6;
+    break;
+  case 'Airbase':
   case 'Engineers':
   case 'Nuclear':
   case 'Settlers':
