@@ -55,7 +55,7 @@ function benchmark_check()
     $("#tech_dialog").dialog('close');
   } catch (err)  {}
 
-  if (game_info != null && game_info['turn'] >= 50) {
+  if (game_info != null && game_info['turn'] >= 15) {
     var time_elapsed =  (new Date().getTime() - benchmark_start) / 1000;
     var fps = Math.floor(benchmark_frames_count / time_elapsed);
 
@@ -75,7 +75,7 @@ function benchmark_check()
 				}
 			}
 		});
-
+    console.log(maprenderer.info);
     $("#benchmark_dialog").dialog('open');
 
     benchmark_enabled = false;

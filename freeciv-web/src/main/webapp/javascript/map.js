@@ -522,3 +522,17 @@ function map_tile_height_adjust(ptile)
 
   }
 }
+
+/****************************************************************************
+...
+****************************************************************************/
+function map_tile_distance(ptile1, ptile2)
+{
+  if (ptile1 == null || ptile2 == null) return 0;
+
+  const dx = ptile2.x - ptile1.x;
+  const dy = ptile2.y - ptile1.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  return distance;
+
+}

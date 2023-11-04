@@ -441,23 +441,34 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     }
     let nexttile = ptile;
     let ntile = ptile;
+    let origtile = ptile;
     for (let i = 0; i < 30; i++) {
       let dir = Math.floor(Math.random() * 8);
       ntile = mapstep(ptile, dir);
       nexttile = (wonder_name == 'Colossus') ? ntile : mapstep(ntile, dir);
+
+      if (map_tile_distance(ptile, nexttile) > 3) {
+        ptile = origtile;
+      }
       if (is_ocean_tile(nexttile)
           || tile_get_known(nexttile) == TILE_UNKNOWN
           || city_owner_player_id(pcity) != tile_owner(nexttile)
           || tile_city(nexttile) != null) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        if (ptile == null) ptile = origtile;
+        nexttile = null;
         continue;
       }
       if (city_positions[nexttile['index']] != null || city_building_positions[nexttile['index']] != null) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        if (ptile == null) ptile = origtile;
+        nexttile = null;
         continue;
       }
       if (wonder_name == 'Lighthouse' && !is_ocean_tile_near(nexttile)) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+        if (ptile == null) ptile = origtile;
+        nexttile = null;
         continue;
       }
 
@@ -509,9 +520,14 @@ function add_city_building(ptile, pcity, scene, building_name) {
         return;
       }
       let nexttile = ptile;
+      let origtile = ptile;
       for (let i = 0; i < 30; i++) {
         let dir = Math.floor(Math.random() * 8);
         nexttile = mapstep(ptile, dir);
+
+        if (map_tile_distance(ptile, nexttile) > 3) {
+          ptile = origtile;
+        }
 
         if (is_ocean_tile(nexttile)
             || tile_has_extra(nexttile, EXTRA_RIVER)
@@ -519,10 +535,14 @@ function add_city_building(ptile, pcity, scene, building_name) {
             || city_owner_player_id(pcity) != tile_owner(nexttile)
             || tile_city(nexttile) != null) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          if (ptile == null) ptile = origtile;
+          nexttile = null;
           continue;
         }
         if (city_positions[nexttile['index']] != null || city_building_positions[nexttile['index']] != null) {
           ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          if (ptile == null) ptile = origtile;
+          nexttile = null;
           continue;
         }
 
