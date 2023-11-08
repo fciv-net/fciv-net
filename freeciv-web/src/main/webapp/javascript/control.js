@@ -349,6 +349,8 @@ function mouse_moved_cb(e)
       && Math.abs(mouse_y - map_select_y) > 45
       && (new Date().getTime() - map_select_check_started) > 200)  {
     map_select_active = true;
+    map_draw_select_lines();
+
   }
 
 }
@@ -3321,7 +3323,7 @@ function update_active_units_dialog()
 
   if (current_focus.length > 0) {
     /* reposition and resize unit dialog. */
-    var newwidth = 32 + punits.length * (width );
+    var newwidth = 32 + punits.length * (width * 1.3);
     if (newwidth < 100) newwidth = 100;
     var newheight = 65 + normal_tile_height;
     $("#game_unit_panel").parent().show();

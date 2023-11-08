@@ -21,6 +21,11 @@ var timeOfLastPinchZoom = new Date().getTime();
 var map_select_check = false;
 var map_select_active = false;
 
+var map_select_check_started = 0;
+var map_select_x;
+var map_select_y;
+var map_select_lines = [];
+
 /****************************************************************************
  Init WebGL mapctrl.
 ****************************************************************************/
@@ -83,12 +88,12 @@ function webglOnDocumentMouseUp( e ) {
 
   if (rightclick) {
     /* right click to recenter. */
-    if (!map_select_active || !map_select_setting_enabled) {
+    if (!map_select_active) {
       context_menu_active = true;
       webgl_recenter_button_pressed(ptile);
     } else {
       context_menu_active = false;
-      //map_select_units(mouse_x, mouse_y);
+      map_select_units(mouse_x, mouse_y);
     }
     map_select_active = false;
     map_select_check = false;
@@ -134,6 +139,12 @@ function webglOnDocumentMouseDown(e) {
     popit();
     return false;
   } else if (rightclick && !map_select_active && is_right_mouse_selection_supported()) {
+
+    map_select_check = true;
+    map_select_x = mouse_x;
+    map_select_y = mouse_y;
+    map_select_check_started = new Date().getTime();
+
     /* The context menu blocks the right click mouse up event on some
      * browsers. */
     context_menu_active = false;
@@ -280,7 +291,7 @@ function webgl_action_button_pressed(canvas_x, canvas_y, qtype)
 **************************************************************************/
 function highlight_map_tile_mouse(x, y)
 {
-  if (terrain_material != null) {
+  if (terrain_material != null && !map_select_active) {
     terrain_material.uniforms.mouse_x.value = x;
     terrain_material.uniforms.mouse_x.needsUpdate = true;
     terrain_material.uniforms.mouse_y.value = y;
@@ -299,4 +310,108 @@ function highlight_map_tile_selected(x, y)
     terrain_material.uniforms.selected_y.value = y;
     terrain_material.uniforms.selected_y.needsUpdate = true;
   }
+}
+
+/**************************************************************************
+Selects units in the map selection rectangle.
+**************************************************************************/
+function map_select_units(mouse_x, mouse_y)
+{
+  if (client_is_observer()) return;
+  var selected_units = [];
+
+  for (let i = 0; i < map_select_lines.length; i++) {
+    scene.remove(map_select_lines[i]);
+  }
+  map_select_lines = [];
+
+
+  let x1 = map_select_x;
+  let y1 = map_select_y;
+  let x2 = mouse_x;
+  let y2 = mouse_y;
+
+  if (x1 > x2) {
+    let tmp = x1;
+    x1 = x2;
+    x2 = tmp;
+  }
+  if (y1 > y2) {
+    let tmp = y1;
+    y1 = y2;
+    y2 = tmp;
+  }
+
+  let selected_map_tiles = {};
+  for (let x = x1; x < x2; x += 18) {
+    for (let y = y1; y < y2; y += 18) {
+      var ptile = webgl_canvas_pos_to_tile(x, y);
+      if (ptile != null) {
+        selected_map_tiles[ptile['index']] = ptile;
+      }
+    }
+  }
+
+  for (var tile_id in selected_map_tiles) {
+    var ptile = selected_map_tiles[tile_id];
+    let cunits = tile_units(ptile);
+    if (cunits == null) continue;
+    for (var i = 0; i < cunits.length; i++) {
+      var aunit = cunits[i];
+      if (aunit['owner'] == client.conn.playing.playerno) {
+        selected_units.push(aunit);
+      }
+    }
+  }
+  current_focus = selected_units;
+  action_selection_next_in_focus(IDENTITY_NUMBER_ZERO);
+  update_active_units_dialog();
+
+}
+
+/**************************************************************************
+Draws a rectangle on the map representing the unit selection.
+**************************************************************************/
+function map_draw_select_lines() {
+
+  for (let i = 0; i < map_select_lines.length; i++) {
+    scene.remove(map_select_lines[i]);
+  }
+  map_select_lines = [];
+
+  let x1 = map_select_x;
+  let y1 = map_select_y;
+  let x2 = mouse_x;
+  let y2 = mouse_y;
+
+  let pos1 = webgl_canvas_pos_to_map_pos(x1, y1);
+  let pos2 = webgl_canvas_pos_to_map_pos(x2, y1);
+  let pos3 = webgl_canvas_pos_to_map_pos(x1, y2);
+  let pos4 = webgl_canvas_pos_to_map_pos(x2, y2);
+  if (pos1 == null || pos2 == null || pos3 == null || pos4 == null) {
+    return;
+  }
+
+  var height = 5 + 0.75 * 100;
+
+  const material = new THREE.LineDashedMaterial({
+  	color: 0xff0000,
+  	linewidth: 2,
+  });
+
+  const points = [];
+
+
+  points.push( new THREE.Vector3( pos1['x'], height, pos1['y']));
+  points.push( new THREE.Vector3( pos2['x'], height, pos2['y']));
+  points.push( new THREE.Vector3( pos4['x'], height, pos4['y']));
+  points.push( new THREE.Vector3( pos3['x'], height, pos3['y']));
+  points.push( new THREE.Vector3( pos1['x'], height, pos1['y']));
+
+  const geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+  const selectline = new THREE.Line( geometry, material );
+  scene.add(selectline);
+  map_select_lines.push(selectline);
+
 }
