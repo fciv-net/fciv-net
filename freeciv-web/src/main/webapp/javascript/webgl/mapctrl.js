@@ -318,6 +318,8 @@ Selects units in the map selection rectangle.
 function map_select_units(mouse_x, mouse_y)
 {
   if (client_is_observer()) return;
+  webgl_clear_unit_focus();
+  
   var selected_units = [];
 
   for (let i = 0; i < map_select_lines.length; i++) {
