@@ -345,9 +345,9 @@ function map_select_units(mouse_x, mouse_y)
   }
 
   let selected_map_tiles = {};
-  for (let x = x1; x < x2; x += 18) {
-    for (let y = y1; y < y2; y += 18) {
-      var ptile = webgl_canvas_pos_to_tile(x, y);
+  for (let x = x1; x < x2; x += 15) {
+    for (let y = y1; y < y2; y += 15) {
+      var ptile = webgl_canvas_pos_to_tile_quick(x, y);
       if (ptile != null) {
         selected_map_tiles[ptile['index']] = ptile;
       }

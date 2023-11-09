@@ -226,10 +226,10 @@ function init_webgl_mapview() {
   }
 
   // Low-resolution terrain mesh used for raycasting to find mouse postition.
-  create_heightmap(is_hex() ? 6 : 2);
+  create_heightmap(2);
   var lofiMaterial = new THREE.MeshStandardMaterial({"color" : 0x00ff00});
   lofiGeometry = new THREE.BufferGeometry();
-  create_land_geometry(lofiGeometry, is_hex() ? 6 : 2);
+  create_land_geometry(lofiGeometry, 2);
   lofiMesh = new THREE.Mesh( lofiGeometry, lofiMaterial );
   lofiMesh.layers.set(6);
   scene.add(lofiMesh);

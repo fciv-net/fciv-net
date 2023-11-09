@@ -172,7 +172,7 @@ function generate_overview_hash(cols, rows) {
     }
   }
 
-    var ptile = webgl_canvas_pos_to_tile($(window).width() / 6, $(window).height() / 6);
+    var ptile = webgl_canvas_pos_to_tile_quick($(window).width() / 6, $(window).height() / 6);
     if (ptile != null) {
       hash += ptile['x'];
       hash += ptile['y'];
@@ -192,16 +192,16 @@ function render_viewrect()
     var w = $(window).width();
     var h = $(window).height();
 
-    var ptile = webgl_canvas_pos_to_tile(w / 6, h / 6);
+    var ptile = webgl_canvas_pos_to_tile_quick(w / 6, h / 6);
     if (ptile == null) return;
     path.push([ptile.x, ptile.y]);
-    var ptile = webgl_canvas_pos_to_tile(5 * w / 6, h / 6);
+    var ptile = webgl_canvas_pos_to_tile_quick(5 * w / 6, h / 6);
     if (ptile == null) return;
     path.push([ptile.x, ptile.y]);
-    var ptile = webgl_canvas_pos_to_tile(5 * w / 6, h - height_offset);
+    var ptile = webgl_canvas_pos_to_tile_quick(5 * w / 6, h - height_offset);
     if (ptile == null) return;
     path.push([ptile.x, ptile.y]);
-    var ptile = webgl_canvas_pos_to_tile(w / 6, h - height_offset);
+    var ptile = webgl_canvas_pos_to_tile_quick(w / 6, h - height_offset);
     if (ptile == null) return;
     path.push([ptile.x, ptile.y]);
 
