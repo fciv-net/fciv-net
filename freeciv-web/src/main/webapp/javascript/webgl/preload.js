@@ -329,6 +329,9 @@ switch (filename) {
   case 'Mine':
     modelscale = 13;
     break;
+  case 'Windmill':
+    modelscale = 0.95;
+    break;
   case 'Oil':
     modelscale = 15;
     break;
@@ -478,6 +481,12 @@ switch (filename) {
     break;
   case 'Temple':
     modelscale = 2.0;
+    break;
+  case 'Bank':
+    modelscale = 1.65;
+    break;
+  case 'Oracle':
+    modelscale = 1.3;
     break;
   case 'Factory':
     modelscale = 2.2;

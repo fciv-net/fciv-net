@@ -418,8 +418,9 @@ function update_tile_extras(ptile) {
   Adds city buildings
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
-  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens"];
-  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "Courthouse", "University", "Factory", "Marketplace"];
+  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle"];
+  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral",
+                         "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill"];
 
   wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
   cityBuildings.forEach(building => add_city_building(ptile, pcity, scene, building));
@@ -482,6 +483,9 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     if (wonder_name == 'Hanging Gardens') {
       height -= 0.1;
     }
+    if (wonder_name == 'Oracle') {
+      height -= 0.1;
+    }
     if (wonder_name == 'Statue of Liberty') {
       if (is_ocean_tile(nexttile)) {
         height += 20.1;
@@ -527,7 +531,7 @@ function add_city_building(ptile, pcity, scene, building_name) {
           ptile = origtile;
         }
 
-        if (is_ocean_tile(nexttile)
+        if ((is_ocean_tile(nexttile) && building_name != "Windmill")
             || tile_has_extra(nexttile, EXTRA_RIVER)
             || tile_get_known(nexttile) == TILE_UNKNOWN
             || city_owner_player_id(pcity) != tile_owner(nexttile)
@@ -572,6 +576,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       }
       if (building_name.indexOf("Cathedral") >= 0) {
         height -= 1.2;
+      }
+      if (building_name == "Bank") {
+        height -= 0.6;
       }
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
 

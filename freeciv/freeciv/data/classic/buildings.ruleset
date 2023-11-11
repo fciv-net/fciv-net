@@ -152,6 +152,31 @@ Together with the Marketplace improvement, a Bank increases the\
  luxury and tax production within a city by 100%.\
 ")
 
+
+[building_windmill]
+name            = _("Windmill")
+genus           = "Improvement"
+reqs    =
+    { "type", "name", "range", "present"
+      "Tech", "Electricity", "Player", TRUE
+    }
+graphic = "b.windmill"
+graphic_alt     = "a.environmentalism"
+obsolete_by	=
+    { "type", "name", "range"
+    }
+build_cost      = 15
+upkeep  = 1
+sabotage        = 100
+sound           = "b_factory"
+sound_alt       = "b_generic"
+helptext        = _("\
+Windmill uses power of wind to grind grains. Such improvement increases tax production by 50%,  and halves food waste \
+(entirely eliminates food waste together with Granary, except of Despotism where Courthouse is also needed).\
+")
+
+
+
 [building_barracks]
 name		= _("Barracks")
 genus		= "Improvement"
@@ -1831,3 +1856,4 @@ This is not a normal improvement.  Instead, setting a city's\
  production to Coinage means its shield production is\
  converted to tax output (money, coins!).\
 ")
+

@@ -2720,3 +2720,25 @@ reqs    =
     { "type",   "name",         "range", "present"
       "Action", "Upgrade Unit", "Local", TRUE
     }
+
+
+; halves food waste except of Despotism
+[effect_windmill]
+type    = "Output_Waste_Pct"
+value   = 25                
+reqs    =                   
+    { "type", "name", "range"
+      "Building", "Windmill", "City"
+      "OutputType", "Food", "Local" 
+    }
+
+[effect_windmill_1]
+type    = "Output_Bonus"
+value   = 50
+reqs    = 
+    { "type", "name", "range"
+      "Building", "Windmill", "City"
+      "OutputType", "Gold", "Local"
+    }
+
+

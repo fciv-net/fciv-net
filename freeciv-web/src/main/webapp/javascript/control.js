@@ -1136,16 +1136,14 @@ function update_unit_order_commands()
                  && tile_has_extra(ptile, EXTRA_ROAD)
                && !tile_has_extra(ptile, EXTRA_RAIL)) {
 	    unit_actions['railroad'] = {name: "Build railroad (R)"};
-      } else {
-      }
-      if (tile_has_extra(ptile, EXTRA_RIVER) && player_invention_state(client.conn.playing, tech_id_by_name('Bridge Building')) == TECH_UNKNOWN) {
-
       }
 
       if (!tile_has_extra(ptile, EXTRA_MINE) && tile_terrain(ptile)['mining_time'] > 0) {
         unit_actions["mine"] =  {name: "Mine (M)"};
-      } else {
+      }
 
+      if (ptype['name'] == "Engineers") {
+        unit_actions["mine"] =  {name: "Oil well"};
       }
 
       if (tile_has_extra(ptile, EXTRA_FALLOUT) || tile_has_extra(ptile, EXTRA_POLLUTION)) {
@@ -1154,20 +1152,17 @@ function update_unit_order_commands()
 
       if (tile_terrain(ptile)['cultivate_time'] > 0) {
         unit_actions["cultivate"] = {name: "Cultivate (I)"};
-      } else {
       }
       if (tile_terrain(ptile)['irrigation_time'] > 0) {
         if (!tile_has_extra(ptile, EXTRA_IRRIGATION)) {
           unit_actions["irrigation"] = {name: "Irrigation (I)"};
         } else if (!tile_has_extra(ptile, EXTRA_FARMLAND) && player_invention_state(client.conn.playing, tech_id_by_name('Refrigeration')) == TECH_KNOWN) {
           unit_actions["irrigation"] = {name: "Build farmland (I)"};
-        } else {
         }
-      } else {
       }
       if (tile_terrain(ptile)['plant_time'] > 0) {
         unit_actions["plant"] = {name: "Plant (M)"};
-      } else {
+
       }
       if (player_invention_state(client.conn.playing, tech_id_by_name('Construction')) == TECH_KNOWN) {
         unit_actions["fortress"] = {name: string_unqualify(terrain_control['gui_type_base0']) + " (Shift-F)"};
@@ -1186,7 +1181,6 @@ function update_unit_order_commands()
 
     if (utype_can_do_action(ptype, ACTION_TRANSFORM_TERRAIN)) {
       unit_actions["transform"] = {name: "Transform terrain (O)"};
-    } else {
     }
 
     if (utype_can_do_action(ptype, ACTION_NUKE)) {
