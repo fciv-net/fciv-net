@@ -592,7 +592,7 @@ function generate_production_list()
 	                    "helptext" : pimprovement['helptext'],
                             "rule_name" : pimprovement['rule_name'],
                             "build_cost" : build_cost,
-                            "unit_details" : "-",
+                            "unit_details" : "",
                             "sprite" : get_improvement_image_sprite(pimprovement) });
   }
   return production_list;
@@ -1472,7 +1472,9 @@ function populate_worklist_production_choices(pcity)
       production_html += "<li class='prod_choice_list_item kindvalue_item ui-widget-content "
        + (can_build ? "" : " cannot_build_item")
        + "' data-value='" + value + "' data-kind='" + kind + "'>"
-       + "<div class='production_list_item_sub ' title='" + production_list[a]['helptext'] +  " \nCost: " + production_list[a]['build_cost']  + " \n" + production_list[a]['unit_details'] + "' style=' background: transparent url("
+       + "<div class='production_list_item_sub ' title='" + html_safe(cleaned_text(production_list[a]['helptext']))
+       +  (production_list[a]['build_cost'] > 0 ? " \nCost: " + production_list[a]['build_cost']  : "") + " \n"
+       + production_list[a]['unit_details'] + "' style=' background: transparent url("
            + sprite['image-src'] +
            ");background-position:-" + sprite['tileset-x'] + "px -" + sprite['tileset-y']
            + "px;  width: " + sprite['width'] + "px;height: " + sprite['height'] + "px;'"
