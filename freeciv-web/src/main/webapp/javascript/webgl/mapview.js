@@ -306,7 +306,6 @@ function create_land_geometry(geometry, mesh_quality)
       var sx = ix % xquality, sy = iy % yquality;
 
       vertices.push( x, -y, heightmap[sx][sy] * 100 );
-      normals.push( 0, 0, 1 );
       uvs.push( ix / gridX );
       uvs.push( 1 - ( iy / gridY ) );
 
@@ -328,7 +327,6 @@ function create_land_geometry(geometry, mesh_quality)
 
   geometry.setIndex( indices );
   geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-  geometry.setAttribute( 'normal', new THREE.Float32BufferAttribute( normals, 3 ) );
   geometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( uvs, 2 ) );
 
   geometry.computeVertexNormals();
