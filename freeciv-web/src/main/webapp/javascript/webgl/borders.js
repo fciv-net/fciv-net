@@ -51,7 +51,7 @@ function init_borders_image()
     borders_texture.needsUpdate = true;
   };
 
-  setInterval(update_borders_image, 3000);
+  setInterval(update_borders_image, 400);
 }
 
 /****************************************************************************
