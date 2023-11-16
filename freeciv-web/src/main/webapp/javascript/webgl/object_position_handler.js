@@ -52,7 +52,7 @@ var selected_unit_material_counter = 0;
 
 var sun_mesh = null;
 
-var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo", "Pheasant", "Wheat", "Peat"];
+var special_resources = ["Fish", "Whales", "Oasis", "Wine", "Iron", "Spice", "Ivory" , "Oil", "Coal", "Fruit", "Furs", "Gold", "Gems", "Silk", "Resources", "Fallout", "Game", "Buffalo", "Pheasant", "Wheat", "Peat", "Buoy"];
 
 /****************************************************************************
   Handles unit positions
@@ -420,7 +420,7 @@ function update_tile_extras(ptile) {
 function add_city_buildings(ptile, pcity, scene) {
   const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle"];
   const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral",
-                         "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill"];
+                         "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill", "Nuclear Plant", "Airport"];
 
   wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
   cityBuildings.forEach(building => add_city_building(ptile, pcity, scene, building));
@@ -577,7 +577,7 @@ function add_city_building(ptile, pcity, scene, building_name) {
       if (building_name.indexOf("Cathedral") >= 0) {
         height -= 1.2;
       }
-      if (building_name == "Bank") {
+      if (building_name == "Bank" || building_name == "NuclearPlant" || building_name == "Airport") {
         height -= 0.6;
       }
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
@@ -599,6 +599,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
           || tile_has_extra(ptile, EXTRA_OIL_WELL)
           || tile_has_extra(ptile, EXTRA_FALLOUT)
           || tile_has_extra(ptile, EXTRA_POLLUTION)
+          || tile_has_extra(ptile, EXTRA_BUOY)
       )) {
     let num_models = 1;
     let height = 5 + ptile['height'] * 100;
@@ -608,6 +609,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     }
     if (tile_has_extra(ptile, EXTRA_FALLOUT)) {
       extra_name = "Fallout";
+    }
+    if (tile_has_extra(ptile, EXTRA_BUOY)) {
+      extra_name = "Buoy";
     }
     if (tile_has_extra(ptile, EXTRA_POLLUTION)) {
       extra_name = "Pollution";
@@ -672,10 +676,10 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       num_models = 2;
     }
     if (extra_name == "Airbase") {
-      height -= 4.9;
+      height -= 5.0;
     }
     if (extra_name == "Fortress") {
-      height -= 3.5;
+      height -= 4.1;
     }
     if (extra_name == "Peat") {
       height -= 6.0;
@@ -689,7 +693,9 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
     if (extra_name == "Pollution") {
       height -= 3.0;
     }
-
+    if (extra_name == "Buoy") {
+      height -= 2.5;
+    }
     for (let i = 0; i < num_models; i++) {
       let model = webgl_get_model(extra_name.replaceAll(" ", ""), ptile);
       if (model == null) {

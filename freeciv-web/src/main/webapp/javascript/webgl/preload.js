@@ -353,6 +353,15 @@ switch (filename) {
   case 'EiffelTower':
     modelscale = 8;
     break;
+  case 'NuclearPlant':
+    modelscale = 4;
+    break;
+  case 'Buoy':
+    modelscale = 1.8;
+    break;
+  case 'Airport':
+    modelscale = 1.8;
+    break;
   case 'Lighthouse':
     modelscale = 4.8;
     break;
@@ -426,9 +435,11 @@ switch (filename) {
     modelscale = 0.85;
     break;
   case 'Fortress':
-    modelscale = 3.6;
+    modelscale = 2.0;
     break;
   case 'Airbase':
+    modelscale = 6.0;
+    break;
   case 'Engineers':
   case 'Nuclear':
   case 'Settlers':
@@ -483,7 +494,7 @@ switch (filename) {
     modelscale = 2.0;
     break;
   case 'Bank':
-    modelscale = 1.65;
+    modelscale = 1.45;
     break;
   case 'Oracle':
     modelscale = 1.3;
