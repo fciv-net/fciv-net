@@ -126,7 +126,7 @@ function get_city_height_offset(pcity)
 /****************************************************************************
   Create heightmap based on tile.height.
 ****************************************************************************/
-function create_heightmap(heightmap_quality)
+function init_heightmap(heightmap_quality)
 {
   let heightmap_resolution_x = map.xsize * heightmap_quality + 1;
   let heightmap_resolution_y = map.ysize * heightmap_quality + 1;
@@ -136,9 +136,20 @@ function create_heightmap(heightmap_quality)
     heightmap[hx] = new Array(heightmap_resolution_y);
   }
 
+}
+
+/****************************************************************************
+  Create heightmap based on tile.height.
+****************************************************************************/
+function update_heightmap(heightmap_quality)
+{
+  let heightmap_resolution_x = map.xsize * heightmap_quality + 1;
+  let heightmap_resolution_y = map.ysize * heightmap_quality + 1;
+
   for (let x = 0; x < map.xsize ; x++) {
     for (let y = 0; y < map.ysize; y++) {
       let ptile = map_pos_to_tile(x, y);
+
       // Make coastline more distinct, to make it easier to distinguish ocean from land.
       if (is_ocean_tile(ptile) && is_land_tile_near(ptile)) {
         ptile['height'] = 0.45;
@@ -175,92 +186,65 @@ function create_heightmap(heightmap_quality)
     }
   }
 
-  if (is_hex()) {
-    for (let x = 0; x < heightmap_resolution_x; x++) {
-      for (let y = 0; y < heightmap_resolution_y; y++) {
-        let sx = x / heightmap_quality;
-        let sy = y / heightmap_quality;
-        let hvec = map_hex_coords(new THREE.Vector2(sx - 0.05, sy + 0.1));
-        let gx = Math.floor(hvec.x);
-        let gy = Math.floor(hvec.y);
-
+  for (let x = 0; x < heightmap_resolution_x; x++) {
+    for (let y = 0; y < heightmap_resolution_y; y++) {
+      let gx = x / heightmap_quality - 0.5;
+      let gy = y / heightmap_quality - 0.5;
+       if (Math.round(gx) == gx && Math.round(gy) == gy) {
         let ptile = map_pos_to_tile(gx, gy);
-        if (ptile != null) {
-          heightmap[x][y] = ptile['height'];
-        } else {
-          heightmap[x][y] = 0.55;
+        heightmap[x][y] = ptile['height'];
+        if (tile_has_extra(ptile, EXTRA_RIVER)) {
+          heightmap[x][y] = ptile['height'] * 0.98;
         }
-      }
-    }
+        if (tile_terrain(ptile)['name'] == "Mountains") {
+          heightmap[x][y] = ptile['height'] * 1.01;
+        }
+      } else {
+        let neighbours = [
+          { "x": Math.floor(gx), "y": Math.floor(gy) },
+          { "x": Math.floor(gx), "y": Math.ceil(gy) },
+          { "x": Math.ceil(gx),  "y": Math.floor(gy) },
+          { "x": Math.ceil(gx),  "y": Math.ceil(gy) }];
 
-    for (let x = 1; x < heightmap_resolution_x - 1; x++) {
-      for (let y = 1; y < heightmap_resolution_y - 1; y++) {
-          heightmap[x][y] = (heightmap[x][y] + heightmap[x-1][y-1] + heightmap[x-1][y+1] + heightmap[x+1][y] + heightmap[x + 1][y + 1] ) / 5;
-      }
-    }
-
-
-  } else {
-    for (let x = 0; x < heightmap_resolution_x; x++) {
-      for (let y = 0; y < heightmap_resolution_y; y++) {
-        let gx = x / heightmap_quality - 0.5;
-        let gy = y / heightmap_quality - 0.5;
-         if (Math.round(gx) == gx && Math.round(gy) == gy) {
-          let ptile = map_pos_to_tile(gx, gy);
-          heightmap[x][y] = ptile['height'];
+        let num_river_neighbours = 0;
+        for (let i = 0; i < 4; i++) {
+          let coords = neighbours[i];
+          if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
+            continue;
+          }
+          let ptile = map_pos_to_tile(coords.x, coords.y);
           if (tile_has_extra(ptile, EXTRA_RIVER)) {
-            heightmap[x][y] = ptile['height'] * 0.98;
+            num_river_neighbours++;
           }
-          if (tile_terrain(ptile)['name'] == "Mountains") {
-            heightmap[x][y] = ptile['height'] * 1.01;
-          }
-        } else {
-          let neighbours = [
-            { "x": Math.floor(gx), "y": Math.floor(gy) },
-            { "x": Math.floor(gx), "y": Math.ceil(gy) },
-            { "x": Math.ceil(gx),  "y": Math.floor(gy) },
-            { "x": Math.ceil(gx),  "y": Math.ceil(gy) }];
-
-          let num_river_neighbours = 0;
-          for (let i = 0; i < 4; i++) {
-            let coords = neighbours[i];
-            if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
-              continue;
-            }
-            let ptile = map_pos_to_tile(coords.x, coords.y);
-            if (tile_has_extra(ptile, EXTRA_RIVER)) {
-              num_river_neighbours++;
-            }
-          }
-
-          let norm = 0;
-          let sum = 0;
-          for (let i = 0; i < 4; i++) {
-            let coords = neighbours[i];
-            if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
-              continue;
-            }
-            let dx = gx - coords.x;
-            let dy = gy - coords.y;
-            let distance = Math.sqrt(dx*dx + dy*dy);
-            let ptile = map_pos_to_tile(coords.x, coords.y);
-            let height = 0;
-            if (tile_terrain(ptile)['name'] == "Hills" || tile_terrain(ptile)['name'] == "Mountains") {
-              let rnd = ((x * y) % 10) / 10;
-              height = ptile['height'] + ((rnd - 0.5) / 50) - 0.01;
-            } else {
-              height = ptile['height'];
-            }
-            if (tile_has_extra(ptile, EXTRA_RIVER)) {
-              height = ptile['height'] * 1.045  - ((num_river_neighbours / 4) * 0.02);
-            }
-
-            sum += height / distance / distance;
-            norm += 1 / distance / distance;
-          }
-
-          heightmap[x][y] = (sum / norm);
         }
+
+        let norm = 0;
+        let sum = 0;
+        for (let i = 0; i < 4; i++) {
+          let coords = neighbours[i];
+          if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize) {
+            continue;
+          }
+          let dx = gx - coords.x;
+          let dy = gy - coords.y;
+          let distance = Math.sqrt(dx*dx + dy*dy);
+          let ptile = map_pos_to_tile(coords.x, coords.y);
+          let height = 0;
+          if (tile_terrain(ptile)['name'] == "Hills" || tile_terrain(ptile)['name'] == "Mountains") {
+            let rnd = ((x * y) % 10) / 10;
+            height = ptile['height'] + ((rnd - 0.5) / 50) - 0.01;
+          } else {
+            height = ptile['height'];
+          }
+          if (tile_has_extra(ptile, EXTRA_RIVER)) {
+            height = ptile['height'] * 1.045  - ((num_river_neighbours / 4) * 0.02);
+          }
+
+          sum += height / distance / distance;
+          norm += 1 / distance / distance;
+        }
+
+        heightmap[x][y] = (sum / norm);
       }
     }
   }

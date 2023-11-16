@@ -393,8 +393,6 @@ function update_tile_extras(ptile) {
 
   let height = 4 + ptile['height'] * 100;
 
-  webgl_update_farmland_irrigation_vertex_colors(ptile);
-
   update_tile_extra_update_model(EXTRA_MINE, "Mine", ptile);
   update_tile_extra_update_model(EXTRA_HUT, "Hut", ptile);
   update_tile_extra_update_model(EXTRA_RUINS, "Ruins", ptile);

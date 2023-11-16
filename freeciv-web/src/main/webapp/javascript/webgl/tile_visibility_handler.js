@@ -17,7 +17,9 @@
 
 ***********************************************************************/
 
-var vertex_colors_dirty = false;
+var map_known_dirty = true;
+var map_terrain_dirty = true;
+var map_geometry_dirty = true;
 
 /**************************************************************************
  Updates the terrain vertex colors to set tile to known, unknown or fogged.
@@ -26,28 +28,28 @@ function webgl_update_tile_known(old_tile, new_tile)
 {
   if (new_tile == null || old_tile == null || landGeometry == null) return;
 
+  if (new_tile['height'] != old_tile['height']) {
+    map_geometry_dirty = true;
+  }
+
   if (tile_terrain(new_tile) != tile_terrain(old_tile)) {
-    vertex_colors_dirty = true;
+    map_terrain_dirty = true;
   }
 
-  if (tile_get_known(new_tile) == tile_get_known(old_tile)) {
-    return;
+  if (tile_resource(old_tile) != tile_resource(new_tile)) {
+     map_terrain_dirty = true;
   }
 
-  vertex_colors_dirty = true;
+  if (old_tile != null && old_tile['extras'] != null && new_tile['extras'].raw != old_tile['extras'].raw) {
+     map_terrain_dirty = true;
+  }
+
+  if (tile_get_known(new_tile) != tile_get_known(old_tile)) {
+    map_known_dirty = true;
+  }
 
 }
 
-
-
-/**************************************************************************
-Updates the terrain vertex colors to set irrigation, farmland, or none.
-**************************************************************************/
-function webgl_update_farmland_irrigation_vertex_colors(ptile)
-{
-  if (ptile == null || landGeometry == null) return;
-  vertex_colors_dirty = true;
-}
 
 /**************************************************************************
  This will update the fog of war and unknown tiles, and farmland/irrigation
@@ -55,25 +57,10 @@ function webgl_update_farmland_irrigation_vertex_colors(ptile)
 **************************************************************************/
 function update_tiles_known_vertex_colors()
 {
-
   const colors = [];
 
   for ( let iy = 0; iy < gridY1; iy ++ ) {
     for ( let ix = 0; ix < gridX1; ix ++ ) {
-      if (is_hex()) {
-        var sx = ix % xquality, sy = iy % yquality;
-        var mx = (sx / terrain_quality), my = (sy / terrain_quality) ;
-        var hvec = map_hex_coords(new THREE.Vector2(mx, my));
-        var gx = Math.floor(hvec.x);
-        var gy = Math.floor(hvec.y);
-        var ptile = map_pos_to_tile(gx, gy);
-        if (ptile != null) {
-          var c = get_vertex_color_from_tile(ptile, ix, iy);
-          colors.push(c[0], c[1], c[2]);
-        } else {
-          colors.push(0,0,0);
-        }
-      } else {
         var sx = ix % xquality, sy = iy % yquality;
         var mx = Math.floor((sx / terrain_quality) - 0.040), my = Math.floor((sy / terrain_quality) - 0.040);
         var ptile = map_pos_to_tile(mx, my);
@@ -83,8 +70,6 @@ function update_tiles_known_vertex_colors()
         } else {
           colors.push(0,0,0);
         }
-      }
-
     }
   }
 

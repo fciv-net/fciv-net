@@ -154,7 +154,7 @@ function show_city_dialog(pcity)
   if (active_city != null) close_city_dialog();
   active_city = pcity;
   if (pcity == null) return;
-  vertex_colors_dirty = true;
+  map_known_dirty = true;
 
   // reset dialog page.
   $("#city_dialog").remove();
@@ -789,7 +789,7 @@ function city_dialog_close_handler()
   }
   keyboard_input=true;
   worklist_dialog_active = false;
-  vertex_colors_dirty = true;
+  map_known_dirty = true;
 }
 
 /**************************************************************************

@@ -224,9 +224,10 @@ function init_webgl_mapview() {
     var terrain_name = tiletype_terrains[i];
     freeciv_uniforms[terrain_name] = {type: "t", value: webgl_textures[terrain_name]};
   }
+  init_heightmap(terrain_quality);
+  update_heightmap(terrain_quality);
 
   // Low-resolution terrain mesh used for raycasting to find mouse postition.
-  create_heightmap(2);
   var lofiMaterial = new THREE.MeshStandardMaterial({"color" : 0x00ff00});
   lofiGeometry = new THREE.BufferGeometry();
   create_land_geometry(lofiGeometry, 2);
@@ -239,7 +240,6 @@ function init_webgl_mapview() {
   }
 
   // High-resolution terrain-mesh shown in mapview.
-  create_heightmap(terrain_quality);
   terrain_material = new THREE.ShaderMaterial({
     uniforms: freeciv_uniforms,
     vertexShader: vertex_shader,
@@ -263,7 +263,9 @@ function init_webgl_mapview() {
   }
 
   update_map_terrain_geometry();
-  setInterval(update_map_terrain_geometry, 90);
+  setInterval(update_map_terrain_geometry, 40);
+  setInterval(update_map_known_tiles, 15);
+  setInterval(update_map_tiletypes, 20);
 
   add_all_objects_to_scene();
 
@@ -299,18 +301,19 @@ function create_land_geometry(geometry, mesh_quality)
   const uvs = [];
   const colors = [];
 
+  let heightmap_scale = (mesh_quality == 2) ? (mesh_quality * 2) : 1;
+
   for ( let iy = 0; iy < gridY1; iy ++ ) {
     const y = iy * segment_height - height_half;
     for ( let ix = 0; ix < gridX1; ix ++ ) {
       const x = ix * segment_width - width_half;
       var sx = ix % xquality, sy = iy % yquality;
 
-      vertices.push( x, -y, heightmap[sx][sy] * 100 );
+      vertices.push( x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100 );
+
       uvs.push( ix / gridX );
       uvs.push( 1 - ( iy / gridY ) );
-
     }
-
   }
 
   for ( let iy = 0; iy < gridY; iy ++ ) {
@@ -339,28 +342,46 @@ function create_land_geometry(geometry, mesh_quality)
 ****************************************************************************/
 function update_map_terrain_geometry()
 {
-  if (!vertex_colors_dirty) {
-    return;
+  if (map_geometry_dirty) {
+    var hash = generate_heightmap_hash();
+    if (hash != heightmap_hash) {
+      update_heightmap(terrain_quality);
+      create_land_geometry(lofiGeometry, 2);
+      create_land_geometry(landGeometry, terrain_quality);
+
+      lofiGeometry.rotateX( - Math.PI / 2 );
+      lofiGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
+      landGeometry.rotateX( - Math.PI / 2 );
+      landGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
+      heightmap_hash = hash;
+    }
   }
 
-  var hash = generate_heightmap_hash();
-  if (hash != heightmap_hash) {
-    create_heightmap(2);
-    create_land_geometry(lofiGeometry, 2);
-    create_heightmap(terrain_quality);
-    create_land_geometry(landGeometry, terrain_quality);
+  map_geometry_dirty = false;
+}
 
-    lofiGeometry.rotateX( - Math.PI / 2 );
-    lofiGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
-    landGeometry.rotateX( - Math.PI / 2 );
-    landGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
-    heightmap_hash = hash;
+/****************************************************************************
+  Update the map tiletypes!
+****************************************************************************/
+function update_map_tiletypes()
+{
+  if (map_terrain_dirty) {
+    update_tiletypes_image();
   }
+  map_terrain_dirty = false;
+}
 
-  update_tiles_known_vertex_colors();
-  update_tiletypes_image();
-  vertex_colors_dirty = false;
-
+/****************************************************************************
+  Update the map known tiles!
+****************************************************************************/
+function update_map_known_tiles()
+{
+  if (map_known_dirty) {
+    update_map_tiletypes();
+    update_tiles_known_vertex_colors();
+    update_map_terrain_geometry();
+  }
+  map_known_dirty = false;
 }
 
 /****************************************************************************
