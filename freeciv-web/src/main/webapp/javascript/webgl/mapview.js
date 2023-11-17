@@ -272,7 +272,7 @@ function init_webgl_mapview() {
   landMesh.castShadow = false;
   scene.add(landMesh);
 
-  if (graphics_quality == QUALITY_HIGH) {
+  if (!webgpu && graphics_quality == QUALITY_HIGH) {
     var shadowMaterial = new THREE.ShadowMaterial();
     shadowMaterial.opacity = 0.85;
     shadowmesh = new THREE.Mesh( landGeometry, shadowMaterial);
@@ -283,8 +283,11 @@ function init_webgl_mapview() {
 
   update_map_terrain_geometry();
   setInterval(update_map_terrain_geometry, 40);
-  setInterval(update_map_known_tiles, 15);
-  setInterval(update_map_tiletypes, 20);
+
+  if (!webgpu) {
+    setInterval(update_map_known_tiles, 15);
+    setInterval(update_map_tiletypes, 20);
+  }
 
   add_all_objects_to_scene();
 
