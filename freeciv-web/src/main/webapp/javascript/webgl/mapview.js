@@ -71,8 +71,6 @@ function webgl_start_renderer()
   THREE.ColorManagement.enabled = true;
   if (webgpu) {
     console.log("WebGPU experimental renderer.");
-    if (maprenderer.backend.isWebGLBackend) console.log("WebGL backend");
-    if (maprenderer.backend.isWebGPUBackend) console.log("WebGPU backend");
   }
 
   container = document.getElementById('mapcanvas');
@@ -118,6 +116,8 @@ function webgl_start_renderer()
     }
   } else {
     maprenderer = new THREE.WebGPURenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
+    if (maprenderer.backend.isWebGLBackend) console.log("WebGL backend");
+    if (maprenderer.backend.isWebGPUBackend) console.log("WebGPU backend");
   }
 
   maprenderer.setPixelRatio(window.devicePixelRatio);
