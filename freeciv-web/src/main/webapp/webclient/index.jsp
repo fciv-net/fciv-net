@@ -64,6 +64,11 @@ var fcwDebug=<%= fcwDebug %>;
   import * as THREE from 'three';
   window.THREE = THREE;
 
+  import { WebGPURenderer } from '/javascript/webgl/libs/webgpu-renderer.module.min.js?ts=${initParam.buildTimeStamp}';
+  window.WebGPURenderer = WebGPURenderer;
+
+
+
   import { AnaglyphEffect } from '/javascript/webgl/libs/AnaglyphEffect.js?ts=${initParam.buildTimeStamp}';
   window.AnaglyphEffect = AnaglyphEffect;
 
