@@ -84,7 +84,7 @@ function webgl_canvas_pos_to_tile(x, y) {
   Converts from canvas coordinates to a tile, fast using the water mesh.
 ****************************************************************************/
 function webgl_canvas_pos_to_tile_quick(x, y) {
-  if (mouse == null || lofiMesh == null || water == null) return null;
+  if (mouse == null || lofiMesh == null) return null;
 
   raycaster.layers.set(0);
 
