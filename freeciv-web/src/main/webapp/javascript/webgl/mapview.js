@@ -71,6 +71,8 @@ function webgl_start_renderer()
   THREE.ColorManagement.enabled = true;
   if (webgpu) {
     console.log("WebGPU experimental renderer.");
+    if (maprenderer.backend.isWebGLBackend) console.log("WebGL backend");
+    if (maprenderer.backend.isWebGPUBackend) console.log("WebGPU backend");
   }
 
   container = document.getElementById('mapcanvas');
@@ -182,8 +184,9 @@ function init_webgl_mapview() {
 
       });
   } else {
-    let water_material = new THREE.MeshBasicMaterial( { color: 0xaaaaff, transparent: true, opacity: 0.5} );
+    let water_material = new THREE.MeshBasicMaterial( { color: 0x7777ff, transparent: true, opacity: 0.8} );
     water = new THREE.Mesh(waterGeometry, water_material);
+    water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 2);
   }
 
   water.rotation.x = - Math.PI * 0.5;
@@ -262,7 +265,7 @@ function init_webgl_mapview() {
       vertexColors: true
     });
   } else {
-    terrain_material = new THREE.MeshStandardMaterial({"color" : 0x009900});
+    terrain_material = new THREE.MeshStandardMaterial({"color" : 0x008800});
   }
 
   landGeometry = new THREE.BufferGeometry();

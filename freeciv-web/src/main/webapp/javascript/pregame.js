@@ -506,7 +506,7 @@ function pregame_settings()
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
         "<tr><td style='min-width: 150px;'>Enable experimental WebGPU renderer:</td>" +
-                "<td><button id='webgpu_enable' type='button' class='webgpu button'>Enable WebGPU renderer </button></td></tr>" +
+                "<td><button id='webgpu_enable' type='button' class='webgpu button'>WebGPU renderer</button></td></tr>" +
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
                 "<br>"+
