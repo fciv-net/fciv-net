@@ -505,6 +505,8 @@ function pregame_settings()
         "<td><input type='checkbox' id='3d_antialiasing_setting' checked>Enable antialiasing (game looks nicer, but is slower)</td></tr>" +
         "<tr><td style='min-width: 150px;'>Benchmark of 3D WebGL version:</td>" +
                 "<td><button id='bechmark_run' type='button' class='benchmark button'>Run benchmark</button></td></tr>" +
+        "<tr><td style='min-width: 150px;'>Enable experimental WebGPU renderer:</td>" +
+                "<td><button id='webgpu_enable' type='button' class='webgpu button'>Enable WebGPU renderer </button></td></tr>" +
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
                 "<br>"+
@@ -805,6 +807,11 @@ function pregame_settings()
 
   $(".benchmark").button();
   $("#show_voice_commands").button();
+
+  $(".webgpu").click(function() {
+    window.location.href = window.location.href + '?webgpu=true';
+  });
+  $(".webgpu").button();
 
   $('#speech_setting').change(function() {
     if ($('#speech_setting').prop('checked')) {

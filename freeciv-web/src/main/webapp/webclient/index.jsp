@@ -10,6 +10,7 @@ String googleSigninClientKey = null;
 String trackJsToken = null;
 String captchaKey = null;
 boolean fcwDebug = false;
+boolean webgpu = false;
 try {
   Properties prop = new Properties();
   prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
@@ -20,6 +21,10 @@ try {
 
   String debugParam = request.getParameter("debug");
   fcwDebug = (debugParam != null && (debugParam.isEmpty() || parseBoolean(debugParam)));
+
+  String webgpuParam = request.getParameter("webgpu");
+  webgpu = (webgpuParam != null && (!webgpuParam.isEmpty() || parseBoolean(webgpuParam)));
+
 } catch (IOException e) {
   e.printStackTrace();
 }
@@ -39,6 +44,7 @@ try {
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 var fcwDebug=<%= fcwDebug %>;
+var webgpu = <%= webgpu %>;
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 
@@ -52,17 +58,31 @@ var fcwDebug=<%= fcwDebug %>;
 
 <script async src="https://ga.jspm.io/npm:es-module-shims@1.7.1/dist/es-module-shims.js"></script>
 
-<script type="importmap">
+<% if (!webgpu) { %>
+  <script type="importmap">
         {
                 "imports": {
                         "three": "/javascript/webgl/libs/three.module.min.js?ts=${initParam.buildTimeStamp}"
                 }
         }
-</script>
-
+  </script>
+<% } else { %>
+  <script type="importmap">
+        {
+                "imports": {
+                        "three": "/javascript/webgpu/libs/three-webgpu.module.min.js?ts=${initParam.buildTimeStamp}"
+                }
+        }
+  </script>
+<% } %>
 <script type="module">
   import * as THREE from 'three';
   window.THREE = THREE;
+
+<% if (webgpu) { %>
+  import { WebGPURenderer } from '/javascript/webgpu/libs/webgpu-renderer.module.min.js?ts=${initParam.buildTimeStamp}';
+  window.WebGPURenderer = WebGPURenderer;
+<% } %>
 
   import { AnaglyphEffect } from '/javascript/webgl/libs/AnaglyphEffect.js?ts=${initParam.buildTimeStamp}';
   window.AnaglyphEffect = AnaglyphEffect;

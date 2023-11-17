@@ -69,6 +69,9 @@ function webgl_start_renderer()
 
   console.log("Three.js " + THREE.REVISION);
   THREE.ColorManagement.enabled = true;
+  if (webgpu) {
+    console.log("WebGPU experimental renderer.");
+  }
 
   container = document.getElementById('mapcanvas');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 12000 );
@@ -103,11 +106,16 @@ function webgl_start_renderer()
     enable_antialiasing = false;
   }
 
-  maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
-  maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
-  if (graphics_quality == QUALITY_HIGH) {
-    maprenderer.shadowMap.enabled = true;
-    maprenderer.shadowMap.type = THREE.PCFShadowMap;
+  if (!webgpu) {
+    maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
+
+    maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+    if (graphics_quality == QUALITY_HIGH) {
+      maprenderer.shadowMap.enabled = true;
+      maprenderer.shadowMap.type = THREE.PCFShadowMap;
+    }
+  } else {
+    maprenderer = new THREE.WebGPURenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
   }
 
   maprenderer.setPixelRatio(window.devicePixelRatio);
@@ -160,7 +168,8 @@ function init_webgl_mapview() {
   var textureLoader = new THREE.TextureLoader();
   var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height);
 
-  water = new Water(waterGeometry, {
+  if (!webgpu) {
+    water = new Water(waterGeometry, {
       color: '#55c0ff',
       scale: 10,
       flowDirection: new THREE.Vector2( 0.1, -0.1),
@@ -171,7 +180,11 @@ function init_webgl_mapview() {
       normalMap0 : textureLoader.load( '/textures/Water_1_M_Normal.jpg' ),
       normalMap1 : textureLoader.load( '/textures/Water_2_M_Normal.jpg' )
 
-    } );
+      });
+  } else {
+    let water_material = new THREE.MeshBasicMaterial( { color: 0xaaaaff, transparent: true, opacity: 0.5} );
+    water = new THREE.Mesh(waterGeometry, water_material);
+  }
 
   water.rotation.x = - Math.PI * 0.5;
   water.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
@@ -180,6 +193,7 @@ function init_webgl_mapview() {
   water.renderOrder = -1; // Render water first, this will sove transparency issues in city labels.
   water.castShadow = false;
   scene.add( water );
+
 
   sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
 
@@ -197,7 +211,7 @@ function init_webgl_mapview() {
   var vertex_shader = $('#terrain_vertex_shh').html();
   var fragment_shader = $('#terrain_fragment_shh').html();
 
-  if (maprenderer.capabilities.maxTextures <= 16) {
+  if (!webgpu && maprenderer.capabilities.maxTextures <= 16) {
     delete tiletype_terrains["irrigation"];
     console.log("max textures: " + maprenderer.capabilities.maxTextures);
     fragment_shader = fragment_shader.replace("uniform sampler2D irrigation;", "")
@@ -240,12 +254,17 @@ function init_webgl_mapview() {
   }
 
   // High-resolution terrain-mesh shown in mapview.
-  terrain_material = new THREE.ShaderMaterial({
-    uniforms: freeciv_uniforms,
-    vertexShader: vertex_shader,
-    fragmentShader: fragment_shader,
-    vertexColors: true
-  });
+  if (!webgpu) {
+    terrain_material = new THREE.ShaderMaterial({
+      uniforms: freeciv_uniforms,
+      vertexShader: vertex_shader,
+      fragmentShader: fragment_shader,
+      vertexColors: true
+    });
+  } else {
+    terrain_material = new THREE.MeshStandardMaterial({"color" : 0x009900});
+  }
+
   landGeometry = new THREE.BufferGeometry();
   create_land_geometry(landGeometry, terrain_quality);
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
