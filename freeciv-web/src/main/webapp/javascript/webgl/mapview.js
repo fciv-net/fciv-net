@@ -290,9 +290,10 @@ function init_webgl_mapview() {
     scene.add(shadowmesh);
   }
 
+  update_map_terrain_geometry();
+  setInterval(update_map_terrain_geometry, 40);
+
   if (!webgpu) {
-    update_map_terrain_geometry();
-    setInterval(update_map_terrain_geometry, 40);
     setInterval(update_map_known_tiles, 15);
     setInterval(update_map_tiletypes, 20);
   }
