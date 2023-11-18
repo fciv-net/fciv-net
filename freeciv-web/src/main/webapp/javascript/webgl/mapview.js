@@ -226,24 +226,26 @@ function init_webgl_mapview() {
   }
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
-  freeciv_uniforms = {
-    maptiles: { type: "t", value: maptiletypes },
-    borders: { type: "t", value: update_borders_image() },
-    map_x_size: { type: "f", value: map['xsize'] },
-    map_y_size: { type: "f", value: map['ysize'] },
-    mouse_x: { type: "i", value: -1 },
-    mouse_y: { type: "i", value: -1 },
-    selected_x: { type: "i", value: -1 },
-    selected_y: { type: "i", value: -1 },
-    roadsmap: { type: "t", value: update_roads_image()},
-    roadsprites: {type: "t", value: webgl_textures["roads"]},
-    railroadsprites: {type: "t", value: webgl_textures["railroads"]},
-    borders_visible: {type: "bool", value: server_settings['borders']['is_visible']}
-  };
+  if (!webgpu) { 
+    freeciv_uniforms = {
+      maptiles: { type: "t", value: maptiletypes },
+      borders: { type: "t", value: update_borders_image() },
+      map_x_size: { type: "f", value: map['xsize'] },
+      map_y_size: { type: "f", value: map['ysize'] },
+      mouse_x: { type: "i", value: -1 },
+      mouse_y: { type: "i", value: -1 },
+      selected_x: { type: "i", value: -1 },
+      selected_y: { type: "i", value: -1 },
+      roadsmap: { type: "t", value: update_roads_image()},
+      roadsprites: {type: "t", value: webgl_textures["roads"]},
+      railroadsprites: {type: "t", value: webgl_textures["railroads"]},
+      borders_visible: {type: "bool", value: server_settings['borders']['is_visible']}
+    };
 
-  for (var i = 0; i < tiletype_terrains.length ; i++) {
-    var terrain_name = tiletype_terrains[i];
-    freeciv_uniforms[terrain_name] = {type: "t", value: webgl_textures[terrain_name]};
+    for (var i = 0; i < tiletype_terrains.length ; i++) {
+      var terrain_name = tiletype_terrains[i];
+      freeciv_uniforms[terrain_name] = {type: "t", value: webgl_textures[terrain_name]};
+    }
   }
   init_heightmap(terrain_quality);
   update_heightmap(terrain_quality);
