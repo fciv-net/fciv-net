@@ -209,10 +209,11 @@ function init_webgl_mapview() {
   sun_mesh.position.set(- 500, 1000, -400);
   scene.add(sun_mesh);
 
-  /* heightmap image */
-  init_borders_image();
-  init_roads_image();
-  init_map_tiletype_image();
+  if (!webgpu) {
+    init_borders_image();
+    init_roads_image();
+    init_map_tiletype_image();
+  }
 
   var vertex_shader = $('#terrain_vertex_shh').html();
   var fragment_shader = $('#terrain_fragment_shh').html();
@@ -287,10 +288,9 @@ function init_webgl_mapview() {
     scene.add(shadowmesh);
   }
 
-  update_map_terrain_geometry();
-  setInterval(update_map_terrain_geometry, 40);
-
   if (!webgpu) {
+    update_map_terrain_geometry();
+    setInterval(update_map_terrain_geometry, 40);
     setInterval(update_map_known_tiles, 15);
     setInterval(update_map_tiletypes, 20);
   }

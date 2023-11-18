@@ -84,9 +84,6 @@ var webgpu = <%= webgpu %>;
   window.WebGPURenderer = WebGPURenderer;
 <% } %>
 
-  import { AnaglyphEffect } from '/javascript/webgl/libs/AnaglyphEffect.js?ts=${initParam.buildTimeStamp}';
-  window.AnaglyphEffect = AnaglyphEffect;
-
   import { GLTFLoader } from '/javascript/webgl/libs/GLTFLoader.js?ts=${initParam.buildTimeStamp}';
   window.GLTFLoader = GLTFLoader;
 
@@ -94,6 +91,10 @@ var webgpu = <%= webgpu %>;
   window.OrbitControls = OrbitControls;
 
 <% if (!webgpu) { %>
+
+  import { AnaglyphEffect } from '/javascript/webgl/libs/AnaglyphEffect.js?ts=${initParam.buildTimeStamp}';
+  window.AnaglyphEffect = AnaglyphEffect;
+
   import { Water } from '/javascript/webgl/libs/Water2.js?ts=${initParam.buildTimeStamp}';
   window.Water = Water;
 <% } %>
