@@ -91,14 +91,15 @@ function webgl_start_renderer()
   spotlight = new THREE.SpotLight( 0xffffff, 2.9 * Math.PI, 0, Math.PI / 3, 0.001, 0.5);
   scene.add( spotlight );
 
-  spotlight.castShadow = true;
-  spotlight.shadow.camera.near = 100;
-  spotlight.shadow.camera.far = 3000;
-  spotlight.shadow.bias = 0.0001;
+  if (!webgpu) {
+    spotlight.castShadow = true;
+    spotlight.shadow.camera.near = 100;
+    spotlight.shadow.camera.far = 3000;
+    spotlight.shadow.bias = 0.0001;
 
-  spotlight.shadow.mapSize.x = 4096;
-  spotlight.shadow.mapSize.y = 4096;
-
+    spotlight.shadow.mapSize.x = 4096;
+    spotlight.shadow.mapSize.y = 4096;
+  }
 
   var enable_antialiasing = graphics_quality >= QUALITY_MEDIUM;
   var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
@@ -138,14 +139,16 @@ function webgl_start_renderer()
   var hours = new Date().getHours();
   var is_day = hours > 6 && hours < 20;
 
-  if (is_day) {
-    const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
-    sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
-    scene.background = sky.texture;
-  } else {
-    const sky = new THREE.WebGLCubeRenderTarget(2000);
-    sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5500, 2500));
-    scene.background = sky.texture;
+  if (!webgpu) {
+    if (is_day) {
+      const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
+      sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
+      scene.background = sky.texture;
+    } else {
+      const sky = new THREE.WebGLCubeRenderTarget(2000);
+      sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5500, 2500));
+      scene.background = sky.texture;
+    }
   }
 
   animate();
