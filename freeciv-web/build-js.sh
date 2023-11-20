@@ -12,3 +12,4 @@ sed -i.bak -e "s/ts=\"/ts=\"1/" -e "s/\?ts=/\?ts=1/" "${FCW_DEST}"/webclient/ind
 
 cp src/main/webapp/javascript/webgl/shaders/*.* "${FCW_DEST}"/javascript/webgl/shaders/
 cp src/main/webapp/javascript/webgl/libs/*.* "${FCW_DEST}"/javascript/webgl/libs/
+cp src/main/webapp/javascript/webgpu/libs/*.* "${FCW_DEST}"/javascript/webgpu/libs/
