@@ -274,8 +274,9 @@ sudo setfacl -m d:u:$(id -u):rwX,u:$(id -u):rwx webapps
 mkdir -p webapps/data/{savegames/pbem,scorelogs,ranklogs}
 setfacl -Rm d:u:tomcat:rwX webapps/data
 
-echo "==== Building freeciv ===="
+echo "==== Building Freeciv C server ===="
 echo "Please be patient"
+echo "If you get an error: Clock skew detected, on Windows, then try setting the clock exactly correct on your computer using ntp or some clock software."
 
 cd "${basedir}"/freeciv && \
   ./prepare_freeciv.sh  && \
