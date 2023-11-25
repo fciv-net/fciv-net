@@ -11,6 +11,7 @@ String trackJsToken = null;
 String captchaKey = null;
 boolean fcwDebug = false;
 boolean webgpu = false;
+boolean app = false;
 try {
   Properties prop = new Properties();
   prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
@@ -24,6 +25,9 @@ try {
 
   String webgpuParam = request.getParameter("webgpu");
   webgpu = (webgpuParam != null && (!webgpuParam.isEmpty() || parseBoolean(webgpuParam)));
+
+  String appParam = request.getParameter("app");
+  app = (appParam != null && (appParam.isEmpty() || parseBoolean(appParam)));
 
 } catch (IOException e) {
   e.printStackTrace();
@@ -191,9 +195,10 @@ var webgpu = <%= webgpu %>;
 
 </style>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9958178836739125"
+<% if (!app) { %>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9958178836739125"
      crossorigin="anonymous"></script>
-
+<% } %>
 </head>
 
 <body>
@@ -203,7 +208,8 @@ var webgpu = <%= webgpu %>;
     <div class="container">
         <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
 
-            <div class="row" style="position: relative; z-index: 1000; padding-top: 60px;  margin-left: -56px;">
+            <% if (!app) { %>
+                <div class="row" style="position: relative; z-index: 1000; padding-top: 60px;  margin-left: -56px;">
                     <div class="col-md-3"></div>
                     <div class="col-md-9">
 
@@ -217,11 +223,9 @@ var webgpu = <%= webgpu %>;
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-
-       </div>
-    </div>
-
-
+                    </div>
+                </div>
+            <% } %>
 
     </div>
 

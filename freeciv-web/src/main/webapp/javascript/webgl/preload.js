@@ -359,6 +359,9 @@ switch (filename) {
   case 'Buoy':
     modelscale = 1.8;
     break;
+  case 'Migrants':
+    modelscale = 10.0;
+    break;
   case 'Airport':
     modelscale = 1.8;
     break;
