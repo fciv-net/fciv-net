@@ -38,6 +38,9 @@ var lofiMesh;  // low resolution mesh used for raycasting.
 var freeciv_uniforms;
 var terrain_material;
 
+var landbufferattribute;
+var lofibufferattribute;
+
 var mapview_model_width;
 var mapview_model_height;
 var xquality;
@@ -253,7 +256,8 @@ function init_webgl_mapview() {
   // Low-resolution terrain mesh used for raycasting to find mouse postition.
   var lofiMaterial = new THREE.MeshStandardMaterial({"color" : 0x00ff00});
   lofiGeometry = new THREE.BufferGeometry();
-  create_land_geometry(lofiGeometry, 2);
+  init_land_geometry(lofiGeometry, 2);
+  update_land_geometry(lofiGeometry, 2);
   lofiMesh = new THREE.Mesh( lofiGeometry, lofiMaterial );
   lofiMesh.layers.set(6);
   scene.add(lofiMesh);
@@ -275,7 +279,8 @@ function init_webgl_mapview() {
   }
 
   landGeometry = new THREE.BufferGeometry();
-  create_land_geometry(landGeometry, terrain_quality);
+  init_land_geometry(landGeometry, terrain_quality);
+  update_land_geometry(landGeometry, terrain_quality);
   landMesh = new THREE.Mesh( landGeometry, terrain_material );
   landMesh.receiveShadow = false;
   landMesh.castShadow = false;
@@ -306,10 +311,9 @@ function init_webgl_mapview() {
 }
 
 /****************************************************************************
-  Create the land terrain geometry
-  (note that this changes global variables).
+  Initialize land geometry
 ****************************************************************************/
-function create_land_geometry(geometry, mesh_quality)
+function init_land_geometry(geometry, mesh_quality)
 {
   xquality = map.xsize * mesh_quality + 1;
   yquality = map.ysize * mesh_quality + 1;
@@ -327,11 +331,8 @@ function create_land_geometry(geometry, mesh_quality)
   segment_height = mapview_model_height / gridY;
 
   const indices = [];
-  const vertices = [];
-  const normals = [];
   const uvs = [];
-  const colors = [];
-
+  const vertices = [];
   let heightmap_scale = (mesh_quality == 2) ? (mesh_quality * 2) : 1;
 
   for ( let iy = 0; iy < gridY1; iy ++ ) {
@@ -341,7 +342,6 @@ function create_land_geometry(geometry, mesh_quality)
       var sx = ix % xquality, sy = iy % yquality;
 
       vertices.push( x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100 );
-
       uvs.push( ix / gridX );
       uvs.push( 1 - ( iy / gridY ) );
     }
@@ -359,9 +359,68 @@ function create_land_geometry(geometry, mesh_quality)
     }
   }
 
+  if (mesh_quality == 2) {
+    lofibufferattribute = new THREE.Float32BufferAttribute( vertices, 3 );
+    geometry.setAttribute( 'position', lofibufferattribute);
+  } else {
+    landbufferattribute = new THREE.Float32BufferAttribute( vertices, 3 );
+    geometry.setAttribute( 'position', landbufferattribute);
+  }
+
   geometry.setIndex( indices );
-  geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
   geometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( uvs, 2 ) );
+
+  geometry.computeVertexNormals();
+
+
+
+  return geometry;
+}
+
+/****************************************************************************
+  Create the land terrain geometry
+****************************************************************************/
+function update_land_geometry(geometry, mesh_quality)
+{
+  xquality = map.xsize * mesh_quality + 1;
+  yquality = map.ysize * mesh_quality + 1;
+
+  width_half = mapview_model_width / 2;
+  height_half = mapview_model_height / 2;
+
+  gridX = Math.floor(xquality);
+  gridY = Math.floor(yquality);
+
+  gridX1 = gridX + 1;
+  gridY1 = gridY + 1;
+
+  segment_width = mapview_model_width / gridX;
+  segment_height = mapview_model_height / gridY;
+
+  const vertices = [];
+
+  let heightmap_scale = (mesh_quality == 2) ? (mesh_quality * 2) : 1;
+
+  for ( let iy = 0; iy < gridY1; iy ++ ) {
+    const y = iy * segment_height - height_half;
+    for ( let ix = 0; ix < gridX1; ix ++ ) {
+      const x = ix * segment_width - width_half;
+      var sx = ix % xquality, sy = iy % yquality;
+      const index = iy * gridX1 + ix;
+
+      if (mesh_quality == 2) {
+        lofibufferattribute.setXYZ(index, x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100);
+      } else {
+        landbufferattribute.setXYZ(index, x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100);
+      }
+
+    }
+  }
+  if (mesh_quality == 2) {
+    lofibufferattribute.needsUpdate = true;
+  } else {
+    landbufferattribute.needsUpdate = true;
+  }
 
   geometry.computeVertexNormals();
 
@@ -377,8 +436,8 @@ function update_map_terrain_geometry()
     var hash = generate_heightmap_hash();
     if (hash != heightmap_hash) {
       update_heightmap(terrain_quality);
-      create_land_geometry(lofiGeometry, 2);
-      create_land_geometry(landGeometry, terrain_quality);
+      update_land_geometry(lofiGeometry, 2);
+      update_land_geometry(landGeometry, terrain_quality);
 
       lofiGeometry.rotateX( - Math.PI / 2 );
       lofiGeometry.translate(Math.floor(mapview_model_width / 2) - 500, 0, Math.floor(mapview_model_height / 2));
