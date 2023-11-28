@@ -252,6 +252,9 @@ switch (filename) {
   case 'Diplomat':
     modelscale = 10.2;
     break;
+  case 'Spy':
+    modelscale = 9.2;
+    break;
   case 'Cannon':
     modelscale = 3.0;
     break;
@@ -361,6 +364,9 @@ switch (filename) {
     break;
   case 'Migrants':
     modelscale = 10.0;
+    break;
+  case 'Partisan':
+    modelscale = 11.0;
     break;
   case 'Airport':
     modelscale = 1.8;

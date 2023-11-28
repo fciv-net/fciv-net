@@ -10,4 +10,6 @@ gltf-transform prune dedup draco Cannon.glb Cannon.glb
 gltf-transform dedup Cannon.glb Cannon.glb  
 gltf-transform draco Cannon.glb Cannon.glb   
 
+See LICENSE.txt for the AGPL license of these models.
+
 
