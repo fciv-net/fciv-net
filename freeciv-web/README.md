@@ -50,4 +50,7 @@ if you are not using vagrant or the install script:
 Copyright (C) 2007-2023 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
-Source code, 3D models and all files part of Freeciv 3D / FCIV.NET are covered by the GNU AFFERO GENERAL PUBLIC LICENSE. 
+Source code, 3D models and all files part of Freeciv 3D / FCIV.NET are covered by the GNU AFFERO GENERAL PUBLIC LICENSE.
+See LICENSE.txt for the AGPL license of Freeciv 3D / FCIV.NET. This license means that these models
+are free and open source, and that any modifications and redistributions must also be
+free and open source with the AGPL license.
