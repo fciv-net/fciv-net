@@ -368,6 +368,9 @@ switch (filename) {
   case 'Partisan':
     modelscale = 11.0;
     break;
+  case 'Fanatics':
+    modelscale = 10.2;
+    break;
   case 'Airport':
     modelscale = 1.8;
     break;
