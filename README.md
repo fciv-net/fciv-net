@@ -53,7 +53,7 @@ Freeciv WebGL is the 3D version, which uses the Three.js 3D engine.
 
 Running Freeciv-web on your computer
 ------------------------------------
-The recommended and probably easiest way is to use Vagrant on VirtualBox.
+The recommended and probably easiest way is to use Docker on VirtualBox.
 
 Whatever the method you choose, you'll have to check out Freeciv-web to a
 directory on your computer, by installing [Git](http://git-scm.com/) and
@@ -66,88 +66,6 @@ You may also want to change some parameters before installing, although
 it's not needed in most cases. If you have special requirements, have a look
 at [config.dist](config/config.dist),
 copy it without the `.dist` extension and edit to your liking.
-
-#### :warning: Notice for Windows users
-
-Please keep in mind that the files are to be used in a Unix-like system
-(some Ubuntu version with the provided Vagrant file).
-Line endings for text files are different in Windows, and some editors
-"correct" them, making the files unusable in the VM.
-There's some provision to recode the main configuration files when installing,
-but not afterwards. If you touch shared files after installation, please use
-an editor that respect Unix line endings or transform them with a utility
-like dos2unix after saving them.
-
-### Running FCIV.NET with Vagrant on VirtualBox
-
-Freeciv-web can be setup using Vagrant on VirtualBox to quickly create a 
-local developer image running Freeciv-web on latest Ubuntu on your host
-operating system such as Windows, OSX or Linux. 
-This is the recommended way to build Freeciv-web on your computer.
-
-1. Install VirtualBox: https://www.virtualbox.org/ - Install manually on Windows, and with the following command on Linux:
- ```bash
-sudo apt-get install virtualbox
- ```
-
-2. Install Vagrant: http://www.vagrantup.com/ - Install manually on Windows
-, and with the following command on Linux:
- ```bash
-sudo apt-get install vagrant
- ```
-
-3. Run Vagrant with the following commands in your Freeciv-web directory:
- ```bash
- vagrant up
- ```
-
-  This will build, compile, install and run Freeciv-web on the virtual server image. Wait for the installation process to complete, watching for any error messages in the logs. If you get an error message about Virtualization (VT) not working, then enable Virtualization in the BIOS.
-
-4. Test Freeciv-web by pointing your browser to http://localhost if you run Windows or http://localhost:8080 if you run Linux or macOS.
-
-To log in to your Vagrant server, run the command: 
- ```bash
- vagrant ssh
- ```
-
-The Vagrant guest machine will mount the Freeciv-web source repository in the /vagrant directory.
-Note that running Freeciv-web using Vagrant requires about 4Gb of memory
-and 3 Gb of harddisk space.
-
-### System Requirements for manual install
-
-Install this software if you are not running Freeciv-web with Vagrant:
-
-- Tomcat 9 - https://tomcat.apache.org/
-
-- Java 11 JDK - https://adoptopenjdk.net/ 
-
-- Python 3.6 - http://www.python.org/
-
-- Pillow v2.3.0 (PIL fork) - http://pillow.readthedocs.org/
-  (required for freeciv-img-extract)
-
-- Mysql 5.5.x - http://www.mysql.com/
-
-- Maven 3 - http://maven.apache.org/download.html
-
-- curl-7.19.7 - http://curl.haxx.se/
-
-- OpenSSL - http://www.openssl.org/
-
-- nginx 1.11.x or later - http://nginx.org/
-
-- pngcrush, required for freeciv-img-extract.  http://pmt.sourceforge.net/pngcrush/
-
-- Tornado 6.1 or later - http://www.tornadoweb.org/
-
-- Jansson 2.6 - http://www.digip.org/jansson/
-
-- liblzma-dev - http://tukaani.org/xz/ - for XZ compressed savegames.
-
-
-When in a [tested system](scripts/install/systems),
-you may run `scripts/install/install.sh` and it will fetch and configure what's needed.
 
 Start and stop Freeciv-web with the following commands:  
   start-freeciv-web.sh  

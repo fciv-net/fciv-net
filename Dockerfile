@@ -1,7 +1,7 @@
 # Freeciv-web docker file
 # Dockerfile update based on debian/tomcat package
 
-FROM ubuntu:mantic
+FROM ubuntu:noble
 
 MAINTAINER FCIV.NET : 3.3
 
