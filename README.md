@@ -53,9 +53,9 @@ Freeciv WebGL is the 3D version, which uses the Three.js 3D engine.
 
 Running Freeciv-web on your computer
 ------------------------------------
-The recommended and probably easiest way is to use Docker on VirtualBox.
+The recommended and probably easiest way is to use Docker.
 
-Whatever the method you choose, you'll have to check out Freeciv-web to a
+Check out Freeciv-web to a
 directory on your computer, by installing [Git](http://git-scm.com/) and
 running this command:
  ```bash
@@ -67,10 +67,7 @@ it's not needed in most cases. If you have special requirements, have a look
 at [config.dist](config/config.dist),
 copy it without the `.dist` extension and edit to your liking.
 
-Start and stop Freeciv-web with the following commands:  
-  start-freeciv-web.sh  
-  stop-freeciv-web.sh  
-  status-freeciv-web.sh
+
 
 All software components in Freeciv-web will log to the /logs sub-directory of the Freeciv-web installation.
 
@@ -91,8 +88,12 @@ Freeciv-web can easily be built and run from Docker using `docker-compose`.
 
 http://localhost:8080/
 
-Enjoy. The overall dockerfile and required changes to scripts needs some further improvements.
+Enjoy.
 
+Start and stop Freeciv-web with the following commands:  
+  start-freeciv-web.sh  
+  stop-freeciv-web.sh  
+  status-freeciv-web.sh
 
 Developers interested in Freeciv-web
 ------------------------------------
