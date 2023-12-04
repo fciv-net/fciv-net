@@ -50,6 +50,7 @@ dependencies="\
   tar \
   unzip \
   zlib1g-dev \
+  rsync \
 "
 
 # TODO: Add back python wikipedia package.

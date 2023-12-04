@@ -247,7 +247,7 @@ switch (filename) {
     modelscale = 8.2;
     break;
   case 'Alpine Troops':
-    modelscale = 8.0;
+    modelscale = 10.0;
     break;
   case 'Diplomat':
     modelscale = 10.2;

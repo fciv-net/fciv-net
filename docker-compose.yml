@@ -7,7 +7,7 @@ services:
     container_name: fciv-net
     command: ["sleep", "infinity"]
     volumes:
-      - "data:/var/lib/tomcat9/webapps/data"
+      - ./freeciv-web:/docker/freeciv-web-shared
     ports:
       - "8080:80"
       - "4002:4002"
