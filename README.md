@@ -8,7 +8,7 @@ FCIV.NET
 [![CodeFactor](https://www.codefactor.io/repository/github/fciv-net/fciv-net/badge)](https://www.codefactor.io/repository/github/fciv-net/fciv-net)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9295dfc718bc478d94d22d43e3f62584)](https://app.codacy.com/gh/fciv-net/fciv-net/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-[Fciv.net](https://www.fciv.net) is an open-source turn-based strategy game. It can be played in a web-browser which supports HTML5 and WebGL 2. The game features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer.
+[Fciv.net](https://www.fciv.net) is an open-source turn-based strategy game. It can be played in a web-browser which supports HTML5 and WebGL 2 or WebGPU. The game features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer.
 
 FCIV.NET is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. See [License](LICENSE.txt) for the full license document.
@@ -47,9 +47,9 @@ Freeciv-Web consists of these components:
   multiple Freeciv server processes and checks capacity through the Metaserver. 
   Implemented in Python.
 
-Freeciv WebGL
+Freeciv 3D
 -------------
-Freeciv WebGL is the 3D version, which uses the Three.js 3D engine. 
+Freeciv 3D is the 3D version using the Three.js 3D engine, which requires WebGl 2 or WebGPU support.
 
 Running Freeciv-web on your computer
 ------------------------------------
