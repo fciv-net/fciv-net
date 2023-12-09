@@ -32,7 +32,6 @@ var tiletype_terrains = ["coast","ocean","arctic","desert","grassland","hills","
 var landGeometry;
 var landMesh; // the terrain land geometry
 var water;
-var composer;
 
 var lofiGeometry;
 var lofiMesh;  // low resolution mesh used for raycasting.
@@ -149,20 +148,6 @@ function webgl_start_renderer()
     const outputPass = new OutputPass();
     composer.addPass(outputPass);
     font_effects();
-  }
-
-  if (bloom_enabled) {
-    const renderScene = new RenderPass( scene, camera );
-
-    const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 0.30, 0.25, 0.0 );
-
-    const outputPass = new OutputPass();
-
-    composer = new EffectComposer( maprenderer );
-    composer.addPass( renderScene );
-    composer.addPass( bloomPass );
-    composer.addPass( outputPass );
-
   }
 
   var hours = new Date().getHours();
@@ -521,9 +506,7 @@ function animate() {
 
   controls.update();
 
-  if (bloom_enabled) {
-    composer.render();
-  } else if (pixelated_enabled) {
+  if (pixelated_enabled) {
     composer.render(scene);
   } else if (anaglyph_3d_enabled) {
     anaglyph_effect.render(scene,camera);

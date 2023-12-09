@@ -117,13 +117,6 @@ var webgpu = <%= webgpu %>;
   import { OutputPass } from '/javascript/webgl/effects/OutputPass.js?ts=${initParam.buildTimeStamp}';
   window.OutputPass  = OutputPass;
 
-  import { RenderPass } from '/javascript/webgl/effects/RenderPass.js?ts=${initParam.buildTimeStamp}';
-  window.RenderPass  = RenderPass;
-
-  import { UnrealBloomPass } from '/javascript/webgl/effects/UnrealBloomPass.js?ts=${initParam.buildTimeStamp}';
-  window.UnrealBloomPass  = UnrealBloomPass;
-
-
 </script>
 
 

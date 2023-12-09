@@ -513,9 +513,6 @@ function pregame_settings()
         "<tr id='pixelated_enabled'><td id='pixelated_label' style='min-width: 150px;'>Pixelated effect</td>" +
                 "<td><input type='checkbox' id='pixelated_setting'>Enable Pixelated effect "+
                 "</td></tr>"+
-        "<tr id='bloom_enabled'><td id='bloom_label' style='min-width: 150px;'>Unreal Bloom effect</td>" +
-               "<td><input type='checkbox' id='bloom_setting'>Enable Unreal Bloom "+
-               "</td></tr>"+
 
          "</table>" +
       "</div>" +
@@ -650,10 +647,6 @@ function pregame_settings()
 
   $('#pixelated_setting').change(function() {
         pixelated_enabled = !pixelated_enabled;
-  });
-
-  $('#bloom_setting').change(function() {
-      bloom_enabled = !bloom_enabled;
   });
 
   if (server_settings['metamessage'] != null
