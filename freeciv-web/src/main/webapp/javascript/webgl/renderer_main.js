@@ -28,6 +28,8 @@ var anaglyph_3d_enabled = false;
 
 var pixelated_enabled = false;
 
+var bloom_enabled = false;
+
 var stats = null;
 
 /****************************************************************************
