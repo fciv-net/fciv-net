@@ -392,3 +392,18 @@ function handle_web_info_text_message(packet)
   show_dialog_message("Tile Information", message);
 
 }
+
+
+
+/**************************************************************************
+ Font effects, eg pixelated fonts.
+ **************************************************************************/
+function font_effects() {
+  if (pixelated_enabled) {
+    const elements = document.querySelectorAll('*'); // Select all elements
+    elements.forEach(element => {
+      element.style.fontFamily = "'Press Start 2P', cursive"; // Change font family
+    });
+  }
+
+}

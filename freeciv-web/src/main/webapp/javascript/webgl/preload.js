@@ -426,7 +426,12 @@ switch (filename) {
     modelscale = 1.0;
     break;
   case 'Wheat':
-    modelscale = 2.7;
+    if (pixelated_enabled) {
+      modelscale = 0.4;
+    } else {
+      modelscale = 2.7;
+    }
+
     break;
   case 'Galleon':
     modelscale = 4.4;

@@ -139,6 +139,17 @@ function webgl_start_renderer()
     anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
   }
 
+  if (pixelated_enabled) {
+    composer = new EffectComposer(maprenderer);
+    const renderPixelatedPass = new RenderPixelatedPass(2.7, scene, camera, {normalEdgeStrength: 1.1, depthEdgeStrength: 0} );
+
+    composer.addPass(renderPixelatedPass);
+
+    const outputPass = new OutputPass();
+    composer.addPass(outputPass);
+    font_effects();
+  }
+
   var hours = new Date().getHours();
   var is_day = hours > 6 && hours < 20;
 
@@ -495,7 +506,9 @@ function animate() {
 
   controls.update();
 
-  if (anaglyph_3d_enabled) {
+  if (pixelated_enabled) {
+    composer.render(scene);
+  } else if (anaglyph_3d_enabled) {
     anaglyph_effect.render(scene,camera);
   } else {
     maprenderer.render(scene, camera);

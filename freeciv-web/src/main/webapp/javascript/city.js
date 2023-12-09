@@ -440,6 +440,8 @@ function show_city_dialog(pcity)
 
   center_tile_city(pcity);
 
+  font_effects();
+
 }
 
 

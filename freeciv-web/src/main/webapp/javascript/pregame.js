@@ -438,7 +438,7 @@ function pregame_settings()
   var dhtml = "<div id='pregame_settings_tabs'>" +
       "   <ul>" +
       "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
-      "     <li><a href='#pregame_settings_tabs-2'>3D WebGL</a></li>" +
+      "     <li><a href='#pregame_settings_tabs-2'>3D Three.js - WebGL / WebGPU</a></li>" +
       "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
       "   </ul>" +
       "<div id='pregame_settings_tabs-1'><br><table id='settings_table'> " +
@@ -509,8 +509,12 @@ function pregame_settings()
                 "<td><button id='webgpu_enable' type='button' class='webgpu button'>WebGPU renderer</button></td></tr>" +
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
-                "<br>"+
-           "</table>" +
+                "</td></tr>"+
+        "<tr id='pixelated_enabled'><td id='pixelated_label' style='min-width: 150px;'>Pixelated effect</td>" +
+                "<td><input type='checkbox' id='pixelated_setting'>Enable Pixelated effect "+
+                "</td></tr>"+
+
+         "</table>" +
       "</div>" +
 
       "<div id='pregame_settings_tabs-3'>" +
@@ -639,6 +643,10 @@ function pregame_settings()
   $("#anaglyph_label").prop("innerHTML", "3D Anaglyph glasses:");
   $('#anaglyph_setting').change(function() {
     anaglyph_3d_enabled = !anaglyph_3d_enabled;
+  });
+
+  $('#pixelated_setting').change(function() {
+        pixelated_enabled = !pixelated_enabled;
   });
 
   if (server_settings['metamessage'] != null
@@ -1014,7 +1022,7 @@ function show_intro_dialog(title, message) {
 
   blur_input_on_touchdevice();
 
-  $(".ui-widget-overlay").css("background-image", "url('/data/game_of_the_day.png')");
+  $(".ui-widget-overlay").css("background-image", window.location.href.includes('localhost')  ? "url('/images/backgrounds/6.jpg')" : "url('/data/game_of_the_day.png')");
   $(".ui-widget-overlay").css("background-position", "center");
   $(".ui-widget-overlay").css("background-repeat", "no-repeat");
   $(".ui-widget-overlay").css("background-size", "cover");
