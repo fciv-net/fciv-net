@@ -174,9 +174,9 @@ function webgl_start_renderer()
   }
 
   if (pixelated_enabled) {
-    camera_dx = 38 * 0.9;
-    camera_dy = 410 * 0.9;
-    camera_dz = 242 * 0.9;
+    camera_dx = 38 * 0.8;
+    camera_dy = 410 * 0.8;
+    camera_dz = 242 * 0.8;
   }
 
   $("#pregame_page").hide();
