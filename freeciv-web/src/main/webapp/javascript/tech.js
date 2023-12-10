@@ -709,6 +709,8 @@ function show_tech_gained_dialog(tech_gained_id)
     $("#tech_dialog").dialogExtend("minimize");
   }
 
+  font_effects();
+
 }
 
 /**************************************************************************

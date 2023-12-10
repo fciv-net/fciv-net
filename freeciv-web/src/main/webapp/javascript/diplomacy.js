@@ -399,6 +399,7 @@ function create_diplomacy_dialog(counterpart, template) {
   if (dialogs_minimized_setting) {
     diplomacy_dialog.dialogExtend("minimize");
   }
+  font_effects();
 }
 
 function meeting_paint_custom_flag(nation, flag_canvas)

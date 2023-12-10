@@ -647,6 +647,7 @@ function pregame_settings()
 
   $('#pixelated_setting').change(function() {
         pixelated_enabled = !pixelated_enabled;
+        font_effects();
   });
 
   if (server_settings['metamessage'] != null
