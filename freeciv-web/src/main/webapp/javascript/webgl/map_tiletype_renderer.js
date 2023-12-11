@@ -17,7 +17,6 @@
 
 ***********************************************************************/
 
-var map_tiletype_resolution;
 var tiletype_palette = [];
 var tiletype_hash = -1;
 var maptiletypes;

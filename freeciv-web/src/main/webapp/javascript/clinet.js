@@ -18,9 +18,6 @@
 ***********************************************************************/
 
 
-var error_shown = false;
-var syncTimerId = -1;
-
 var clinet_last_send = 0;
 var debug_client_speed_list = [];
 

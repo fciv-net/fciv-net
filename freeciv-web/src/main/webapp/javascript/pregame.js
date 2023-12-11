@@ -27,7 +27,6 @@ var metamessage_changed = false;
 var logged_in_with_password = false;
 var antialiasing_setting = true;
 var password_reset_count = 0;
-var google_user_token = null;
 
 /****************************************************************************
   ...

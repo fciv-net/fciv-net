@@ -19,7 +19,6 @@
 
 
 var techs = {};
-var techcoststyle1 = {};
 
 var tech_canvas_text_font = "18px Arial";
 

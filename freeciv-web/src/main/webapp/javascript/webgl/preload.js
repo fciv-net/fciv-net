@@ -22,9 +22,6 @@ var webgl_models = {};
 var start_preload = 0;
 var total_model_count = 0;
 var load_count = 0;
-var webgl_materials = {};
-
-var meshes = {};
 
 var model_filenames_initial = ["Settlers",   "Explorer",   "Workers", "city_european_0",  "city_modern_0", "city_roman_0",  "city_babylonian_0", "city_chinese_0", "Warriors", "citywalls_stone", "citywalls_roman",
                                "Cactus1", "Palm1", "Palm2", "Pine1", "Pine2", "Tree1", "Tree2", "Tree3", "Tree4", "Fish1", "Fish2", "Fish3", "Whales"];

@@ -24,16 +24,9 @@
 function map_to_scene_coords(x, y)
 {
   var result = {};
-  if (is_hex()) {
-    var hvec = map_hex_coords(new THREE.Vector2(x, y));
-    var gx = hvec.x;
-    var gy = hvec.y;
-    result['x'] = Math.floor(-470 + gx * (mapview_model_width / map['xsize']));
-    result['y'] = Math.floor(30 + gy * (mapview_model_height / map['ysize']));
-  } else {
-    result['x'] = Math.floor(-470 + x * mapview_model_width / map['xsize']);
-    result['y'] = Math.floor(30 + y * mapview_model_height / map['ysize']);
-  }
+  result['x'] = Math.floor(-470 + x * mapview_model_width / map['xsize']);
+  result['y'] = Math.floor(30 + y * mapview_model_height / map['ysize']);
+
   return result;
 }
 
@@ -43,17 +36,9 @@ function map_to_scene_coords(x, y)
 function scene_to_map_coords(x, y)
 {
   var result = {};
-  if (is_hex()) {
-    var hvec = map_hex_coords(new THREE.Vector2(x, y));
-    var gx = hvec.x + 0.5;
-    var gy = hvec.y;
-    result['x'] = Math.floor((gx + 500) * map['xsize'] / mapview_model_width);
-    result['y'] = Math.floor((gy) * map['ysize'] / mapview_model_height);
+  result['x'] = Math.floor((x + 500) * map['xsize'] / mapview_model_width);
+  result['y'] = Math.floor((y) * map['ysize'] / mapview_model_height);
 
-  } else {
-    result['x'] = Math.floor((x + 500) * map['xsize'] / mapview_model_width);
-    result['y'] = Math.floor((y) * map['ysize'] / mapview_model_height);
-  }
   return result;
 }
 

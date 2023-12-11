@@ -57,15 +57,9 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
       var next_height = nexttile['height'];
       if (tile_terrain(ptile)['name'] == "Hills" || tile_terrain(ptile)['name'] == "Mountains") {
         current_height += 0.1;
-        if (is_hex()) {
-          current_height += 0.1;
-        }
       }
       if (tile_terrain(nexttile)['name'] == "Hills" || tile_terrain(nexttile)['name'] == "Mountains") {
         next_height += 0.1;
-        if (is_hex()) {
-          next_height += 0.1;
-        }
       }
 
       let x = currpos['x'] - 10;

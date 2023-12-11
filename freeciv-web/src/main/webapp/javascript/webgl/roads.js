@@ -17,8 +17,6 @@
 
 ***********************************************************************/
 
-var num_road_tiles = 9;
-var roads_palette = [];
 var roads_texture;
 var roads_hash = -1;
 

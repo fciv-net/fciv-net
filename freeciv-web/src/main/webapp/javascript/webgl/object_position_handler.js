@@ -35,8 +35,6 @@ var unit_flag_positions = {};
 var unit_label_positions = {};
 var unit_activities_positions = {};
 
-var map_tile_label_positions = {};
-
 var unit_health_positions = {};
 var unit_healthpercentage_positions = {};
 
@@ -727,7 +725,6 @@ function update_tile_forest(ptile)
 {
   let terrain_name = tile_terrain(ptile).name;
   const extra_id = tile_resource(ptile);
-  let extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Forest" && tile_get_known(ptile) != TILE_UNKNOWN) {
     let height = 4.8 + ptile['height'] * 100 + get_forest_offset(ptile);

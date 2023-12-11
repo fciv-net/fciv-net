@@ -241,7 +241,7 @@ function init_webgl_mapview() {
   landMesh.castShadow = false;
   scene.add(landMesh);
 
-  if (!webgpu && graphics_quality == QUALITY_HIGH) {
+  if (!webgpu && graphics_quality === QUALITY_HIGH) {
     var shadowMaterial = new THREE.ShadowMaterial();
     shadowMaterial.opacity = 0.85;
     shadowmesh = new THREE.Mesh( landGeometry, shadowMaterial);
@@ -258,7 +258,7 @@ function init_webgl_mapview() {
     setInterval(update_map_tiletypes, 20);
   }
 
-  sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
+  let sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
   sun_mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 4, 30), sun_material );
   sun_mesh.castShadow = true;
   sun_mesh.rotation.x = -1 * Math.PI / 2;
@@ -296,7 +296,7 @@ function init_land_geometry(geometry, mesh_quality)
   const indices = [];
   const uvs = [];
   const vertices = [];
-  let heightmap_scale = (mesh_quality == 2) ? (mesh_quality * 2) : 1;
+  let heightmap_scale = (mesh_quality === 2) ? (mesh_quality * 2) : 1;
 
   for ( let iy = 0; iy < gridY1; iy ++ ) {
     const y = iy * segment_height - height_half;
@@ -322,7 +322,7 @@ function init_land_geometry(geometry, mesh_quality)
     }
   }
 
-  if (mesh_quality == 2) {
+  if (mesh_quality === 2) {
     lofibufferattribute = new THREE.Float32BufferAttribute( vertices, 3 );
     geometry.setAttribute( 'position', lofibufferattribute);
   } else {
@@ -360,9 +360,7 @@ function update_land_geometry(geometry, mesh_quality)
   segment_width = mapview_model_width / gridX;
   segment_height = mapview_model_height / gridY;
 
-  const vertices = [];
-
-  let heightmap_scale = (mesh_quality == 2) ? (mesh_quality * 2) : 1;
+  let heightmap_scale = (mesh_quality === 2) ? (mesh_quality * 2) : 1;
 
   for ( let iy = 0; iy < gridY1; iy ++ ) {
     const y = iy * segment_height - height_half;
@@ -371,7 +369,7 @@ function update_land_geometry(geometry, mesh_quality)
       var sx = ix % xquality, sy = iy % yquality;
       const index = iy * gridX1 + ix;
 
-      if (mesh_quality == 2) {
+      if (mesh_quality === 2) {
         lofibufferattribute.setXYZ(index, x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100);
       } else {
         landbufferattribute.setXYZ(index, x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100);
@@ -379,7 +377,7 @@ function update_land_geometry(geometry, mesh_quality)
 
     }
   }
-  if (mesh_quality == 2) {
+  if (mesh_quality === 2) {
     lofibufferattribute.needsUpdate = true;
   } else {
     landbufferattribute.needsUpdate = true;

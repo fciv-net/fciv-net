@@ -17,9 +17,9 @@
 
 ***********************************************************************/
 
-  var TILE_UNKNOWN = 0;
-  var TILE_KNOWN_UNSEEN = 1;
-  var TILE_KNOWN_SEEN = 2;
+var TILE_UNKNOWN = 0;
+var TILE_KNOWN_UNSEEN = 1;
+var TILE_KNOWN_SEEN = 2;
 
 const TILE_INDEX_NONE = -1;
 

@@ -27,8 +27,7 @@ var lux;
 
 var maxrate = 80;
 var freeze = false;
-var government_list;
-var current_government;
+
 
 
 /**************************************************************************
