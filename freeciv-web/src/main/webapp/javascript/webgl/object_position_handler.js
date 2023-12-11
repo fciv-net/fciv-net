@@ -724,7 +724,6 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
 function update_tile_forest(ptile)
 {
   let terrain_name = tile_terrain(ptile).name;
-  const extra_id = tile_resource(ptile);
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Forest" && tile_get_known(ptile) != TILE_UNKNOWN) {
     let height = 4.8 + ptile['height'] * 100 + get_forest_offset(ptile);
