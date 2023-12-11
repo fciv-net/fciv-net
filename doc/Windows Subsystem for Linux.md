@@ -10,7 +10,7 @@ Open a Powershell window, run as Administator, this command:
 > git clone https://github.com/fciv-net/fciv-net.git --depth=10
 
 3. Build Fciv.net:
-cd fciv-net 
+> cd fciv-net 
 > ./scripts/install/install.sh --mode=TEST
 
 4: Start Fciv.net:
