@@ -32,6 +32,7 @@ var tiletype_terrains = ["coast","ocean","arctic","desert","grassland","hills","
 var landGeometry;
 var landMesh; // the terrain land geometry
 var water;
+var shadowmesh;
 
 var lofiGeometry;
 var lofiMesh;  // low resolution mesh used for raycasting.
@@ -114,10 +115,7 @@ function webgl_start_renderer()
     maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
 
     maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
-    if (graphics_quality == QUALITY_HIGH) {
-      maprenderer.shadowMap.enabled = true;
-      maprenderer.shadowMap.type = THREE.PCFShadowMap;
-    }
+
   } else {
     maprenderer = new THREE.WebGPURenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
     if (maprenderer.backend.isWebGLBackend) console.log("WebGL backend");
@@ -140,30 +138,10 @@ function webgl_start_renderer()
   }
 
   if (pixelated_enabled) {
-    composer = new EffectComposer(maprenderer);
-    const renderPixelatedPass = new RenderPixelatedPass(2.7, scene, camera, {normalEdgeStrength: 1.1, depthEdgeStrength: 0} );
-
-    composer.addPass(renderPixelatedPass);
-
-    const outputPass = new OutputPass();
-    composer.addPass(outputPass);
-    font_effects();
+    toggle_pixelated();
   }
 
-  var hours = new Date().getHours();
-  var is_day = hours > 6 && hours < 20;
 
-  if (!webgpu) {
-    if (is_day) {
-      const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
-      sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
-      scene.background = sky.texture;
-    } else {
-      const sky = new THREE.WebGLCubeRenderTarget(2000);
-      sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5500, 2500));
-      scene.background = sky.texture;
-    }
-  }
 
   animate();
 
@@ -187,47 +165,7 @@ function webgl_start_renderer()
  This will render the map terrain mesh.
 ****************************************************************************/
 function init_webgl_mapview() {
-
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
-
-  var textureLoader = new THREE.TextureLoader();
-  var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height);
-
-  if (!webgpu) {
-    water = new Water(waterGeometry, {
-      color: '#55c0ff',
-      scale: 10,
-      flowDirection: new THREE.Vector2( 0.1, -0.1),
-      textureWidth: 1024,
-      textureHeight: 1024,
-      reflectivity : 0.7,
-      clipBias : 0.05,
-      normalMap0 : textureLoader.load( '/textures/Water_1_M_Normal.jpg' ),
-      normalMap1 : textureLoader.load( '/textures/Water_2_M_Normal.jpg' )
-
-      });
-  } else {
-    let water_material = new THREE.MeshBasicMaterial( { color: 0x7777ff, transparent: true, opacity: 0.8} );
-    water = new THREE.Mesh(waterGeometry, water_material);
-    water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), 2);
-  }
-
-  water.rotation.x = - Math.PI * 0.5;
-  water.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
-  water.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
-  water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
-  water.renderOrder = -1; // Render water first, this will sove transparency issues in city labels.
-  water.castShadow = false;
-  scene.add( water );
-
-
-  sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
-
-  sun_mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 4, 30), sun_material );
-  sun_mesh.castShadow = true;
-  sun_mesh.rotation.x = -1 * Math.PI / 2;
-  sun_mesh.position.set(- 500, 1000, -400);
-  scene.add(sun_mesh);
 
   if (!webgpu) {
     init_borders_image();
@@ -320,6 +258,14 @@ function init_webgl_mapview() {
     setInterval(update_map_tiletypes, 20);
   }
 
+  sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
+  sun_mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 4, 30), sun_material );
+  sun_mesh.castShadow = true;
+  sun_mesh.rotation.x = -1 * Math.PI / 2;
+  sun_mesh.position.set(- 500, 1000, -400);
+  scene.add(sun_mesh);
+
+  add_quality_dependent_objects();
   add_all_objects_to_scene();
 
   benchmark_start = new Date().getTime();
@@ -526,4 +472,79 @@ function animate() {
 
 
   requestAnimationFrame(animate);
+}
+
+
+/****************************************************************************
+ ...
+ ****************************************************************************/
+function add_quality_dependent_objects()
+{
+  var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height);
+
+  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+    scene.remove(water);
+    water = new Water(waterGeometry, {
+      color: '#55c0ff',
+      scale: 10,
+      flowDirection: new THREE.Vector2( 0.1, -0.1),
+      textureWidth: 1024,
+      textureHeight: 1024,
+      reflectivity : 0.7,
+      clipBias : 0.05,
+      normalMap0 : webgl_textures["water1"],
+      normalMap1 : webgl_textures["water2"]
+    });
+  } else {
+    scene.remove(water);
+    let water_material = new THREE.MeshBasicMaterial( { color: 0x4b4bd0, transparent: true, opacity: 0.4} );
+    water = new THREE.Mesh(waterGeometry, water_material);
+
+  }
+  water.rotation.x = - Math.PI * 0.5;
+  water.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+  water.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+  water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
+  water.renderOrder = -1; // Render water first, this will sove transparency issues in city labels.
+  water.castShadow = false;
+  scene.add( water );
+
+  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+    if (shadowmesh == null) {
+      var shadowMaterial = new THREE.ShadowMaterial();
+      shadowMaterial.opacity = 0.85;
+      shadowmesh = new THREE.Mesh( landGeometry, shadowMaterial);
+      shadowmesh.receiveShadow = true;
+      shadowmesh.castShadow = false;
+      scene.add(shadowmesh);
+    }
+
+    shadowmesh.visible = true;
+
+    maprenderer.shadowMap.enabled = true;
+    maprenderer.shadowMap.type = THREE.PCFShadowMap;
+
+  } else if (shadowmesh != null) {
+    shadowmesh.visible = false;
+    maprenderer.shadowMap.enabled = false;
+  }
+
+  var hours = new Date().getHours();
+  var is_day = hours > 6 && hours < 20;
+
+  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+    if (is_day) {
+      const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
+      sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
+      scene.background = sky.texture;
+    } else {
+      const sky = new THREE.WebGLCubeRenderTarget(2000);
+      sky.fromEquirectangularTexture(maprenderer, create_star_sky_texture(13000, 5500, 2500));
+      scene.background = sky.texture;
+    }
+  } else {
+    scene.background = null;
+  }
+
+
 }

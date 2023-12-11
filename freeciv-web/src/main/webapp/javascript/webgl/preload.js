@@ -169,6 +169,34 @@ function webgl_preload()
     })()
   );
 
+  imgurl =  '/textures/Water_1_M_Normal.jpg';
+  textureLoader.load(imgurl, (function () {
+        return function (image) {
+          webgl_textures["water1"] = new THREE.Texture();
+          webgl_textures["water1"].image = image;
+          webgl_textures["water1"].wrapS = THREE.RepeatWrapping;
+          webgl_textures["water1"].wrapT = THREE.RepeatWrapping;
+          webgl_textures["water1"].magFilter = THREE.LinearFilter;
+          webgl_textures["water1"].minFilter = THREE.LinearFilter;
+          webgl_textures["water1"].needsUpdate = true;
+        }
+      })()
+  );
+
+  imgurl =  '/textures/Water_2_M_Normal.jpg';
+  textureLoader.load(imgurl, (function () {
+        return function (image) {
+          webgl_textures["water2"] = new THREE.Texture();
+          webgl_textures["water2"].image = image;
+          webgl_textures["water2"].wrapS = THREE.RepeatWrapping;
+          webgl_textures["water2"].wrapT = THREE.RepeatWrapping;
+          webgl_textures["water2"].magFilter = THREE.LinearFilter;
+          webgl_textures["water2"].minFilter = THREE.LinearFilter;
+          webgl_textures["water2"].needsUpdate = true;
+        }
+      })()
+  );
+
 }
 
 /****************************************************************************

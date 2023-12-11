@@ -114,18 +114,6 @@ function init_options_dialog()
   $("#end_button").button("option", "label", "End Game");
   $("#fullscreen_button").button("option", "label", "Fullscreen");
 
-  $("#metamessage_setting").val(server_settings['metamessage']['val']);
-  $('#metamessage_setting').change(function() {
-    send_message("/metamessage " + $('#metamessage_setting').val());
-  });
-
-  $('#metamessage_setting').bind('keyup blur',function(){
-    var cleaned_text = $(this).val().replace(/[^a-zA-Z\s\-]/g,'');
-    if ($(this).val() != cleaned_text) {
-      $(this).val( cleaned_text ); }
-    }
-  );
-
 
   var existing_timeout = game_info['timeout'];
   if (existing_timeout == 0) $("#timeout_info").html("(0 = no timeout)");
@@ -170,6 +158,20 @@ function init_options_dialog()
     simpleStorage.set('openai_enabled', openai_enabled);
   });
 
+  $('#pixelated_setting_ingame').prop('checked', pixelated_enabled);
+  $('#pixelated_setting_ingame').change(function() {
+    pixelated_enabled = this.checked;
+    simpleStorage.set('pixelated_setting', pixelated_enabled);
+    toggle_pixelated();
+  });
+
+  $('#borders_setting').prop('checked', draw_borders);
+  $('#borders_setting').change(function() {
+    draw_borders = this.checked;
+    terrain_material.uniforms.borders_visible.value = draw_borders;
+    terrain_material.uniforms.borders_visible.needsUpdate = true;
+  });
+
   if (is_speech_supported()) {
     $('#speech_enabled_setting').prop('checked', speech_enabled);
     $('#speech_enabled_setting').change(function() {
@@ -178,6 +180,14 @@ function init_options_dialog()
   } else {
     $('#speech_enabled_setting').attr('disabled', true);
   }
+
+  $('#graphics_quality_options').change(function() {
+    graphics_quality = parseFloat($('#graphics_quality_options').val());
+    simpleStorage.set("graphics_quality", graphics_quality);
+    add_quality_dependent_objects();
+  });
+  $("#graphics_quality_options").val(graphics_quality);
+
 
 }
 

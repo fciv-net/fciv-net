@@ -17,9 +17,7 @@
 
 ***********************************************************************/
 
-#ifdef GL_ES
 precision highp float;
-#endif
 
 varying vec3 vNormal;
 varying vec3 vColor;
@@ -167,7 +165,7 @@ vec4 border_n;
 vec4 border_s;
 
 
-void main(void)
+void main()
 {
 
     if (vColor.r == 0.0) {

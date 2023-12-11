@@ -61,7 +61,9 @@ function webgl_preload_complete()
 
 }
 
-
+/****************************************************************************
+ Init the map renderer
+ ****************************************************************************/
 function renderer_init() {
   if (!Detector.webgl) {
     swal("3D WebGL not supported by your browser or you don't have a 3D graphics card. ");
@@ -79,3 +81,4 @@ function renderer_init() {
     setTimeout("$('#mapcanvas').fadeIn(2500);", 300);
   }
 }
+

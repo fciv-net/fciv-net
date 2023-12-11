@@ -23,73 +23,94 @@
 </div>
 </td>
 </tr>
+
+
 <tr>
 <td>
-<div class="main_menu_buttons">
-  <button id="surrender_button" type="button" class="button setting_button" onClick="surrender_game();" title="Surrenders in multiplayer games and thus ends the game for you."></button>
-</div>
+  <div class="main_menu_buttons">
+    <input type='checkbox' name='openai_setting' id='openai_setting' checked>
+    <b>ChatGTP OpenAI enabled</b>
+  </div>
 </td>
 <td>
-<div class="main_menu_buttons">
-  <button id="end_button" type="button" class="button setting_button" onClick="window.location='/';" title="Ends the game, and returns to the main page of Freeciv-web." ></button>
-</div>
+    <div class="main_menu_buttons">
+      <input type='checkbox' name='pixelated_setting_ingame' id='pixelated_setting_ingame'>
+      <b>Pixel-art retro effect</b>
+    </div>
 </td>
 </tr>
 
 <tr>
 <td>
   <div class="main_menu_buttons">
-    <b>ChatGTP OpenAI enabled:</b> <input type='checkbox' name='openai_setting' id='openai_setting' checked>
-  </div>
-</td>
-</tr>
-
-<tr>
-<td>
-  <div class="main_menu_buttons">
-    <b>Play sounds:</b> <input type='checkbox' name='play_sounds_setting' id='play_sounds_setting' checked>
+    <input type='checkbox' name='play_sounds_setting' id='play_sounds_setting' checked>
+    <b>Play sounds</b>
   </div>
 </td>
 <td>
   <div class="main_menu_buttons">
-    <b>Speech messages:</b> <input type='checkbox' name='speech_enabled_setting' id='speech_enabled_setting'>
+    <input type='checkbox' name='speech_enabled_setting' id='speech_enabled_setting'>
+    <b>Speech messages</b>
   </div>
 </td>
 </tr>
 <tr>
 <td>
   <div class="main_menu_buttons">
-    <b>Dialogs open minimized:</b> <input type='checkbox' name='dialogs_minimized_setting' id='dialogs_minimized_setting'>
+    <input type='checkbox' name='dialogs_minimized_setting' id='dialogs_minimized_setting'>
+    <b>Dialogs open minimized</b>
   </div>
 </td>
 <td>
-<div class="main_menu_buttons">
-  <button id="city_labels_hide_button" type="button" class="button setting_button" onClick="hide_city_labels();" title="Hide city labels." >Hide city labels</button>
-</div>
+    <div class="main_menu_buttons">
+      <input type='checkbox' name='borders_setting' id='borders_setting'>
+      <b>Show borders</b>
+    </div>
 </td>
 </tr>
 </table>
 
+<div class="main_menu_buttons" id="quality_div">
+ <table style="width: 400px;">
+  <tr title='Graphics quality level'>
+      <td><b>Graphics quality:</b>
+          &nbsp; &nbsp;
+      <select name='graphics_quality_options' id='graphics_quality_options'>
+    <option value='2'>Medium</option>
+    <option value='3'>High</option>
+    </select></td>
+  </tr>
+ </table>
+</div>
 
 
 <div class="main_menu_buttons" id="timeout_setting_div">
-  <b>Timeout (seconds per turn):</b> <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' max='3600' step='1'>
-  <span id="timeout_info"></span>
-</div>
+  <input type='number' name='timeout_setting' id='timeout_setting' size='6' length='3' max='3600' step='1' style='width: 40px;'>
+  <b>Timeout (seconds per turn)</b>
 
-<div class="main_menu_buttons" id="title_setting_div">
-  <b>Game title:</b> <input type='text' name='metamessage_setting' id='metamessage_setting' size='28' maxlength='42'>
+  <span id="timeout_info"></span>
 </div>
 
 <div class="main_menu_buttons">
 <table>
 <tr>
   <td>
-    <button id="fps_button" type="button" class="button setting_button" onClick="show_fps();">Show fps</button>
+    <div class="main_menu_buttons">
+       <button id="fps_button" type="button" class="button setting_button" onClick="show_fps();">Show fps</button>
+    </div>
   </td>
-  <td>
-    <button id="hof_button" type="button" class="button setting_button" onClick="submit_game_of_the_day();">Submit Game of the Day</button>
-  </td>
+</tr>
+<tr>
+    <td>
+      <div class="main_menu_buttons">
+        <button id="surrender_button" type="button" class="button setting_button" onClick="surrender_game();" title="Surrenders in multiplayer games and thus ends the game for you."></button>
+      </div>
+    </td>
+    <td>
+      <div class="main_menu_buttons">
+        <button id="end_button" type="button" class="button setting_button" onClick="window.location='/';" title="Ends the game, and returns to the main page of Freeciv-web." ></button>
+      </div>
+    </td>
 </tr>
 </table>
 

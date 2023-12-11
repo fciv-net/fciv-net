@@ -510,8 +510,8 @@ function pregame_settings()
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
                 "</td></tr>"+
-        "<tr id='pixelated_enabled'><td id='pixelated_label' style='min-width: 150px;'>Pixelated effect</td>" +
-                "<td><input type='checkbox' id='pixelated_setting'>Enable Pixelated effect "+
+        "<tr id='pixelated_enabled'><td id='pixelated_label' style='min-width: 150px;'>Pixel-art retro effect</td>" +
+                "<td><input type='checkbox' id='pixelated_setting'>Enable Pixel-art retro effect "+
                 "</td></tr>"+
 
          "</table>" +
