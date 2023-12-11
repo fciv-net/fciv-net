@@ -1,6 +1,8 @@
 Run Fciv.net on Windows Subsystem for Linux (WSL) 
 =================================================
 
+Allows running Freeciv3D on an Ubuntu Linux in Windows.
+
 ### 1. Install WSL on Windows 11:  
 https://learn.microsoft.com/en-us/windows/wsl/install  
 Open a Powershell window, run as Administator, this command:
