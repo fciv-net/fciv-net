@@ -51,6 +51,9 @@ Freeciv 3D
 -------------
 Freeciv 3D is the 3D version using the Three.js 3D engine, which requires WebGl 2 or WebGPU support.
 
+### Running Freeciv-web on Windows Subsystem for Linux (WSL)
+[Windows Subsystem for Linux (WSL)](/doc/Windows%20Subsystem%20for%20Linux.md)
+
 Running Freeciv-web on your computer
 ------------------------------------
 The recommended and probably easiest way is to use Docker.
@@ -95,8 +98,7 @@ Start and stop Freeciv-web with the following commands:
   stop-freeciv-web.sh  
   status-freeciv-web.sh
 
-### Running Freeciv-web on Windows Subsystem for Linux (WSL)
-[Windows Subsystem for Linux (WSL)](/doc/Windows%20Subsystem%20for%20Linux.md)
+
 
 Developers interested in Freeciv-web
 ------------------------------------
