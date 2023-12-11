@@ -1,7 +1,7 @@
 Run Fciv.net on Windows Subsystem for Linux (WSL) 
 =================================================
 
-1. Install WSL on Windows 11:
+1. Install WSL on Windows 11:  
 https://learn.microsoft.com/en-us/windows/wsl/install  
 Open a Powershell window, run as Administator, this command:
 >  wsl --install
