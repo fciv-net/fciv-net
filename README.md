@@ -95,6 +95,9 @@ Start and stop Freeciv-web with the following commands:
   stop-freeciv-web.sh  
   status-freeciv-web.sh
 
+### Running Freeciv-web on Windows Subsystem for Linux (WSL)
+[Windows Subsystem for Linux (WSL)](/doc/Windows%20Subsystem%20for%20Linux.md)
+
 Developers interested in Freeciv-web
 ------------------------------------
 
