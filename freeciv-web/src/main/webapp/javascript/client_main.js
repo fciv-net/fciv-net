@@ -375,7 +375,7 @@ function handle_web_info_text_message(packet)
       if (pplayer != null &&
           (client.conn.playing == null || pplayer != client.conn.playing)) {
         lines[i] = split_txt[1]
-                 + "<a href='#' onclick='javascript:nation_table_select_player("
+                 + "<a href='#' onclick='nation_table_select_player("
                  + pplayer['playerno']
                  + ");' style='color: black;'>"
                  + split_txt[2]

@@ -32,7 +32,7 @@ function render_nuclear_explosion(ptile)
   if (ptile == null || nuke_unit == null || nuke_start_tile == null) return;
 
   center_tile_mapcanvas_3d(ptile);
-  setTimeout("create_nuke(" + ptile['index'] + ");", 500);
+  setTimeout("create_nuke(" + ptile['index'] + ")", 500);
   nuke_active = true;
 }
 

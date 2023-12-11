@@ -99,7 +99,7 @@ function civclient_benchmark(frame)
   center_tile_mapcanvas(ptile);
 
   if (frame < 30) {
-    setTimeout("civclient_benchmark(" + (frame + 1) + ");", 10);
+    setTimeout("civclient_benchmark(" + (frame + 1) + ")", 10);
   } else {
 
     var end = new Date().getTime();

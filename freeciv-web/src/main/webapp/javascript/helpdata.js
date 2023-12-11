@@ -35,7 +35,7 @@ function show_help()
   for (var sec_id in helpdata_order) {
     var key = helpdata_order[sec_id];
     if (hidden_menu_items.indexOf(key) > -1) {
-      continue;
+
     } else if (key.indexOf("help_gen") != -1) {
       generate_help_menu(key);
     } else if (toplevel_menu_items.indexOf(key) > -1) {

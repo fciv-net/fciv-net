@@ -602,26 +602,6 @@ function get_tech_infobox_html(tech_id)
   return infobox_html;
 }
 
-
-/**************************************************************************
- For pbem games, checks if a tech was gained in the previous turn.
-**************************************************************************/
-function check_queued_tech_gained_dialog()
-{
-  return;
-
-  /*if (!is_pbem() || players.length < 2) return;
-
-  var queued_tech = simpleStorage.get(get_pbem_game_key(), "");
-
-  if (queued_tech != null) {
-    $("#dialog").remove();
-    show_tech_gained_dialog(queued_tech);
-    simpleStorage.set(get_pbem_game_key(), null);
-  }*/
-
-}
-
 /**************************************************************************
  This will show the tech gained dialog for normal games. This will store 
  the gained tech, for pbem games, to be displayed at beginning of next turn.
