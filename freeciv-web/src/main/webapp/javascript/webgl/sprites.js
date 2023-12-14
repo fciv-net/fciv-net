@@ -339,7 +339,7 @@ function create_city_worked_sprite(food, shields, trade)
     ctx.drawImage(sprites[skey], 0, sprites[fkey].height / 2,
                 sprites[skey].width, sprites[skey].height / 2,
                 0,0,64,32);
-    var tkey = "city.t_trade_" + food;
+    var tkey = "city.t_trade_" + trade;
     ctx.drawImage(sprites[tkey], 0, sprites[fkey].height / 2,
                 sprites[tkey].width, sprites[tkey].height / 2,
                 0,0,64,32);
