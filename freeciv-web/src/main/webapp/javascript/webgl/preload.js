@@ -502,6 +502,13 @@ switch (filename) {
   case 'city_roman_capital':
     modelscale = 2.1;
     break;
+  case 'city_postmodern_0':
+  case 'city_postmodern_1':
+  case 'city_postmodern_2':
+  case 'city_postmodern_3':
+  case 'city_postmodern_4':
+    modelscale = 19.1;
+    break;
   case 'city_babylonian_0':
   case 'city_babylonian_1':
   case 'city_babylonian_2':

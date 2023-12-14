@@ -277,6 +277,7 @@ function update_city_position(ptile) {
     if (pcity['style'] == 1) height -= 0.82;
     if (pcity['style'] == 3) height -= 2;
     if (pcity['style'] == 4) height -= 1;
+    if (pcity['style'] == 9) height -= 1;
 
     new_city.position.set(pos['x'] - 12, height - 2, pos['y'] - 11);
     new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
@@ -327,6 +328,7 @@ function update_city_position(ptile) {
       if (pcity['style'] == 1) height -= 0.82;
       if (pcity['style'] == 3) height -= 2;
       if (pcity['style'] == 4) height -= 1;
+      if (pcity['style'] == 9) height -= 1;
 
       new_city.position.set(pos['x'] - 12, height - 2, pos['y'] - 10);
       new_city.rotateOnAxis(new THREE.Vector3(0,1,0).normalize(), (2 * Math.PI * Math.random()));
