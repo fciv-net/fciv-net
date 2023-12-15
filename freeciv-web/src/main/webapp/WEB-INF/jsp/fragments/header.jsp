@@ -40,8 +40,6 @@
 		    <li><a href="/about">About</a></li>
 
 	            <li><a href="https://www.twitter.com/fcivnet">@Fcivnet</a></li>
-
-		    <li><a href="https://www.freecivweb.org" title="One turn per day multiplayer games on freecivweb.org">Massive Multiplayer Freeciv</a></li>
 </ul>
 		</div><!-- end navbar-collapse -->
 	</div><!-- end container-fluid -->
