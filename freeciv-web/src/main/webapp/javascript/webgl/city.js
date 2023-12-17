@@ -181,3 +181,25 @@ function get_citywalls_models(pcity) {
     return "citywalls_roman";
   }
 }
+
+/****************************************************************************
+ Show or hide city buildings on the map.
+ ****************************************************************************/
+function update_show_city_buildings() {
+
+  if (show_buildings) {
+    for (let key in city_building_positions) {
+      if (city_building_positions[key] != null) {
+        let building = city_building_positions[key];
+        building.visible = true;
+      }
+    }
+  } else {
+    for (let key in city_building_positions) {
+      if (city_building_positions[key] != null) {
+        let building = city_building_positions[key];
+        building.visible = false;
+      }
+    }
+  }
+}

@@ -57,8 +57,8 @@
 <tr>
 <td>
   <div class="main_menu_buttons">
-    <input type='checkbox' name='dialogs_minimized_setting' id='dialogs_minimized_setting'>
-    <b>Dialogs open minimized</b>
+    <input type='checkbox' name='show_buildings_setting' id='show_buildings_setting'>
+    <b>Show city buildings</b>
   </div>
 </td>
 <td>
@@ -68,6 +68,16 @@
     </div>
 </td>
 </tr>
+    <tr>
+        <td>
+            <div class="main_menu_buttons">
+                <input type='checkbox' name='dialogs_minimized_setting' id='dialogs_minimized_setting'>
+                <b>Dialogs open minimized</b>
+            </div>
+        </td>
+        <td>
+        </td>
+    </tr>
 </table>
 
 <div class="main_menu_buttons" id="quality_div">

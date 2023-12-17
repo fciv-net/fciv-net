@@ -437,7 +437,7 @@ function pregame_settings()
   var dhtml = "<div id='pregame_settings_tabs'>" +
       "   <ul>" +
       "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
-      "     <li><a href='#pregame_settings_tabs-2'>3D Three.js - WebGL / WebGPU</a></li>" +
+      "     <li><a href='#pregame_settings_tabs-2'>3D WebGL,WebGPU</a></li>" +
       "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
       "   </ul>" +
       "<div id='pregame_settings_tabs-1'><br><table id='settings_table'> " +

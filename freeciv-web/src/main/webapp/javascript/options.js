@@ -104,6 +104,7 @@ var draw_unit_shields = TRUE;
 var player_dlg_show_dead_players = TRUE;
 var reqtree_show_icons = TRUE;
 var reqtree_curved_lines = FALSE;
+var show_buildings = true;
 
 var dialogs_minimized_setting = false;
 
@@ -150,7 +151,7 @@ function init_options_dialog()
   $('#play_sounds_setting').change(function() {
     sounds_enabled = this.checked;
     simpleStorage.set('sndFX', sounds_enabled);
-  });
+  })
 
   $('#openai_setting').prop('checked', openai_enabled);
   $('#openai_setting').change(function() {
@@ -170,6 +171,12 @@ function init_options_dialog()
     draw_borders = this.checked;
     terrain_material.uniforms.borders_visible.value = draw_borders;
     terrain_material.uniforms.borders_visible.needsUpdate = true;
+  });
+
+  $('#show_buildings_setting').prop('checked', show_buildings);
+  $('#show_buildings_setting').change(function() {
+    show_buildings = this.checked;
+    update_show_city_buildings();
   });
 
   if (is_speech_supported()) {
