@@ -6,8 +6,8 @@ name   = _("Mongol")
 plural = _("?plural:Mongols")
 groups = "Medieval", "Early Modern", "Modern", "Asian", "Core"
 legend = _("In the centuries after their unification by Chinggis Khan, the\
- Mongols conquered the largest empire in human history, encompassing most\
- of the continent of Asia. They became notorious for their utter\
+ Mongols conquered the largest land empire in human history, encompassing\
+ most of the continent of Asia. They became notorious for their utter\
  ruthlessness in warfare.")
 
 leaders = {
@@ -43,7 +43,7 @@ init_buildings = ""
 init_units = ""
 
 civilwar_nations = "Tibetan", "Tuvan", "Kalmyk", "Timurid", "Uyghur", "Tatar",
- "Crimean Tatar", "Buryat", "Golden Horde"
+ "Crimean Tatar", "Buryat", "Golden Horde", "Chinese", "Han"
 
 cities =
  "Karakorum", ; Каракорум
