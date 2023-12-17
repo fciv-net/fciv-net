@@ -5,18 +5,22 @@ translation_domain = "freeciv-core"
 name   = _("Portuguese")
 plural = _("?plural:Portuguese")
 groups = "Medieval", "Early Modern", "Modern", "European", "Core"
-legend = _("Portugal founded the first of the great mercantile empires\
- in the 1400s on the shipbuilding advances funded by Prince Henry the\
- Navigator.")
+legend = _("Portugal was originally a Leonese county that achieved\
+ independence. After finishing it's reconquista in 1249, Portugal\
+ founded the first of the great mercantile empires in the early 1400s\
+ on the shipbuilding advances funded by Prince Henry the Navigator.")
 
 leaders = {
  "name",                        "sex"
  "Afonso Henriques",            "Male"
  "Sancho I",                    "Male"
  "Dinis",                       "Male"
- "Afonso IV",                   "Male"
+ "José",                        "Male"
+ "Pedro IV",                    "Male"
+ "Luís IV",                     "Male"
  "João I",                      "Male"
  "João II",                     "Male"
+ "Pedro II",                    "Male"
  "Manuel I",                    "Male"
  "João IV",                     "Male"
  "Maria II",                    "Female"
@@ -25,7 +29,7 @@ leaders = {
 
 ruler_titles = {
  "government",      "male_title",           "female_title"
- "Despotism",       _("Viscount %s"),       _("Viscountess %s")
+ "Despotism",       _("Count %s"),          _("Countess %s")
  "Fundamentalism",  _("Patriarch %s"),      _("Mother Superior %s")
 }
 
@@ -92,7 +96,7 @@ cities =
  "Marvão",
  "Mafra",
  "Palmela",
- "Cascais",
+ "Cascais (ocean)",
  "Estoril",
  "Funchal",
  "Ponta Delgada",
@@ -103,4 +107,5 @@ cities =
  "Maia",
  "Figueira da Foz (river)",
  "Matosinhos",
- "Vila Nova de Gaia"
+ "Vila Nova de Gaia",
+ "Pombal"
