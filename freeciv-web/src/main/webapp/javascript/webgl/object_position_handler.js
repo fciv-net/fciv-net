@@ -506,6 +506,9 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     wonder.position.set(pos['x'] - 10, height - 7, pos['y'] - 6);
     pcity[wonder_name + '_added'] = true;
     city_building_positions[nexttile['index']] = wonder;
+    if (!show_buildings) {
+      wonder.visible = false;
+    }
     scene.add(wonder);
   }
 }
@@ -583,6 +586,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       building.position.set(pos['x'] - 14, height - 5, pos['y'] - 14 + y_offset);
       pcity[building_name + '_added'] = true;
       city_building_positions[nexttile['index']] = building;
+      if (!show_buildings) {
+        building.visible = false;
+      }
       scene.add(building);
     }
 }
