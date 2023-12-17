@@ -442,7 +442,7 @@ switch (filename) {
     modelscale = 6;
     break;
   case 'Wine':
-    modelscale = 8;
+    modelscale = 1.2;
     break;
   case 'Buffalo':
     modelscale = 1.9;

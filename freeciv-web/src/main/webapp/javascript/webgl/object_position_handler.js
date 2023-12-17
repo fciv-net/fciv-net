@@ -639,8 +639,12 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       num_models = 2;
       height -= 7;
     }
-    if (extra_name == "Wine" || extra_name == "Iron" || extra_name == "Ivory"  || extra_name == "Coal"  || extra_name == "Gold" ) {
+    if (extra_name == "Iron" || extra_name == "Ivory"  || extra_name == "Coal"  || extra_name == "Gold" ) {
       height -= 7.5;
+    }
+    if (extra_name == "Wine" ) {
+      height -= 9.5;
+      num_models = 1;
     }
     if (extra_name == "Oil") {
       height -= 6;
