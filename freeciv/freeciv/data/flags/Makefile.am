@@ -126,6 +126,7 @@ flag_files =				\
 		cossack.png		\
 		costa_rica.png		\
 		courland.png		\
+		couto_misto.png		\
 		crete.png		\
 		crimean_tatar.png	\
 		croatia.png		\
@@ -578,16 +579,16 @@ flag_files =				\
 		abkhazia-large.png		\
 		aborigines-large.png		\
 		acadia-large.png		\
-		aceh-large.png		\
+		aceh-large.png			\
 		acre-large.png			\
 		adygea-large.png		\
 		afghanistan-large.png		\
-		africa-large.png	\
-		ainu-large.png		\
-		akwe-large.png		\
+		africa-large.png		\
+		ainu-large.png			\
+		akwe-large.png			\
 		aland-large.png			\
 		albania-large.png		\
-		aleut-large.png		\
+		aleut-large.png			\
 		algeria-large.png		\
 		almohad-large.png		\
 		alsace-large.png		\
@@ -602,9 +603,9 @@ flag_files =				\
 		antarctica_alt-large.png	\
 		antigua_and_barbuda-large.png	\
 		apache-large.png		\
-		arab-large.png		\
+		arab-large.png			\
 		aragon-large.png		\
-		aram-large.png		\
+		aram-large.png			\
 		argentina-large.png		\
 		armenia-large.png		\
 		ashanti-large.png		\
@@ -697,6 +698,7 @@ flag_files =				\
 		cossack-large.png		\
 		costa_rica-large.png		\
 		courland-large.png		\
+		couto_misto-large.png		\
 		crete-large.png			\
 		crimean_tatar-large.png	\
 		croatia-large.png		\
@@ -1270,6 +1272,7 @@ shield_files =					\
 		costa_rica-shield.png		\
 		cossack-shield.png		\
 		courland-shield.png		\
+		couto_misto-shield.png		\
 		crete-shield.png		\
 		crimean_tatar-shield.png	\
 		croatia-shield.png		\
@@ -1841,6 +1844,7 @@ shield_files =					\
 		costa_rica-shield-large.png		\
 		cossack-shield-large.png		\
 		courland-shield-large.png		\
+		couto_misto-shield-large.png		\
 		crete-shield-large.png			\
 		crimean_tatar-shield-large.png	\
 		croatia-shield-large.png		\
@@ -2414,6 +2418,7 @@ svg_files = 				\
 		cossack.svg		\
 		costa_rica.svg		\
 		courland.svg		\
+		couto_misto.svg		\
 		crete.svg		\
 		crimean_tatar.svg	\
 		croatia.svg		\
