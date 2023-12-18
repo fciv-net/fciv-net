@@ -24,7 +24,7 @@ ruler_titles = {
 }
 
 flag = "couto_misto"
-flag_alt = "-"
+flag_alt = "texas"
 style = "Celtic"
 
 init_techs = ""

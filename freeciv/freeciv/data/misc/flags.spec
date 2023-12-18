@@ -130,8 +130,9 @@ artists = "
    Constantine		Nikos Mavrogiannopoulos
    Cornwall		Vasco Alexandre Da Silva Costa
    Corsica		Patricia Fidi
-   Cossack		Alex Tora
+   Cossack		Alex Tora 
    Costa Rica		Nightstallion (Wikimedia Commons)
+   Couto Misto          rvid19 (Wikimedia Commons)
    Crete		J.M. Maalderink
    Crimean Tatar	J.M. Maalderink
    Croatia		Frank Zeko
@@ -708,6 +709,7 @@ sprites =
 		"f.cossack", "flags/cossack"
 		"f.costa_rica", "flags/costa_rica"
 		"f.courland", "flags/courland"
+                "f.couto_misto", "flags/couto_misto"
 		"f.crete", "flags/crete"
 		"f.crimean_tatar", "flags/crimean_tatar"
 		"f.croatia", "flags/croatia"
