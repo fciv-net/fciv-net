@@ -23,7 +23,7 @@ ruler_titles = {
  "Republic",        _("Juiz %s"),           _("Juiza %s")
 }
 
-flag = "coutomisto"
+flag = "couto_misto"
 flag_alt = "-"
 style = "Celtic"
 
