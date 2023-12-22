@@ -19,3 +19,18 @@ Open a Powershell window, run as Administator, this command:
 > ./scripts/start-freeciv-web.sh
 
 ### Open Fciv.net at http://localhost/
+
+##Known problems
+### 1. SQL problems
+> error: 'Access denied for user 'root'@'localhost' (using password: YES)'
+
+![sql bug](https://raw.githubusercontent.com/fciv-net/fciv-net/main/doc/img/sql_bug.png "")
+
+This error can happen when fciv-net is stopped, most probably by a compilation fail. It can be solved by stopping mySQL:
+> sudo systemctl stop mysql
+
+Try to re-run fciv-net. If the same error happens again, the only known solution is to completely uninstall mySQL. It will automatically be installed again.
+> sudo systemctl stop mysql
+sudo apt-get purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+sudo rm -rf /etc/mysql /var/lib/mysql
+sudo apt autoremove && sudo apt autoclean
