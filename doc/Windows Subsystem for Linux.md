@@ -24,7 +24,7 @@ Open a Powershell window, run as Administator, this command:
 ### 1. SQL problems
 > error: 'Access denied for user 'root'@'localhost' (using password: YES)'
 
-![sql bug](https://raw.githubusercontent.com/rvid19/fciv-net/main/doc/img/sql_bug.png "")
+![sql bug](https://raw.githubusercontent.com/fciv-net/fciv-net/main/doc/img/sql_bug.png "")
 
 This error can happen when fciv-net is stopped, most probably by a compilation fail. It can be solved by stopping mySQL:
 > sudo systemctl stop mysql

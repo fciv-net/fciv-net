@@ -21,7 +21,7 @@ Currently known servers based on FCIV.NET / Freeciv-web, which are open source i
 
 FCIV-NET screenshots:
 ------------------------
-![Freeciv-web](https://raw.githubusercontent.com/rvid19/fciv-net/main/doc/img/Screenshot.png "FCIV.NET screenshot")
+![Freeciv-web](https://raw.githubusercontent.com/fciv-net/fciv-net/main/doc/img/Screenshot.png "FCIV.NET screenshot")
 
 
 Overview
@@ -51,12 +51,9 @@ Freeciv 3D
 -------------
 Freeciv 3D is the 3D version using the Three.js 3D engine, which requires WebGl 2 or WebGPU support.
 
-### Running Freeciv-web on Windows Subsystem for Linux (WSL)
-[Windows Subsystem for Linux (WSL)](/doc/Windows%20Subsystem%20for%20Linux.md)
-
 Running Freeciv-web on your computer
 ------------------------------------
-The recommended and probably easiest way is to use Docker.
+The recommended and probably easiest way is to use Docker. Freeciv-web can also be run with WSL. In some cases it may be easier.
 
 Check out Freeciv-web to a
 directory on your computer, by installing [Git](http://git-scm.com/) and
@@ -98,7 +95,8 @@ Start and stop Freeciv-web with the following commands:
   stop-freeciv-web.sh  
   status-freeciv-web.sh
 
-
+### Running Freeciv-web on Windows Subsystem for Linux (WSL)
+[Windows Subsystem for Linux (WSL)](/doc/Windows%20Subsystem%20for%20Linux.md)
 
 Developers interested in Freeciv-web
 ------------------------------------
