@@ -709,7 +709,7 @@ sprites =
 		"f.cossack", "flags/cossack"
 		"f.costa_rica", "flags/costa_rica"
 		"f.courland", "flags/courland"
-                "f.couto_misto", "flags/couto-misto"
+                "f.couto_misto", "flags/couto_misto"
 		"f.crete", "flags/crete"
 		"f.crimean_tatar", "flags/crimean_tatar"
 		"f.croatia", "flags/croatia"
