@@ -13,6 +13,8 @@ FCIV.NET
 FCIV.NET is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. The 3D models are also "open source" and must be made free and open source. See [License](LICENSE.txt) for the full license document.
 
+FCIV.NET is a game about history. The developers of this game encourages peace and technological development as a winning strategy.
+
 
 Live servers
 ------------
