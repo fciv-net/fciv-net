@@ -416,7 +416,7 @@ function update_tile_extras(ptile) {
   Adds city buildings
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
-  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle"];
+  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle", "Great Library", "Sun Tzu's War Academy"];
   const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral",
                          "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill", "Nuclear Plant", "Airport"];
 
@@ -432,7 +432,7 @@ function add_city_buildings(ptile, pcity, scene) {
 ****************************************************************************/
 function add_wonder(ptile, pcity, scene, wonder_name) {
   if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
-    let wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
+    let wonder = webgl_get_model(wonder_name.replaceAll(" ", "").replaceAll("'", ""), ptile);
     if (wonder == null) {
       return;
     }
@@ -484,6 +484,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     if (wonder_name == 'Oracle') {
       height -= 0.1;
     }
+    if (wonder_name == 'SunTzusWarAcademy') {
+      height += 0.5;
+    }
+
     if (wonder_name == 'Statue of Liberty') {
       if (is_ocean_tile(nexttile)) {
         height += 20.1;
@@ -571,6 +575,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       }
       if (building_name.indexOf("Barracks") >= 0) {
         height -= 0.9;
+      }
+      if (building_name.indexOf("Aqueduct") >= 0) {
+        height -= 1.35;
       }
       if (building_name.indexOf("Courthouse") >= 0) {
         height -= 0.9;

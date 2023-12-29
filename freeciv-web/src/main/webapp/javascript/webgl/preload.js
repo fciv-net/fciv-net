@@ -381,6 +381,15 @@ switch (filename) {
   case 'EiffelTower':
     modelscale = 8;
     break;
+  case 'GreatLibrary':
+    modelscale = 3;
+    break;
+  case 'SunTzusWarAcademy':
+    modelscale = 5;
+    break;
+  case 'Crusaders':
+    modelscale = 5;
+    break;
   case 'NuclearPlant':
     modelscale = 4;
     break;
@@ -565,7 +574,7 @@ switch (filename) {
       modelscale = 1.35;
     }
     else if (filename == "Aqueduct") {
-      modelscale = 0.40;
+      modelscale = 0.30;
     }
     else if (filename == "Cathedral") {
       modelscale = 1.5;
