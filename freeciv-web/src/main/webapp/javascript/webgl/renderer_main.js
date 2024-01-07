@@ -26,8 +26,6 @@ var terrain_quality = 8; // 8 is slow, 7 has problems with rivers.
 
 var anaglyph_3d_enabled = false;
 
-var pixelated_enabled = false;
-
 var stats = null;
 
 /****************************************************************************

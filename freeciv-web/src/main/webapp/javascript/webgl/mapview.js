@@ -145,12 +145,6 @@ function webgl_start_renderer()
     camera_dz = 242 * 1.3;
   }
 
-  if (pixelated_enabled) {
-    camera_dx = 38 * 0.8;
-    camera_dy = 410 * 0.8;
-    camera_dz = 242 * 0.8;
-  }
-
   $("#pregame_page").hide();
 }
 
@@ -450,9 +444,7 @@ function animate() {
 
   controls.update();
 
-  if (pixelated_enabled) {
-    composer.render(scene);
-  } else if (anaglyph_3d_enabled) {
+  if (anaglyph_3d_enabled) {
     anaglyph_effect.render(scene,camera);
   } else {
     maprenderer.render(scene, camera);
