@@ -509,9 +509,6 @@ function pregame_settings()
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
                 "</td></tr>"+
-        "<tr id='pixelated_enabled'><td id='pixelated_label' style='min-width: 150px;'>Pixel-art retro effect</td>" +
-                "<td><input type='checkbox' id='pixelated_setting'>Enable Pixel-art retro effect "+
-                "</td></tr>"+
 
          "</table>" +
       "</div>" +
@@ -642,11 +639,6 @@ function pregame_settings()
   $("#anaglyph_label").prop("innerHTML", "3D Anaglyph glasses:");
   $('#anaglyph_setting').change(function() {
     anaglyph_3d_enabled = !anaglyph_3d_enabled;
-  });
-
-  $('#pixelated_setting').change(function() {
-        pixelated_enabled = !pixelated_enabled;
-        font_effects();
   });
 
   if (server_settings['metamessage'] != null

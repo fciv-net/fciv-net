@@ -315,8 +315,6 @@ function update_tech_tree()
       }
     }
   }
-
-  font_effects();
 }
 
 /**************************************************************************
@@ -687,8 +685,6 @@ function show_tech_gained_dialog(tech_gained_id)
   if (dialogs_minimized_setting) {
     $("#tech_dialog").dialogExtend("minimize");
   }
-
-  font_effects();
 
 }
 

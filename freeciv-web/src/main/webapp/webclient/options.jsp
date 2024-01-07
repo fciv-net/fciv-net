@@ -32,12 +32,6 @@
     <b>ChatGTP OpenAI enabled</b>
   </div>
 </td>
-<td>
-    <div class="main_menu_buttons">
-      <input type='checkbox' name='pixelated_setting_ingame' id='pixelated_setting_ingame'>
-      <b>Pixel-art retro effect</b>
-    </div>
-</td>
 </tr>
 
 <tr>

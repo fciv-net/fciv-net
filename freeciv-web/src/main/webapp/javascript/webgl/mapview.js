@@ -137,12 +137,6 @@ function webgl_start_renderer()
     anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
   }
 
-  if (pixelated_enabled) {
-    toggle_pixelated();
-  }
-
-
-
   animate();
 
   if (is_small_screen()) {
