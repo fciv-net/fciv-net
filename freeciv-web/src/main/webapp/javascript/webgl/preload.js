@@ -382,6 +382,9 @@ switch (filename) {
   case 'GreatLibrary':
     modelscale = 3;
     break;
+  case 'JSBachsCathedral':
+    modelscale = 1.8;
+    break;
   case 'SunTzusWarAcademy':
     modelscale = 5;
     break;
@@ -526,7 +529,7 @@ switch (filename) {
   case 'city_chinese_2':
   case 'city_chinese_3':
   case 'city_chinese_4':
-    modelscale = 1.95;
+    modelscale = 1.85;
     break;
   case 'city_modern_1':
   case 'city_modern_2':
@@ -546,7 +549,7 @@ switch (filename) {
     modelscale = 2.0;
     break;
   case 'Bank':
-    modelscale = 1.45;
+    modelscale = 1.35;
     break;
   case 'Oracle':
     modelscale = 1.3;

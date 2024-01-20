@@ -414,7 +414,7 @@ function update_tile_extras(ptile) {
   Adds city buildings
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
-  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle", "Great Library", "Sun Tzu's War Academy"];
+  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle", "Great Library", "Sun Tzu's War Academy", "J.S. Bach's Cathedral"];
   const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral",
                          "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill", "Nuclear Plant", "Airport"];
 
@@ -430,7 +430,7 @@ function add_city_buildings(ptile, pcity, scene) {
 ****************************************************************************/
 function add_wonder(ptile, pcity, scene, wonder_name) {
   if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
-    let wonder = webgl_get_model(wonder_name.replaceAll(" ", "").replaceAll("'", ""), ptile);
+    let wonder = webgl_get_model(wonder_name.replaceAll(" ", "").replaceAll("'", "").replaceAll(".", ""), ptile);
     if (wonder == null) {
       return;
     }
