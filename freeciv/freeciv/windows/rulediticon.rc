@@ -1,3 +1,0 @@
-#include <windows.h>
-
-ruledit_icon ICON "ruledit.ico"
