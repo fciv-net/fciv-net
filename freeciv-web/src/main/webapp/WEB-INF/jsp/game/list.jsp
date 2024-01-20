@@ -106,11 +106,10 @@
 									<td class="hidden-xs">${game.message}</td>
 									<td class="hidden-xs">${game.players}</td>
 									<td class="hidden-xs">${game.turn}</td>
-									<td> <a class="label label-success label-lg"
-										href="/webclient/?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;type=${game.type}" title="Observe">
-											Observe</a> <a class="label label-primary label-lg"
-										href="/game/details?host=${game.host}&amp;port=${game.port}">
-											Info</a>
+									<td>
+										<a class="label label-primary label-lg" href="/game/details?host=${game.host}&amp;port=${game.port}">
+											Info
+										</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -164,10 +163,7 @@
 											<c:if test="${game.type} ne 'longturn'}">
 												<a class="label label-success label-lg"
 													href="/webclient/?action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
-													Observe 2D</a>
-												<a class="label label-success label-lg"
-													href="/webclient/?renderer=webgl&amp;action=observe&amp;civserverport=${game.port}&amp;civserverhost=${game.host}&amp;multi=true&amp;type=${game.type}">
-													3D</a>
+													Observe</a>
 											</c:if>
 											</c:otherwise>
 										</c:choose>

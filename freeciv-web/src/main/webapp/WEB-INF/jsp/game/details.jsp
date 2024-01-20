@@ -41,8 +41,7 @@
 							</c:when>
 							<c:otherwise>
 								<div>
-									<a class="label label-primary" href="/webclient/?action=multi&renderer=webgl&civserverport=${port}&amp;civserverhost=${host}&amp;type=${type}">
-										Join/Observe</a> You can observe this game now.
+									 This game is running now.
 								</div>
 							</c:otherwise>
 						</c:choose>
