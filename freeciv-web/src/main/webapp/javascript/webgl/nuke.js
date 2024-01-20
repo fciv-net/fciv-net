@@ -62,7 +62,7 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * inner_radius) - (inner_radius / 2);
     var h = height + mushroom_height + (Math.random() * inner_radius) - (inner_radius / 2);
     var y = pos['y']  + (Math.random() * inner_radius) - (inner_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (inner_radius / 2) || dist < 45) {
       continue;
     }
@@ -83,7 +83,7 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
     var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
     var y = pos['y']  + (Math.random() * outer_radius) - (outer_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (outer_radius / 2) || dist < 35) {
       continue;
     }
@@ -143,7 +143,7 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * blast_radius) - (blast_radius / 2);
     var h = height + 0.5 + (Math.random() * blast_radius) - (blast_radius / 2);
     var y = pos['y']  + (Math.random() * blast_radius) - (blast_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (70 * (height + 0.5 - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (70 * (height + 0.5 - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (blast_radius / 2)) {
       continue;
     }
@@ -163,7 +163,7 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * column_radius) - (column_radius / 2);
     var h = height + 30 + (Math.random() * column_radius) - (column_radius / 2);
     var y = pos['y']  + (Math.random() * column_radius) - (column_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (0.01 * (height + 30 - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (0.01 * (height + 30 - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (column_radius / 2)) {
       continue;
     }
