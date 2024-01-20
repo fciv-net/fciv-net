@@ -40,7 +40,7 @@ function webgl_update_tile_known(old_tile, new_tile)
      map_terrain_dirty = true;
   }
 
-  if (old_tile != null && old_tile['extras'] != null && new_tile['extras'].raw != old_tile['extras'].raw) {
+  if (old_tile['extras'] != null && new_tile['extras'].raw != old_tile['extras'].raw) {
      map_terrain_dirty = true;
   }
 

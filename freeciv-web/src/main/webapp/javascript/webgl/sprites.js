@@ -79,7 +79,7 @@ function create_unit_label_sprite(punit, ptile)
     }
     var activity_txt = get_unit_activity_text(punit);
     if (activity_txt == "A") {
-      var txt = activity_txt;
+      let txt = activity_txt;
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 3;
       ctx.strokeText(txt, 0, 20);
@@ -88,7 +88,7 @@ function create_unit_label_sprite(punit, ptile)
     }
 
     if (tile_units(ptile).length > 1) {
-      var txt = "" + tile_units(ptile).length;
+      let txt = "" + tile_units(ptile).length;
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 3;
       ctx.strokeText(txt, width, 20);

@@ -1774,14 +1774,14 @@ function handle_research_info(packet)
 
   if (game_info['team_pooled_research']) {
     for (var player_id in players) {
-      var pplayer = players[player_id];
+      let pplayer = players[player_id];
       if (pplayer['team'] == packet['id']) {
-	pplayer = $.extend(pplayer, packet);
+	    pplayer = $.extend(pplayer, packet);
         delete pplayer['id'];
       }
     }
   } else {
-    var pplayer = players[packet['id']];
+    let pplayer = players[packet['id']];
     pplayer = $.extend(pplayer, packet);
     delete pplayer['id'];
   }
@@ -1790,7 +1790,7 @@ function handle_research_info(packet)
     for (var i = 0; i < packet['inventions'].length; i++) {
       if (packet['inventions'][i] != old_inventions[i] && packet['inventions'][i] == TECH_KNOWN) {
         queue_tech_gained_dialog(i);
-	break;
+	    break;
       }
     }
   }
