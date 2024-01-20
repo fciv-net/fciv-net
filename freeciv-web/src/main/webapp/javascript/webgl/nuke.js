@@ -50,7 +50,7 @@ function create_nuke(ptile_id)
   var inner_radius = 110;
   var mushroom_height = 70;
 
-  var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_glow"]}));
+  let sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_glow"]}));
   sprite.scale.set(500, 200, 1);
   sprite.position.set(pos['x'] , height + mushroom_height + 20, pos['y']);
   scene.add(sprite);
@@ -67,7 +67,7 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite(innerMaterial);
+    let sprite = new THREE.Sprite(innerMaterial);
     sprite.scale.set(2.5 + Math.random(), 2.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -88,7 +88,7 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite(outerMaterial);
+    let sprite = new THREE.Sprite(outerMaterial);
     sprite.scale.set(0.8 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -107,7 +107,7 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite(hotMaterial);
+    let sprite = new THREE.Sprite(hotMaterial);
     sprite.scale.set(0.5 + Math.random(), 0.4 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -148,7 +148,7 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite(blastMaterial);
+    let sprite = new THREE.Sprite(blastMaterial);
     sprite.scale.set(1 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -168,7 +168,7 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite(risingMaterial);
+    let sprite = new THREE.Sprite(risingMaterial);
     sprite.scale.set(1 + Math.random(), 1 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
