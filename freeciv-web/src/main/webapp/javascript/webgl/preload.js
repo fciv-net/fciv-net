@@ -19,7 +19,6 @@
 
 var webgl_textures = {};
 var webgl_models = {};
-var start_preload = 0;
 var total_model_count = 0;
 var load_count = 0;
 
@@ -36,7 +35,6 @@ var loader;
 function webgl_preload()
 {
   $.blockUI({ message: "<h2>Downloading 3D models <span id='download_progress'></span></h2>" });
-  start_preload = new Date().getTime();
 
   loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
@@ -625,33 +623,4 @@ function webgl_get_model(filename, ptile)
 
     return null;
   }
-}
-
-/****************************************************************************
- Returns a extra texture
-****************************************************************************/
-function get_extra_texture(key)
-{
-  if (key != null && texture_cache[key] != null) {
-      return texture_cache[key];
-  }
-  if (sprites[key] == null ) {
-    console.log("Invalid extra key: " + key);
-    return null;
-  }
-
-  var ecanvas = document.createElement("canvas");
-  ecanvas.width = 42;
-  ecanvas.height = 42;
-  var econtext = ecanvas.getContext("2d");
-  econtext.drawImage(sprites[key], 14, 6,
-                sprites[key].width - 33, sprites[key].height,
-                0,0,42,42);
-
-  // Create a new texture out of the canvas
-  var texture = new THREE.Texture(ecanvas);
-  texture.needsUpdate = true;
-  texture_cache[key] = texture;
-
-  return texture;
 }

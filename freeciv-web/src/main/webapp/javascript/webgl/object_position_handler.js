@@ -391,8 +391,6 @@ function update_tile_extras(ptile) {
 
   if (ptile == null || tile_get_known(ptile) == TILE_UNKNOWN) return;
 
-  let height = 4 + ptile['height'] * 100;
-
   update_tile_extra_update_model(EXTRA_MINE, "Mine", ptile);
   update_tile_extra_update_model(EXTRA_HUT, "Hut", ptile);
   update_tile_extra_update_model(EXTRA_RUINS, "Ruins", ptile);
@@ -789,8 +787,6 @@ function update_tile_forest(ptile)
 function update_tile_jungle(ptile)
 {
   let terrain_name = tile_terrain(ptile).name;
-  const extra_id = tile_resource(ptile);
-  let extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
     let height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);
