@@ -43,12 +43,6 @@ function init_webgl_mapctrl()
 
   window.addEventListener('resize', webglOnWindowResize, false );
 
-  /* setup zoom in/zoom out*/
-  if (is_touch_device()) {
-    var mc = new Hammer.Manager(document.getElementById('mapcanvas'));
-    mc.add(new Hammer.Pinch({ threshold: 0.1 }));
-    mc.on("pinch", webgl_mapview_pinch_zoom);
-  }
 }
 
 
