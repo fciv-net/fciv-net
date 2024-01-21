@@ -159,13 +159,6 @@ function init_options_dialog()
     simpleStorage.set('openai_enabled', openai_enabled);
   });
 
-  $('#pixelated_setting_ingame').prop('checked', pixelated_enabled);
-  $('#pixelated_setting_ingame').change(function() {
-    pixelated_enabled = this.checked;
-    simpleStorage.set('pixelated_setting', pixelated_enabled);
-    toggle_pixelated();
-  });
-
   $('#borders_setting').prop('checked', draw_borders);
   $('#borders_setting').change(function() {
     draw_borders = this.checked;

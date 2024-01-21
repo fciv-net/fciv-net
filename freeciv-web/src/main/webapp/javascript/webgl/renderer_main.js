@@ -26,8 +26,6 @@ var terrain_quality = 8; // 8 is slow, 7 has problems with rivers.
 
 var anaglyph_3d_enabled = false;
 
-var pixelated_enabled = false;
-
 var stats = null;
 
 /****************************************************************************
@@ -43,6 +41,8 @@ function init_webgl_renderer()
   var stored_graphics_quality_setting = simpleStorage.get("graphics_quality", "");
   if (stored_graphics_quality_setting != null && stored_graphics_quality_setting > 0) {
     graphics_quality = stored_graphics_quality_setting;
+  } else if (is_small_screen()) {
+    graphics_quality = QUALITY_MEDIUM;
   } else {
     graphics_quality = QUALITY_HIGH; //default value
   }

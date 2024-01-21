@@ -26,11 +26,13 @@ python3 "${DIR}"/img-extract.py -f "${FREECIV_DIR}" -o "${TEMP_DIR}" &&
 echo "compressing .png files from ${TEMP_DIR} to ${TILESET_DEST}" &&
 pngcrush -q -d "${TILESET_DEST}" "${TEMP_DIR}"/freeciv-web-tileset*.png &&
 cp "${TEMP_DIR}"/tileset_spec_*.js "${SPEC_DEST}" &&
-echo "converting flag .svg files to .png ..." &&
+#echo "converting flag .svg files to .png ..." &&
+echo "copying flag .svg files ..." &&
 (for svgfile in $(find "${FREECIV_DIR}"/data/flags/*.svg); do
   name="$(basename "$svgfile")"
   pngfile="${FLAG_DEST}/${name/%.svg/-web.png}"
-  timeout -k 3 8 convert -density 80 -resize 200 "$svgfile" "${pngfile}" ||
-    >&2 echo "  ERROR converting ${svgfile} to ${pngfile}"
+  #timeout -k 3 8 convert -density 80 -resize 200 "$svgfile" "${pngfile}" ||
+  #  >&2 echo "  ERROR converting ${svgfile} to ${pngfile}"
+  cp "$svgfile" "$FLAG_DEST"
 done) &&
 echo "Freeciv-img-extract done." || (>&2 echo "Freeciv-img-extract failed!" && exit 1)

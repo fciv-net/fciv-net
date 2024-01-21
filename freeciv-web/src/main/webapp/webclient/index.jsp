@@ -45,8 +45,6 @@ try {
 <meta name="description" content="Fciv.net - play Freeciv in 3D online for free; open source strategy game">
 <meta property="og:image" content="https://fciv.net/static/images/freeciv-webgl-splash-48.png" />
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
-
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
 var fcwDebug=<%= fcwDebug %>;
@@ -108,14 +106,6 @@ var webgpu = <%= webgpu %>;
   import { DRACOLoader } from '/javascript/webgl/libs/DRACOLoader.js?ts=${initParam.buildTimeStamp}';
   window.DRACOLoader = DRACOLoader;
 
-  import { EffectComposer } from '/javascript/webgl/effects/EffectComposer.js?ts=${initParam.buildTimeStamp}';
-  window.EffectComposer = EffectComposer;
-
-  import { RenderPixelatedPass } from '/javascript/webgl/effects/RenderPixelatedPass.js?ts=${initParam.buildTimeStamp}';
-  window.RenderPixelatedPass = RenderPixelatedPass;
-
-  import { OutputPass } from '/javascript/webgl/effects/OutputPass.js?ts=${initParam.buildTimeStamp}';
-  window.OutputPass  = OutputPass;
 
 </script>
 
@@ -140,14 +130,7 @@ var webgpu = <%= webgpu %>;
 
 <style>
 	/*
-		 _____                   _                        _
-		|  ___| __ ___  ___  ___(_)_   __   __      _____| |__
-		| |_ | '__/ _ \/ _ \/ __| \ \ / /___\ \ /\ / / _ \ '_ \
-		|  _|| | |  __/  __/ (__| |\ V /_____\ V  V /  __/ |_) |
-		|_|  |_|  \___|\___|\___|_| \_/       \_/\_/ \___|_.__/
-
-		The following styles apply to the whole frontend HTML.
-
+		FCIV.NET - Freeciv 3D.
 	 */
 	body {
 		padding-top: 60px;

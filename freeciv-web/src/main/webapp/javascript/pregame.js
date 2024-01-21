@@ -247,12 +247,12 @@ function pick_nation(player_id)
                + "<div id='nation_legend'></div><div id='select_nation_flag'></div>";
 
   $("#pick_nation_dialog").html(nations_html);
-  $("#pick_nation_dialog").attr("title", "What Nation Will " + pplayer['name'] + " Be Ruler Of?");
+  $("#pick_nation_dialog").attr("title", "Choose your nation wisely.");
   $("#pick_nation_dialog").dialog({
 			bgiframe: true,
 			modal: true,
 			width: is_small_screen() ? "99%" : "70%",
-            height: $(window).height() - 200,
+            height: $(window).height() - 150,
 			buttons: {
 			    "Customize this nation": function() {
                    show_customize_nation_dialog(player_id);
@@ -332,8 +332,8 @@ function select_nation(new_nation_id)
   $("#nation_choice").html("Chosen nation: " + pnation['adjective']);
 
   if (!pnation['customized']) {
-    $("#select_nation_flag").html("<img style='nation_flag_choice' src='/images/flags/"
-		            + pnation['graphic_str'] + "-web" + get_tileset_file_extention() + "'>");
+    $("#select_nation_flag").html("<img id='nation_flag_choice' src='/images/flags/"
+		            + pnation['graphic_str'] + ".svg'>");
   }
 
   if (chosen_nation != new_nation_id && $("#nation_" + new_nation_id).length > 0) {
@@ -509,9 +509,6 @@ function pregame_settings()
         "<tr id='anaglyph_enabled'><td id='anaglyph_label' style='min-width: 150px;'></td>" +
                 "<td><input type='checkbox' id='anaglyph_setting'>Enable Anaglyph 3D (Red+Cyan glasses) "+
                 "</td></tr>"+
-        "<tr id='pixelated_enabled'><td id='pixelated_label' style='min-width: 150px;'>Pixel-art retro effect</td>" +
-                "<td><input type='checkbox' id='pixelated_setting'>Enable Pixel-art retro effect "+
-                "</td></tr>"+
 
          "</table>" +
       "</div>" +
@@ -642,11 +639,6 @@ function pregame_settings()
   $("#anaglyph_label").prop("innerHTML", "3D Anaglyph glasses:");
   $('#anaglyph_setting').change(function() {
     anaglyph_3d_enabled = !anaglyph_3d_enabled;
-  });
-
-  $('#pixelated_setting').change(function() {
-        pixelated_enabled = !pixelated_enabled;
-        font_effects();
   });
 
   if (server_settings['metamessage'] != null

@@ -50,7 +50,7 @@ function create_nuke(ptile_id)
   var inner_radius = 110;
   var mushroom_height = 70;
 
-  var sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_glow"]}));
+  let sprite = new THREE.Sprite( new THREE.SpriteMaterial( { map: webgl_textures["nuke_glow"]}));
   sprite.scale.set(500, 200, 1);
   sprite.position.set(pos['x'] , height + mushroom_height + 20, pos['y']);
   scene.add(sprite);
@@ -62,12 +62,12 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * inner_radius) - (inner_radius / 2);
     var h = height + mushroom_height + (Math.random() * inner_radius) - (inner_radius / 2);
     var y = pos['y']  + (Math.random() * inner_radius) - (inner_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (inner_radius / 2) || dist < 45) {
       continue;
     }
 
-    var sprite = new THREE.Sprite(innerMaterial);
+    let sprite = new THREE.Sprite(innerMaterial);
     sprite.scale.set(2.5 + Math.random(), 2.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -83,12 +83,12 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * outer_radius) - (outer_radius / 2);
     var h = height + mushroom_height + (Math.random() * outer_radius) - (outer_radius / 2);
     var y = pos['y']  + (Math.random() * outer_radius) - (outer_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (2 * (height + mushroom_height - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (outer_radius / 2) || dist < 35) {
       continue;
     }
 
-    var sprite = new THREE.Sprite(outerMaterial);
+    let sprite = new THREE.Sprite(outerMaterial);
     sprite.scale.set(0.8 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -107,7 +107,7 @@ function create_nuke(ptile_id)
       continue;
     }
 
-    var sprite = new THREE.Sprite(hotMaterial);
+    let sprite = new THREE.Sprite(hotMaterial);
     sprite.scale.set(0.5 + Math.random(), 0.4 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -143,12 +143,12 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * blast_radius) - (blast_radius / 2);
     var h = height + 0.5 + (Math.random() * blast_radius) - (blast_radius / 2);
     var y = pos['y']  + (Math.random() * blast_radius) - (blast_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (70 * (height + 0.5 - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (70 * (height + 0.5 - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (blast_radius / 2)) {
       continue;
     }
 
-    var sprite = new THREE.Sprite(blastMaterial);
+    let sprite = new THREE.Sprite(blastMaterial);
     sprite.scale.set(1 + Math.random(), 0.5 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);
@@ -163,12 +163,12 @@ function create_nuke(ptile_id)
     var x = pos['x'] + (Math.random() * column_radius) - (column_radius / 2);
     var h = height + 30 + (Math.random() * column_radius) - (column_radius / 2);
     var y = pos['y']  + (Math.random() * column_radius) - (column_radius / 2);
-    var dist = Math.sqrt(((pos['x'] - x) ** 2) + (0.01 * (height + 30 - h) ** 2) + ((pos['y'] - y) ** 2));
+    let dist = Math.sqrt(((pos['x'] - x) ** 2) + (0.01 * (height + 30 - h) ** 2) + ((pos['y'] - y) ** 2));
     if (dist > (column_radius / 2)) {
       continue;
     }
 
-    var sprite = new THREE.Sprite(risingMaterial);
+    let sprite = new THREE.Sprite(risingMaterial);
     sprite.scale.set(1 + Math.random(), 1 + Math.random(), 1);
     sprite.position.set(x, h, y);
     scene.add(sprite);

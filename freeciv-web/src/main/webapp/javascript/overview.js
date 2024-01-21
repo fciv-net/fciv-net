@@ -189,22 +189,24 @@ function render_viewrect()
 
   var path = [];
 
-    var w = $(window).width();
-    var h = $(window).height();
+  var w = $(window).width();
+  var h = $(window).height();
 
-    var ptile = webgl_canvas_pos_to_tile_quick(w / 6, h / 6);
-    if (ptile == null) return;
-    path.push([ptile.x, ptile.y]);
-    var ptile = webgl_canvas_pos_to_tile_quick(5 * w / 6, h / 6);
-    if (ptile == null) return;
-    path.push([ptile.x, ptile.y]);
-    var ptile = webgl_canvas_pos_to_tile_quick(5 * w / 6, h - height_offset);
-    if (ptile == null) return;
-    path.push([ptile.x, ptile.y]);
-    var ptile = webgl_canvas_pos_to_tile_quick(w / 6, h - height_offset);
-    if (ptile == null) return;
-    path.push([ptile.x, ptile.y]);
+  let ptile = webgl_canvas_pos_to_tile_quick(w / 6, h / 6);
+  if (ptile == null) return;
+  path.push([ptile.x, ptile.y]);
 
+  ptile = webgl_canvas_pos_to_tile_quick(5 * w / 6, h / 6);
+  if (ptile == null) return;
+  path.push([ptile.x, ptile.y]);
+
+  ptile = webgl_canvas_pos_to_tile_quick(5 * w / 6, h - height_offset);
+  if (ptile == null) return;
+  path.push([ptile.x, ptile.y]);
+
+  ptile = webgl_canvas_pos_to_tile_quick(w / 6, h - height_offset);
+  if (ptile == null) return;
+  path.push([ptile.x, ptile.y]);
 
   var viewrect_canvas = document.getElementById('overview_viewrect');
   if (viewrect_canvas == null) return;

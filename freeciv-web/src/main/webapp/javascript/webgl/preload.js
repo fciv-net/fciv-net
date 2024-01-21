@@ -19,7 +19,6 @@
 
 var webgl_textures = {};
 var webgl_models = {};
-var start_preload = 0;
 var total_model_count = 0;
 var load_count = 0;
 
@@ -36,7 +35,6 @@ var loader;
 function webgl_preload()
 {
   $.blockUI({ message: "<h2>Downloading 3D models <span id='download_progress'></span></h2>" });
-  start_preload = new Date().getTime();
 
   loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
@@ -381,6 +379,18 @@ switch (filename) {
   case 'EiffelTower':
     modelscale = 8;
     break;
+  case 'GreatLibrary':
+    modelscale = 3;
+    break;
+  case 'JSBachsCathedral':
+    modelscale = 1.8;
+    break;
+  case 'SunTzusWarAcademy':
+    modelscale = 5;
+    break;
+  case 'Crusaders':
+    modelscale = 5;
+    break;
   case 'NuclearPlant':
     modelscale = 4;
     break;
@@ -451,11 +461,7 @@ switch (filename) {
     modelscale = 1.0;
     break;
   case 'Wheat':
-    if (pixelated_enabled) {
-      modelscale = 0.4;
-    } else {
-      modelscale = 2.7;
-    }
+    modelscale = 2.7;
 
     break;
   case 'Galleon':
@@ -523,7 +529,7 @@ switch (filename) {
   case 'city_chinese_2':
   case 'city_chinese_3':
   case 'city_chinese_4':
-    modelscale = 1.95;
+    modelscale = 1.85;
     break;
   case 'city_modern_1':
   case 'city_modern_2':
@@ -543,7 +549,7 @@ switch (filename) {
     modelscale = 2.0;
     break;
   case 'Bank':
-    modelscale = 1.45;
+    modelscale = 1.35;
     break;
   case 'Oracle':
     modelscale = 1.3;
@@ -565,7 +571,7 @@ switch (filename) {
       modelscale = 1.35;
     }
     else if (filename == "Aqueduct") {
-      modelscale = 0.40;
+      modelscale = 0.30;
     }
     else if (filename == "Cathedral") {
       modelscale = 1.5;
@@ -620,33 +626,4 @@ function webgl_get_model(filename, ptile)
 
     return null;
   }
-}
-
-/****************************************************************************
- Returns a extra texture
-****************************************************************************/
-function get_extra_texture(key)
-{
-  if (key != null && texture_cache[key] != null) {
-      return texture_cache[key];
-  }
-  if (sprites[key] == null ) {
-    console.log("Invalid extra key: " + key);
-    return null;
-  }
-
-  var ecanvas = document.createElement("canvas");
-  ecanvas.width = 42;
-  ecanvas.height = 42;
-  var econtext = ecanvas.getContext("2d");
-  econtext.drawImage(sprites[key], 14, 6,
-                sprites[key].width - 33, sprites[key].height,
-                0,0,42,42);
-
-  // Create a new texture out of the canvas
-  var texture = new THREE.Texture(ecanvas);
-  texture.needsUpdate = true;
-  texture_cache[key] = texture;
-
-  return texture;
 }

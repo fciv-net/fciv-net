@@ -391,8 +391,6 @@ function update_tile_extras(ptile) {
 
   if (ptile == null || tile_get_known(ptile) == TILE_UNKNOWN) return;
 
-  let height = 4 + ptile['height'] * 100;
-
   update_tile_extra_update_model(EXTRA_MINE, "Mine", ptile);
   update_tile_extra_update_model(EXTRA_HUT, "Hut", ptile);
   update_tile_extra_update_model(EXTRA_RUINS, "Ruins", ptile);
@@ -416,7 +414,7 @@ function update_tile_extras(ptile) {
   Adds city buildings
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
-  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle"];
+  const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle", "Great Library", "Sun Tzu's War Academy", "J.S. Bach's Cathedral"];
   const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral",
                          "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill", "Nuclear Plant", "Airport"];
 
@@ -432,7 +430,7 @@ function add_city_buildings(ptile, pcity, scene) {
 ****************************************************************************/
 function add_wonder(ptile, pcity, scene, wonder_name) {
   if (city_has_building(pcity, improvement_id_by_name(wonder_name)) && pcity[wonder_name + '_added'] == null) {
-    let wonder = webgl_get_model(wonder_name.replaceAll(" ", ""), ptile);
+    let wonder = webgl_get_model(wonder_name.replaceAll(" ", "").replaceAll("'", "").replaceAll(".", ""), ptile);
     if (wonder == null) {
       return;
     }
@@ -484,6 +482,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     if (wonder_name == 'Oracle') {
       height -= 0.1;
     }
+    if (wonder_name == 'SunTzusWarAcademy') {
+      height += 0.5;
+    }
+
     if (wonder_name == 'Statue of Liberty') {
       if (is_ocean_tile(nexttile)) {
         height += 20.1;
@@ -506,6 +508,9 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
     wonder.position.set(pos['x'] - 10, height - 7, pos['y'] - 6);
     pcity[wonder_name + '_added'] = true;
     city_building_positions[nexttile['index']] = wonder;
+    if (!show_buildings) {
+      wonder.visible = false;
+    }
     scene.add(wonder);
   }
 }
@@ -569,6 +574,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       if (building_name.indexOf("Barracks") >= 0) {
         height -= 0.9;
       }
+      if (building_name.indexOf("Aqueduct") >= 0) {
+        height -= 1.35;
+      }
       if (building_name.indexOf("Courthouse") >= 0) {
         height -= 0.9;
       }
@@ -583,6 +591,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       building.position.set(pos['x'] - 14, height - 5, pos['y'] - 14 + y_offset);
       pcity[building_name + '_added'] = true;
       city_building_positions[nexttile['index']] = building;
+      if (!show_buildings) {
+        building.visible = false;
+      }
       scene.add(building);
     }
 }
@@ -776,8 +787,6 @@ function update_tile_forest(ptile)
 function update_tile_jungle(ptile)
 {
   let terrain_name = tile_terrain(ptile).name;
-  const extra_id = tile_resource(ptile);
-  let extra_resource = (extra_id === null) ? null : extras[extra_id];
 
   if (scene != null && tile_models_list[ptile['index']] == null && terrain_name == "Jungle" && tile_get_known(ptile) != TILE_UNKNOWN) {
     let height = 5 + ptile['height'] * 100 + get_forest_offset(ptile);

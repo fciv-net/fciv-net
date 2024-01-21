@@ -393,44 +393,14 @@ function handle_web_info_text_message(packet)
 
 }
 
-
-
 /**************************************************************************
- Font effects, eg pixelated fonts.
+ Function to ensure elements' positions every 2 seconds
  **************************************************************************/
-function font_effects()
-{
-  if (pixelated_enabled) {
-    const elements = document.querySelectorAll('*'); // Select all elements
-    elements.forEach(element => {
-      element.style.fontFamily = "'Press Start 2P', cursive"; // Change font family
-    });
-    $(".fa").hide();
-  } else {
-    const elements = document.querySelectorAll('*'); // Select all elements
-    elements.forEach(element => {
-      element.style.fontFamily = "'lucida grande', tahoma, verdana, arial, sans-serif"; // Change font family
-    });
-    $(".fa").show();
-    $(".fa").css('font-family', 'FontAwesome');
-  }
-}
+function updateElementsPosition() {
+  // Scroll body to the top of the page
+  $('body, html').scrollTop(0);
 
-/**************************************************************************
- Toggle Pixel-art retro effect.
- **************************************************************************/
-function toggle_pixelated()
-{
-  if (pixelated_enabled) {
-    composer = new EffectComposer(maprenderer);
-    const renderPixelatedPass = new RenderPixelatedPass(2.7, scene, camera, {normalEdgeStrength: 1.1, depthEdgeStrength: 0} );
-
-    composer.addPass(renderPixelatedPass);
-
-    const outputPass = new OutputPass();
-    composer.addPass(outputPass);
-    font_effects();
-  } else {
-    font_effects();
-  }
+  // Ensure game_page and tabs is at the top of the page
+  $('#tabs').css('top', '0');
+  $('#game_page').css('top', '0');
 }

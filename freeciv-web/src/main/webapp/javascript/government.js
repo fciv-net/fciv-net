@@ -86,7 +86,7 @@ function init_civ_dialog()
       $("#civ_dialog_text").html(civ_description);
     }
     if (!pnation['customized']) {
-        $("#civ_dialog_flag").html("<img src='/images/flags/" + tag + "-web" + get_tileset_file_extention() + "' width='180'>");
+        $("#civ_dialog_flag").html("<img src='/images/flags/" + tag + ".svg' width='220'>");
     }
   } else {
     $("#civ_dialog_text").html("Observing.");

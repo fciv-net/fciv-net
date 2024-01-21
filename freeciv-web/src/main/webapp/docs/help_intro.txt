@@ -8,7 +8,3 @@ Fciv.net / Freeciv-web is free and open source software. The Freeciv C server is
 <a href="https://github.com/fciv-net/fciv-net" target="_new">GitHub project for Fciv.net</a> - <a href="https://twitter.com/fcivnet" target="_new">@Fciv.net on Twitter</a>
 <br><br>
 <a href="https://fciv.net/wiki/">Fciv.net Wiki</a> with game rules, player guides, tutorials and documentation.
-
-
-<br><br>
-<img src="/static/images/freeciv-webgl-splash-48.png" style="width:50%;">

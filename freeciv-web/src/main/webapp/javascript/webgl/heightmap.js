@@ -197,7 +197,7 @@ function update_heightmap(heightmap_quality)
           heightmap[x][y] = ptile['height'] * 0.98;
         }
         if (tile_terrain(ptile)['name'] == "Mountains") {
-          heightmap[x][y] = ptile['height'] * 1.01;
+          heightmap[x][y] = ptile['height'] * 1.02;
         }
       } else {
         let neighbours = [

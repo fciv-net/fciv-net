@@ -55,6 +55,12 @@ function show_help()
   $("#tabs-hel").css("height", $(window).height() - 60);
   $("#help_info_page").css("max-width", $(window).width() - $("#help_menu").width() - 60);
   allow_right_click = true;
+
+  $(".chatbox_dialog ").show();
+  $(".chatbox_dialog ").css('left', 200);
+  $(".chatbox_dialog ").css('top', 400);
+  message_log.update({ event: E_CONNECTION, message: "You can ask the Freeciv AI assistant for help here." });
+
 }
 
 /**************************************************************************

@@ -143,6 +143,8 @@ function civclient_init()
 
  $("#mapcanvas").hide();
 
+  setInterval(updateElementsPosition, 2000);
+
 }
 
 /**************************************************************************
