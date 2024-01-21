@@ -130,14 +130,7 @@ var webgpu = <%= webgpu %>;
 
 <style>
 	/*
-		 _____                   _                        _
-		|  ___| __ ___  ___  ___(_)_   __   __      _____| |__
-		| |_ | '__/ _ \/ _ \/ __| \ \ / /___\ \ /\ / / _ \ '_ \
-		|  _|| | |  __/  __/ (__| |\ V /_____\ V  V /  __/ |_) |
-		|_|  |_|  \___|\___|\___|_| \_/       \_/\_/ \___|_.__/
-
-		The following styles apply to the whole frontend HTML.
-
+		FCIV.NET - Freeciv 3D.
 	 */
 	body {
 		padding-top: 60px;

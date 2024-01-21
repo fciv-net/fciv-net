@@ -392,3 +392,15 @@ function handle_web_info_text_message(packet)
   show_dialog_message("Tile Information", message);
 
 }
+
+/**************************************************************************
+ Function to ensure elements' positions every 2 seconds
+ **************************************************************************/
+function updateElementsPosition() {
+  // Scroll body to the top of the page
+  $('body, html').scrollTop(0);
+
+  // Ensure game_page and tabs is at the top of the page
+  $('#tabs').css('top', '0');
+  $('#game_page').css('top', '0');
+}
