@@ -44,7 +44,6 @@ function submit_game_to_hall_of_fame()
    }
 
    }).fail(function() {
-    swal("Unable to sumit game to Hall of Fame. Please try again later!");
     $.unblockUI();
   })
 }
