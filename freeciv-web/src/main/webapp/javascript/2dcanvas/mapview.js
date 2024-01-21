@@ -147,17 +147,6 @@ function mapview_window_resized ()
 
 }
 
-/**************************************************************************
-  ...
-**************************************************************************/
-function drawPath(ctx, x1, y1, x2, y2, x3, y3, x4, y4)
-{
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.lineTo(x3, y3);
-    ctx.lineTo(x4, y4);
-    ctx.lineTo(x1, y1);
-}
 
 /**************************************************************************
   ...
@@ -169,16 +158,6 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
   }
 
   pcanvas.drawImage(sprites[tag], canvas_x, canvas_y);
-
-}
-
-/****************************************************************************
-  Draw a filled-in colored rectangle onto the mapview or citydialog canvas.
-****************************************************************************/
-function canvas_put_rectangle(canvas_context, pcolor, canvas_x, canvas_y, width, height)
-{
-  canvas_context.fillStyle = pcolor;
-  canvas_context.fillRect (canvas_x, canvas_y, canvas_x + width, canvas_y + height);
 
 }
 

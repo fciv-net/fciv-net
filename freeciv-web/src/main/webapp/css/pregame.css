@@ -107,7 +107,7 @@ body {
 
 #nation_list {
   float: left; 
-  height:500px;
+  height:580px;
   overflow: auto; 
   width: 29%;
 }
@@ -127,7 +127,7 @@ body {
 }
 
 #nation_flag_choice {
-  width : 25%;
+  width : 300px;
 }
 
 

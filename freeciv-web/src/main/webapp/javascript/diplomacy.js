@@ -482,7 +482,7 @@ function meeting_template_data(giver, taker)
   var nation = nations[giver['nation']];
 
   if (!nation['customized']) {
-    data.flag = nation['graphic_str'] + "-web" + get_tileset_file_extention();
+    data.flag = nation['graphic_str'] + ".svg";
   }
 
   data.adjective = nation['adjective'];
