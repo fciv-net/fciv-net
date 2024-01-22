@@ -103,9 +103,8 @@ Start and stop Freeciv-web with the following commands:
 Developers interested in Freeciv-web
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/fciv-net/fciv-net/issues) on GibHub and the [TODO file](doc/TODO) for 
-some tasks you can work on. Pull requests on Github is welcome! 
-  
+If you want to contibute to Freeciv-web, see the [issues](https://github.com/fciv-net/fciv-net/issues) on GibHub for some tasks you can work on. Pull requests and suggestions/issues on Github are welcome! 
+
 
 Contributors to Freeciv-web
 ---------------------------
