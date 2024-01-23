@@ -11,10 +11,12 @@ jobs:
     steps:
       - name: check out Freeciv-web
         uses: actions/checkout@v4.1.1
+      - name: Set up Java
+        uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven        
+          cache: maven    
       - name: prepare
         run: |
           sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
