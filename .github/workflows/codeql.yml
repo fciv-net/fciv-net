@@ -61,7 +61,7 @@ jobs:
       run: |
         if [ "${{ matrix.language }}" == "c-cpp" ]; then
           sudo apt-get update
-          sudo apt-get install -y meson ninja-build
+          sudo apt-get install -y meson ninja-build libjansson-dev
         fi
 
     # Initializes the CodeQL tools for scanning.
