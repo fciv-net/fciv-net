@@ -39,7 +39,7 @@ jobs:
       uses: github/codeql-action/autobuild@v3
       with:
         # Specify the build directory only for C/C++
-        build-dir: build
+        build-dir: freeciv/freeciv
       if: matrix.language == 'c-cpp'
 
     - name: Perform CodeQL Analysis
