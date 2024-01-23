@@ -42,7 +42,7 @@ ext_install_tomcat10 () {
     sudo groupadd --system tomcat
   fi
   if ! id tomcat > /dev/null 2>&1 ; then
-    sudo useradd --system --home /var/lib/tomcat9 -g tomcat --shell /bin/false tomcat
+    sudo useradd --system --home /var/lib/tomcat10 -g tomcat --shell /bin/false tomcat
   fi
 
   sudo chgrp -R tomcat /var/lib/tomcat10
