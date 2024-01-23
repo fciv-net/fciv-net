@@ -36,11 +36,11 @@ jobs:
         languages: ${{ matrix.language }}
 
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
-      with:
-        # Specify the build directory only for C/C++
-        build-dir: freeciv/freeciv
-      if: matrix.language == 'c-cpp'
+      run: |
+        if [ "${{ matrix.language }}" == "c-cpp" ]; then
+          cd freeciv
+          ./prepare_freeciv.sh
+        fi
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
