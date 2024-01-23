@@ -34,7 +34,7 @@ dependencies="\
   maven \
   default-mysql-server \
   nginx \
-  default-jdk-headless \
+  openjdk-17-jdk-headless \
   patch \
   pkg-config \
   pngcrush \
