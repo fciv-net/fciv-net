@@ -7,7 +7,6 @@
 <%
 String gaTrackingId = null;
 String googleSigninClientKey = null;
-String trackJsToken = null;
 String captchaKey = null;
 boolean fcwDebug = false;
 boolean webgpu = false;
@@ -17,7 +16,6 @@ try {
   prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
   gaTrackingId = stripToNull(prop.getProperty("ga-tracking-id"));
   googleSigninClientKey = stripToEmpty(prop.getProperty("google-signin-client-key"));
-  trackJsToken = stripToNull(prop.getProperty("trackjs-token"));
   captchaKey = stripToEmpty(prop.getProperty("captcha_public"));
 
   String debugParam = request.getParameter("debug");

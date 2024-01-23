@@ -30,8 +30,8 @@ import java.util.Objects;
 import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import javax.sql.DataSource;
 
 import org.apache.commons.codec.digest.DigestUtils;

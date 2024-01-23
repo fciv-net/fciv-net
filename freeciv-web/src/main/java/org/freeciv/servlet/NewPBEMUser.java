@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 
 import java.sql.*;
 import java.util.Properties;
