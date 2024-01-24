@@ -1,7 +1,7 @@
-Freeciv web application 
+Freeciv 3D web application 
 =======================
 
-This is the Freeciv web application, which consists of the Java servlets 
+This is the Freeciv 3D web application, which consists of the Java servlets 
 and filters for running the web client, JSP templates, javascript code
 and other web content. 
 
@@ -16,9 +16,9 @@ Scripts to generate these files are in `$freeciv-web/scripts` and they
 are generated to `$freeciv-web/freeciv-web/src/derived`. See the
 README.md in those directories for more info.
 
-Tomcat 9 + nginx setup
+Tomcat + nginx setup
 ================================
-Freeciv-web supports the Tomcat 9 application server for hosting the Java web application.
+Freeciv-web supports the Tomcat  application server for hosting the Java web application.
 
 The build scripts are updated to build Freeciv-web for Tomcat by default,
 so setting up Freeciv-web with Vagrant will configure this automatically.
@@ -40,17 +40,11 @@ Flyway migrations of the database is supported. Remember to set the mysql passwo
 To migrate the database to the latest version, run this Maven command:
 mvn flyway:migrate
 
-The following files contain DB, mail and other configuration, and must be set manually
-if you are not using vagrant or the install script:
 
-* freeciv-web/src/main/webapp/META-INF/context.xml  (you can use config/web.context.tmpl as a template)
-* freeciv-web/src/main/webapp/WEB-INF/config.properties  (you can use config/web.properties.tmpl as a template)
-
-
-Copyright (C) 2007-2023 Andreas Røsdal. 
+Copyright (C) 2007-2024 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 Source code, 3D models and all files part of Freeciv 3D / FCIV.NET are covered by the GNU AFFERO GENERAL PUBLIC LICENSE.
-See LICENSE.txt for the AGPL license of Freeciv 3D / FCIV.NET. This license means that these models
+See LICENSE.txt for the AGPL license of Freeciv 3D / FCIV.NET. This license means that these 3D models
 are free and open source, and that any modifications and redistributions must also be
-free and open source with the AGPL license.
+free and open source, with the AGPL license.
