@@ -193,7 +193,7 @@ function update_unit_position(ptile) {
         highlight_map_tile_selected(-1, -1);
       }
       if (visible_unit['anim_list'].length == 0) {
-        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 18, 20, 30), selected_unit_material );
+        selected_mesh = new THREE.Mesh( new THREE.RingGeometry( 16, 20, 30), selected_unit_material );
         selected_mesh.position.set(pos['x'] - 12, height + 2, pos['y'] - 7);
         selected_mesh.rotation.x = -1 * Math.PI / 2;
         scene.add(selected_mesh);

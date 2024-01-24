@@ -153,7 +153,7 @@ function webgl_start_renderer()
  This will render the map terrain mesh.
 ****************************************************************************/
 function init_webgl_mapview() {
-  selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.5} );
+  selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.7} );
 
   if (!webgpu) {
     init_borders_image();
@@ -434,10 +434,10 @@ function animate() {
   update_animated_objects();
 
   if (selected_unit_indicator != null && selected_unit_material != null) {
-    selected_unit_material.color.multiplyScalar (0.994);
-    if (selected_unit_material_counter > 80) {
+    selected_unit_material.color.multiplyScalar (0.996);
+    if (selected_unit_material_counter > 50) {
       selected_unit_material_counter = 0;
-      selected_unit_material.color.setHex(0xf6f7bf);
+      selected_unit_material.color.setHex(0xffffff);
     }
     selected_unit_material_counter++;
   }

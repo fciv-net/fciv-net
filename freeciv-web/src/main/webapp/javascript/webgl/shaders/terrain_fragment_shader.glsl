@@ -530,10 +530,10 @@ void main()
     float shade_factor = 0.32 + 1.52 * max(0., dot(vNormal, normalize(light)));
 
     if (mouse_x >= 0 && mouse_y >= 0 && mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
-        shade_factor += + 0.6;
+        shade_factor += 0.7;
     }
     if (selected_x >= 0 && selected_y >= 0 && selected_x == int(floor((map_x_size * vUv.x ))) && selected_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
-        shade_factor += + 1.0;
+        shade_factor += 1.5;
     }
 
     // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
