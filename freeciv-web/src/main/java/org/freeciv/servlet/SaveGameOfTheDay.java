@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 public class SaveGameOfTheDay extends HttpServlet {
 
-    private static final String mapDstImgPaths = "/var/lib/tomcat9/webapps/data/";
+    private static final String mapDstImgPaths = "/var/lib/tomcat10/webapps/data/";
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
