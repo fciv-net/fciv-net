@@ -317,6 +317,9 @@ switch (filename) {
   case 'Warriors':
     modelscale = 10;
     break;
+  case 'Fighter':
+    modelscale = 9;
+    break;
   case 'Legion':
     modelscale = 7;
     break;
@@ -405,6 +408,12 @@ switch (filename) {
     break;
   case 'Fanatics':
     modelscale = 10.2;
+    break;
+  case 'Elephants':
+    modelscale = 4;
+    break;
+  case 'Harbor':
+    modelscale = 1.0;
     break;
   case 'Airport':
     modelscale = 1.8;
