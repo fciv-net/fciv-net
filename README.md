@@ -1,5 +1,5 @@
-FCIV.NET
---------
+FCIV.NET Freeciv 3D 
+-------------------
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Build Status](https://github.com/fciv-net/fciv-net/workflows/continuous%20integration/badge.svg)](https://github.com/fciv-net/fciv-net/actions?query=workflow%3A%22continuous+integration%22)
@@ -35,7 +35,7 @@ Freeciv-Web consists of these components:
   This application is a Java web application which make up the application
   viewed in each user's web browser. The Metaserver is also a part of this module.
   Implemented in Javascript, Java, JSP, HTML and CSS. Built with maven and runs 
-  on Tomcat 9 and nginx.
+  on Tomcat and nginx.
 
 * [Freeciv](freeciv) - the Freeciv C server, which is checked out from the official
   Git repository, and patched to work with a WebSocket/JSON protocol. Implemented in C.
