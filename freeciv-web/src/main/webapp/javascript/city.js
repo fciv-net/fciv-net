@@ -1400,9 +1400,12 @@ function city_worklist_dialog(pcity)
            +"</div>";
   }
 
-  var headline = prod_img_html + "<div id='prod_descr'>"
-    + (is_small_screen() ? " " : " Production: ")
+  var headline = prod_img_html + "<div id='prod_descr'>" // universal_build_shield_cost(pcity, target); // pcity['shield_stock']
+    + (is_small_screen() ? " " : " Production: <b>")
     + (prod_type != null ? prod_type['type']['name'] : "None")
+    + "</b> ("
+    + pcity['shield_stock'] + "/"
+    + universal_build_shield_cost(pcity, unit_types[pcity['production_value']], true) + ")"
 
   if (turns_to_complete != FC_INFINITY) {
     headline += ", turns: " + turns_to_complete + ", cost: " + pcity['buy_cost'];
