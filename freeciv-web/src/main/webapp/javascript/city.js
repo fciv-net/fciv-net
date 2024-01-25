@@ -689,15 +689,14 @@ function request_city_buy()
   if (pcity['production_kind'] == VUT_UTYPE) {
     var punit_type = unit_types[pcity['production_value']];
     if (punit_type != null) {
-      buy_price_string = punit_type['name'] + " costs " + pcity['buy_cost'] + " gold.";
-      buy_question_string = "Buy " + punit_type['name'] + " for " + pcity['buy_cost'] + " gold?";
+      send_city_buy();
+      return;
     }
-  } else {
-    var improvement = improvements[pcity['production_value']];
-    if (improvement != null) {
-      buy_price_string = improvement['name'] + " costs " + pcity['buy_cost'] + " gold.";
-      buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_cost'] + " gold?";
-    }
+  }
+  var improvement = improvements[pcity['production_value']];
+  if (improvement != null) {
+    buy_price_string = improvement['name'] + " costs " + pcity['buy_cost'] + " gold.";
+    buy_question_string = "Buy " + improvement['name'] + " for " + pcity['buy_cost'] + " gold?";
   }
 
   var treasury_text = "<br>Treasury contains " + pplayer['gold'] + " gold.";
@@ -1401,12 +1400,12 @@ function city_worklist_dialog(pcity)
            +"</div>";
   }
 
-  var headline = prod_img_html + "<div id='prod_descr'>" 
-    + (is_small_screen() ? " " : " Production: ") 
-    + (prod_type != null ? prod_type['type']['name'] : "None");
+  var headline = prod_img_html + "<div id='prod_descr'>"
+    + (is_small_screen() ? " " : " Production: ")
+    + (prod_type != null ? prod_type['type']['name'] : "None")
 
   if (turns_to_complete != FC_INFINITY) {
-    headline += ", turns: " + turns_to_complete;
+    headline += ", turns: " + turns_to_complete + ", cost: " + pcity['buy_cost'];
   }
 
   $("#worklist_dialog_headline").html(headline + "</div>");
