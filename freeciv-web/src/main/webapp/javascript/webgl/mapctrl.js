@@ -253,12 +253,15 @@ function webgl_recenter_button_pressed(ptile)
 {
   if (can_client_change_view() && ptile != null) {
     var sunit = find_visible_unit(ptile);
-    if (!client_is_observer() && sunit != null
-        && sunit['owner'] == client.conn.playing.playerno) {
+    let pcity = tile_city(ptile)
+    if (!client_is_observer() && (sunit != null && sunit['owner'] == client.conn.playing.playerno) || (pcity != null && pcity['owner'] == client.conn.playing.playerno)) {
       /* the user right-clicked on own unit, show context menu instead of recenter. */
       if (current_focus.length <= 1) set_unit_focus(sunit);
       $("#mapcanvas").contextMenu(true);
       $("#mapcanvas").contextmenu();
+    } else if (!client_is_observer() && (sunit != null && sunit['owner'] != client.conn.playing.playerno) || (pcity != null && pcity['owner'] != client.conn.playing.playerno)) {
+      $("#mapcanvas").contextMenu(false);
+      popit_req(ptile);
     } else {
       $("#mapcanvas").contextMenu(false);
       enable_mapview_slide_3d(ptile);

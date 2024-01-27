@@ -124,9 +124,7 @@ function init_tech_screen()
 
   if (is_tech_tree_init) return;
 
-  if (ruleset_control['name'] == "Civ2Civ3 ruleset") reqtree = reqtree_civ2civ3;
-  if (ruleset_control['name'] == "Multiplayer ruleset") reqtree = reqtree_multiplayer;
-  if (ruleset_control['name'] == "Longturn-Web-X ruleset") reqtree = reqtree_multiplayer;
+  generate_req_tree();
 
   tech_canvas = document.getElementById('tech_canvas');
   if (tech_canvas == null) {
@@ -168,6 +166,14 @@ function init_tech_screen()
 }
 
 /**************************************************************************
+  95% of the time the above function is called to see if active player
+  knows specific tech X. This wrapper makes it a lot easier.
+**************************************************************************/
+function tech_known(tech_str) {
+  return (player_invention_state(client.conn.playing, tech_id_by_name(tech_str)) == TECH_KNOWN);
+}
+
+/**************************************************************************
  ...
 **************************************************************************/
 function update_tech_tree()
@@ -185,22 +191,49 @@ function update_tech_tree()
 
     var sx = Math.floor(reqtree[tech_id+'']['x'] * tech_xscale);  //scale in X direction.
     var sy = reqtree[tech_id+'']['y'];
-    for (var i = 0; i < ptech['research_reqs'].length; i++) {
-      var rid = ptech['research_reqs'][i]['value'];
+    for (var i = 0; i < ptech['req'].length; i++) {
+      var rid = ptech['req'][i];
       if (rid == 0 || reqtree[rid+''] == null) continue;
 
       var dx = Math.floor(reqtree[rid+'']['x'] * tech_xscale);  //scale in X direction.
       var dy = reqtree[rid+'']['y'];
 
-      tech_canvas_ctx.strokeStyle = 'rgba(70, 70, 70, 0.8)';
-      tech_canvas_ctx.lineWidth = 3;
+      // Alternating line colour sequence, each tech gets a different line colour to differentiate.
+      var sequence = 1+Math.round(dy/55)+Math.round(dx/45);      // Create a "seed" that bumps up as we span the canvas vertically and horizontally
+      sequence = sequence - (sequence-sequence%9);               // This creates a colour number from 0-8 out of our "seed"
+      if (reqtree[rid+'']['col'] !== undefined) sequence = reqtree[rid+'']['col']; // Allow reqtree designer to override random colour for some techs
 
+      // known tech connecting to known tech: use black line
+      if (tech_known(ptech['rule_name']) && tech_known(techs[rid]['rule_name'])) {
+        tech_canvas_ctx.strokeStyle = 'rgb(88, 88, 88)';
+        tech_canvas_ctx.lineWidth = 1;
+      }
+      else { // else differentiate line colours to make tracing them easier
+        if (sequence == 9) tech_canvas_ctx.strokeStyle =      'rgba(144, 134, 134, 0.95)';     // grey
+        else if (sequence == 8) tech_canvas_ctx.strokeStyle = 'rgba(55, 83, 204, 0.83)';       // egyptian blue
+        else if (sequence == 7) tech_canvas_ctx.strokeStyle = 'rgba(81, 146, 187, 0.8)';       // medium teal-blue
+        else if (sequence == 6) tech_canvas_ctx.strokeStyle = 'rgba(121, 127, 82, 0.88)';      // olive / ochre
+        else if (sequence == 5) tech_canvas_ctx.strokeStyle = 'rgba(138, 36, 78, 0.8)';        // wine
+        else if (sequence == 4) tech_canvas_ctx.strokeStyle = 'rgba(161, 227, 243, 0.8)';      // bright sky
+        else if (sequence == 3) tech_canvas_ctx.strokeStyle = 'rgba(60, 187, 146, 0.8)';       // bronze sea spray (strong green-cyan)
+        else if (sequence == 2) tech_canvas_ctx.strokeStyle = 'rgba(124, 108, 167, 0.95)';     // periwinkle
+        else if (sequence == 1) tech_canvas_ctx.strokeStyle = 'rgba(223, 223, 223, 0.8)';      // white
+        else tech_canvas_ctx.strokeStyle =                    'rgba(189, 91, 79, 0.85)';       // coral / salmon
+        tech_canvas_ctx.lineWidth = 3;
+      }
+
+      var node_offset = 3;
       tech_canvas_ctx.beginPath();
       tech_canvas_ctx.moveTo(sx, sy + hy);
-      tech_canvas_ctx.lineTo(dx + hx, dy + hy);
+      tech_canvas_ctx.lineTo(dx + hx+(node_offset+1), dy + hy);
       tech_canvas_ctx.stroke();
 
-
+      // draw a node (helps indicate which line-colour is the real required tech: because we see a coloured node for it )
+      var radius = 2;
+      tech_canvas_ctx.lineWidth = 4;
+      tech_canvas_ctx.beginPath();
+      tech_canvas_ctx.arc(dx + hx+radius+node_offset, dy + hy, radius, 0, 2 * Math.PI, false);
+      tech_canvas_ctx.stroke();
     }
 
   }
@@ -236,9 +269,9 @@ function update_tech_tree()
 
     /* TECH WITH KNOWN PREREQS. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_PREREQS_KNOWN) {
-      var bgcolor = (is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(131, 170, 101)" : "rgb(91, 130, 61)";
+      var bgcolor = (is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(171, 220, 141)" : "rgb(91, 130, 61)";
       if (client.conn.playing['researching'] == ptech['id']) {
-        bgcolor = "rgb(161, 200, 131)";
+        bgcolor = "rgb(255, 255, 255)";
         tech_canvas_ctx.lineWidth=6;
       }
 
@@ -262,7 +295,7 @@ function update_tech_tree()
 
     /* UNKNOWN TECHNOLOGY. */
     } else if (player_invention_state(client.conn.playing, ptech['id']) == TECH_UNKNOWN) {
-      let bgcolor = (is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(111, 141, 180)" : "rgb(61, 95, 130)";
+      let bgcolor = (is_tech_req_for_goal(ptech['id'], client.conn.playing['tech_goal'])) ? "rgb(131, 161, 200)" : "rgb(61, 95, 130)";
       if (client.conn.playing['tech_goal'] == ptech['id']) {
         tech_canvas_ctx.lineWidth=6;
       }

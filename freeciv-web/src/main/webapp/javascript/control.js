@@ -1071,7 +1071,6 @@ function update_unit_order_commands()
   var i, r;
   var punit;
   var ptype;
-  var pcity;
   var ptile;
   var unit_actions = {};
   var funits = get_units_in_focus();
@@ -1099,7 +1098,6 @@ function update_unit_order_commands()
     } else if (utype_can_do_action(ptype, ACTION_JOIN_CITY)
                && pcity != null) {
       unit_actions["build"] = {name: "Join city (B)"};
-    } else {
 
     }
 

@@ -573,7 +573,7 @@ function generate_production_list()
 
       production_list.push({"kind": VUT_UTYPE, "value" : punit_type['id'],
                             "text" : punit_type['name'],
-	                    "helptext" : punit_type['helptext'],
+	                        "helptext" : punit_type['helptext'],
                             "rule_name" : punit_type['rule_name'],
                             "build_cost" : punit_type['build_cost'],
                             "unit_details" : "Attack:" + punit_type['attack_strength'] + ", Defense:"
@@ -589,7 +589,7 @@ function generate_production_list()
       production_list.push({"kind": VUT_IMPROVEMENT,
                             "value" : pimprovement['id'],
                             "text" : pimprovement['name'],
-	                    "helptext" : pimprovement['helptext'],
+	                        "helptext" : pimprovement['helptext'],
                             "rule_name" : pimprovement['rule_name'],
                             "build_cost" : build_cost,
                             "unit_details" : "",
@@ -1900,62 +1900,7 @@ function city_worklist_task_remove()
   send_city_worklist(active_city['id']);
 }
 
-/**************************************************************************
- Updates the Cities tab when clicked, populating the table.
-**************************************************************************/
-function update_city_screen()
-{
-  if (observing) return;
 
-  var sortList = [];
-  var headers = $('#city_table thead th');
-  headers.filter('.tablesorter-headerAsc').each(function (i, cell) {
-    sortList.push([cell.cellIndex, 0]);
-  });
-  headers.filter('.tablesorter-headerDesc').each(function (i, cell) {
-    sortList.push([cell.cellIndex, 1]);
-  });
-
-  var city_list_html = "<table class='tablesorter' id='city_table' border=0 cellspacing=0>"
-        + "<thead><tr><th>Name</th><th>Population</th><th>Size</th><th>State</th>"
-        + "<th>Granary</th><th>Grows In</th><th>Producing</th>"
-        + "<th>Surplus<br>Food/Prod/Trade</th><th>Economy<br>Gold/Luxury/Science</th></tr></thead><tbody>";
-  var count = 0;
-  for (var city_id in cities){
-    var pcity = cities[city_id];
-    if (client.conn.playing != null && city_owner(pcity) != null && city_owner(pcity).playerno == client.conn.playing.playerno) {
-      count++; 
-      var prod_type = get_city_production_type(pcity);
-      var turns_to_complete_str;
-      if (get_city_production_time(pcity) == FC_INFINITY) {
-        turns_to_complete_str = "-"; //client does not know how long production will take yet.
-      } else {
-        turns_to_complete_str = get_city_production_time(pcity) + " turns";
-      }
-
-      city_list_html += "<tr class='cities_row' id='cities_list_" + pcity['id'] + "' onclick='show_city_dialog_by_id(" + pcity['id'] + ");'><td>"
-              + pcity['name'] + "</td><td>" + numberWithCommas(city_population(pcity)*1000) +
-              "</td><td>" + pcity['size'] + "</td><td>" + get_city_state(pcity) + "</td><td>" + pcity['food_stock'] + "/" + pcity['granary_size'] +
-              "</td><td>" + city_turns_to_growth_text(pcity) + "</td>" + 
-              "<td>" + prod_type['name'] + " (" + turns_to_complete_str + ")" +
-              "</td><td>" + pcity['surplus'][O_FOOD] + "/" + pcity['surplus'][O_SHIELD] + "/" + pcity['surplus'][O_TRADE] + "</td>" +
-              "<td>" + pcity['prod'][O_GOLD] + "/" + pcity['prod'][O_LUXURY] + "/" + pcity['prod'][O_SCIENCE] + "<td>"; 
-
-      city_list_html += "</tr>";
-    }
-  }
-
-  city_list_html += "</tbody></table>";
-  $("#cities_list").html(city_list_html);
-
-  if (count == 0) {
-    $("#city_table").html("You have no cities. Build new cities with the Settlers unit.");
-  }
-
-  $('#cities_scroll').css("height", $(window).height() - 200);
-
-  $("#city_table").tablesorter({theme:"dark", sortList: sortList});
-}
 
 /**********************************************************************//**
   Return TRUE iff the city is unhappy.  An unhappy city will fall
