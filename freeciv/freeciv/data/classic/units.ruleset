@@ -1709,11 +1709,11 @@ uk_food       = 0
 uk_gold       = 0
 tp_defense    = "Alight"
 cargo         = "Land"
-flags         = "BadCityDefender", "Provoking"
+flags         = "TradeRoute", "BadCityDefender", "Provoking"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Caravel replaces the Trireme and can enter\
- any ocean tile.\
+ any ocean tile. Can establish a trade route.\
 ")
 
 [unit_galleon]
@@ -1746,12 +1746,12 @@ uk_food       = 0
 uk_gold       = 0
 tp_defense    = "Alight"
 cargo         = "Land"
-flags         = "BadCityDefender", "Provoking"
+flags         = "TradeRoute", "BadCityDefender", "Provoking"
 roles         = "Ferryboat", "FerryStartUnit", "BarbarianBoat"
 helptext      = _("\
 The Galleon is a pure transport ship and cannot\
  attack other ships, though it may still defend\
- itself when attacked.\
+ itself when attacked. Can establish a trade route.\
 ")
 
 [unit_frigate]
@@ -2088,11 +2088,11 @@ uk_food       = 0
 uk_gold       = 0
 tp_defense    = "Alight"
 cargo         = "Land"
-flags         = "BadCityDefender", "Provoking"
+flags         = "TradeRoute", "BadCityDefender", "Provoking"
 roles         = "Ferryboat", "FerryStartUnit"
 helptext      = _("\
 The Transport cannot attack on its own but\
- may defend itself when under attack.\
+ may defend itself when under attack. Can establish trade routes.\
 ")
 
 [unit_cruise_missile]
