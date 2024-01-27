@@ -257,6 +257,7 @@ function webgl_recenter_button_pressed(ptile)
     if (!client_is_observer() && (sunit != null && sunit['owner'] == client.conn.playing.playerno) || (pcity != null && pcity['owner'] == client.conn.playing.playerno)) {
       /* the user right-clicked on own unit, show context menu instead of recenter. */
       if (current_focus.length <= 1) set_unit_focus(sunit);
+      do_map_click(ptile, SELECT_POPUP, true);
       $("#mapcanvas").contextMenu(true);
       $("#mapcanvas").contextmenu();
     } else if (!client_is_observer() && (sunit != null && sunit['owner'] != client.conn.playing.playerno) || (pcity != null && pcity['owner'] != client.conn.playing.playerno)) {
