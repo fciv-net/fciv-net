@@ -193,7 +193,7 @@ value   = 5
 
 [effect_trade_routes_base]
 type    = "Max_Trade_Routes"
-value   = 2
+value   = 4
 
 [effect_trade_routes_magnetism]
 type    = "Max_Trade_Routes"
