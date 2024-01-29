@@ -1074,6 +1074,7 @@ function update_unit_order_commands()
   var ptile;
   var unit_actions = {};
   var funits = get_units_in_focus();
+  var pcity;
   for (i = 0; i < funits.length; i++) {
     punit = funits[i];
     ptile = index_to_tile(punit['tile']);
