@@ -1197,6 +1197,7 @@ function handle_end_turn(packet)
     $("#turn_done_button").button( "option", "disabled", true);
   }
   close_city_dialog();
+  $(".diplomacy_dialog").remove();
 }
 
 function handle_freeze_client(packet)

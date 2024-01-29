@@ -209,16 +209,16 @@ function update_tech_tree()
         tech_canvas_ctx.lineWidth = 1;
       }
       else { // else differentiate line colours to make tracing them easier
-        if (sequence == 9) tech_canvas_ctx.strokeStyle =      'rgba(144, 134, 134, 0.95)';     // grey
-        else if (sequence == 8) tech_canvas_ctx.strokeStyle = 'rgba(55, 83, 204, 0.83)';       // egyptian blue
+        if (sequence == 9) tech_canvas_ctx.strokeStyle =      'rgba(80, 80, 80, 0.95)';     // grey
+        else if (sequence == 8) tech_canvas_ctx.strokeStyle = 'rgba(55, 83, 104, 0.83)';       // egyptian blue
         else if (sequence == 7) tech_canvas_ctx.strokeStyle = 'rgba(81, 146, 187, 0.8)';       // medium teal-blue
         else if (sequence == 6) tech_canvas_ctx.strokeStyle = 'rgba(121, 127, 82, 0.88)';      // olive / ochre
         else if (sequence == 5) tech_canvas_ctx.strokeStyle = 'rgba(138, 36, 78, 0.8)';        // wine
-        else if (sequence == 4) tech_canvas_ctx.strokeStyle = 'rgba(161, 227, 243, 0.8)';      // bright sky
+        else if (sequence == 4) tech_canvas_ctx.strokeStyle = 'rgba(80, 161, 80, 0.8)';      // bright sky
         else if (sequence == 3) tech_canvas_ctx.strokeStyle = 'rgba(60, 187, 146, 0.8)';       // bronze sea spray (strong green-cyan)
         else if (sequence == 2) tech_canvas_ctx.strokeStyle = 'rgba(124, 108, 167, 0.95)';     // periwinkle
-        else if (sequence == 1) tech_canvas_ctx.strokeStyle = 'rgba(223, 223, 223, 0.8)';      // white
-        else tech_canvas_ctx.strokeStyle =                    'rgba(189, 91, 79, 0.85)';       // coral / salmon
+        else if (sequence == 1) tech_canvas_ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';      // white
+        else tech_canvas_ctx.strokeStyle =                    'rgba(150, 91, 79, 0.85)';       // coral / salmon
         tech_canvas_ctx.lineWidth = 3;
       }
 

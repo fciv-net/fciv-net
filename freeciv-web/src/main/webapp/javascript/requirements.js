@@ -238,5 +238,6 @@ function universal_build_shield_cost(pcity, target)
    * (or from a universal that may be a building or a unit) to something
    * that evaluates the effect (like this function).
    * At the moment (10th Oct 2018) it isn't used in any bundled ruleset. */
+   if (target == null) return 1000;
   return target['build_cost'];
 }

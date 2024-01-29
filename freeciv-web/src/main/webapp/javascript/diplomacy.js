@@ -335,6 +335,7 @@ function create_diplomacy_dialog(counterpart, template) {
                     cancel_meeting_req(counterpart_id);
                 }
 			},
+			dialogClass: 'diplomacy_dialog',
 			close: function() {
 			     cancel_meeting_req(counterpart_id);
 			}

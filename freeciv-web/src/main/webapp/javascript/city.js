@@ -1512,7 +1512,7 @@ function populate_worklist_production_choices(pcity)
     $(".kindvalue_item").dblclick(function() {
       var value = parseFloat($(this).data('value'));
       var kind = parseFloat($(this).data('kind'));
-      send_city_worklist_add(pcity['id'], kind, value);
+      send_city_change(pcity['id'], kind, value);
     });
   } else {
     $(".kindvalue_item").click(function() {

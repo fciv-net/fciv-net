@@ -19,31 +19,27 @@
 
 
 var reqtree = {};
-var reqtree_xwidth = 350;
+var reqtree_xwidth = 330;
 var reqtree_ywidth = 80;
 
 /**************************************************************************
- ...
+ Technology tree algorithm, assigning the position of each technology in the tree.
 **************************************************************************/
 function generate_req_tree() {
+  reqtree = {};
 
   for (let tech_id in techs) {
     let ptech = techs[tech_id];
-    ptech['reqtree'] = [];
-    if (ptech['req'][0] > 0) {
-      ptech['reqtree'][0] = techs[ptech['req'][0]];
+    ptech['subreqs'] = [];
+  }
 
-      if (techs[ptech['req'][0]]['subreqs'] == null) {
-        techs[ptech['req'][0]]['subreqs'] = [];
-      }
+  for (let tech_id in techs) {
+    let ptech = techs[tech_id];
+
+    if (ptech['req'][0] > 0) {
       techs[ptech['req'][0]]['subreqs'].push(ptech);
     }
     if (ptech['req'][1] > 0) {
-      ptech['reqtree'][1] = techs[ptech['req'][1]];
-
-      if (techs[ptech['req'][1]]['subreqs'] == null) {
-        techs[ptech['req'][1]]['subreqs'] = [];
-      }
       techs[ptech['req'][1]]['subreqs'].push(ptech);
     }
   }
@@ -56,7 +52,7 @@ function generate_req_tree() {
   }
 
   var level_counts = {};
-  for (let x = 0; x < 1000; x++) {
+  for (let x = 0; x < Object.keys(techs).length; x++) {
     level_counts[x] = 0;
   }
   for (let tech_id in techs) {
@@ -67,7 +63,7 @@ function generate_req_tree() {
 
   for (let tech_id in techs) {
     let ptech = techs[tech_id];
-    reqtree[tech_id] = {'x' : ptech['xlevel'] * reqtree_xwidth, 'y': ptech['ylevel'] * reqtree_ywidth};
+    reqtree[tech_id] = {'x' : 20 + ptech['xlevel'] * reqtree_xwidth, 'y': 20 + ptech['ylevel'] * reqtree_ywidth};
   }
 
 }
