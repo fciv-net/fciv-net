@@ -43,13 +43,14 @@ Open a Powershell window, run as Administator, this command:
 
 <br />
 
-## 2. Troubleshooting
+## 2. Known problems
 
-### 2.1. mySQL problems
+### 2.1. SQL problems
 #### 2.1.1. error: 'Access denied for user 'root'@'localhost'
 
 > error: 'Access denied for user 'root'@'localhost' (using password: YES)'
 
+  
 
 ![sql bug](https://raw.githubusercontent.com/fciv-net/fciv-net/main/doc/img/sql_bug.png  "")
 
@@ -69,7 +70,7 @@ Try to re-run Fciv-net. If the same error happens again, the only known solution
 
 > sudo apt autoremove && sudo apt autoclean
 
-or a single  command:
+or a single long command:
 
 > sudo systemctl stop mysql && sudo apt-get purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-* && sudo rm -rf /etc/mysql /var/lib/mysql && sudo apt autoremove && sudo apt autoclean
 
@@ -86,3 +87,5 @@ Now try to install Fciv-net again. mySQL will be automatically reinstalled.
 
 This issue can appear during compilation. It can be solved by removing the /var/lib/tomcat10 folder.
 > sudo rm -r /var/lib/tomcat10
+=======
+Now install Fciv-net again. mySQL will be automatically reinstalled.
