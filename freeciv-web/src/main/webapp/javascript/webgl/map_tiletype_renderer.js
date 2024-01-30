@@ -85,7 +85,7 @@ function map_tiletype_tile_color(map_x, map_y)
     return tile_terrain(ptile)['id'] * 2 + 1;
   }
 
-  return COLOR_OVERVIEW_UNKNOWN;
+  return 0;
 }
 
 

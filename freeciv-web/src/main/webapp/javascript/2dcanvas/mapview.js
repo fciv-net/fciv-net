@@ -167,7 +167,6 @@ function mapview_put_tile(pcanvas, tag, canvas_x, canvas_y) {
 **************************************************************************/
 function set_default_mapview_inactive()
 {
-  if (overview_active) $("#game_overview_panel").parent().hide();
   if (!is_small_screen()) $("#game_unit_panel").parent().hide();
   if (chatbox_active) $("#game_chatbox_panel").parent().hide();
 

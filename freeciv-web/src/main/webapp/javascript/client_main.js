@@ -46,7 +46,6 @@ function set_client_state(newstate)
 
       set_client_page(PAGE_GAME);
       setup_window_size();
-      if (overview_active) init_overview();
       if (unitpanel_active) init_game_unit_panel();
 
       update_metamessage_on_gamestart();
@@ -120,7 +119,6 @@ function setup_window_size ()
     $(".ui-tabs-anchor").css("padding", "3px");
 
     $("#freeciv_logo").hide();
-    overview_active = false;
 
     $("#game_status_panel_bar").css("font-size", "0.8em");
 
@@ -333,9 +331,6 @@ function set_default_mapview_active()
   tech_dialog_active = false;
   allow_right_click = false;
   keyboard_input = true;
-
-  if (overview_active) $("#game_overview_panel").parent().show();
-  if (overview_active) $(".overview_dialog").position({my: 'left bottom', at: 'left bottom', of: window, within: $("#game_page")});
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
 

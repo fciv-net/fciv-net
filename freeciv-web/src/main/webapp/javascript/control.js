@@ -234,12 +234,6 @@ function control_init()
     show_help();
   });
 
-  $("#overview_map").click(function(e) {
-    var x = e.pageX - $(this).offset().left;
-    var y = e.pageY - $(this).offset().top;
-    overview_clicked (x, y);
-  });
-
   $("#send_message_button").click(function(e) {
     show_send_private_message_dialog();
   });
