@@ -110,9 +110,11 @@ function update_unit_position(ptile) {
     var new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
       new_flag = create_flag_sprite(pflag['key']);
-      new_flag.position.set(pos['x'] - 10, height + 20, pos['y'] - 20);
-      scene.add(new_flag);
-      unit_flag_positions[ptile['index']] = new_flag;
+      if (new_flag != null) {
+        new_flag.position.set(pos['x'] - 10, height + 20, pos['y'] - 20);
+        scene.add(new_flag);
+        unit_flag_positions[ptile['index']] = new_flag;
+      }
     }
 
     /* indicate focus unit*/
@@ -228,9 +230,11 @@ function update_unit_position(ptile) {
     let new_flag;
     if (unit_flag_positions[ptile['index']] == null && scene != null) {
       new_flag = create_flag_sprite(pflag['key']);
-      new_flag.position.set(pos['x'] - flag_dx, height + flag_dz, pos['y'] - flag_dy - 10);
-      scene.add(new_flag);
-      unit_flag_positions[ptile['index']] = new_flag;
+      if (new_flag != null) {
+        new_flag.position.set(pos['x'] - flag_dx, height + flag_dz, pos['y'] - flag_dy - 10);
+        scene.add(new_flag);
+        unit_flag_positions[ptile['index']] = new_flag;
+      }
     }
 
     anim_objs[visible_unit['id']] = {'unit' : visible_unit['id'], 'mesh' : new_unit, 'flag' : new_flag};

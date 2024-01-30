@@ -49,8 +49,7 @@ function diplomacy_init_meeting_req(counterpart)
 **************************************************************************/
 function show_diplomacy_dialog(counterpart)
 {
- var pplayer = players[counterpart];
- create_diplomacy_dialog(pplayer, Handlebars.templates['diplomacy_meeting']);
+  createDiplomacyDialog(players[counterpart]);
 }
 
 /**************************************************************************
@@ -301,106 +300,141 @@ function diplomacy_cancel_treaty(player_id)
 /**************************************************************************
  ...
 **************************************************************************/
-function create_diplomacy_dialog(counterpart, template) {
-  var pplayer = client.conn.playing;
-  var counterpart_id = counterpart['playerno'];
+function createDiplomacyDialog(counterpart) {
+  const pplayer = client.conn.playing;
+  const counterpartId = counterpart['playerno'];
 
-  // reset diplomacy_dialog div.
-  // TODO: check whether this is still needed
-  cleanup_diplomacy_dialog(counterpart_id);
-  $("#game_page").append(template({
-    self: meeting_template_data(pplayer, counterpart),
-    counterpart: meeting_template_data(counterpart, pplayer)
-  }));
+  const selfData = meeting_template_data(pplayer, counterpart);
+  const counterpartData = meeting_template_data(counterpart, pplayer);
+  const title = `Diplomacy: ${counterpart['name']} of the ${nations[counterpart['nation']]['adjective']}`;
 
-  var title = "Diplomacy: " + counterpart['name']
-		 + " of the " + nations[counterpart['nation']]['adjective'];
+  const diplomacyDialog = $("<div>").attr("id", `diplomacy_dialog_${counterpartId}`).attr("title", title);
+  $("#game_page").append(diplomacyDialog);
 
-  var diplomacy_dialog = $("#diplomacy_dialog_" + counterpart_id);
-  diplomacy_dialog.attr("title", title);
-  diplomacy_dialog.dialog({
-			bgiframe: true,
-			modal: false,
-			width: is_small_screen() ? "90%" : "50%",
-            height: 450,
-			buttons: {
-				"Accept treaty": function() {
-				    accept_treaty_req(counterpart_id);
-				},
-				"Cancel meeting" : function() {
-				    cancel_meeting_req(counterpart_id);
-				},
-                "Declare war": function() {
-                    diplomacy_cancel_treaty(counterpart_id);
-                    cancel_meeting_req(counterpart_id);
-                }
-			},
-			dialogClass: 'diplomacy_dialog',
-			close: function() {
-			     cancel_meeting_req(counterpart_id);
-			}
-		}).dialogExtend({
-           "minimizable" : true,
-           "closable" : true,
-           "icons" : {
-             "minimize" : "ui-icon-circle-minus",
-             "restore" : "ui-icon-newwin"
-           }});
+  diplomacyDialog.html(`
+    <div>
+      Treaty clauses:<br>
+      <div class='diplomacy_messages' id='diplomacy_messages_${counterpartId}'></div>
+      <div>
+        <!-- Player Box for Self -->
+        <div class='diplomacy_player_box'>
+          <!-- Self Flag or Canvas -->
+          ${selfData.flag ? `<img src='/images/flags/${selfData.flag}' class='flag_self' id='flag_self_${counterpartId}'>` : `<canvas class='flag_self' id='flag_self_${counterpartId}' width='58' height='40'></canvas>`}
+          <div class='agree_self' id='agree_self_${counterpartId}'></div>
+          <h3>${selfData.adjective} ${selfData.name}</h3>
+          <div class='dipl_div'>
+            <div id='hierarchy_self_${counterpartId}'><a tabindex='0' class='menu-button-activator ui-button ui-widget ui-state-default ui-corner-all'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
+              <ul class='dipl_add'>
+                ${selfData.clauses.map(clause => `
+                  ${clause.title ? `<li><div>${clause.title}</div><ul>${clause.clauses.map(subClause => `<li><div><a href='#' onclick='create_clause_req(${counterpartId}, ${selfData.pid}, ${subClause.type}, ${subClause.value});'>${subClause.name}</a></div></li>`).join('')}</ul></li>` :
+                  `<li><div><a href='#' onclick='create_clause_req(${counterpartId}, ${selfData.pid}, ${clause.type}, ${clause.value});'>${clause.name}</a></div></li>`}
+                `).join('')}
+              </ul>
+            </div>
+            <span class='diplomacy_gold'>Gold:<input id='self_gold_${counterpartId}' type='number' step='1' size='3' value='0'></span>
+          </div>
+        </div>
+        <!-- Player Box for Counterpart -->
+        <div class='diplomacy_player_box'>
+          <!-- Counterpart Flag or Canvas -->
+          ${counterpartData.flag ? `<img src='/images/flags/${counterpartData.flag}' class='flag_counterpart' id='flag_counterpart_${counterpartId}'>` : `<canvas class='flag_counterpart' id='flag_counterpart_${counterpartId}' width='58' height='40'></canvas>`}
+          <div class='agree_counterpart' id='agree_counterpart_${counterpartId}'></div>
+          <h3>${counterpartData.adjective} ${counterpartData.name}</h3>
+          <div class='dipl_div'>
+            <div id='hierarchy_counterpart_${counterpartId}'><a tabindex='0' class='menu-button-activator ui-button ui-widget ui-state-default ui-corner-all'><span class='ui-icon ui-icon-triangle-1-s'></span>Add Clause...</a>
+              <ul class='dipl_add'>
+                ${counterpartData.clauses.map(clause => `
+                  ${clause.title ? `<li><div>${clause.title}</div><ul>${clause.clauses.map(subClause => `<li><div><a href='#' onclick='create_clause_req(${counterpartId}, ${counterpartData.pid}, ${subClause.type}, ${subClause.value});'>${subClause.name}</a></div></li>`).join('')}</ul></li>` :
+                  `<li><div><a href='#' onclick='create_clause_req(${counterpartId}, ${counterpartData.pid}, ${clause.type}, ${clause.value});'>${clause.name}</a></div></li>`}
+                `).join('')}
+              </ul>
+            </div>
+            <span class='diplomacy_gold'>Gold:<input id='counterpart_gold_${counterpartId}' type='number' step='1' size='3' value='0'></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
 
-  diplomacy_dialog.dialog('open');
+  diplomacyDialog.dialog({
+    bgiframe: true,
+    modal: false,
+    width: is_small_screen() ? "90%" : "50%",
+    height: 450,
+    buttons: {
+      "Accept treaty": function () {
+        accept_treaty_req(counterpartId);
+      },
+      "Cancel meeting": function () {
+        cancel_meeting_req(counterpartId);
+      },
+      "Declare war": function () {
+        diplomacy_cancel_treaty(counterpartId);
+        cancel_meeting_req(counterpartId);
+      }
+    },
+    dialogClass: 'diplomacy_dialog',
+    close: function () {
+      cancel_meeting_req(counterpartId);
+    }
+  }).dialogExtend({
+    "minimizable": true,
+    "closable": true,
+    "icons": {
+      "minimize": "ui-icon-circle-minus",
+      "restore": "ui-icon-newwin"
+    }
+  });
 
-  var nation = nations[pplayer['nation']];
-  if (nation['customized']) {
-    meeting_paint_custom_flag(nation, document.getElementById('flag_self_' + counterpart_id));
+  diplomacyDialog.dialog('open');
+
+  const selfFlagElement = $(`#flag_self_${counterpartId}`);
+  const counterpartFlagElement = $(`#flag_counterpart_${counterpartId}`);
+  const selfNation = nations[pplayer['nation']];
+  const counterpartNation = nations[counterpart['nation']];
+
+  if (selfNation['customized']) {
+    meeting_paint_custom_flag(selfNation, selfFlagElement[0]);
   }
-  nation = nations[counterpart['nation']];
-  if (nation['customized']) {
-    meeting_paint_custom_flag(nation, document.getElementById('flag_counterpart_' + counterpart_id));
+  if (counterpartNation['customized']) {
+    meeting_paint_custom_flag(counterpartNation, counterpartFlagElement[0]);
   }
 
-  create_clauses_menu($('#hierarchy_self_' + counterpart_id));
-  create_clauses_menu($('#hierarchy_counterpart_' + counterpart_id));
+  create_clauses_menu($(`#hierarchy_self_${counterpartId}`));
+  create_clauses_menu($(`#hierarchy_counterpart_${counterpartId}`));
 
   if (game_info.trading_gold && clause_infos[CLAUSE_GOLD]['enabled']) {
-    $("#self_gold_" + counterpart_id).attr({
-       "max" : pplayer['gold'],
-       "min" : 0
+    $(`#self_gold_${counterpartId}`).attr({
+      "max": pplayer['gold'],
+      "min": 0
     });
 
-    $("#counterpart_gold_" + counterpart_id).attr({
-       "max" : counterpart['gold'],
-       "min" : 0
+    $(`#counterpart_gold_${counterpartId}`).attr({
+      "max": counterpart['gold'],
+      "min": 0
     });
 
-    var wto;
-    $("#counterpart_gold_" + counterpart_id).change(function() {
-      clearTimeout(wto);
-      wto = setTimeout(function() {
-        meeting_gold_change_req(counterpart_id, counterpart_id,
-                                parseFloat($("#counterpart_gold_" + counterpart_id).val()));
-      }, 500);
+    $(`#counterpart_gold_${counterpartId}`).change(function () {
+      meeting_gold_change_req(counterpartId, counterpartId, parseFloat($(`#counterpart_gold_${counterpartId}`).val()));
     });
 
-    $("#self_gold_" + counterpart_id).change(function() {
-      clearTimeout(wto);
-      wto = setTimeout(function() {
-        meeting_gold_change_req(counterpart_id, pplayer['playerno'],
-                                parseFloat($("#self_gold_" + counterpart_id).val()));
-      }, 500);
+    $(`#self_gold_${counterpartId}`).change(function () {
+      meeting_gold_change_req(counterpartId, pplayer['playerno'], parseFloat($(`#self_gold_${counterpartId}`).val()));
     });
 
   } else {
-    $("#self_gold_" + counterpart_id).prop("disabled", true).parent().hide();
-    $("#counterpart_gold_" + counterpart_id).prop("disabled", true).parent().hide();
+    $(`#self_gold_${counterpartId}`).prop("disabled", true).parent().hide();
+    $(`#counterpart_gold_${counterpartId}`).prop("disabled", true).parent().hide();
   }
 
-  diplomacy_dialog.css("overflow", "visible");
-  diplomacy_dialog.parent().css("z-index", 1000);
+  diplomacyDialog.css("overflow", "visible");
+  diplomacyDialog.parent().css("z-index", 1000);
 
   if (dialogs_minimized_setting) {
-    diplomacy_dialog.dialogExtend("minimize");
+    diplomacyDialog.dialogExtend("minimize");
   }
 }
+
 
 function meeting_paint_custom_flag(nation, flag_canvas)
 {

@@ -29,8 +29,6 @@ else
   rm -f "${WEBAPP_DIR}/build.txt"
 fi
 
-./compile-hb.sh
-
 echo "maven package"
 mvn ${BATCH_MODE} -Dflyway.configFiles=./flyway.properties flyway:migrate package && \
 echo "Copying target/freeciv-web.war to ${TOMCATDIR}/webapps" && \

@@ -57,10 +57,8 @@ spec_files = {
   "amplio2" : [
     "terrain1.spec",
     "activities.spec",
-    "cities.spec",
     "bases.spec",
     "explosions.spec",
-    "fog.spec",
     "grid.spec",
     "nuke.spec",
     "select.spec",
@@ -311,41 +309,8 @@ for tileset_id in sorted(files.keys()):
               if (tag2 != None and len(tag2) > 0): 
                 coords[tileset_id][tag2] = (curr_x, curr_y, w, h, tileset_inc);
 
-  if not (tileset_id == "amplio2" or tileset_id == "isotrident"):
-    increment_tileset_image(tileset_id);
-  else: 
-    for src_key in dither_map.keys():
-      for alt_key in dither_map.keys():
-          for dir in range(4):
-            tag = str(dir) + src_key[5:].replace("1", "") + "_" + alt_key[5:].replace("1", "");
-            src_img = dither_map[src_key].copy();
-            alt_img = dither_map[alt_key].copy();
-            src_img.paste(alt_img, None, dither_mask);
 
-            (WZ, HZ) = src_img.size;
-            xf = [int(WZ / 2), 0, int(WZ / 2), 0];
-            yf = [0, int(HZ / 2), int(HZ / 2), 0];
-
-            result_cell = src_img.crop((xf[dir], yf[dir], int(xf[dir] + (WZ / 2)), int(yf[dir] + (HZ / 2))));
-
-            (w, h) = (int(WZ / 2) , int(HZ / 2));
-            if (w > max_width): max_width = w;
-            if (h > max_height): max_height = h;
-            sum_area += (h*w);
-            if (curr_y + h >= tileset_height):
-              increment_tileset_image(tileset_id);
-            tileset.paste(result_cell, (curr_x, curr_y));
-
-            coords[tileset_id][tag] = (curr_x, curr_y, w, h, tileset_inc);
-
-            curr_x += w;
-            if (h > max_row_height): max_row_height = h;
-            if (w + curr_x >= tileset_width): 
-              curr_x = 0;
-              curr_y += max_row_height;
-              max_row_height = 0;
-
-    increment_tileset_image(tileset_id);
+  increment_tileset_image(tileset_id);
 
 if verbose: print("MAX: " + str(max_width) + "  " + str(max_height) + "  " + str(sum_area));
 

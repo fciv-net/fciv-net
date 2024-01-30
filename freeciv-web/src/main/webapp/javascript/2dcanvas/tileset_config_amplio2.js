@@ -25,7 +25,7 @@ var tileset_tile_height = 48;
 
 var tileset_name = "amplio2";
 
-var tileset_image_count = 3;
+var tileset_image_count = 2;
 
 var normal_tile_width  = 96;
 var normal_tile_height = 48;

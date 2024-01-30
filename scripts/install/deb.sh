@@ -21,7 +21,6 @@ dependencies="\
   curl \
   git \
   gnupg \
-  handlebars \
   imagemagick \
   libcurl4-openssl-dev \
   libicu-dev \

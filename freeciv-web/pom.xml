@@ -371,7 +371,6 @@ Rerun the sync-js-hand.js script.
 								<includes>
 									<!-- order is important: these must be before sources below -->
 									<include>libs/EventAggregator.js</include>
-									<include>handlebars.runtime.js</include>
 									<include>map-constants.js</include>
 									<include>2dcanvas/tilespec-constants.js</include>
 									<!-- end of order dependent includes -->
@@ -388,7 +387,6 @@ Rerun the sync-js-hand.js script.
 									<exclude>libs/es-module-shims.js</exclude>
 									<exclude>libs/jquery.min.js</exclude>
 									<exclude>libs/gif.worker.js</exclude>
-									<exclude>libs/handlebars.runtime.js</exclude>
 									<exclude>libs/stacktrace.min.js</exclude>
 									<exclude>webgl/libs/*js</exclude>
 								</excludes>

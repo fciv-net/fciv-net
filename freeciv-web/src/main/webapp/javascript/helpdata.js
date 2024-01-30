@@ -57,8 +57,8 @@ function show_help()
   allow_right_click = true;
 
   $(".chatbox_dialog ").show();
-  $(".chatbox_dialog ").css('left', 200);
-  $(".chatbox_dialog ").css('top', 400);
+  $(".chatbox_dialog ").css('left', 400);
+  $(".chatbox_dialog ").css('top', 450);
   message_log.update({ event: E_CONNECTION, message: "You can ask the Freeciv AI assistant for help here." });
 
 }

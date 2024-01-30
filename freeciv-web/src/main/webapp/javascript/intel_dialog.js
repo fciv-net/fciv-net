@@ -64,82 +64,119 @@ function show_intelligence_report_hearsay(pplayer)
 /**************************************************************************
  Show the intelligence report dialog when there's an embassy.
 **************************************************************************/
-function show_intelligence_report_embassy(pplayer)
-{
-  // reset dialog page.
+function show_intelligence_report_embassy(pplayer) {
+  // Reset dialog page.
   $("#intel_dialog").remove();
   $("<div id='intel_dialog'></div>").appendTo("div#game_page");
 
   const capital = player_capital(pplayer);
 
-  var intel_data = {
-    ruler: pplayer['name'],
-    government: governments[pplayer['government']]['name'],
+  const intelData = {
+    ruler: pplayer.name,
+    government: governments[pplayer.government].name,
     capital: capital ? capital.name : '(capital unknown)',
-    gold: pplayer['gold'],
-    tax: pplayer['tax'] + '%',
-    science: pplayer['science'] + '%',
-    luxury: pplayer['luxury'] + '%',
+    gold: pplayer.gold,
+    tax: `${pplayer.tax}%`,
+    science: `${pplayer.science}%`,
+    luxury: `${pplayer.luxury}%`,
     researching: '(Unknown)',
-    culture: pplayer['culture'],
+    culture: pplayer.culture,
     dipl: [],
     tech: []
   };
 
-  // TODO: future techs
-  var research = research_get(pplayer);
-  if (research !== undefined) {
-    var researching = techs[research['researching']];
-    if (researching !== undefined) {
-      intel_data['researching'] = researching['name'] + ' ('
-                                + research['bulbs_researched'] + '/'
-                                + research['researching_cost'] + ')';
-    } else {
-      intel_data['researching'] = '(Nothing)';
-    }
-    var myresearch = client_is_observer()
-                     ? null
-                     : research_get(client.conn.playing)['inventions'];
-    for (var tech_id in techs) {
-      if (research['inventions'][tech_id] == TECH_KNOWN) {
-        intel_data['tech'].push({
-          name: techs[tech_id]['name'],
-          who: (myresearch != null && myresearch[tech_id] == TECH_KNOWN)
-                           ? 'both' : 'them'
+  // Future techs
+  const research = research_get(pplayer);
+  if (research) {
+    const researchingTech = techs[research.researching];
+    intelData.researching = researchingTech ? `${researchingTech.name} (${research.bulbs_researched}/${research.researching_cost})` : "(Nothing)";
+
+    const myResearch = client_is_observer() ? null : research_get(client.conn.playing).inventions;
+    for (const techId in techs) {
+      if (research.inventions[techId] == TECH_KNOWN) {
+        intelData.tech.push({
+          name: techs[techId].name,
+          who: (myResearch && myResearch[techId] == TECH_KNOWN) ? "both" : "them"
         });
       }
     }
   }
 
-  if (pplayer['diplstates'] !== undefined) {
-    pplayer['diplstates'].forEach(function (st, i) {
-      if (st['state'] !== DS_NO_CONTACT && i !== pplayer['playerno']) {
-        var dplst = intel_data['dipl'][st['state']];
-        if (dplst === undefined) {
-          dplst = {
-            state: get_diplstate_text(st['state']),
+  if (pplayer.diplstates) {
+    pplayer.diplstates.forEach((st, i) => {
+      if (st.state !== DS_NO_CONTACT && i !== pplayer.playerno) {
+        let dplSt = intelData.dipl[st.state];
+        if (!dplSt) {
+          dplSt = {
+            state: get_diplstate_text(st.state),
             nations: []
           };
-          intel_data['dipl'][st['state']] = dplst;
+          intelData.dipl[st.state] = dplSt;
         }
-        dplst['nations'].push(nations[players[i]['nation']]['adjective']);
+        dplSt.nations.push(nations[players[i].nation].adjective);
       }
     });
   }
 
-  $("#intel_dialog").html(Handlebars.templates['intel'](intel_data));
-  $("#intel_dialog").dialog({
-			bgiframe: true,
-			modal: true,
-			title: "Foreign Intelligence: "
-                             + nations[pplayer['nation']]['adjective']
-                             + " Empire",
-                        width: "auto"
-                     });
+  const intelTabsHTML = `
+    <div id="intel_tabs">
+      <ul>
+        <li><a href="#intel_tabs-overview">Overview</a></li>
+        <li><a href="#intel_tabs-diplomacy">Diplomacy</a></li>
+        <li><a href="#intel_tabs-technology">Technology</a></li>
+      </ul>
 
-  $("#intel_dialog").dialog('open');
-  $("#intel_tabs").tabs();
-  $("#game_text_input").blur();
+      <div id="intel_tabs-overview" class="inteldlg_tabs">
+        <table class="vert-attr-list">
+          <tr><th>Ruler</th><td>${intelData.ruler}</td></tr>
+          <tr><th>Government</th><td>${intelData.government}</td></tr>
+          <tr><th>Capital</th><td>${intelData.capital}</td></tr>
+          <tr><th>Gold</th><td>${intelData.gold}</td></tr>
+          <tr><th>&nbsp;</th><td></td></tr>
+          <tr><th>Tax</th><td>${intelData.tax}</td></tr>
+          <tr><th>Science</th><td>${intelData.science}</td></tr>
+          <tr><th>Luxury</th><td>${intelData.luxury}</td></tr>
+          <tr><th>&nbsp;</th><td></td></tr>
+          <tr><th>Researching</th><td>${intelData.researching}</td></tr>
+          <tr><th>Culture</th><td>${intelData.culture}</td></tr>
+        </table>
+      </div>
 
+      <div id="intel_tabs-diplomacy" class="inteldlg_tabs">
+        <ul>
+          ${intelData.dipl.length > 0 ?
+            intelData.dipl.map(st =>
+              `<li>${st.state}<ul>${st.nations.map(nation => `<li>${nation}</li>`).join('')}</ul></li>`
+            ).join('')
+            :
+            '<li>No contact with other nations</li>'
+          }
+        </ul>
+      </div>
+
+      <div id="intel_tabs-technology" class="inteldlg_tabs">
+        <ul>
+          ${intelData.tech.length > 0 ?
+            intelData.tech.map(tech => `<li class="tech-${tech.who}">${tech.name}</li>`).join('')
+            :
+            '<li>This exciting tribe does not seem to invest in technology.</li>'
+          }
+        </ul>
+      </div>
+    </div>
+  `;
+
+  $('#intel_dialog').html(intelTabsHTML);
+  $('#intel_dialog').dialog({
+    bgiframe: true,
+    modal: true,
+    title: `Foreign Intelligence: ${nations[pplayer.nation].adjective} Empire`,
+    width: 'auto'
+  });
+
+  $('#intel_dialog').dialog('open');
+  $('#intel_tabs').tabs();
+  $('#game_text_input').blur();
 }
+
 

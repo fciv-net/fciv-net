@@ -334,6 +334,9 @@ function set_default_mapview_active()
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar("scrollTo", "bottom",{scrollInertia:0});
 
+  $(".chatbox_dialog").css("top", "52px");
+  $(".chatbox_dialog").css("left", "5px");
+
  $("#mapview_canvas_div").show();
 }
 

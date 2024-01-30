@@ -58,6 +58,169 @@ var city_tile_map = null;
 
 var opt_show_unreachable_items = false;
 
+var city_dialog_html = `
+<div id="city_tabs">
+  <ul>
+    <li><a href="#city_tabs-1" onclick="javascript:city_tab_index=0;">Overview</a></li>
+    <li><a href="#city_tabs-2" onclick="javascript:city_tab_index=1;">Production</a></li>
+    <li><a href="#city_tabs-3" onclick="javascript:city_tab_index=2;">Traderoutes</a></li>
+    <li class="extra_tabs_big" onclick="javascript:city_tab_index=3;"><a href="#city_tabs-4">Settings</a></li>
+    <li><a href="#city_tabs-5" onclick="javascript:city_tab_index=4;">Governor</a></li>
+  </ul>
+
+  <div id="city_tabs-1">
+    <div id="city_overview_tab" class="citydlg_tabs">
+    <div id="city_viewport">
+    <div id="specialist_panel">
+    </div>
+
+    <div class="city_panel">
+      <div id="city_dialog_info">
+	  <div></div>
+	  <div style="float:left;">
+	  <span id="city_size"></span>
+	  <div id='city_production_overview'></div>
+	  <div id='city_production_turns_overview'></div>
+	</div>
+	<div style="float: left; margin-top: -20px; padding-left: 20px;">
+	  <table id="city_stats">
+	  <tr><td>Food: </td><td id="city_food"></td></tr>
+	  <tr><td>Prod: </td><td id="city_prod"></td></tr>
+	  <tr><td>Trade: </td><td id="city_trade"></td></tr>
+	  <tr><td>Gold:: </td><td id="city_gold"></td></tr>
+	  <tr><td>Luxury: </td><td id="city_luxury"></td></tr>
+	  <tr><td>Science: </td><td id="city_science"></td></tr>
+	  <tr><td>Corruption: </td><td id="city_corruption"></td></tr>
+	  <tr><td>Waste: </td><td id="city_waste"></td></tr>
+	  <tr><td>Pollution: </td><td id="city_pollution"></td></tr>
+      <tr><td>Culture: </td><td id="city_culture"></td></tr>
+  	  </table>
+        </div>
+      </div>
+
+    </div>
+    <div id="city_improvements_panel" class="city_panel">
+      <div style="clear: left;"></div>
+      <div id="city_improvements">
+        <div id="city_improvements_title">City Improvements:</div>
+        <div id="city_improvements_list"></div>
+      </div>
+
+      <div id="city_present_units" >
+        <div id="city_present_units_title">Present Units:</div>
+        <div id="city_present_units_list"></div>
+      </div>
+
+      <div id="city_supported_units" >
+        <div id="city_supported_units_title">Supported Units:</div>
+        <div id="city_supported_units_list"></div>
+      </div>
+
+    </div>
+
+
+  </div>
+  </div>
+  </div>
+  <div id="city_tabs-2">
+    <div id="city_production_tab" class="citydlg_tabs">
+      <div id='worklist_left'>
+        <div id='worklist_dialog_headline'></div>
+        <div id='worklist_heading'>Target Worklist:</div><div id='city_current_worklist'></div>
+      </div>
+      <div id='worklist_right'>
+        <div id='worklist_production_choices'></div>
+      </div>
+      <div id="worklist_control">
+        <button type="button" class="button" onClick="city_insert_in_worklist();" id="city_worklist_insert_btn" title="Insert before first selected task, or first in the list"><i class="fa fa-chevron-left fa-fw"></i></button>
+        <div class="wc_spacer"></div>
+        <button type="button" class="button" onClick="city_worklist_task_up();" id="city_worklist_up_btn" style="height: 20%;" title="Move selected tasks up"><i class="fa fa-chevron-up fa-fw"></i></button>
+        <button type="button" class="button" onClick="city_worklist_task_down();" id="city_worklist_down_btn" style="height: 20%;" title="Move selected tasks down"><i class="fa fa-chevron-down fa-fw"></i></button>
+        <div class="wc_spacer"></div>
+        <button type="button" class="button" onClick="city_exchange_worklist_task();" id="city_worklist_exchange_btn" title="Change selected tasks"><i class="fa fa-exchange fa-fw"></i></button>
+        <div class="wc_spacer"></div>
+        <button type="button" class="button" onClick="city_worklist_task_remove();" id="city_worklist_remove_btn" title="Remove selected tasks"><i class="fa fa-trash fa-fw"></i></button>
+      </div>
+    </div>
+  </div>
+  <div id="city_tabs-3">
+    <div id="city_traderoutes_tab" class="citydlg_tabs"></div>
+  </div>
+  <div id="city_tabs-4">
+    <div id="city_settings_tab" class="citydlg_tabs">
+      <div id="city_disband_options" >
+        <input id="disbandable_city" type="checkbox" name="disband_city0" value="disband_city0"/>Disband city if built settler at size 1.
+
+        <br>
+        <input id='show_unreachable_items' type='checkbox'/>Show unreachable worklist items<br/>
+
+      </div>
+
+    </div>
+  </div>
+
+    <div id="city_tabs-5">
+        <div id="city_governor_tab" class="citydlg_tabs">
+            <form name="cma_vals" id="cma_form" >
+                <table border="0">
+                    <tbody>
+                    <tr>
+
+                        <td>
+                            <span style="">
+                              <input id="cma_food" class="cma_checkbox" type="checkbox" name="cma_food" value="" onclick="button_pushed_toggle_cma();" />
+                              <img style="" class="lowered_gov" src="/images/wheat.png">
+                              <b>Food </b>
+                            </span>
+                        </td>
+                        <td>
+                            <span style="">
+                              <input id="cma_shield" class="cma_checkbox" type="checkbox" name="cma_shield" value="" onclick="button_pushed_toggle_cma();" />
+                              <img style="" class="lowered_gov" src="/images/shield14x18.png">
+                              <b>Shield </b>
+                            </span>
+                        </td>
+                        <td>
+                            <span style="">
+                              <input id="cma_trade" class="cma_checkbox" type="checkbox" name="cma_trade" value="" onclick="button_pushed_toggle_cma();" />
+                              <img style="" class="lowered_gov" src="/images/trade.png">
+                              <b>Trade </b>
+                            </span>
+                        </td>
+                        <td>
+                            <span style="">
+                              <input id="cma_gold" class="cma_checkbox" type="checkbox" name="cma_gold" value="" onclick="button_pushed_toggle_cma();" />
+                              <img style="" class="lowered_gov" src="/images/gold.png">
+                              <b>Gold </b>
+                           </span>
+                        </td>
+                        <td>
+                            <span style="">
+                              <input id="cma_luxury" class="cma_checkbox" type="checkbox" name="cma_luxury" value="" onclick="button_pushed_toggle_cma();" />
+                              <img style="" class="lowered_gov" src="/images/lux.png">
+                              <b>Luxury </b>
+                            </span>
+                        </td>
+                        <td>
+                           <span style="">
+                              <input id="cma_science" class="cma_checkbox" type="checkbox" name="cma_science" value="" onclick="button_pushed_toggle_cma();" />
+                              <img style="" class="lowered_gov" src="/images/sci.png">
+                              <b>Science </b>
+                           </span>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+`;
+
 /**************************************************************************
  ...
 **************************************************************************/
@@ -136,8 +299,7 @@ function show_city_dialog_by_id(pcity_id)
 }
 
 /**************************************************************************
- Show the city dialog, by loading a Handlebars template, and filling it
- with data about the city.
+ Show the city dialog.
 **************************************************************************/
 function show_city_dialog(pcity)
 {
@@ -160,9 +322,9 @@ function show_city_dialog(pcity)
   $("#city_dialog").remove();
   $("<div id='city_dialog'></div>").appendTo("div#game_page");
 
-  var city_data = {};
 
-  $("#city_dialog").html(Handlebars.templates['city'](city_data));
+
+  $("#city_dialog").html(city_dialog_html);
 
   highlight_map_tile_selected(city_tile(pcity).x, city_tile(pcity).y);
 
