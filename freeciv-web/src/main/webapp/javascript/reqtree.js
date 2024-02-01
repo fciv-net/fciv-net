@@ -21,6 +21,7 @@
 var reqtree = {};
 var reqtree_xwidth = 330;
 var reqtree_ywidth = 80;
+var level_counts = {};
 
 /**************************************************************************
  Technology tree algorithm, assigning the position of each technology in the tree.
@@ -31,6 +32,11 @@ function generate_req_tree() {
   for (let tech_id in techs) {
     let ptech = techs[tech_id];
     ptech['subreqs'] = [];
+    ptech['traversed'] = false;
+  }
+
+  for (let x = 0; x < Object.keys(techs).length; x++) {
+    level_counts[x] = 0;
   }
 
   for (let tech_id in techs) {
@@ -51,30 +57,24 @@ function generate_req_tree() {
     }
   }
 
-  var level_counts = {};
-  for (let x = 0; x < Object.keys(techs).length; x++) {
-    level_counts[x] = 0;
-  }
   for (let tech_id in techs) {
     let ptech = techs[tech_id];
-    ptech['ylevel'] = level_counts[ptech['xlevel']];
-    level_counts[ptech['xlevel']] = level_counts[ptech['xlevel']] + 1;
+    reqtree[tech_id] = {'x' : 20 + ptech['xlevel'] * reqtree_xwidth,
+                        'y': 20 + ptech['ylevel'] * reqtree_ywidth};
   }
-
-  for (let tech_id in techs) {
-    let ptech = techs[tech_id];
-    reqtree[tech_id] = {'x' : 20 + ptech['xlevel'] * reqtree_xwidth, 'y': 20 + ptech['ylevel'] * reqtree_ywidth};
-  }
-
 }
 
 /**************************************************************************
- ...
+ Recursive function to assign levels to technologies
 **************************************************************************/
 function reqtree_assign_level(ptech, xlevel) {
-  if (ptech['xlevel'] == null || ptech['xlevel'] < xlevel) {
+  if (ptech['traversed'] == false) {
     ptech['xlevel'] = xlevel;
+    ptech['ylevel'] = level_counts[xlevel];
+    level_counts[xlevel] = level_counts[xlevel] + 1;
+    ptech['traversed'] = true;
   }
+
 
   if (ptech['subreqs'] != null) {
     for (let n = 0; n < ptech['subreqs'].length; n++) {
