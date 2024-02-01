@@ -525,7 +525,7 @@ static void close_metaserver_connection(struct connection *caller)
 /**********************************************************************//**
   Handle metaconnection command.
 **************************************************************************/
-static bool metaconnection_command(struct connection *caller, char *arg, 
+static bool metaconnection_command(struct connection *caller, char *arg,
                                    bool check)
 {
   bool persistent = FALSE;
@@ -581,7 +581,7 @@ static bool metaconnection_command(struct connection *caller, char *arg,
 /**********************************************************************//**
   Handle metapatches command.
 **************************************************************************/
-static bool metapatches_command(struct connection *caller, 
+static bool metapatches_command(struct connection *caller,
                                 char *arg, bool check)
 {
   if (check) {
@@ -606,7 +606,7 @@ static bool metapatches_command(struct connection *caller,
 /**********************************************************************//**
   Handle metamessage command.
 **************************************************************************/
-static bool metamessage_command(struct connection *caller, 
+static bool metamessage_command(struct connection *caller,
                                 char *arg, bool check)
 {
   struct setting *pset;
@@ -1173,7 +1173,7 @@ bool read_init_script(struct connection *caller, const char *script_filename,
   Security: We will look for a file with mandatory extension '.serv',
   and on public servers we will not look outside the data directories.
   As long as the user cannot create files with arbitrary names in the
-  root of the data directories, this should ensure that we will not be 
+  root of the data directories, this should ensure that we will not be
   tricked into loading non-approved content. The script is read with the
   permissions of the caller, so it will in any case not lead to elevated
   permissions unless there are other bugs.
@@ -1199,7 +1199,7 @@ static bool read_init_script_real(struct connection *caller,
   real_filename = script_filename + fnlen
                   - MIN(strlen(script_extension), fnlen);
   if (strcmp(real_filename, script_extension) != 0) {
-    fc_snprintf(serv_filename, sizeof(serv_filename), "%s%s", 
+    fc_snprintf(serv_filename, sizeof(serv_filename), "%s%s",
                 script_filename, script_extension);
   } else {
     sz_strlcpy(serv_filename, script_filename);
@@ -1221,7 +1221,7 @@ static bool read_init_script_real(struct connection *caller,
   if (!real_filename) {
     if (is_restricted(caller) && !from_cmdline) {
       cmd_reply(CMD_READ_SCRIPT, caller, C_FAIL,
-                _("No command script found by the name \"%s\"."), 
+                _("No command script found by the name \"%s\"."),
                 serv_filename);
       return FALSE;
     }
@@ -1384,7 +1384,7 @@ static bool set_cmdlevel(struct connection *caller,
      * and thus this if clause is needed.
      * (Imagine a ctrl level access player that wants to change
      * access level of a hack level access player)
-     * At the moment it can be used only by hack access level 
+     * At the moment it can be used only by hack access level
      * and thus this clause is never used.
      */
     cmd_reply(CMD_CMDLEVEL, caller, C_FAIL,
@@ -2004,7 +2004,7 @@ void set_ai_level_direct(struct player *pplayer, enum ai_level level)
 	_("Player '%s' now has AI skill level '%s'."),
 	player_name(pplayer),
 	ai_level_translated_name(level));
-  
+
 }
 
 /**********************************************************************//**
@@ -2748,14 +2748,14 @@ static bool debug_command(struct connection *caller, char *str,
     }
     if (BV_ISSET(pplayer->server.debug, PLAYER_DEBUG_DIPLOMACY)) {
       BV_CLR(pplayer->server.debug, PLAYER_DEBUG_DIPLOMACY);
-      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s diplomacy no longer debugged"), 
+      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s diplomacy no longer debugged"),
                 player_name(pplayer));
     } else {
       BV_SET(pplayer->server.debug, PLAYER_DEBUG_DIPLOMACY);
-      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s diplomacy debugged"), 
+      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s diplomacy debugged"),
                 player_name(pplayer));
       /* TODO: print some info about the player here */
-    } 
+    }
   } else if (ntokens > 0 && strcmp(arg[0], "tech") == 0) {
     struct player *pplayer;
     enum m_pre_result match_result;
@@ -2773,11 +2773,11 @@ static bool debug_command(struct connection *caller, char *str,
     }
     if (BV_ISSET(pplayer->server.debug, PLAYER_DEBUG_TECH)) {
       BV_CLR(pplayer->server.debug, PLAYER_DEBUG_TECH);
-      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s tech no longer debugged"), 
+      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s tech no longer debugged"),
                 player_name(pplayer));
     } else {
       BV_SET(pplayer->server.debug, PLAYER_DEBUG_TECH);
-      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s tech debugged"), 
+      cmd_reply(CMD_DEBUG, caller, C_OK, _("%s tech debugged"),
                 player_name(pplayer));
       /* TODO: print some info about the player here */
     }
@@ -3112,10 +3112,10 @@ static bool set_command(struct connection *caller, char *str, bool check)
     setting_changed(pset);
     setting_action(pset);
     send_server_setting(NULL, pset);
-    /* 
+    /*
      * send any modified game parameters to the clients -- if sent
      * before S_S_RUNNING, triggers a popdown_races_dialog() call
-     * in client/packhand.c#handle_game_info() 
+     * in client/packhand.c#handle_game_info()
      */
     send_game_info(NULL);
     reset_all_start_commands(FALSE);
@@ -3288,7 +3288,7 @@ static bool is_allowed_to_take(struct connection *requester,
       }
       return FALSE;
     }
-  } else { 
+  } else {
     if (!(allow = strchr(game.server.allow_take,
                          (game.info.is_new_game ? 'H' : 'h')))) {
       if (will_obs) {
@@ -3335,24 +3335,24 @@ static bool is_allowed_to_take(struct connection *requester,
 static bool observe_command(struct connection *caller, char *str, bool check)
 {
   int i = 0, ntokens = 0;
-  char buf[MAX_LEN_CONSOLE_LINE], *arg[2], msg[MAX_LEN_MSG];  
+  char buf[MAX_LEN_CONSOLE_LINE], *arg[2], msg[MAX_LEN_MSG];
   bool is_newgame = !game_was_started();
   enum m_pre_result result;
   struct connection *pconn = NULL;
   struct player *pplayer = NULL;
   bool res = FALSE;
-  
+
   /******** PART I: fill pconn and pplayer ********/
 
   sz_strlcpy(buf, str);
   ntokens = get_tokens(buf, arg, 2, TOKEN_DELIMITERS);
-  
+
   /* check syntax, only certain syntax if allowed depending on the caller */
   if (!caller && ntokens < 1) {
     cmd_reply(CMD_OBSERVE, caller, C_SYNTAX, _("Usage:\n%s"),
               command_synopsis(command_by_number(CMD_OBSERVE)));
     goto end;
-  } 
+  }
 
   if (ntokens == 2 && (caller && caller->access_level != ALLOW_HACK)) {
     cmd_reply(CMD_OBSERVE, caller, C_SYNTAX,
@@ -3405,7 +3405,7 @@ static bool observe_command(struct connection *caller, char *str, bool check)
       && !pconn->observer
       && is_newgame
       && !pplayer->was_created) {
-    cmd_reply(CMD_OBSERVE, caller, C_FAIL, 
+    cmd_reply(CMD_OBSERVE, caller, C_FAIL,
               _("%s already controls %s. Using 'observe' would remove %s"),
               pconn->username,
               player_name(pplayer),
@@ -3417,12 +3417,12 @@ static bool observe_command(struct connection *caller, char *str, bool check)
   if (pplayer == pconn->playing && pconn->observer) {
     if (pplayer) {
       cmd_reply(CMD_OBSERVE, caller, C_FAIL,
-		_("%s is already observing %s."),  
+		_("%s is already observing %s."),
 		pconn->username,
 		player_name(pplayer));
     } else {
       cmd_reply(CMD_OBSERVE, caller, C_FAIL,
-		_("%s is already observing."),  
+		_("%s is already observing."),
 		pconn->username);
     }
     goto end;
@@ -3449,7 +3449,7 @@ static bool observe_command(struct connection *caller, char *str, bool check)
       /* find pplayer again, the pointer might have been changed */
       pplayer = player_by_name(name);
     }
-  } 
+  }
 
   /* attach pconn to new player as an observer or as global observer */
   if ((res = connection_attach(pconn, pplayer, TRUE))) {
@@ -3472,12 +3472,12 @@ static bool observe_command(struct connection *caller, char *str, bool check)
 }
 
 /**********************************************************************//**
-  Take over a player. If a connection already has control of that player, 
-  disallow it. 
+  Take over a player. If a connection already has control of that player,
+  disallow it.
 
   If there are two arguments, treat the first as the connection name and the
   second as the player name (only hack and the console can do this).
-  Otherwise, there should be one argument, that being the player that the 
+  Otherwise, there should be one argument, that being the player that the
   caller wants to take.
 **************************************************************************/
 static bool take_command(struct connection *caller, char *str, bool check)
@@ -3688,7 +3688,7 @@ static bool detach_command(struct connection *caller, char *str, bool check)
   }
 
   /* match the connection if the argument was given */
-  if (ntokens == 1 
+  if (ntokens == 1
       && !(pconn = conn_by_user_prefix(arg[0], &match_result))) {
     cmd_reply_no_such_conn(CMD_DETACH, caller, arg[0], match_result);
     goto end;
@@ -3699,10 +3699,10 @@ static bool detach_command(struct connection *caller, char *str, bool check)
     pconn = caller;
   }
 
-  /* if pconn and caller are not the same, only continue 
+  /* if pconn and caller are not the same, only continue
    * if we're console, or we have ALLOW_HACK */
   if (pconn != caller  && caller && caller->access_level != ALLOW_HACK) {
-    cmd_reply(CMD_DETACH, caller, C_FAIL, 
+    cmd_reply(CMD_DETACH, caller, C_FAIL,
                 _("You can not detach other users."));
     goto end;
   }
@@ -3711,7 +3711,7 @@ static bool detach_command(struct connection *caller, char *str, bool check)
 
   /* must have someone to detach from... */
   if (!pplayer && !pconn->observer) {
-    cmd_reply(CMD_DETACH, caller, C_FAIL, 
+    cmd_reply(CMD_DETACH, caller, C_FAIL,
               _("%s is not attached to any player."), pconn->username);
     goto end;
   }
@@ -3807,11 +3807,17 @@ bool load_command(struct connection *caller, const char *filename, bool check,
     webdirs = strvec_new();
 
     if (caller != NULL) {
-      fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, caller->username);
+      char lowercase_username[MAX_LEN_NAME];
+      size_t username_length = strnlen(caller->username, MAX_LEN_NAME);
+
+      for (size_t i = 0; i < username_length; i++) {
+        lowercase_username[i] = tolower(caller->username[i]);
+      }
+      lowercase_username[username_length] = '\0';
+
+      fc_snprintf(websave, sizeof(websave), "%s/%s", srvarg.saves_pathname, lowercase_username);
       strvec_append(webdirs, websave);
     }
-    fc_snprintf(websave, sizeof(websave), "%s/pbem", srvarg.saves_pathname);
-    strvec_append(webdirs, websave);
 
     /* it is a normal savegame or maybe a scenario */
     char testfile[MAX_LEN_PATH];
@@ -3931,7 +3937,7 @@ bool load_command(struct connection *caller, const char *filename, bool check,
   /* Everything seemed to load ok; spread the good news. */
   dlsend_packet_game_load(game.est_connections, TRUE, srvarg.load_filename);
 
-  /* Attach connections to players. Currently, this applies only 
+  /* Attach connections to players. Currently, this applies only
    * to connections that have the same username as a player. */
   conn_list_iterate(game.est_connections, pconn) {
     players_iterate(pplayer) {
@@ -4063,7 +4069,7 @@ bool set_rulesetdir(struct connection *caller, const char *str, bool check,
     player_info_thaw();
 
     if (success) {
-      cmd_reply(CMD_RULESETDIR, caller, C_OK, 
+      cmd_reply(CMD_RULESETDIR, caller, C_OK,
                 _("Ruleset directory set to \"%s\""), str);
     } else {
       cmd_reply(CMD_RULESETDIR, caller, C_SYNTAX,
@@ -4516,14 +4522,7 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
   level = command_level(command_by_number(cmd));
 
   /* Special savegame handling for Freeciv-web. */
-  if (strncmp(game.server.meta_info.type, "pbem", 4) == 0 
-      && cmd == CMD_SAVE && caller) {
-    char pbemfile[200];
-
-    fc_snprintf(pbemfile, sizeof(pbemfile), "%s/pbem/pbem-%s-%u",
-                srvarg.saves_pathname, caller->username, (unsigned)time(NULL));
-    sz_strlcpy(arg, pbemfile);
-  } else if (cmd == CMD_SAVE && caller) {
+  if (cmd == CMD_SAVE && caller) {
     char savefile[300];
     char buffer[30];
     char savedir[300];
@@ -4533,14 +4532,23 @@ static bool handle_stdin_input_real(struct connection *caller, char *str,
     time(&timer);
     fc_localtime(&timer, &tm_info);
     strftime(buffer, 30, "%Y-%m-%d-%H_%M", &tm_info);
+
+    char lowercase_username[MAX_LEN_NAME];
+	size_t username_length = strnlen(caller->username, MAX_LEN_NAME);
+
+	for (size_t i = 0; i < username_length; i++) {
+	  lowercase_username[i] = tolower(caller->username[i]);
+	      }
+    lowercase_username[username_length] = '\0';
+
     fc_snprintf(savefile, sizeof(savefile), "%s/%s/%s_T%u_%s",
-                srvarg.saves_pathname,  caller->username,
+                srvarg.saves_pathname,  lowercase_username,
                 caller->username, game.info.turn, buffer);
     sz_strlcpy(arg, savefile);
 
     /* Create sub-directory from player's username in saves directory. */
     fc_snprintf(savedir, sizeof(savedir), "%s/%s",
-                srvarg.saves_pathname, caller->username);
+                srvarg.saves_pathname, lowercase_username);
     make_dir(savedir, 0775);
   }
 
@@ -4792,7 +4800,7 @@ static bool end_command(struct connection *caller, char *str, bool check)
                 "have disconnected."));
     return TRUE;
   } else {
-    cmd_reply(CMD_END_GAME, caller, C_FAIL, 
+    cmd_reply(CMD_END_GAME, caller, C_FAIL,
               _("Cannot end the game: no game running."));
     return FALSE;
   }
@@ -5435,7 +5443,7 @@ static bool delegate_command(struct connection *caller, char *arg,
      * they are attached to 'their' player. */
     if (player_delegation_active(dplayer)) {
       if (!player_delegation_get(dplayer)) {
-        /* Attempting to change a 'put aside' player. Must be admin 
+        /* Attempting to change a 'put aside' player. Must be admin
          * or console. */
         fc_assert(player_specified);
         cmd_reply(CMD_DELEGATE, caller, C_FAIL,
@@ -5621,7 +5629,7 @@ static bool delegate_command(struct connection *caller, char *arg,
     break;
 
   case DELEGATE_RESTORE:
-    /* Delegate user relinquishes control of delegated player, returning to 
+    /* Delegate user relinquishes control of delegated player, returning to
      * previous view (e.g. observer) if any. */
     fc_assert_ret_val(caller, FALSE);
 
@@ -6256,7 +6264,7 @@ bool start_command(struct connection *caller, bool check, bool notify)
 /**********************************************************************//**
   Handle cut command
 **************************************************************************/
-static bool cut_client_connection(struct connection *caller, char *name, 
+static bool cut_client_connection(struct connection *caller, char *name,
                                   bool check)
 {
   enum m_pre_result match_result;
@@ -6466,7 +6474,7 @@ static void show_help_command(struct connection *caller,
 			      enum command_id id)
 {
   const struct command *cmd = command_by_number(id);
-  
+
   if (command_short_help(cmd)) {
     cmd_reply(help_cmd, caller, C_COMMENT,
               /* TRANS: <untranslated name> - translated short help */
@@ -6594,7 +6602,7 @@ static void cmd_reply_matches(enum command_id cmd,
   Unified indices for help arguments:
     CMD_NUM           -  Server commands
     HELP_GENERAL_NUM  -  General help arguments, above
-    settings_number() -  Server options 
+    settings_number() -  Server options
 **************************************************************************/
 #define HELP_ARG_NUM (CMD_NUM + HELP_GENERAL_COUNT + settings_number())
 
@@ -6651,13 +6659,13 @@ static bool show_help(struct connection *caller, char *arg)
 
   /* other cases should be above */
   fc_assert_ret_val(match_result < M_PRE_AMBIGUOUS, FALSE);
-  
+
   if (ind < CMD_NUM) {
     show_help_command(caller, CMD_HELP, ind);
     return TRUE;
   }
   ind -= CMD_NUM;
-  
+
   if (ind == HELP_GENERAL_OPTIONS) {
     show_help_option_list(caller, CMD_HELP);
     return TRUE;
@@ -6672,7 +6680,7 @@ static bool show_help(struct connection *caller, char *arg)
     show_help_option(caller, CMD_HELP, ind);
     return TRUE;
   }
-  
+
   /* should have finished by now */
   log_error("Bug in show_help!");
   return FALSE;
@@ -6739,7 +6747,7 @@ static void show_delegations(struct connection *caller)
 }
 
 /**********************************************************************//**
-  Show the ignore list of the 
+  Show the ignore list of the
 **************************************************************************/
 static bool show_ignore(struct connection *caller)
 {
@@ -6841,7 +6849,7 @@ void show_players(struct connection *caller)
       }
       n = conn_list_size(pplayer->connections);
       if (n > 0) {
-        cat_snprintf(buf, sizeof(buf), 
+        cat_snprintf(buf, sizeof(buf),
                      PL_(", %d connection:", ", %d connections:", n), n);
       }
       cmd_reply(CMD_LIST, caller, C_COMMENT, "  %s", buf);
@@ -6899,7 +6907,7 @@ static void show_scenarios(struct connection *caller)
   cmd_reply(CMD_LIST, caller, C_COMMENT, horiz_line);
 
   files = fileinfolist_infix(get_scenario_dirs(), ".sav", TRUE);
-  
+
   fileinfo_list_iterate(files, pfile) {
     struct section_file *sf = secfile_load_section(pfile->fullname, "scenario", TRUE);
 
@@ -7133,7 +7141,7 @@ static bool show_list(struct connection *caller, char *arg)
 /**********************************************************************//**
   A generalised generator function: text and state are "standard"
   parameters to a readline generator function;
-  num is number of possible completions, or -1 if this is not known and 
+  num is number of possible completions, or -1 if this is not known and
   index2str should be iterated until it returns NULL;
   index2str is a function which returns each possible completion string
   by index (it may return NULL).

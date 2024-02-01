@@ -90,11 +90,7 @@ public class DeleteSaveGame extends HttpServlet {
 				throw new Exception("Invalid");
 			}
 
-			File folder = new File(savegameDirectory + "/" + usernameFromDB);
-
-			if (!folder.exists()) {
-				folder = new File(savegameDirectory + "/" + StringUtils.capitalize(usernameFromDB));
-			}
+			File folder = new File(savegameDirectory + "/" + usernameFromDB.toLowerCase());
 
 			if (!folder.exists()) {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,

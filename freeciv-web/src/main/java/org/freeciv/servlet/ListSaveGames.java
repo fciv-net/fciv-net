@@ -76,11 +76,7 @@ public class ListSaveGames extends HttpServlet {
 			if (usernameFromDB == null ) {
 				throw new Exception("Invalid");
 			}
-			File folder = new File(savegameDirectory + "/" + usernameFromDB);
-
-			if (!folder.exists()) {
-				folder = new File(savegameDirectory + "/" + StringUtils.capitalize(usernameFromDB));
-			}
+			File folder = new File(savegameDirectory + "/" + usernameFromDB.toLowerCase());
 
 			if (!folder.exists()) {
 				response.getOutputStream().print(";");
