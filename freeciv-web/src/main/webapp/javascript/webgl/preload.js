@@ -305,6 +305,9 @@ switch (filename) {
   case 'Caravan':
     modelscale = 8;
     break;
+  case 'Carrier':
+    modelscale = 0.85;
+    break;
   case 'Workers':
     modelscale = 10;
     break;
@@ -480,7 +483,7 @@ switch (filename) {
     modelscale = 5.3;
     break;
   case 'AEGIS Cruiser':
-     modelscale = 9;
+     modelscale = 1.6;
      break;
   case 'Destroyer':
     modelscale = 0.90;
@@ -498,6 +501,8 @@ switch (filename) {
     modelscale = 6.0;
     break;
   case 'Engineers':
+    modelscale = 1.4;
+    break;
   case 'Nuclear':
   case 'Settlers':
     modelscale = 8.5;
