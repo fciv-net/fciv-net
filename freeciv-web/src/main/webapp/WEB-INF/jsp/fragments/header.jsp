@@ -33,8 +33,6 @@
 
 			<li><a href="https://discord.gg/baFdjpNpTR">Discord</a></li>
 
-		    <li><a href="https://www.fciv.net/wiki/">Wiki</a></li>
-
 		    <li><a href="/hall_of_fame">Hall of Fame</a></li>
 
 		    <li><a href="/about">About</a></li>
