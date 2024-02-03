@@ -117,7 +117,6 @@ var webgpu = <%= webgpu %>;
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="google-signin-client_id" content="<%= googleSigninClientKey %>">
-<link rel="manifest" href="/static/manifest.json">
 
 <script>var captcha_site_key = '<%= captchaKey %>';</script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
