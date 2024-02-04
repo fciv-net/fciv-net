@@ -25,6 +25,7 @@ var map_select_check_started = 0;
 var map_select_x;
 var map_select_y;
 var map_select_lines = [];
+var map_zoom_button_zoom_out = true;
 
 /****************************************************************************
  Init WebGL mapctrl.
@@ -145,38 +146,6 @@ function webglOnDocumentMouseDown(e) {
   }
 }
 
-
-/****************************************************************************
- Handle zoom in / out on touch device
-****************************************************************************/
-function webgl_mapview_pinch_zoom(ev)
-{
-  timeOfLastPinchZoom = new Date().getTime();
-  var new_camera_dx;
-  var new_camera_dy;
-  var new_camera_dz;
-
-  if(ev.scale > 1) {
-    // zoom in
-    new_camera_dy = camera_dy - 16;
-    new_camera_dx = camera_dx - 15;
-    new_camera_dz = camera_dz - 15;
-  } else{
-    // zoom out
-    new_camera_dy = camera_dy + 16;
-    new_camera_dx = camera_dx + 15;
-    new_camera_dz = camera_dz + 15;
-  }
-  if (new_camera_dy < 240 || new_camera_dy > 1500) {
-    return;
-  } else {
-    camera_dx = new_camera_dx;
-    camera_dy = new_camera_dy;
-    camera_dz = new_camera_dz;
-  }
-
-  camera_look_at(camera_current_x, camera_current_y, camera_current_z);
-}
 
 /****************************************************************************
   This function is triggered when beginning a touch event on a touch device,
@@ -413,5 +382,20 @@ function map_draw_select_lines() {
   const selectline = new THREE.Line( geometry, material );
   scene.add(selectline);
   map_select_lines.push(selectline);
+
+}
+
+/**************************************************************************
+ Zoom the map out / in when a button in clicked in the toolbar.
+**************************************************************************/
+function zoom_map_in_out() {
+
+  if (map_zoom_button_zoom_out) {
+    camera.position.y += 1600;
+  } else {
+    camera.position.y -= 1600;
+    camera.position.y = Math.max(camera.position.y, 330);
+  }
+  map_zoom_button_zoom_out = !map_zoom_button_zoom_out;
 
 }

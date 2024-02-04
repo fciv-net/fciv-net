@@ -109,7 +109,6 @@ float mountains_low_begin = 74.0;
 float mountains_low_end = 74.5;
 float mountains_high = 75.10;
 
-vec3 ambiant = vec3(0.27, 0.55, 1.);
 vec3 light = vec3(0.8, 0.6, 0.7);
 
 vec2 texture_coord;
@@ -517,6 +516,8 @@ void main()
             border_e.r != border_color.r || border_e.g != border_color.g || border_e.b != border_color.b ||
             border_w.r != border_color.r || border_w.g != border_color.g || border_w.b != border_color.b)  {
             c = border_color.rbg;
+        } else if (vPosition_camera.z > 900.0) {
+            c = mix(c, border_color.rbg, 0.70);
         } else {
            c = mix(c, border_color.rbg, 0.10);
         }
@@ -539,6 +540,6 @@ void main()
     // Fog of war, and unknown tiles, are stored as a vertex color in vColor.r.
     c = c * vColor.r;
 
-    gl_FragColor.rgb = mix(c * shade_factor, ambiant, (vPosition_camera.z - 550.) * 0.0000187);
+    gl_FragColor.rgb = c * shade_factor;
 
 }

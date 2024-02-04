@@ -118,13 +118,21 @@ body
 
 #turn_done_button_div {
   position: absolute;
-  padding: 5px;
+  padding: 8px;
   right: 0;
   top: 0;
 }
 
+#zoom_map_image {
+  padding-left: 4px;
+  padding-right: 4px;
+  cursor:pointer;
+  height: 30px;
+}
+
+
 #turn_done_button {
-  float: left;
+
 }
 
 .main_menu_buttons {
@@ -316,7 +324,7 @@ body
   height: 30px;
   text-align: center;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  padding-right: 150px;
+  padding-right: 180px;
   padding-top: 5px;
 }
 
@@ -363,8 +371,7 @@ body
   text-align: center; 
   color: #ffffff; 
   width: 70px; 
-  cursor:pointer; 
-  cursor:hand;
+  cursor:pointer;
   float: left;
 }
 
@@ -379,7 +386,6 @@ body
 
 .production_list_item_sub {
   cursor:pointer;
-  cursor:hand;
   float:left; 
 }
 
@@ -676,7 +682,6 @@ body
   text-align: left; 
   font-size: 100%;
   cursor:pointer;
-  cursor:hand;
   float: left;
   padding: 2px;
   margin: 2px;
@@ -799,7 +804,6 @@ body
 
 .chatbox_text_tileinfo {
   cursor:pointer;
-  cursor:hand;
 }
 
 /* city tabs will be on the bottom of the dialog. */
@@ -889,8 +893,7 @@ body
 }
 
 .cities_row {
-  cursor:pointer; 
-  cursor:hand;
+  cursor:pointer;
 }
 
 #wiki_dialog {

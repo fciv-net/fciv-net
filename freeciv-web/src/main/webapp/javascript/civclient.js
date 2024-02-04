@@ -295,7 +295,9 @@ function update_timeout()
       } else {
         $("#turn_done_button").button("option", "label", "Turn Done (" + seconds_to_human_time(remaining) + ")");
       }
-      if (!is_touch_device()) $("#turn_done_button").tooltip({ disabled: false });
+      if (!is_touch_device()) {
+        $("#turn_done_button").tooltip({ disabled: false });
+      }
     }
   }
 }

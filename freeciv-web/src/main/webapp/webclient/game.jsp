@@ -17,9 +17,11 @@
                 <div id="game_status_panel_top"></div>
 
 				<div id="turn_done_button_div">
-            			  <button id="turn_done_button" type="button" 
-					  class="button" title="Ends your turn. (Shift+Enter)">Turn Done</button>
-                		</div>
+						 <img id="zoom_map_image" src="/images/map-zoom.png" title="Zoom map out/in">
+
+						  <button id="turn_done_button" type="button"
+						          class="button" title="Ends your turn. (Shift+Enter)">Turn Done</button>
+				</div>
 			</ul>
 			
 			<div id="tabs-map" tabindex="-1">

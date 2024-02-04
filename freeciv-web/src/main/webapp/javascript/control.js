@@ -84,7 +84,10 @@ function control_init()
   $(window).bind('orientationchange resize', orientation_changed);
 
   $("#turn_done_button").click(send_end_turn);
-  if (!is_touch_device()) $("#turn_done_button").tooltip();
+  if (!is_touch_device()) {
+    $("#turn_done_button").tooltip();
+    $("#zoom_map_image").tooltip();
+  }
 
   $("#freeciv_logo").click(function(event) {
     window.open('/', '_new');
@@ -142,6 +145,10 @@ function control_init()
 
   $("#tech_canvas").click(function(event) {
      tech_mapview_mouse_click(event);
+   });
+
+   $("#zoom_map_image").click(function(event) {
+     zoom_map_in_out();
    });
 
   /* disable text-selection, as this gives wrong mouse cursor
