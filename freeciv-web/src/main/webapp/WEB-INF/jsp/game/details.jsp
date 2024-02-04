@@ -92,7 +92,7 @@
     											<tr>
     												<td>
     													<c:if test="${player.flag ne 'none'}">
-			    	   										<img src="/images/flags/${player.flag}-web.png" alt="${player.flag}" width="50">
+			    	   										<img src="/images/flags/${player.flag}.svg" alt="${player.flag}" width="50">
     				   									</c:if>
 	    			   								</td>
 		    										<td>${player.name}</td>
