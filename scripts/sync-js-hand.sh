@@ -39,7 +39,7 @@ cp "${FREECIV_DIR}/data/stdsounds"/*.ogg "${SOUNDS_DEST}" && \
   echo "Copied sounds to ${SOUNDS_DEST}" && \
 cp "${FREECIV_DIR}/data/scenarios"/*.sav "${GAME_DEST}" && \
   echo "Copied scenarios to ${GAME_DEST}" && \
-cp "${DIR}/../LICENSE.txt" "${DOCS_DEST}" && \
+cp "${DIR}/../LICENSE.md" "${DOCS_DEST}" && \
 (if [ -n "${UPDATE_EXTERNAL_SOURCES}" ]; then
   "${DIR}"/update-wikipedia-docs.py -f "${FREECIV_DIR}" -o "${WEBAPP_DIR}"
     echo "Wikipedia content updated."
