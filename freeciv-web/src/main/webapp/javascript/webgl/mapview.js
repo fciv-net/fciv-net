@@ -134,9 +134,9 @@ function webgl_start_renderer()
   animate();
 
   if (is_small_screen()) {
-    camera_dx = 38 * 1.3;
-    camera_dy = 410 * 1.3;
-    camera_dz = 242 * 1.3;
+    camera_dx = 38 * 1.35;
+    camera_dy = 410 * 1.35;
+    camera_dz = 242 * 1.35;
   }
 
   $("#pregame_page").hide();
@@ -239,13 +239,6 @@ function init_webgl_mapview() {
     setInterval(update_map_known_tiles, 15);
     setInterval(update_map_tiletypes, 20);
   }
-
-  /*let sun_material = new THREE.MeshBasicMaterial( { color: 0xffff00, transparent: true, opacity: 0.8} );
-  sun_mesh = new THREE.Mesh( new THREE.RingGeometry( 2, 4, 30), sun_material );
-  sun_mesh.castShadow = true;
-  sun_mesh.rotation.x = -1 * Math.PI / 2;
-  sun_mesh.position.set(- 500, 1000, -400);
-  scene.add(sun_mesh);*/
 
   add_quality_dependent_objects();
   add_all_objects_to_scene();

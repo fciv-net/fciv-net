@@ -42,18 +42,9 @@ function init_webgl_mapctrl()
     $('#mapcanvas').bind('touchmove', webgl_mapview_touch_move);
   }
 
-   if (!is_small_screen()) {
-     $("#zoom_map_image").click(function(event) {
-       zoom_map_in_out();
-     });
-   } else {
-     $("#zoom_map_image").on( "mousedown", function() {
-                          zoom_map_in_out();
-                         } );
-     $("#zoom_map_image").on( "mouseup", function() {
-                          zoom_map_in_out();
-                         } );
-   }
+  $("#zoom_map_image").click(function(event) {
+    zoom_map_in_out();
+  });
 
   window.addEventListener('resize', webglOnWindowResize, false );
 
@@ -417,5 +408,7 @@ function zoom_map_in_out() {
     camera.position.y = Math.max(camera.position.y, 400);
   }
   map_zoom_button_zoom_out = !map_zoom_button_zoom_out;
+
+ camera_current_y = camera.position.y - camera_dy;
 
 }
