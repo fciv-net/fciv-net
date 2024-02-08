@@ -124,6 +124,8 @@
   }
 		
 </style>
+<script src="/static/javascript/bootstrap.min.js" ></script>
+
 </head>
 <body>
 	<div class="container">

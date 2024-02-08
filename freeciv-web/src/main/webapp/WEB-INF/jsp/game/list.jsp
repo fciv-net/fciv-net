@@ -5,7 +5,9 @@
 <html lang="en">
 <head>
 <%@include file="/WEB-INF/jsp/fragments/head.jsp"%>
-	
+
+<script src="/static/javascript/bootstrap.min.js" ></script>
+
 <style>
 	.nav-tabs {
 		margin-top: 5px;

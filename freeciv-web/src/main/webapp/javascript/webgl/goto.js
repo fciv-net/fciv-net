@@ -44,9 +44,6 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
 
     var nexttile = mapstep(ptile, dir);
     if (nexttile != null) {
-      if (tile_get_known(ptile) == TILE_UNKNOWN && tile_get_known(nexttile) == TILE_UNKNOWN) {
-        continue; // Don't show goto lines on unknown tiles, as it will reveal water in unknown terrain.
-      }
 
       var currpos = map_to_scene_coords(ptile['x'], ptile['y']);
       var nextpos = map_to_scene_coords(nexttile['x'], nexttile['y']);

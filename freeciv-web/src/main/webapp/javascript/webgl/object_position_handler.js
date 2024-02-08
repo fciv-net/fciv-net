@@ -534,11 +534,19 @@ function add_city_building(ptile, pcity, scene, building_name) {
         let dir = Math.floor(Math.random() * 8);
         nexttile = mapstep(ptile, dir);
 
-        if (map_tile_distance(ptile, nexttile) > 3) {
+        if (map_tile_distance(ptile, nexttile) > 2) {
           ptile = origtile;
         }
 
-        if ((is_ocean_tile(nexttile) && building_name != "Windmill" && building_name != "Harbor")
+        var is_ocean_building = (building_name == "Harbor");
+        if (!is_ocean_tile(nexttile) && is_ocean_building) {
+          ptile = mapstep(ptile, Math.floor(Math.random() * 8));
+          if (ptile == null) ptile = origtile;
+          nexttile = null;
+          continue;
+        }
+
+        if ((!is_ocean_building && is_ocean_tile(nexttile))
             || tile_has_extra(nexttile, EXTRA_RIVER)
             || tile_get_known(nexttile) == TILE_UNKNOWN
             || city_owner_player_id(pcity) != tile_owner(nexttile)
