@@ -398,6 +398,7 @@ function zoom_map_in_out() {
 
   if (map_zoom_button_zoom_out) {
     camera.position.y += 1600;
+    camera.position.y = Math.min(camera.position.y, 2000);
   } else {
     camera.position.y -= 1600;
     camera.position.y = Math.max(camera.position.y, 330);
