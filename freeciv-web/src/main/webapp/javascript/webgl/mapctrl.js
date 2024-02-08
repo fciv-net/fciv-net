@@ -44,6 +44,12 @@ function init_webgl_mapctrl()
 
   window.addEventListener('resize', webglOnWindowResize, false );
 
+  controls = new OrbitControls( camera, maprenderer.domElement );
+  controls.enableDamping = !is_small_screen();
+  controls.enablePan = false;
+  controls.dampingFactor = 0.05;
+  controls.maxPolarAngle = 0.9 * Math.PI / 2;
+
 }
 
 

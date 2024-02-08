@@ -126,12 +126,6 @@ function webgl_start_renderer()
   maprenderer.setSize(new_mapview_width, new_mapview_height);
   container.appendChild(maprenderer.domElement);
 
-  controls = new OrbitControls( camera, maprenderer.domElement );
-  controls.enableDamping = true;
-  controls.enablePan = false;
-  controls.dampingFactor = 0.05;
-  controls.maxPolarAngle = 0.9 * Math.PI / 2;
-
   if (anaglyph_3d_enabled) {
     anaglyph_effect = new AnaglyphEffect( maprenderer );
     anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
@@ -442,7 +436,9 @@ function animate() {
     selected_unit_material_counter++;
   }
 
-  controls.update();
+  if (controls != null) {
+    controls.update();
+  }
 
   if (anaglyph_3d_enabled) {
     anaglyph_effect.render(scene,camera);

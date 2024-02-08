@@ -38,7 +38,7 @@ function init_chatbox()
             width: (is_small_screen() ? "100%" : "35%"),
             top: 43,
             left: 2,
-			height: (is_small_screen() ? 100 : 250),
+			height: (is_small_screen() ? 140 : 250),
 			resizable: false,
 			dialogClass: 'chatbox_dialog no-close noTitleBar',
 			closeOnEscape: false,
@@ -66,15 +66,6 @@ function init_chatbox()
     this.style.setProperty( 'border', 'solid 1px', 'important' );
     this.style.setProperty( 'border-color', '#4328', 'important' );
   });
-
-
-  if (is_small_screen()) {
-    $(".chatbox_dialog").css("left", "2px");
-    $(".chatbox_dialog").css("top", "40px");
-    $("#game_chatbox_panel").parent().css("max-height", "15%");
-    $("#game_chatbox_panel").parent().css("width", "95%");
-
-  }
 
   $("#freeciv_custom_scrollbar_div").mCustomScrollbar({theme:"3d"});
   if (current_message_dialog_state == "minimized") $("#game_chatbox_panel").dialogExtend("minimize");
