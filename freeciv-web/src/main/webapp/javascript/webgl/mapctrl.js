@@ -42,6 +42,19 @@ function init_webgl_mapctrl()
     $('#mapcanvas').bind('touchmove', webgl_mapview_touch_move);
   }
 
+   if (!is_small_screen()) {
+     $("#zoom_map_image").click(function(event) {
+       zoom_map_in_out();
+     });
+   } else {
+     $("#zoom_map_image").on( "mousedown", function() {
+                          zoom_map_in_out();
+                         } );
+     $("#zoom_map_image").on( "mouseup", function() {
+                          zoom_map_in_out();
+                         } );
+   }
+
   window.addEventListener('resize', webglOnWindowResize, false );
 
   controls = new OrbitControls( camera, maprenderer.domElement );
@@ -401,7 +414,7 @@ function zoom_map_in_out() {
     camera.position.y = Math.min(camera.position.y, 2000);
   } else {
     camera.position.y -= 1600;
-    camera.position.y = Math.max(camera.position.y, 330);
+    camera.position.y = Math.max(camera.position.y, 400);
   }
   map_zoom_button_zoom_out = !map_zoom_button_zoom_out;
 

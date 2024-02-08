@@ -147,10 +147,6 @@ function control_init()
      tech_mapview_mouse_click(event);
    });
 
-   $("#zoom_map_image").click(function(event) {
-     zoom_map_in_out();
-   });
-
   /* disable text-selection, as this gives wrong mouse cursor
    * during drag to goto units. */
   document.onselectstart = function(){ return allow_right_click; };
