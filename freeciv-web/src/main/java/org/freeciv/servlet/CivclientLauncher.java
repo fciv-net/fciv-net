@@ -74,7 +74,7 @@ public class CivclientLauncher extends HttpServlet {
 			}
 			
 
-			if (civServerPort == null || civServerPort.length() == 0) {
+			if (civServerPort == null || civServerPort.isEmpty()) {
 				// If the user requested a new game, then get host and port for an available
 				// server from the metaserver DB, and use that one.
 				String lookupQuery =
@@ -101,7 +101,7 @@ public class CivclientLauncher extends HttpServlet {
 			/* Validate port */
 			String validateQuery = "SELECT COUNT(*) FROM servers WHERE port = ?";
 			PreparedStatement validateStmt = conn.prepareStatement(validateQuery);
-			if (civServerPort == null || civServerPort.length() == 0) {
+			if (civServerPort == null || civServerPort.isEmpty()) {
 				response.setHeader("result", "invalid port validation");
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
 						"Unable to find a valid Freeciv server to play on. Please try again later.");
@@ -131,9 +131,9 @@ public class CivclientLauncher extends HttpServlet {
 				}
 		}
 
-		response.setHeader("port", civServerPort);
+		int port = Integer.parseInt(civServerPort);
+		response.setHeader("port", String.valueOf(port));
 		response.setHeader("result", "success");
-		response.setHeader("action", action);
 		response.getOutputStream().print("success");
 
 	}
