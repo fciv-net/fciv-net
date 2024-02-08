@@ -267,3 +267,25 @@ function submit_game_of_the_day2() {
   update_game_status_panel();
   show_fps();
 }
+
+/**************************************************************************
+ JQuery isFunction replacement since they deprecated it.
+**************************************************************************/
+function isFunction(obj) {
+  return typeof obj === 'function';
+}
+
+/**************************************************************************
+ JQuery trim replacement since they deprecated it.
+**************************************************************************/
+function trim(str) {
+    if (str == null) return null;
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+/**************************************************************************
+ JQuery isArray replacement since they deprecated it.
+**************************************************************************/
+function isArray(value) {
+  return Array.isArray(value);
+}

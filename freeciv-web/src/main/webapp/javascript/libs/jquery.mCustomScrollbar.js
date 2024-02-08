@@ -2423,8 +2423,8 @@ and dependencies (minified).
 		$(defaultSelector)[pluginNS](); /* add scrollbars automatically on default selector */
 		
 		/* extend jQuery expressions */
-		$.extend($.expr[":"],{
-			/* checks if element is within scrollable viewport */
+		/*$.extend($.expr[":"],{
+			// checks if element is within scrollable viewport
 			mcsInView:$.expr[":"].mcsInView || function(el){
 				var $el=$(el),content=$el.parents(".mCSB_container"),wrapper,cPos;
 				if(!content.length){return;}
@@ -2433,7 +2433,7 @@ and dependencies (minified).
 				return 	cPos[0]+_childPos($el)[0]>=0 && cPos[0]+_childPos($el)[0]<wrapper.height()-$el.outerHeight(false) && 
 						cPos[1]+_childPos($el)[1]>=0 && cPos[1]+_childPos($el)[1]<wrapper.width()-$el.outerWidth(false);
 			},
-			/* checks if element or part of element is in view of scrollable viewport */
+			// checks if element or part of element is in view of scrollable viewport
 			mcsInSight:$.expr[":"].mcsInSight || function(el,i,m){
 				var $el=$(el),elD,content=$el.parents(".mCSB_container"),wrapperView,pos,wrapperViewPct,
 					pctVals=m[3]==="exact" ? [[1,0],[1,0]] : [[0.9,0.1],[0.6,0.4]];
@@ -2445,13 +2445,13 @@ and dependencies (minified).
 				return 	pos[0]-(wrapperView[0]*wrapperViewPct[0][0])<0 && pos[0]+elD[0]-(wrapperView[0]*wrapperViewPct[0][1])>=0 && 
 						pos[1]-(wrapperView[1]*wrapperViewPct[1][0])<0 && pos[1]+elD[1]-(wrapperView[1]*wrapperViewPct[1][1])>=0;
 			},
-			/* checks if element is overflowed having visible scrollbar(s) */
+			// checks if element is overflowed having visible scrollbar(s)
 			mcsOverflow:$.expr[":"].mcsOverflow || function(el){
 				var d=$(el).data(pluginPfx);
 				if(!d){return;}
 				return d.overflowed[0] || d.overflowed[1];
 			}
-		});
+		});*/
 	
 	});
 

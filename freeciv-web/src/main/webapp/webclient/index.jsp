@@ -50,8 +50,6 @@ var webgpu = <%= webgpu %>;
 </script>
 <script type="text/javascript" src="/javascript/libs/jquery.min.js?ts=${initParam.buildTimeStamp}"></script>
 
-<script src="/static/javascript/bootstrap.min.js" ></script>
-
 <script src="https://apis.google.com/js/platform.js"></script>
 
 <script type="text/javascript" src="/javascript/libs/stacktrace.min.js"></script>
