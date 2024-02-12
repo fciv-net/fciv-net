@@ -3155,9 +3155,9 @@ function update_goto_path(goto_packet)
   goto_turns_request_map[goto_packet['unit_id'] + "," + goaltile['x'] + "," + goaltile['y']]
 	  = current_goto_turns;
 
-  if (current_goto_turns != undefined) {
+  /*if (current_goto_turns != undefined) {
     $("#active_unit_info").html("Turns for goto: " + current_goto_turns);
-  }
+  }*/
   update_mouse_cursor();
 }
 
@@ -3320,7 +3320,7 @@ function update_active_units_dialog()
     $("#game_unit_panel").parent().width(newwidth);
     $("#game_unit_panel").parent().height(newheight);
     $("#game_unit_panel").parent().css("left", ($( window ).width() - newwidth) + "px");
-    $("#game_unit_panel").parent().css("top", ($( window ).height() - newheight - 4) + "px");
+    $("#game_unit_panel").parent().css("top", ($( window ).height() - newheight - 15) + "px");
     $("#game_unit_panel").parent().css("background", "rgba(0,0,0,0.9)");
     if (game_unit_panel_state == "minimized") $("#game_unit_panel").dialogExtend("minimize");
   } else {
