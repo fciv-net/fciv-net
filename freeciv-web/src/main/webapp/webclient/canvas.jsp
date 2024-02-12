@@ -22,16 +22,6 @@
     <%-- Game status panel --%>
     <div id="game_status_panel_bar"></div>
 
-
-    <%-- Overview mini-map --%>
-    <div id="game_overview_panel">
-	<div id="overview_map">
-            <img id="overview_img"/>
-            <canvas id="overview_viewrect"></canvas>
-	</div>
-    </div>
-
-
     <%-- Unit orders and info panel --%>
     <div id="game_unit_panel">
 	<div id="game_unit_info">&nbsp;

@@ -75,20 +75,6 @@ body
 }
 
 
-#overview_map {
-  cursor:crosshair;
-  border: 1px solid #555555;
-  position: relative;
-}
-
-#overview_img, #overview_viewrect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
 #game_unit_info {
   float: left;
   width: 100%;
@@ -725,7 +711,7 @@ body
   font-size: 140%;
 }
 
-.overview_dialog .ui-dialog-titlebar, .unit_dialog .ui-dialog-titlebar, .chatbox_dialog .ui-dialog-titlebar  {
+.ui-dialog-titlebar, .unit_dialog .ui-dialog-titlebar, .chatbox_dialog .ui-dialog-titlebar  {
   padding-bottom: 0px;
   padding-left: 4px;
   padding-top: 0px;
@@ -903,11 +889,6 @@ body
 #cities_scroll {
   width: 100%;
   overflow: auto;
-}
-
-#game_overview_panel {
-  padding: 2px;
-  margin-bottom: -5px;
 }
 
 .negative_net_income {

@@ -6,7 +6,6 @@
 <head>
 	<%@include file="/WEB-INF/jsp/fragments/head.jsp"%>
 	<script src="/javascript/libs/Detector.js"></script>
-	<script src="/static/javascript/index.min.js"></script>
 	<style>
 	/* Make sure that the development tools used in freeciv are not to big */
 	img.small {
@@ -124,7 +123,6 @@
   }
 		
 </style>
-<script src="/static/javascript/bootstrap.min.js" ></script>
 
 </head>
 <body>

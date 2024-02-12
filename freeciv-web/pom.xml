@@ -396,21 +396,6 @@ Rerun the sync-js-hand.js script.
 							</goals>
 						</execution>
 
-						<execution>
-							<id>index-minify</id>
-							<configuration>
-								<sourceDir>static/javascript</sourceDir>
-								<targetDir>static/javascript</targetDir>
-								<outputFilename>index.min.js</outputFilename>
-								<includes>
-									<include>index.js</include>
-								</includes>
-							</configuration>
-							<goals>
-								<goal>minify</goal>
-							</goals>
-						</execution>
-
 					</executions>
 				</plugin>
 

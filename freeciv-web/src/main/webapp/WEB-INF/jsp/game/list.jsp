@@ -6,8 +6,6 @@
 <head>
 <%@include file="/WEB-INF/jsp/fragments/head.jsp"%>
 
-<script src="/static/javascript/bootstrap.min.js" ></script>
-
 <style>
 	.nav-tabs {
 		margin-top: 5px;
@@ -118,7 +116,10 @@
 						</table>
 					</c:if>
 					<c:if test="${fn:length(singlePlayerGameList) == 0}">
-							<a class="label label-primary" href="/webclient/?action=new&amp;type=singleplayer">Start</a> a new single player game!
+
+					<div style="padding: 30px; font-size:200%;">
+							<a class="label label-primary"  href="/webclient/?action=new&amp;type=singleplayer">Start</a> a new single player game!
+					</div>
 					</c:if>
 				</div>
 	
@@ -187,5 +188,53 @@
 		<%@include file="/WEB-INF/jsp/fragments/footer.jsp"%>
 	</div>
 
+
+<script>
+$(document).ready(function(){
+    // Function to show Single-player tab
+    function showSinglePlayerTab() {
+        // Remove active class from all tabs
+        $("ul.nav-tabs li").removeClass("active");
+        // Add active class to Single-player tab
+        $("ul.nav-tabs li[role='presentation'] a[href='#single-player-tab']").parent().addClass("active");
+
+        // Hide all tab panes
+        $(".tab-content .tab-pane").removeClass("active");
+        // Show Single-player tab pane
+        $("#single-player-tab").addClass("active");
+    }
+
+    // Function to show Multiplayer tab
+    function showMultiPlayerTab() {
+        // Remove active class from all tabs
+        $("ul.nav-tabs li").removeClass("active");
+        // Add active class to Multiplayer tab
+        $("ul.nav-tabs li[role='presentation'] a[href='#multi-player-tab']").parent().addClass("active");
+
+        // Hide all tab panes
+        $(".tab-content .tab-pane").removeClass("active");
+        // Show Multiplayer tab pane
+        $("#multi-player-tab").addClass("active");
+    }
+
+    // Check URL hash on page load
+    if (window.location.hash === "#multi-player-tab") {
+        showMultiPlayerTab();
+    } else {
+        showSinglePlayerTab();
+    }
+
+    // Click event handler for Single-player tab
+    $("ul.nav-tabs li[role='presentation'] a[href='#single-player-tab']").click(function(){
+        showSinglePlayerTab();
+    });
+
+    // Click event handler for Multiplayer tab
+    $("ul.nav-tabs li[role='presentation'] a[href='#multi-player-tab']").click(function(){
+        showMultiPlayerTab();
+    });
+});
+
+</script>
 </body>
 </html>
