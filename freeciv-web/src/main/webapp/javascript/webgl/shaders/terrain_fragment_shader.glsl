@@ -528,7 +528,7 @@ void main()
     vec4 Cb = texture2D(coast, vec2(dx  , dy)) * 0.5;
     c = mix(c, Cb.rgb, x);
 
-    float shade_factor = 0.32 + 1.52 * max(0., dot(vNormal, normalize(light)));
+    float shade_factor = 0.37 + 1.52 * max(0., dot(vNormal, normalize(light)));
 
     if (mouse_x >= 0 && mouse_y >= 0 && mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
         shade_factor += 0.7;
