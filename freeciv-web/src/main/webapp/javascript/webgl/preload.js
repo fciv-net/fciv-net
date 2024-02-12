@@ -501,7 +501,7 @@ switch (filename) {
     modelscale = 6.0;
     break;
   case 'Engineers':
-    modelscale = 1.1;
+    modelscale = 1.25;
     break;
   case 'Nuclear':
   case 'Settlers':
