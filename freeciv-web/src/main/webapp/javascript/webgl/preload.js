@@ -565,6 +565,12 @@ switch (filename) {
   case 'Bank':
     modelscale = 1.35;
     break;
+  case 'Palace':
+    modelscale = 2.4;
+    break;
+  case 'PowerPlant':
+    modelscale = 2.4;
+    break;
   case 'Oracle':
     modelscale = 1.3;
     break;
