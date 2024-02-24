@@ -131,10 +131,7 @@ function init_heightmap(heightmap_quality)
   let heightmap_resolution_x = map.xsize * heightmap_quality + 1;
   let heightmap_resolution_y = map.ysize * heightmap_quality + 1;
 
-  heightmap = new Array(heightmap_resolution_x);
-  for (let hx = 0; hx < heightmap_resolution_x; hx++) {
-    heightmap[hx] = new Array(heightmap_resolution_y);
-  }
+  heightmap = new Float32Array(heightmap_resolution_x * heightmap_resolution_y);
 
 }
 
@@ -188,16 +185,17 @@ function update_heightmap(heightmap_quality)
 
   for (let x = 0; x < heightmap_resolution_x; x++) {
     for (let y = 0; y < heightmap_resolution_y; y++) {
+      let index = y * heightmap_resolution_x + x;
       let gx = x / heightmap_quality - 0.5;
       let gy = y / heightmap_quality - 0.5;
        if (Math.round(gx) == gx && Math.round(gy) == gy) {
         let ptile = map_pos_to_tile(gx, gy);
-        heightmap[x][y] = ptile['height'];
+        heightmap[index] = ptile['height'];
         if (tile_has_extra(ptile, EXTRA_RIVER)) {
-          heightmap[x][y] = ptile['height'] * 0.98;
+          heightmap[index] = ptile['height'] * 0.98;
         }
         if (tile_terrain(ptile)['name'] == "Mountains") {
-          heightmap[x][y] = ptile['height'] * 1.02;
+          heightmap[index] = ptile['height'] * 1.02;
         }
       } else {
         let neighbours = [
@@ -244,7 +242,7 @@ function update_heightmap(heightmap_quality)
           norm += 1 / distance / distance;
         }
 
-        heightmap[x][y] = (sum / norm);
+        heightmap[index] = (sum / norm);
       }
     }
   }

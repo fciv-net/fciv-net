@@ -318,8 +318,7 @@ function init_land_geometry(geometry, mesh_quality)
 /****************************************************************************
   Create the land terrain geometry
 ****************************************************************************/
-function update_land_geometry(geometry, mesh_quality)
-{
+function update_land_geometry(geometry, mesh_quality) {
   xquality = map.xsize * mesh_quality + 1;
   yquality = map.ysize * mesh_quality + 1;
 
@@ -337,19 +336,19 @@ function update_land_geometry(geometry, mesh_quality)
 
   let heightmap_scale = (mesh_quality === 2) ? (mesh_quality * 2) : 1;
 
-  for ( let iy = 0; iy < gridY1; iy ++ ) {
+  for (let iy = 0; iy < gridY1; iy++) {
     const y = iy * segment_height - height_half;
-    for ( let ix = 0; ix < gridX1; ix ++ ) {
+    for (let ix = 0; ix < gridX1; ix++) {
       const x = ix * segment_width - width_half;
       var sx = ix % xquality, sy = iy % yquality;
       const index = iy * gridX1 + ix;
+      const heightIndex = (sy * heightmap_scale * xquality) + (sx * heightmap_scale); // Convert (sx, sy) to single index
 
       if (mesh_quality === 2) {
-        lofibufferattribute.setXYZ(index, x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100);
+        lofibufferattribute.setXYZ(index, x, -y, heightmap[heightIndex] * 100);
       } else {
-        landbufferattribute.setXYZ(index, x, -y, heightmap[sx * heightmap_scale][sy * heightmap_scale] * 100);
+        landbufferattribute.setXYZ(index, x, -y, heightmap[heightIndex] * 100);
       }
-
     }
   }
   if (mesh_quality === 2) {
@@ -362,6 +361,7 @@ function update_land_geometry(geometry, mesh_quality)
 
   return geometry;
 }
+
 
 /****************************************************************************
   Update the map terrain geometry!
