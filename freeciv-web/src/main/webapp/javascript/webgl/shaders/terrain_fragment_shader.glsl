@@ -168,7 +168,7 @@ void main()
 {
 
     if (vColor.r == 0.0) {
-        gl_FragColor.rgb = vec3(0, 0, 0);
+        gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 
         if (mouse_x >= 0 && mouse_y >= 0 && mouse_x == int(floor((map_x_size * vUv.x ))) && mouse_y == int(floor((map_y_size * (1.0 - vUv.y) )))) {
             gl_FragColor.rgb = vec3(0.3, 0.3, 0.3);
@@ -177,9 +177,10 @@ void main()
         return;
     }
 
-    float rnd = fract(sin(dot(vec2(round(vUv.x * 10000.0) / 10000.0 , round(vUv.y * 10000.0) / 10000.0) , vec2(12.98, 78.233))) * 43758.5453);
-    vec4 terrain_type = texture2D(maptiles, vec2(vUv.x + (rnd - 0.5) / (8.0 * map_x_size), vUv.y + (rnd - 0.5) / (8.0 * map_y_size)));
-    vec4 border_color = borders_visible ? texture2D(borders, vec2(vUv.x, vUv.y)) : vec4(0, 0, 0, 0);
+    float rnd = fract(sin(dot(vUv, vec2(12.98, 78.233))) * 43758.5453);
+    vec2 rndOffset = (vec2(rnd) - 0.5) / (8.0 * vec2(map_x_size, map_y_size));
+    vec4 terrain_type = texture2D(maptiles, vUv + rndOffset);
+    vec4 border_color = borders_visible ? texture2D(borders, vUv) : vec4(0);
     vec4 road_type = texture2D(roadsmap, vec2(vUv.x, vUv.y));
 
     vec3 c;
