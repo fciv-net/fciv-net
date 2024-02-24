@@ -319,44 +319,34 @@ function init_land_geometry(geometry, mesh_quality)
   Create the land terrain geometry
 ****************************************************************************/
 function update_land_geometry(geometry, mesh_quality) {
-  xquality = map.xsize * mesh_quality + 1;
-  yquality = map.ysize * mesh_quality + 1;
+  const xquality = map.xsize * mesh_quality + 1;
+  const yquality = map.ysize * mesh_quality + 1;
 
-  width_half = mapview_model_width / 2;
-  height_half = mapview_model_height / 2;
+  const gridX = Math.floor(xquality);
+  const gridY = Math.floor(yquality);
 
-  gridX = Math.floor(xquality);
-  gridY = Math.floor(yquality);
+  const segment_width = mapview_model_width / gridX;
+  const segment_height = mapview_model_height / gridY;
 
-  gridX1 = gridX + 1;
-  gridY1 = gridY + 1;
+  const width_half = mapview_model_width / 2;
+  const height_half = mapview_model_height / 2;
 
-  segment_width = mapview_model_width / gridX;
-  segment_height = mapview_model_height / gridY;
+  const heightmap_scale = (mesh_quality === 2) ? 2 : 1;
+  const bufferAttribute = mesh_quality === 2 ? lofibufferattribute : landbufferattribute;
 
-  let heightmap_scale = (mesh_quality === 2) ? (mesh_quality * 2) : 1;
-
-  for (let iy = 0; iy < gridY1; iy++) {
+  for (let iy = 0; iy <= gridY; iy++) {
     const y = iy * segment_height - height_half;
-    for (let ix = 0; ix < gridX1; ix++) {
+    for (let ix = 0; ix <= gridX; ix++) {
       const x = ix * segment_width - width_half;
-      var sx = ix % xquality, sy = iy % yquality;
-      const index = iy * gridX1 + ix;
+      const sx = ix % xquality, sy = iy % yquality;
+      const index = iy * (gridX + 1) + ix;
       const heightIndex = (sy * heightmap_scale * xquality) + (sx * heightmap_scale); // Convert (sx, sy) to single index
 
-      if (mesh_quality === 2) {
-        lofibufferattribute.setXYZ(index, x, -y, heightmap[heightIndex] * 100);
-      } else {
-        landbufferattribute.setXYZ(index, x, -y, heightmap[heightIndex] * 100);
-      }
+      bufferAttribute.setXYZ(index, x, -y, heightmap[heightIndex] * 100);
     }
   }
-  if (mesh_quality === 2) {
-    lofibufferattribute.needsUpdate = true;
-  } else {
-    landbufferattribute.needsUpdate = true;
-  }
 
+  bufferAttribute.needsUpdate = true;
   geometry.computeVertexNormals();
 
   return geometry;
