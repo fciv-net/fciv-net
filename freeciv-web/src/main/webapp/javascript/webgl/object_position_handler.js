@@ -419,7 +419,7 @@ function update_tile_extras(ptile) {
 ****************************************************************************/
 function add_city_buildings(ptile, pcity, scene) {
   const wonders = ["Pyramids", "Lighthouse", "Statue of Liberty", "Colossus", "Eiffel Tower", "Hanging Gardens", "Oracle", "Great Library", "Sun Tzu's War Academy", "J.S. Bach's Cathedral"];
-  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral",
+  const cityBuildings = ["Library", "Temple", "Barracks", "Barracks II", "Barracks III", "Granary", "Colosseum", "Aqueduct", "Cathedral", "SETI Program",
                          "Courthouse", "University", "Factory", "Marketplace", "Bank", "Windmill", "Nuclear Plant", "Airport", "Harbor"];
 
   wonders.forEach(wonder => add_wonder(ptile, pcity, scene, wonder));
@@ -597,6 +597,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       }
       if (building_name.indexOf("Harbor") >= 0) {
         height += 1.2;
+      }
+      if (building_name == "SETIProgram") {
+        height -= 0.6;
       }
       if (building_name == "Bank" || building_name == "NuclearPlant" || building_name == "Airport") {
         height -= 0.6;

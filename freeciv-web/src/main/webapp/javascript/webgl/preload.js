@@ -309,10 +309,10 @@ switch (filename) {
     modelscale = 0.85;
     break;
   case 'Workers':
-    modelscale = 10;
+    modelscale = 8;
     break;
   case 'Explorer':
-    modelscale = 11;
+    modelscale = 9.5;
     break;
   case 'Chariot':
     modelscale = 6;
@@ -501,11 +501,11 @@ switch (filename) {
     modelscale = 6.0;
     break;
   case 'Engineers':
-    modelscale = 1.25;
+    modelscale = 1.15;
     break;
   case 'Nuclear':
   case 'Settlers':
-    modelscale = 8.5;
+    modelscale = 4.0;
     break;
   case 'Spaceship':
   case 'Spaceship_launched':
@@ -563,6 +563,9 @@ switch (filename) {
     modelscale = 2.0;
     break;
   case 'Bank':
+    modelscale = 1.35;
+    break;
+  case 'SETIProgram':
     modelscale = 1.35;
     break;
   case 'Palace':
