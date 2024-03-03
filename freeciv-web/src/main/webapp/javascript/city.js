@@ -596,7 +596,7 @@ function show_city_dialog(pcity)
   }
 
   $("#city_dialog").parent().css("z-index", 100000)
-
+  $(".ui-dialog-buttonset").css("margin-top", "-18px");
 
   show_city_governor_tab();
 
