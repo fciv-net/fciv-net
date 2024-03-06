@@ -394,6 +394,9 @@ switch (filename) {
   case 'SunTzusWarAcademy':
     modelscale = 5;
     break;
+  case 'IsaacNewtonsCollege':
+    modelscale = 3.6;
+    break;
   case 'Crusaders':
     modelscale = 5;
     break;
@@ -501,7 +504,7 @@ switch (filename) {
     modelscale = 6.0;
     break;
   case 'Engineers':
-    modelscale = 1.15;
+    modelscale = 4.6;
     break;
   case 'Nuclear':
   case 'Settlers':
