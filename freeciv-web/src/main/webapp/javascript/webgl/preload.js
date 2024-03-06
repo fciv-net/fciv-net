@@ -422,7 +422,7 @@ switch (filename) {
     modelscale = 1.8;
     break;
   case 'Lighthouse':
-    modelscale = 4.8;
+    modelscale = 4.3;
     break;
   case 'Iron':
     modelscale = 9;
