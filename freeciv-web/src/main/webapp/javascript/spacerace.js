@@ -103,8 +103,8 @@ function show_spaceship_dialog()
 **************************************************************************/
 function launch_spaceship()
 {
-  var test_packet = {"pid" : packet_spaceship_launch};
-  var myJSONText = JSON.stringify(test_packet);
+  let test_packet = {"pid" : packet_spaceship_launch};
+  let myJSONText = JSON.stringify(test_packet);
   send_request(myJSONText);
   launch_spaceship_anim();
 
@@ -127,17 +127,17 @@ function get_spaceship_state_text(state_id)
 function add_spaceship(ptile, pcity, scene) {
   if (observing || ptile == null || ptile['extras_owner'] == null) return;
 
-  var spaceship_plr = spaceship_info[ptile['extras_owner']];
+  let spaceship_plr = spaceship_info[ptile['extras_owner']];
   if (spaceship_plr != null && pcity != null && spaceships[ptile['extras_owner']] == null && is_primary_capital(pcity) && spaceship_plr['sship_state'] == SSHIP_STARTED) {
-    var spaceshipmodel = webgl_get_model("Spaceship", ptile);
+    let spaceshipmodel = webgl_get_model("Spaceship", ptile);
     if (spaceshipmodel == null) {
       return;
     }
     var nexttile = ptile;
     for (var i = 0; i < 30; i++) {
-      var dir = Math.floor(Math.random() * 8);
-      var ntile = mapstep(ptile, dir);
-      var nexttile = mapstep(ntile, dir);
+      let dir = Math.floor(Math.random() * 8);
+      let ntile = mapstep(ptile, dir);
+      let nexttile = mapstep(ntile, dir);
       if (is_ocean_tile(nexttile)) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
         continue;
@@ -148,7 +148,7 @@ function add_spaceship(ptile, pcity, scene) {
     }
     if (nexttile == null) return;
 
-    var height = 5 + nexttile['height'] * 100;
+    let height = 5 + nexttile['height'] * 100;
 
     pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
     spaceshipmodel.position.set(pos['x'] - 1, height + 3, pos['y'] - 1);

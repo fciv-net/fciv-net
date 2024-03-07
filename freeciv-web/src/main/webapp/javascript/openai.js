@@ -26,10 +26,10 @@ var openai_messages = "";
 **************************************************************************/
 function get_openai_game_context()
 {
-  var context = ""
+  let context = ""
   if (observing) return;
 
-  var pplayer = client.conn.playing;
+  let pplayer = client.conn.playing;
   if (pplayer == null || pplayer['nation'] == null) {
     return "";
   }
@@ -52,7 +52,7 @@ function get_openai_game_context()
   }
 
   if (current_focus[0] != null) {
-    var punit_type = unit_types[current_focus[0]['type']];
+    let punit_type = unit_types[current_focus[0]['type']];
     context += "This selected unit is in focus for the current player: " + punit_type['rule_name'] + ". ";
   } else {
     context += "There is no selected unit in focus. ";
@@ -64,8 +64,8 @@ function get_openai_game_context()
   context += "The maximum rate is " + government_max_rate(client.conn.playing['government']) + "%. ";
 
   context += "These are the players in the game: ";
-   for (var player_id in players) {
-     var pplayer = players[player_id];
+   for (let player_id in players) {
+     let pplayer = players[player_id];
      if (pplayer['nation'] == -1) continue;
      if (player_id == client.conn.playing['playerno']) {
       context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation "
@@ -89,7 +89,7 @@ function get_openai_game_context()
 
    context += " These are the cities in the game: "
    for (var city_id in cities){
-       var pcity = cities[city_id];
+       let pcity = cities[city_id];
        context += pcity['name'];
        if (nations[pcity['nation_id']] != null) {
          context += " (" +  nations[pcity['nation_id']]['name']  + ")";
@@ -101,7 +101,7 @@ function get_openai_game_context()
 
   context += " These are all the technologies researched and known the current player: "
   for (var tech_id in techs) {
-     var ptech = techs[tech_id];
+     let ptech = techs[tech_id];
      if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {
        context += ptech['name'] + ",";
      }
@@ -110,7 +110,7 @@ function get_openai_game_context()
 
   context += " These are all the technologies not known the current player: "
   for (var tech_id in techs) {
-     var ptech = techs[tech_id];
+     let ptech = techs[tech_id];
      if (player_invention_state(client.conn.playing, ptech['id']) != TECH_KNOWN) {
        context += ptech['name'] + ",";
      }
@@ -121,7 +121,7 @@ function get_openai_game_context()
   for (var unit_id in units) {
     var punit = units[unit_id];
      if (punit['owner'] == client.conn.playing.playerno ) {
-       var punit_type = unit_types[punit['type']];
+       let punit_type = unit_types[punit['type']];
        context += punit_type['rule_name'] + ",";
      }
   }

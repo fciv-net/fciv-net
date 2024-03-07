@@ -117,11 +117,11 @@ function update_nation_screen()
   }
 
   for (let player_id in players) {
-    var pplayer = players[player_id];
-    var flag_canvas = $('#nation_dlg_flags_' + player_id);
+    let pplayer = players[player_id];
+    let flag_canvas = $('#nation_dlg_flags_' + player_id);
     if (flag_canvas.length > 0) {
-      var flag_canvas_ctx = flag_canvas[0].getContext("2d");
-      var tag = "f." + nations[pplayer['nation']]['graphic_str'];
+      let flag_canvas_ctx = flag_canvas[0].getContext("2d");
+      let tag = "f." + nations[pplayer['nation']]['graphic_str'];
       if (flag_canvas_ctx != null && sprites[tag] != null) {
         flag_canvas_ctx.drawImage(sprites[tag], 0, 0);
       }
