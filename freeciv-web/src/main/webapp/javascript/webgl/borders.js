@@ -54,7 +54,7 @@ function update_borders_image()
           var pplayer = players[ptile['owner']];
 
           if (nations[pplayer['nation']].color != null) {
-            nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+            let nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
             borders_data[index] = parseInt(nation_colors[0]) * 0.65;
             borders_data[index + 1] = parseInt(nation_colors[2]) * 0.65;
             borders_data[index + 2] =  parseInt(nation_colors[1]) * 0.65;

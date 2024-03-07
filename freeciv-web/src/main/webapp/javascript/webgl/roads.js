@@ -49,7 +49,6 @@ function update_roads_image()
    if (hash != roads_hash) {
     for (let x = 0; x < map.xsize; x++) {
       for (let y = 0; y < map.ysize; y++) {
-        let ptile = map_pos_to_tile(x, y);
         let index = (y * map.xsize + x) * 4;
         let color = road_image_color(x, y);
         roads_data[index] = color[0];
