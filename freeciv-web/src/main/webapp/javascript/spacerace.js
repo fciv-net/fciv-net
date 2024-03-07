@@ -137,7 +137,7 @@ function add_spaceship(ptile, pcity, scene) {
     for (var i = 0; i < 30; i++) {
       let dir = Math.floor(Math.random() * 8);
       let ntile = mapstep(ptile, dir);
-      let nexttile = mapstep(ntile, dir);
+      nexttile = mapstep(ntile, dir);
       if (is_ocean_tile(nexttile)) {
         ptile = mapstep(ptile, Math.floor(Math.random() * 8));
         continue;
