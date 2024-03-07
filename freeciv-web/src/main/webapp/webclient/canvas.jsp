@@ -1,9 +1,3 @@
- <image id="map_tiletype_grid" style="display:none;">
- <image id="borders_image" style="display:none;">
-
- <image id="roads_image" style="display:none;">
- <canvas id="roads_canvas" style="display:none;"></canvas>
-
  <div id="mapview_canvas_div">
     <%-- The main mapview canvas --%>  
     <div id="mapcanvas"></div>

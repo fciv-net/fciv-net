@@ -19,20 +19,19 @@
 
 var roads_texture;
 var roads_hash = -1;
+var roads_data;
 
 /****************************************************************************
  Initialize roads image
 ****************************************************************************/
 function init_roads_image()
 {
-  generate_roads_image();
-  roads_texture = new THREE.Texture();
-  roads_texture.magFilter = THREE.NearestFilter;
-  roads_texture.minFilter = THREE.NearestFilter;
-  roads_texture.image = document.getElementById("roads_image");
-  roads_texture.image.onload = function () {
-    roads_texture.needsUpdate = true;
-  };
+  roads_data = new Uint8Array( 4 * map.xsize * map.ysize );
+
+  roads_texture = new THREE.DataTexture(roads_data, map.xsize, map.ysize);
+  roads_texture.flipY = true;
+
+  update_roads_image();
 
   if (graphics_quality == QUALITY_MEDIUM) setInterval(update_roads_image, 3000);
   if (graphics_quality == QUALITY_HIGH) setInterval(update_roads_image, 1200);
@@ -48,35 +47,22 @@ function update_roads_image()
    var hash = generate_roads_hash();
 
    if (hash != roads_hash) {
-     generate_roads_image();
-     roads_texture.image = document.getElementById("roads_image");
-     roads_texture.image.onload = function () {
-       roads_texture.needsUpdate = true;
-     };
-     roads_hash = hash;
-  }
-
-   return roads_texture;
-}
-
-/****************************************************************************
-
-****************************************************************************/
-function generate_roads_image() {
-
-  var can = document.getElementById('roads_canvas');
-  can.width  = map.xsize;
-  can.height = map.ysize;
-  var ctx = can.getContext('2d');
-  for (var x = 0; x < map.xsize ; x++) {
-    for (var y = 0; y < map.ysize; y++) {
-      ctx.fillStyle = road_image_color(x, y);
-      ctx.fillRect(x, y, 1, 1);
+    for (let x = 0; x < map.xsize; x++) {
+      for (let y = 0; y < map.ysize; y++) {
+        let ptile = map_pos_to_tile(x, y);
+        let index = (y * map.xsize + x) * 4;
+        let color = road_image_color(x, y);
+        roads_data[index] = color[0];
+        roads_data[index + 1] = color[1];
+        roads_data[index + 2] = color[2];
+        roads_data[index + 3] = 255;
+      }
     }
+    roads_texture.needsUpdate = true;
+    roads_hash = hash;
   }
-  var img = document.getElementById("roads_image");
-  img.src = can.toDataURL();
 
+  return roads_texture;
 }
 
 
@@ -105,7 +91,7 @@ function road_image_color(map_x, map_y)
         adj_road_count++;
         if (adj_road_count > 2) {
           let checktile = mapstep(ptile, 6);
-          if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) return "rgb(43,0,0)";  //special case, 4 connected rails.
+          if (checktile != null && tile_has_extra(checktile, EXTRA_RAIL)) return [43,0,0];  //special case, 4 connected rails.
           break;
         }
       }
@@ -123,7 +109,7 @@ function road_image_color(map_x, map_y)
       }
     }
 
-    return "rgb("+result[0]+","+result[1]+","+result[2]+")";
+    return [result[0], result[1], result[2]];
   }
 
   // Roads
@@ -144,7 +130,7 @@ function road_image_color(map_x, map_y)
         adj_road_count++;
         if (adj_road_count > 2) {
           let checktile = mapstep(ptile, 6);
-          if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) return "rgb(42,0,0)"; //special case, 4 connected roads.
+          if (checktile != null && tile_has_extra(checktile, EXTRA_ROAD)) return [42,0,0]; //special case, 4 connected roads.
           break;
         }
       }
@@ -162,9 +148,9 @@ function road_image_color(map_x, map_y)
       }
     }
 
-    return "rgb("+result[0]+","+result[1]+","+result[2]+")";
+    return [result[0], result[1] , result[2]];
   }
-  return "rgb(0,0,0)"; // no road.
+  return [0,0,0]; // no road.
 
 }
 

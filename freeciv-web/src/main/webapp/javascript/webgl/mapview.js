@@ -169,14 +169,14 @@ function init_webgl_mapview() {
   if (!webgpu) { 
     freeciv_uniforms = {
       maptiles: { type: "t", value: maptiletypes },
-      borders: { type: "t", value: update_borders_image() },
+      borders: { type: "t", value: borders_texture },
       map_x_size: { type: "f", value: map['xsize'] },
       map_y_size: { type: "f", value: map['ysize'] },
       mouse_x: { type: "i", value: -1 },
       mouse_y: { type: "i", value: -1 },
       selected_x: { type: "i", value: -1 },
       selected_y: { type: "i", value: -1 },
-      roadsmap: { type: "t", value: update_roads_image()},
+      roadsmap: { type: "t", value: roads_texture},
       roadsprites: {type: "t", value: webgl_textures["roads"]},
       railroadsprites: {type: "t", value: webgl_textures["railroads"]},
       borders_visible: {type: "bool", value: server_settings['borders']['is_visible']}

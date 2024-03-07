@@ -20,36 +20,19 @@
 var borders_palette = [];
 var borders_texture;
 var borders_hash = -1;
+var borders_data;
 
 /****************************************************************************
  Initialize borders image.
 ****************************************************************************/
 function init_borders_image()
 {
-  borders_palette = [];
-  borders_palette.push([142, 0, 0]);
-  for (var player_id in players) {
-    var pplayer = players[player_id];
-    var nation_colors;
-    if (nations[pplayer['nation']].color != null) {
-      nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
-      if (nation_colors[0] < nation_colors[1] - 10 && nation_colors[2] < nation_colors[1] - 10) nation_colors = [0, 20, 0]; //darken green
-    } else {
-      nation_colors = [0, 0, 0];
-    }
-    borders_palette.push([parseInt(nation_colors[0]) * 0.65, parseInt(nation_colors[2]) * 0.65, parseInt(nation_colors[1]) * 0.65]);
-  }
+  borders_data = new Uint8Array( 4 * map.xsize * map.ysize );
 
-  bmp_lib.render('borders_image',
-                    generate_borders_image(),
-                    borders_palette);
-  borders_texture = new THREE.Texture();
-  borders_texture.magFilter = THREE.NearestFilter;
-  borders_texture.minFilter = THREE.NearestFilter;
-  borders_texture.image = document.getElementById("borders_image");
-  borders_texture.image.onload = function () {
-    borders_texture.needsUpdate = true;
-  };
+  borders_texture = new THREE.DataTexture(borders_data, map.xsize, map.ysize);
+  borders_texture.flipY = true;
+
+  update_borders_image();
 
   setInterval(update_borders_image, 400);
 }
@@ -60,59 +43,43 @@ function init_borders_image()
 ****************************************************************************/
 function update_borders_image()
 {
-   var hash = generate_borders_image_hash();
+  var hash = generate_borders_image_hash();
 
-   if (hash != borders_hash) {
-     borders_palette = [];
-     borders_palette.push([142, 0, 0]);
-     for (var player_id in players) {
-       var pplayer = players[player_id];
-       var nation_colors;
-       if (nations[pplayer['nation']].color != null) {
-         nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
-         if (nation_colors[0] < nation_colors[1] - 10 && nation_colors[2] < nation_colors[1] - 10) nation_colors = [0, 20, 0]; //darken green
-       } else {
-         nation_colors = [0,0,0];
-       }
+  if (hash != borders_hash) {
+    for (let x = 0; x < map.xsize; x++) {
+      for (let y = 0; y < map.ysize; y++) {
+        let ptile = map_pos_to_tile(x, y);
+        let index = (y * map.xsize + x) * 4;
+        if (ptile != null && ptile['owner'] != null && ptile['owner'] < 255) {
+          var pplayer = players[ptile['owner']];
 
-       borders_palette.push([parseInt(nation_colors[0]) * 0.65, parseInt(nation_colors[2]) * 0.65, parseInt(nation_colors[1]) * 0.65]);
-     }
-
-     bmp_lib.render('borders_image',
-                       generate_borders_image(),
-                       borders_palette);
-     borders_texture.image = document.getElementById("borders_image");
-     borders_texture.image.onload = function () {
-       borders_texture.needsUpdate = true;
-     };
-     borders_hash = hash;
-
-     return borders_texture;
-  }
-}
-
-/****************************************************************************
-
-****************************************************************************/
-function generate_borders_image() {
-  var cols = map['xsize'];
-  var rows = map['ysize'];
-
-  var row;
-  // The grid of points that make up the image.
-  var grid = Array(rows);
-  for (row = 0; row < rows ; row++) {
-    grid[row] = Array(cols);
-  }
-
-  for (var y = 0; y < rows ; y++) {
-    for (var x = 0; x < cols; x++) {
-      grid[y][x] = border_image_color(x, y);
+          if (nations[pplayer['nation']].color != null) {
+            nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+            borders_data[index] = parseInt(nation_colors[0]) * 0.65;
+            borders_data[index + 1] = parseInt(nation_colors[2]) * 0.65;
+            borders_data[index + 2] =  parseInt(nation_colors[1]) * 0.65;
+            borders_data[index + 3] = 255;
+          } else {
+            borders_data[index] = 142;
+            borders_data[index + 1] = 0;
+            borders_data[index + 2] = 0;
+            borders_data[index + 3] = 255;
+          }
+        } else {
+          borders_data[index] = 142;
+          borders_data[index + 1] = 0;
+          borders_data[index + 2] = 0;
+          borders_data[index + 3] = 255;
+        }
+      }
     }
-  }
+    borders_hash = hash;
+    borders_texture.needsUpdate = true;
 
-  return grid;
+    return borders_texture;
+  }
 }
+
 
 /****************************************************************************
  Creates a hash of the map borders.
