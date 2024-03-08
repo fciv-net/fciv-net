@@ -994,6 +994,8 @@ function advance_unit_focus()
   var i;
 
   if (client_is_observer() || nuke_active) return;
+  goto_active = false;
+  clear_goto_tiles();
 
   if (urgent_focus_queue.length > 0) {
     var focus_tile = (current_focus != null && current_focus.length > 0
@@ -3100,6 +3102,8 @@ function key_unit_move(dir)
 ****************************************************************************/
 function request_goto_path(unit_id, dst_x, dst_y)
 {
+  if (!goto_active) return;
+
   if (goto_request_map[unit_id + "," + dst_x + "," + dst_y] == null) {
     goto_request_map[unit_id + "," + dst_x + "," + dst_y] = true;
 

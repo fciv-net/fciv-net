@@ -33,59 +33,39 @@ function init_map_tiletype_image()
   maptiletypes = new THREE.DataTexture(maptiles_data, map.xsize, map.ysize);
   maptiletypes.flipY = true;
 
-  update_tiletypes_image();
-  setInterval(update_tiletypes_image, 60000);
-
-  tiletype_hash = generate_tiletype_hash();
+  for (let x = 0; x < map.xsize; x++) {
+    for (let y = 0; y < map.ysize; y++) {
+      let index = (y * map.xsize + x) * 4;
+      maptiles_data[index] = 0;
+      maptiles_data[index + 1] = 0;
+      maptiles_data[index + 2] = 0;
+      maptiles_data[index + 3] = 0;
+    }
+  }
 
  }
 
 /****************************************************************************
   ...
 ****************************************************************************/
-function update_tiletypes_image()
+function update_tiletypes_tile(ptile)
 {
-   var hash = generate_tiletype_hash();
-   if (hash != tiletype_hash) {
-     for (let x = 0; x < map.xsize; x++) {
-      for (let y = 0; y < map.ysize; y++) {
-        let ptile = map_pos_to_tile(x, y);
-        let index = (y * map.xsize + x) * 4;
-        if (ptile != null && tile_terrain(ptile) != null && !tile_has_extra(ptile, EXTRA_RIVER)) {
-          maptiles_data[index] = tile_terrain(ptile)['id'] * 10;
-          maptiles_data[index + 1] = 0;
-          maptiles_data[index + 2] = 0;
-          maptiles_data[index + 3] = 255;
-        } else if (ptile != null && tile_terrain(ptile) != null && tile_has_extra(ptile, EXTRA_RIVER)) {
-          maptiles_data[index] = tile_terrain(ptile)['id'] * 10;
-          maptiles_data[index + 1] = 10;
-          maptiles_data[index + 2] = 0;
-          maptiles_data[index + 3] = 255;
-        } else {
-          maptiles_data[index] = 0;
-          maptiles_data[index + 1] = 10;
-          maptiles_data[index + 2] = 0;
-          maptiles_data[index + 3] = 255;
-        }
-      }
-    }
+  let x = ptile.x;
+  let y = ptile.y;
+  let index = (y * map.xsize + x) * 4;
+  let old_value = (maptiles_data[index] + maptiles_data[index + 1]);
+  if (ptile != null && tile_terrain(ptile) != null && !tile_has_extra(ptile, EXTRA_RIVER)) {
+    maptiles_data[index] = tile_terrain(ptile)['id'] * 10;
+    maptiles_data[index + 1] = 0;
+  } else if (ptile != null && tile_terrain(ptile) != null && tile_has_extra(ptile, EXTRA_RIVER)) {
+    maptiles_data[index] = tile_terrain(ptile)['id'] * 10;
+    maptiles_data[index + 1] = 10;
+  } else {
+    maptiles_data[index] = 0;
+    maptiles_data[index + 1] = 10;
+  }
+  if ((maptiles_data[index] + maptiles_data[index + 1]) != old_value) {
     maptiletypes.needsUpdate = true;
-    tiletype_hash = hash;
   }
 
-}
-
-/****************************************************************************
- Creates a hash of the map tiletypes.
-****************************************************************************/
-function generate_tiletype_hash() {
-  var hash = 0;
-
-  for (var x = 0; x < map.xsize ; x++) {
-    for (var y = 0; y < map.ysize; y++) {
-      var ptile = map_pos_to_tile(x, y);
-      hash += tile_terrain(ptile)['id'];
-    }
-  }
-  return hash;
 }

@@ -476,7 +476,7 @@ switch (filename) {
     modelscale = 1.0;
     break;
   case 'Wheat':
-    modelscale = 2.7;
+    modelscale = 1.9;
 
     break;
   case 'Galleon':

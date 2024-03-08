@@ -25,6 +25,7 @@ var goto_lines = [];
 function webgl_render_goto_line(start_tile, goto_packet_dir)
 {
   clear_goto_tiles();
+  if (!goto_active) return;
 
   var ptile = start_tile;
 
@@ -75,5 +76,18 @@ function webgl_render_goto_line(start_tile, goto_packet_dir)
     }
 
     ptile = mapstep(ptile, dir);
+  }
+}
+
+/**************************************************************************
+ Removes goto lines and clears goto tiles.
+**************************************************************************/
+function clear_goto_tiles()
+{
+  if (scene != null && goto_lines != null) {
+    for (var i = 0; i < goto_lines.length; i++) {
+      scene.remove(goto_lines[i]);
+    }
+    goto_lines = [];
   }
 }

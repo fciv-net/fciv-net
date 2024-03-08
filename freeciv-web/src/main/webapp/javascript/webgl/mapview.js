@@ -150,9 +150,9 @@ function init_webgl_mapview() {
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.7} );
 
   if (!webgpu) {
-    init_borders_image();
-    init_roads_image();
-    init_map_tiletype_image();
+    //init_borders_image();
+    //init_roads_image();
+    //init_map_tiletype_image();
   }
 
   var vertex_shader = $('#terrain_vertex_shh').html();
@@ -237,7 +237,6 @@ function init_webgl_mapview() {
 
   if (!webgpu) {
     setInterval(update_map_known_tiles, 15);
-    setInterval(update_map_tiletypes, 20);
   }
 
   add_quality_dependent_objects();
@@ -377,23 +376,11 @@ function update_map_terrain_geometry()
 }
 
 /****************************************************************************
-  Update the map tiletypes!
-****************************************************************************/
-function update_map_tiletypes()
-{
-  if (map_terrain_dirty) {
-    update_tiletypes_image();
-  }
-  map_terrain_dirty = false;
-}
-
-/****************************************************************************
   Update the map known tiles!
 ****************************************************************************/
 function update_map_known_tiles()
 {
   if (map_known_dirty) {
-    update_map_tiletypes();
     update_tiles_known_vertex_colors();
     update_map_terrain_geometry();
   }

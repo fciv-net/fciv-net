@@ -31,39 +31,59 @@ function init_roads_image()
   roads_texture = new THREE.DataTexture(roads_data, map.xsize, map.ysize);
   roads_texture.flipY = true;
 
-  update_roads_image();
-
-  if (graphics_quality == QUALITY_MEDIUM) setInterval(update_roads_image, 3000);
-  if (graphics_quality == QUALITY_HIGH) setInterval(update_roads_image, 1200);
-
+  for (let x = 0; x < map.xsize; x++) {
+    for (let y = 0; y < map.ysize; y++) {
+      let index = (y * map.xsize + x) * 4;
+      roads_data[index] = 0;
+      roads_data[index + 1] = 0;
+      roads_data[index + 2] = 0;
+      roads_data[index + 3] = 255;
+    }
+  }
 }
-
 
 /****************************************************************************
   ...
 ****************************************************************************/
-function update_roads_image()
+function update_roads_tile(ptile, recursive)
 {
-   var hash = generate_roads_hash();
+  let x = ptile.x;
+  let y = ptile.y;
+  let index = (y * map.xsize + x) * 4;
+  let old_value = (roads_data[index] + roads_data[index + 1] + roads_data[index + 2]);
 
-   if (hash != roads_hash) {
-    for (let x = 0; x < map.xsize; x++) {
-      for (let y = 0; y < map.ysize; y++) {
-        let index = (y * map.xsize + x) * 4;
-        let color = road_image_color(x, y);
-        roads_data[index] = color[0];
-        roads_data[index + 1] = color[1];
-        roads_data[index + 2] = color[2];
-        roads_data[index + 3] = 255;
-      }
-    }
+  let color = road_image_color(x, y);
+  roads_data[index] = color[0];
+  roads_data[index + 1] = color[1];
+  roads_data[index + 2] = color[2];
+
+  if ((roads_data[index] + roads_data[index + 1] + roads_data[index + 2] ) != old_value) {
     roads_texture.needsUpdate = true;
-    roads_hash = hash;
   }
 
-  return roads_texture;
-}
+  if (!recursive) return;
 
+  let neighbours = [
+    { "x": x - 1 , "y": y - 1},
+    { "x": x - 1, "y": y },
+    { "x": x - 1,  "y": y + 1 },
+    { "x": x,  "y": y - 1},
+    { "x": x , "y": y + 1},
+    { "x": x + 1, "y": y - 1 },
+    { "x": x + 1,  "y": y },
+    { "x": x + 1,  "y": y + 1},
+  ];
+
+  for (let i = 0; i < 8; i++) {
+    let coords = neighbours[i];
+    if (coords.x < 0 || coords.x >= map.xsize || coords.y < 0 || coords.y >= map.ysize ) {
+      continue;
+    }
+    let ntile = map_pos_to_tile(coords.x, coords.y);
+    update_roads_tile(ntile, false);
+  }
+
+}
 
 /****************************************************************************
 ...
@@ -151,24 +171,4 @@ function road_image_color(map_x, map_y)
   }
   return [0,0,0]; // no road.
 
-}
-
-/****************************************************************************
- Creates a hash of the roads.
-****************************************************************************/
-function generate_roads_hash() {
-  var hash = 0;
-
-  for (var x = 0; x < map.xsize ; x++) {
-    for (var y = 0; y < map.ysize; y++) {
-      var ptile = map_pos_to_tile(x, y);
-      if (ptile != null && tile_has_extra(ptile, EXTRA_ROAD)) {
-        hash += ((x * y) + 1);
-      }
-      if (ptile != null && tile_has_extra(ptile, EXTRA_RAIL)) {
-        hash += ((x * y) + 10);
-      }
-    }
-  }
-  return hash;
 }

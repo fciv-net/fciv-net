@@ -32,72 +32,51 @@ function init_borders_image()
   borders_texture = new THREE.DataTexture(borders_data, map.xsize, map.ysize);
   borders_texture.flipY = true;
 
-  update_borders_image();
-
-  setInterval(update_borders_image, 400);
+  for (let x = 0; x < map.xsize; x++) {
+    for (let y = 0; y < map.ysize; y++) {
+      let index = (y * map.xsize + x) * 4;
+      borders_data[index] = 142;
+      borders_data[index + 1] = 0;
+      borders_data[index + 2] = 0;
+      borders_data[index + 3] = 255;
+    }
+  }
 }
 
 /****************************************************************************
-  Returns a texture containing one pixel for each map tile, where the color of each pixel
-  contains the border color.
+ Update one border tile.
 ****************************************************************************/
-function update_borders_image()
+function update_borders_tile(ptile)
 {
-  var hash = generate_borders_image_hash();
+  if (borders_texture == null) return;
 
-  if (hash != borders_hash) {
-    for (let x = 0; x < map.xsize; x++) {
-      for (let y = 0; y < map.ysize; y++) {
-        let ptile = map_pos_to_tile(x, y);
-        let index = (y * map.xsize + x) * 4;
-        if (ptile != null && ptile['owner'] != null && ptile['owner'] < 255) {
-          var pplayer = players[ptile['owner']];
+  let x = ptile.x;
+  let y = ptile.y;
+  let index = (y * map.xsize + x) * 4;
+  let old_value = borders_data[index] + borders_data[index + 1] + borders_data[index + 2];
 
-          if (nations[pplayer['nation']].color != null) {
-            let nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
-            borders_data[index] = parseInt(nation_colors[0]) * 0.65;
-            borders_data[index + 1] = parseInt(nation_colors[2]) * 0.65;
-            borders_data[index + 2] =  parseInt(nation_colors[1]) * 0.65;
-            borders_data[index + 3] = 255;
-          } else {
-            borders_data[index] = 142;
-            borders_data[index + 1] = 0;
-            borders_data[index + 2] = 0;
-            borders_data[index + 3] = 255;
-          }
-        } else {
-          borders_data[index] = 142;
-          borders_data[index + 1] = 0;
-          borders_data[index + 2] = 0;
-          borders_data[index + 3] = 255;
-        }
-      }
+  if (ptile != null && ptile['owner'] != null && ptile['owner'] < 255) {
+    var pplayer = players[ptile['owner']];
+
+    if (nations[pplayer['nation']].color != null) {
+      let nation_colors = nations[pplayer['nation']].color.replace("rgb(", "").replace(")", "").split(",");
+      borders_data[index] = parseInt(nation_colors[0]) * 0.65;
+      borders_data[index + 1] = parseInt(nation_colors[2]) * 0.65;
+      borders_data[index + 2] =  parseInt(nation_colors[1]) * 0.65;
+    } else {
+      borders_data[index] = 142;
+      borders_data[index + 1] = 0;
+      borders_data[index + 2] = 0;
     }
-    borders_hash = hash;
+  } else {
+    borders_data[index] = 142;
+    borders_data[index + 1] = 0;
+    borders_data[index + 2] = 0;
+  }
+  if ((borders_data[index] + borders_data[index + 1] + borders_data[index + 2]) != old_value) {
     borders_texture.needsUpdate = true;
-
-    return borders_texture;
   }
 }
-
-
-/****************************************************************************
- Creates a hash of the map borders.
-****************************************************************************/
-function generate_borders_image_hash() {
-  var hash = 0;
-  var cols = map['xsize'];
-  var rows = map['ysize'];
-
-  for (var y = 0; y < rows ; y++) {
-    for (var x = 0; x < cols; x++) {
-      hash += border_image_color(x, y);
-    }
-  }
-
-  return hash;
-}
-
 
 /****************************************************************************
   Returns the color of the tile at the given map position.

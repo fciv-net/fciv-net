@@ -188,6 +188,10 @@ function handle_tile_info(packet)
     }
 
     tiles[packet['tile']] = $.extend(tiles[packet['tile']], packet);
+
+    update_borders_tile(tiles[packet['tile']]);
+    update_roads_tile(tiles[packet['tile']], true);
+    update_tiletypes_tile(tiles[packet['tile']]);
   }
 }
 
@@ -499,7 +503,6 @@ function handle_set_topology(packet)
   /* TODO */
 }
 
-/* 50% complete */
 function handle_map_info(packet)
 {
   map = packet;
@@ -510,6 +513,10 @@ function handle_map_info(packet)
 
   mapview_model_width = Math.floor(MAPVIEW_ASPECT_FACTOR * map['xsize']);
   mapview_model_height = Math.floor(MAPVIEW_ASPECT_FACTOR * map['ysize']);
+
+  init_borders_image();
+  init_roads_image();
+  init_map_tiletype_image();
 
 }
 

@@ -454,19 +454,6 @@ function dir_ccw(dir)
   return -1;
 }
 
-/**************************************************************************
- Removes goto lines and clears goto tiles.
-**************************************************************************/
-function clear_goto_tiles()
-{
-    if (scene != null && goto_lines != null) {
-      for (var i = 0; i < goto_lines.length; i++) {
-        scene.remove(goto_lines[i]);
-      }
-      goto_lines = [];
-    }
-}
-
 /****************************************************************************
   Adjust tile height
 ****************************************************************************/

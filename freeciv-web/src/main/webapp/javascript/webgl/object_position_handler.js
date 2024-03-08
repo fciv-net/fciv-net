@@ -684,7 +684,7 @@ function update_tile_extra_update_model(extra_type, extra_name, ptile)
       height -= 2;
     }
     if (extra_name == "Wheat") {
-      num_models = 10;
+      num_models = 14;
       height -= 0.5;
     }
     if (extra_name == "Ruins") {
