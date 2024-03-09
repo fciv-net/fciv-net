@@ -149,12 +149,6 @@ function webgl_start_renderer()
 function init_webgl_mapview() {
   selected_unit_material = new THREE.MeshBasicMaterial( { color: 0xf6f7bf, transparent: true, opacity: 0.7} );
 
-  if (!webgpu) {
-    //init_borders_image();
-    //init_roads_image();
-    //init_map_tiletype_image();
-  }
-
   var vertex_shader = $('#terrain_vertex_shh').html();
   var fragment_shader = $('#terrain_fragment_shh').html();
 
@@ -380,11 +374,12 @@ function update_map_terrain_geometry()
 ****************************************************************************/
 function update_map_known_tiles()
 {
-  if (map_known_dirty) {
+  if (map_known_dirty || map_terrain_dirty) {
     update_tiles_known_vertex_colors();
     update_map_terrain_geometry();
   }
   map_known_dirty = false;
+  map_terrain_dirty = false;
 }
 
 /****************************************************************************
