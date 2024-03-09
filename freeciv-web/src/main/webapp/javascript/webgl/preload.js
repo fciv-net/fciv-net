@@ -488,6 +488,12 @@ switch (filename) {
   case 'AEGIS Cruiser':
      modelscale = 1.6;
      break;
+  case 'Stealth Bomber':
+     modelscale = 10;
+     break;
+  case 'Stealth Fighter':
+     modelscale = 10;
+     break;
   case 'Destroyer':
     modelscale = 0.90;
     break;
