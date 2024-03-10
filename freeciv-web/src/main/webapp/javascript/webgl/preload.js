@@ -555,7 +555,7 @@ switch (filename) {
   case 'city_chinese_2':
   case 'city_chinese_3':
   case 'city_chinese_4':
-    modelscale = 1.85;
+    modelscale = 1.78;
     break;
   case 'city_modern_1':
   case 'city_modern_2':
