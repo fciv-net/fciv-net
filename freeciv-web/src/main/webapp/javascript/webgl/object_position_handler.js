@@ -525,7 +525,8 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
 ****************************************************************************/
 function add_city_building(ptile, pcity, scene, building_name) {
     if (city_has_building(pcity, improvement_id_by_name(building_name)) && pcity[building_name + '_added'] == null) {
-      if (building_name == "Temple" && pcity['style'] == 1) {
+      let original_building_name = building_name;
+      if (building_name == "Temple" && (pcity['style'] == 1 || pcity['style'] == 6 || pcity['style'] == 7)) {
         building_name = "Temple_roman";
       }
 
@@ -615,7 +616,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
       pos = map_to_scene_coords(nexttile['x'], nexttile['y']);
 
       building.position.set(pos['x'] - 14, height - 5, pos['y'] - 14 + y_offset);
-      pcity[building_name + '_added'] = true;
+
+      pcity[original_building_name + '_added'] = true;
+
       city_building_positions[nexttile['index']] = building;
       if (!show_buildings) {
         building.visible = false;
