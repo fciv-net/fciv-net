@@ -49,6 +49,12 @@ function get_unit_height_offset(punit)
   if (ptype['name'] == "Battleship") {
     return 4.0;
   }
+  if (ptype['name'] == "Transport") {
+    return 4.0;
+  }
+  if (ptype['name'] == "Fighter") {
+    return 18.0;
+  }
   if (ptype['name'] == "Cruiser") {
     return 4.0;
   }

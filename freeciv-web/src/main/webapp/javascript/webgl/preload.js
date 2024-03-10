@@ -284,6 +284,9 @@ switch (filename) {
   case 'Artillery':
     modelscale = 3.4;
     break;
+  case 'Transport':
+    modelscale = 1.0;
+    break;
   case 'Catapult':
     modelscale = 2.1;
     break;
@@ -321,7 +324,7 @@ switch (filename) {
     modelscale = 10;
     break;
   case 'Fighter':
-    modelscale = 9;
+    modelscale = 8;
     break;
   case 'Legion':
     modelscale = 7;
@@ -570,6 +573,9 @@ switch (filename) {
     break;
   case 'Temple':
     modelscale = 2.0;
+    break;
+  case 'Temple_roman':
+    modelscale = 0.75;
     break;
   case 'Bank':
     modelscale = 1.35;

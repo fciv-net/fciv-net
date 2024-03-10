@@ -525,6 +525,10 @@ function add_wonder(ptile, pcity, scene, wonder_name) {
 ****************************************************************************/
 function add_city_building(ptile, pcity, scene, building_name) {
     if (city_has_building(pcity, improvement_id_by_name(building_name)) && pcity[building_name + '_added'] == null) {
+      if (building_name == "Temple" && pcity['style'] == 1) {
+        building_name = "Temple_roman";
+      }
+
       let building = webgl_get_model(building_name.replaceAll(" ", ""), ptile);
       if (building == null) {
         return;
@@ -573,6 +577,9 @@ function add_city_building(ptile, pcity, scene, building_name) {
 
       if (building_name == "Temple") {
         height -= 0.6;
+      }
+      if (building_name == "Temple_roman") {
+        height += 1.6;
       }
       if (building_name == "Factory" || building_name == "Marketplace") {
         height -= 1.2;

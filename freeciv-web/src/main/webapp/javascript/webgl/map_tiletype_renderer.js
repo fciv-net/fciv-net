@@ -53,6 +53,7 @@ function update_tiletypes_tile(ptile)
   let x = ptile.x;
   let y = ptile.y;
   let index = (y * map.xsize + x) * 4;
+  let old_value = maptiles_data[index] + maptiles_data[index + 1] + maptiles_data[index + 2];
   if (ptile != null && tile_terrain(ptile) != null && !tile_has_extra(ptile, EXTRA_RIVER)) {
     maptiles_data[index] = tile_terrain(ptile)['id'] * 10;
     maptiles_data[index + 1] = 0;
@@ -63,8 +64,17 @@ function update_tiletypes_tile(ptile)
     maptiles_data[index] = 0;
     maptiles_data[index + 1] = 10;
   }
+    if (tile_has_extra(ptile, EXTRA_FARMLAND)) {
+      maptiles_data[index + 2] = 2;
+    } else if (tile_has_extra(ptile, EXTRA_IRRIGATION)) {
+      maptiles_data[index + 2] = 1;
+    } else {
+      maptiles_data[index + 2] = 0;
+    }
 
-  maptiletypes.needsUpdate = true;
-
+  if (old_value != (maptiles_data[index] + maptiles_data[index + 1] + maptiles_data[index + 2])) {
+    maptiletypes.needsUpdate = true;
+    //console.log("updated map tiles.");
+  }
 
 }

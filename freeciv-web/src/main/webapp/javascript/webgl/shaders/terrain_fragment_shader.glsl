@@ -361,14 +361,12 @@ void main()
         }
     }
 
-    if (vColor.g > 0.3 && vColor.g < 0.7) {
+    if (terrain_type.b == (1.0 / 255.0)) {
         // render Irrigation.
         texture_coord = vec2(dx , dy);
         vec4 t1 = texture2D(irrigation , texture_coord);
         c = mix(c, vec3(t1), t1.a);
-    }
-
-    if (vColor.g > 0.9) {
+    } else if (terrain_type.b ==(2.0 / 255.0)) {
         // render farmland.
         texture_coord = vec2(dx , dy );
         vec4 t1 = texture2D(farmland, texture_coord);

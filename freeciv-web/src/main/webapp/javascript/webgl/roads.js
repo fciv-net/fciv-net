@@ -59,6 +59,7 @@ function update_roads_tile(ptile, recursive)
 
   if ((roads_data[index] + roads_data[index + 1] + roads_data[index + 2] ) != old_value) {
     roads_texture.needsUpdate = true;
+    //console.log("updated roads.");
   }
 
   if (!recursive) return;

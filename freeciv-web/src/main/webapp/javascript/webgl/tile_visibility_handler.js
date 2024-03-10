@@ -18,7 +18,6 @@
 ***********************************************************************/
 
 var map_known_dirty = true;
-var map_terrain_dirty = true;
 var map_geometry_dirty = true;
 
 /**************************************************************************
@@ -30,18 +29,6 @@ function webgl_update_tile_known(old_tile, new_tile)
 
   if (new_tile['height'] != old_tile['height']) {
     map_geometry_dirty = true;
-  }
-
-  if (tile_terrain(new_tile) != tile_terrain(old_tile)) {
-    map_terrain_dirty = true;
-  }
-
-  if (tile_resource(old_tile) != tile_resource(new_tile)) {
-     map_terrain_dirty = true;
-  }
-
-  if (old_tile['extras'] != null && new_tile['extras'].raw != old_tile['extras'].raw) {
-     map_terrain_dirty = true;
   }
 
   if (tile_get_known(new_tile) != tile_get_known(old_tile)) {
@@ -76,6 +63,7 @@ function update_tiles_known_vertex_colors()
   landGeometry.setAttribute( 'vertColor', new THREE.Float32BufferAttribute( colors, 3) );
 
   landGeometry.colorsNeedUpdate = true;
+  //console.log("updated vertex colours (tiles known, irrigation).");
 
 }
 
@@ -108,15 +96,6 @@ function get_vertex_color_from_tile(ptile, vertex_x, vertex_y)
       }
     }
 
-    var farmland_irrigation_color = 0;
-    if (tile_has_extra(ptile, EXTRA_FARMLAND)) {
-      farmland_irrigation_color = 1.0;
-    } else if (tile_has_extra(ptile, EXTRA_IRRIGATION)) {
-      farmland_irrigation_color = 0.5;
-    } else {
-      farmland_irrigation_color = 0;
-    }
-
-    return [known_status_color, farmland_irrigation_color,0];
+    return [known_status_color, 0,0];
 
 }
