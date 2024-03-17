@@ -51,7 +51,7 @@ public class ChatList extends HttpServlet {
             response.getOutputStream().print("<html><head><link href=\"/static/css/bootstrap.min.css\" rel=\"stylesheet\"></head><body>");
             response.getOutputStream().print("<h2>OpenAI Chat Log:</h2>");
             response.getOutputStream().print("<table border='2'>");
-            response.getOutputStream().print("<tr><td>Question:</td><td>Answer:</td><td>Timestamp:</td></tr>");
+            response.getOutputStream().print("<tr><td>ID:</td><td>Question:</td><td>Answer:</td><td>Timestamp:</td></tr>");
             int count = 0;
             while (rs.next()) {
                 try {
