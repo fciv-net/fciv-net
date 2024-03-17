@@ -9,7 +9,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.freeciv.util.Constants;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -33,11 +41,9 @@ public class OpenAIChat  extends HttpServlet {
             response.setContentType("text/html; charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
 
-            String message = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+            String question = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 
-            message = new String(Base64.getDecoder().decode(message));
-
-            System.out.println("OpenAI message: " + message);
+            question = new String(Base64.getDecoder().decode(question));
 
             Properties prop = new Properties();
             prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
@@ -85,7 +91,7 @@ public class OpenAIChat  extends HttpServlet {
             messages.add(systemchat);
 
 
-            for (String submessage : message.split(";")) {
+            for (String submessage : question.split(";")) {
                 ChatMessage userchat = new ChatMessage();
                 userchat.setRole("user");
                 userchat.setContent(submessage);
@@ -97,14 +103,46 @@ public class OpenAIChat  extends HttpServlet {
                     .model(model)
                     .build();
             List<ChatCompletionChoice> choices = service.createChatCompletion(completionRequest).getChoices();
+            String answer = "";
             for (ChatCompletionChoice choice : choices) {
                 response.getWriter().print(choice.getMessage().getContent());
-                System.out.println("OpenAI response: " + choice.getMessage().getContent());
+                answer += choice.getMessage().getContent();
+            }
+
+            String ipAddress = request.getHeader("X-Real-IP");
+            if (ipAddress == null) {
+                ipAddress = request.getRemoteAddr();
+            }
+
+
+            Connection conn = null;
+            try {
+
+                Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+                DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
+                conn = ds.getConnection();
+
+                String query = "INSERT INTO chatlog (question, answer, name, reusable) VALUES (?, ?, ?, ?)";
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setString(1, question);
+                preparedStatement.setString(2, answer);
+                preparedStatement.setString(3, ipAddress);
+                preparedStatement.setBoolean(4, false);
+                preparedStatement.executeUpdate();
+
+            } catch (Exception err) {
+                response.setHeader("result", "error");
+            } finally {
+                if (conn != null)
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
             }
 
 
         } catch (Exception erro) {
-            erro.printStackTrace();
             System.out.println(erro.getMessage());
         }
     }

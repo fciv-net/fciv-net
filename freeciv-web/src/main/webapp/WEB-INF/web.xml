@@ -83,6 +83,17 @@
 		<url-pattern>/errorlist</url-pattern>
 	</servlet-mapping>
 
+	<!-- /chatlist -->
+	<servlet>
+		<servlet-name>ChatList</servlet-name>
+		<servlet-class>org.freeciv.servlet.ChatList</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ChatList</servlet-name>
+		<url-pattern>/chatlist</url-pattern>
+	</servlet-mapping>
+
 	<!-- /save_game_of_the_day -->
 	<servlet>
 		<servlet-name>SaveGameOfTheDay</servlet-name>
