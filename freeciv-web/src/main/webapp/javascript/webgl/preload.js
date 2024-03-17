@@ -276,7 +276,7 @@ switch (filename) {
     modelscale = 10.2;
     break;
   case 'Spy':
-    modelscale = 9.2;
+    modelscale = 2.7;
     break;
   case 'Cannon':
     modelscale = 3.0;
@@ -315,7 +315,7 @@ switch (filename) {
     modelscale = 8;
     break;
   case 'Explorer':
-    modelscale = 9.5;
+    modelscale = 9.0;
     break;
   case 'Chariot':
     modelscale = 6;
@@ -601,15 +601,16 @@ switch (filename) {
   case 'University':
     modelscale = 1.5;
     break;
+  case 'Aqueduct':
+    modelscale = 0.25;
+    break;
+
   default:
     if (filename.indexOf("Barracks") >= 0) {
       modelscale = 0.65;
     }
     else if (filename == "Granary" || filename == "Colosseum") {
       modelscale = 1.35;
-    }
-    else if (filename == "Aqueduct") {
-      modelscale = 0.30;
     }
     else if (filename == "Cathedral") {
       modelscale = 1.5;
