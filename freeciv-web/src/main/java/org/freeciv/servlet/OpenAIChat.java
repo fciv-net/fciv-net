@@ -58,8 +58,8 @@ public class OpenAIChat  extends HttpServlet {
             List<ChatMessage> messages = new ArrayList<>();
             ChatMessage systemchat = new ChatMessage();
             systemchat.setRole("system");
-            String fcivInfo = "I am a player in the game of FCIV.NET, a fork of the game Freeciv. FCIV.NET is a 3D version of Freeciv which can be played in a browser for free. You can pretent do be a assistant in the game. "
-                    + "In FCIV.NET new cities are built using the keyboard shortcut B or right clicking on a Settlers unit and selecting Build city from the menu. "
+            String fcivInfo = "I am a player in the game of Freeciv 3D at Fciv.net. Freeciv 3D is a 3D version of Freeciv which can be played in a browser for free. You can pretent do be a assistant in the game. "
+                    + "In Freeciv 3D new cities are built using the keyboard shortcut B or right clicking on a Settlers unit and selecting Build city from the menu. "
                     + "Units are moved using the keyboard shortcut G (Goto) and then selecting the destination. Units can also be moved using the arrow keys on the keyboard";
 
             String keyboardShortcuts = " Keyboard Shortcuts for Unit Orders: "+

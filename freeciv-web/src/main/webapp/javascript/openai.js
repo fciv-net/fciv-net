@@ -35,35 +35,35 @@ function get_openai_game_context()
   }
 
   if (civclient_state == C_S_PREPARING) {
-    context += "The current player is called " + username + ". ";
+    context += "The current player is " + username + ". ";
     context += "The game has not started yet. Press the start button to start the game."
     return context;
   }
 
-  context += "The current player is called " + username + " of the " + nations[pplayer['nation']]['adjective'] + " nation. \n";
-  context += "Population of the players nation: " +  civ_population(client.conn.playing.playerno) + ".\n";
-  context += "Government of the player: " + governments[client.conn.playing['government']]['name']  + ".\n";
+  context += "The current player is " + username + " of the " + nations[pplayer['nation']]['adjective'] + " nation. \n";
+  context += "Population: " +  civ_population(client.conn.playing.playerno) + ".\n";
+  context += "Government: " + governments[client.conn.playing['government']]['name']  + ".\n";
   context += "Current game year and turn: " + get_year_string() + ". \n";
-  context += "Current gold of the player: " + pplayer['gold'] + ". \n";
+  context += "Current gold: " + pplayer['gold'] + ". \n";
   if (techs[client.conn.playing['researching']] != null) {
-      context += research_goal_text = "The player is currently researching " + techs[client.conn.playing['researching']]['name'] + ". ";
+      context += research_goal_text = "Currently researching " + techs[client.conn.playing['researching']]['name'] + ". ";
   } else {
     context += " The player has not chosen something to research. ";
   }
 
   if (current_focus[0] != null) {
     let punit_type = unit_types[current_focus[0]['type']];
-    context += "This selected unit is in focus for the current player: " + punit_type['rule_name'] + ". ";
+    context += "Unit in focus for the current player: " + punit_type['rule_name'] + ". ";
   } else {
-    context += "There is no selected unit in focus. ";
+    context += "No selected unit in focus. ";
   }
 
-  context += "The current tax rate is: " + client.conn.playing['tax'] + "%. ";
-  context += "The current luxury rate is: " + client.conn.playing['luxury'] + "%. ";
-  context += "The current science rate is: " + client.conn.playing['science'] + "%. ";
-  context += "The maximum rate is " + government_max_rate(client.conn.playing['government']) + "%. ";
+  context += "Tax rate is: " + client.conn.playing['tax'] + "%. ";
+  context += "Luxury rate is: " + client.conn.playing['luxury'] + "%. ";
+  context += "Sience rate is: " + client.conn.playing['science'] + "%. ";
+  context += "Maximum rate is " + government_max_rate(client.conn.playing['government']) + "%. ";
 
-  context += "These are the players in the game: ";
+  context += "Players in the game: ";
    for (let player_id in players) {
      let pplayer = players[player_id];
      if (pplayer['nation'] == -1) continue;
@@ -74,11 +74,11 @@ function get_openai_game_context()
          + " and a game score of " + get_score_text(pplayer) + ". "
 
      } else {
-      context += pplayer['name'] + " of the " + nations[pplayer['nation']]['adjective'] + " nation "
-         + "with diplomatic state " + get_diplstate_text(diplstates[player_id]) + " with the current player "
-         + " and a " + col_love(pplayer) + " attitude of with the current player "
-         + " and a game score of " + get_score_text(pplayer)
-         + " and this AI player is " + (pplayer['is_alive'] ? "alive" : "dead")
+      context += pplayer['name'] + " of " + nations[pplayer['nation']]['adjective'] + " nation "
+         + "diplomatic state " + get_diplstate_text(diplstates[player_id]) + " with current player "
+         + " and " + col_love(pplayer) + " attitude to current player "
+         + " and game score of " + get_score_text(pplayer)
+         + " and is " + (pplayer['is_alive'] ? "alive" : "dead")
          + ". "
      }
 
@@ -87,7 +87,7 @@ function get_openai_game_context()
    context += ".\n";
 
 
-   context += " These are the cities in the game: "
+   context += " Cities in the game: "
    for (var city_id in cities){
        let pcity = cities[city_id];
        context += pcity['name'];
@@ -99,7 +99,7 @@ function get_openai_game_context()
    }
   context += ".\n";
 
-  context += " These are all the technologies researched and known the current player: "
+  context += " All technologies researched and known the current player: "
   for (var tech_id in techs) {
      let ptech = techs[tech_id];
      if (player_invention_state(client.conn.playing, ptech['id']) == TECH_KNOWN) {
@@ -108,7 +108,7 @@ function get_openai_game_context()
   }
   context += ".\n";
 
-  context += " These are all the technologies not known the current player: "
+  context += "All technologies not known the current player: "
   for (var tech_id in techs) {
      let ptech = techs[tech_id];
      if (player_invention_state(client.conn.playing, ptech['id']) != TECH_KNOWN) {
@@ -117,7 +117,7 @@ function get_openai_game_context()
   }
   context += ".\n";
 
-  context += " These the game units of the current player: "
+  context += " Game units of the current player: "
   for (var unit_id in units) {
     var punit = units[unit_id];
      if (punit['owner'] == client.conn.playing.playerno ) {
@@ -132,10 +132,10 @@ function get_openai_game_context()
     return context;
   }
 
-  context += "The following text until **** is the game console text shown to the user to tell important events in the game "
-          + "and can be used by ChatGTP to create dialogs with the player about game events: "
-          + $("#game_message_area").text() + " ****.";
+  context += "The following text until **** is the game console text shown to the user to tell important events in the game: "
+          + $("#game_message_area").text() + " ****. ";
 
+  context += " Limit answer to max 100 words. ";
   return context;
 
 }
