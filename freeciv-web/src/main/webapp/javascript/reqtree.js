@@ -69,6 +69,9 @@ function generate_req_tree() {
 **************************************************************************/
 function reqtree_assign_level(ptech, xlevel) {
   if (ptech['traversed'] == false) {
+    if (level_counts[xlevel] >= 10) {
+      xlevel += 1;
+    }
     ptech['xlevel'] = xlevel;
     ptech['ylevel'] = level_counts[xlevel];
     level_counts[xlevel] = level_counts[xlevel] + 1;
