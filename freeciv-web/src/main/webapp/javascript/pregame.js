@@ -438,7 +438,7 @@ function pregame_settings()
       "   <ul>" +
       "     <li><a href='#pregame_settings_tabs-1'>Game</a></li>" +
       "     <li><a href='#pregame_settings_tabs-2'>3D WebGL,WebGPU</a></li>" +
-      "     <li><a href='#pregame_settings_tabs-3'>Other</a></li>" +
+      "     <li><a href='#pregame_settings_tabs-3'>AI, LLM, Other</a></li>" +
       "   </ul>" +
       "<div id='pregame_settings_tabs-1'><br><table id='settings_table'> " +
       "<tr title='Ruleset version'><td>Ruleset:</td>" +
@@ -515,6 +515,8 @@ function pregame_settings()
 
       "<div id='pregame_settings_tabs-3'>" +
 	    "<table id='settings_table'>" +
+        "<tr id='mentat_enabled'><td id='mentat_label'>AI Chat:<br><br></td>" +
+        "<td><input type='checkbox' id='mentat_setting'> Enable AI LLM Mentat<br><br></td></tr>" +
         "<tr title='Font on map'><td>Font on map:</td>" +
 	    "<td><input type='text' name='mapview_font' id='mapview_font' size='28' maxlength='42' value='16px Georgia, serif'></td></tr>" +
 	    "<tr id='speech_enabled'><td id='speech_label'></td>" +
@@ -820,6 +822,14 @@ function pregame_settings()
     } else {
       speech_enabled = false;
     }
+  });
+
+  $('#mentat_setting').change(function() {
+        if ($('#mentat_setting').prop('checked')) {
+            mentat_enabled = true;
+        } else {
+            mentat_enabled = false;
+        }
   });
 
   $('#voice').change(function() {

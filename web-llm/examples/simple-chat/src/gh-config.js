@@ -248,5 +248,5 @@ export default {
 			"low_resource_required": true,
 		},
 	],
-	"use_web_worker": true
+	"use_web_worker": false
 }

@@ -10,6 +10,7 @@
 				<li id="tech_tab"><a id="tech_tab_item" href="#tabs-tec"><i class="fa fa-flask" aria-hidden="true"></i> Research</a></li>
 				<li id="players_tab"><a href="#tabs-nat"><i class="fa fa-flag" aria-hidden="true"></i> Nations</a></li>
 				<li id="cities_tab"><a href="#tabs-cities"><i class="fa fa-fort-awesome" aria-hidden="true"></i> Cities</a></li>
+				<li id="mentat_tab"><a href="#tabs-mentat"><i class="fa fa-user-circle" aria-hidden="true"></i> Mentat</a></li>
 				<li id="opt_tab"><a href="#tabs-opt"><i class="fa fa-cogs" aria-hidden="true"></i> Options</a></li>
 				<li id="hel_tab"><a href="#tabs-hel"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Manual</a></li>
 
@@ -39,10 +40,11 @@
 			<div id="tabs-cities">
 				<jsp:include page="cities.jsp" flush="false"/>
 			</div>
+			<div id="tabs-mentat">
+                <jsp:include page="mentat.jsp" flush="false"/>
+			</div>
 
 			<div id="tabs-hel" class="manual_doc">
-			</div>
-			<div id="tabs-chat">
 			</div>
 			<div id="tabs-opt">
 				<jsp:include page="options.jsp" flush="false"/>

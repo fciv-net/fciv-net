@@ -219,16 +219,14 @@ function control_init()
     update_city_screen();
   });
 
+  $("#mentat_tab").click(function(event) {
+    set_default_mapview_inactive();
+  });
+
   $("#opt_tab").click(function(event) {
     $("#tabs-hel").hide();
     init_options_dialog();
     set_default_mapview_inactive();
-  });
-
-  $("#chat_tab").click(function(event) {
-    set_default_mapview_inactive();
-    $("#tabs-chat").show();
-
   });
 
 
