@@ -513,7 +513,7 @@ function pregame_settings()
          "</table>" +
       "</div>" +
 
-      "<div id='pregame_settings_tabs-3'>" +
+      "<div id='pregame_settings_tabs-3'> <br>" +
 	    "<table id='settings_table'>" +
         "<tr id='mentat_enabled'><td id='mentat_label'>AI Chat:<br><br></td>" +
         "<td><input type='checkbox' id='mentat_setting'> Enable AI LLM Mentat<br><br></td></tr>" +
