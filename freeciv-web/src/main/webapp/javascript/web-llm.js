@@ -40,7 +40,7 @@ function init_web_llm()
  Send initial message to Web-llm to start it up.
 ****************************************************************************/
 function send_init_message_to_llm() {
-  $("#chatui-input").val("Hello Freeciv game advisor, please introduce this game Freeciv 3D, which is a free open source strategy game playable in the web browser.");
+  $("#chatui-input").val("Hello game advisor, please introduce this game Freeciv 3D,a free open source strategy game.");
   $("#chatui-send-btn").click();
 
 }
