@@ -32,12 +32,6 @@
     <b>Play sounds</b>
   </div>
 </td>
-</tr>
-
-<tr>
-<td>
-
-</td>
 <td>
   <div class="main_menu_buttons">
     <input type='checkbox' name='speech_enabled_setting' id='speech_enabled_setting'>
@@ -45,6 +39,7 @@
   </div>
 </td>
 </tr>
+
 <tr>
 <td>
   <div class="main_menu_buttons">
