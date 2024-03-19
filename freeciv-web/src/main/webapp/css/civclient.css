@@ -62,6 +62,7 @@ body
 #chat_direction {
   width: 29px;
   height: 20px;
+  diplay:none;
 }
 
 #game_text_input {
