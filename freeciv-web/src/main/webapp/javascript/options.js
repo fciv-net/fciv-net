@@ -42,8 +42,6 @@ var default_sound_plugin_name = "";
 
 var sounds_enabled = true;
 
-var openai_enabled = true;
-
 var save_options_on_exit = TRUE;
 var fullscreen_mode = FALSE;
 
@@ -153,12 +151,6 @@ function init_options_dialog()
     sounds_enabled = this.checked;
     simpleStorage.set('sndFX', sounds_enabled);
   })
-
-  $('#openai_setting').prop('checked', openai_enabled);
-  $('#openai_setting').change(function() {
-    openai_enabled = this.checked;
-    simpleStorage.set('openai_enabled', openai_enabled);
-  });
 
   $('#borders_setting').prop('checked', draw_borders);
   $('#borders_setting').change(function() {

@@ -126,9 +126,9 @@ function civclient_init()
     }
   }
 
-  openai_enabled = simpleStorage.get('openai_enabled');
-  if (openai_enabled == null) {
-    openai_enabled = true;
+  mentat_enabled = simpleStorage.get('mentat_setting');
+  if (mentat_enabled == null) {
+    mentat_enabled = false;
   }
 
   dialogs_minimized_setting = simpleStorage.get('dialogs_minimized_setting');

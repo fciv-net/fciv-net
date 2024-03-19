@@ -83,17 +83,6 @@
 		<url-pattern>/errorlist</url-pattern>
 	</servlet-mapping>
 
-	<!-- /chatlist -->
-	<servlet>
-		<servlet-name>ChatList</servlet-name>
-		<servlet-class>org.freeciv.servlet.ChatList</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>ChatList</servlet-name>
-		<url-pattern>/chatlist</url-pattern>
-	</servlet-mapping>
-
 	<!-- /save_game_of_the_day -->
 	<servlet>
 		<servlet-name>SaveGameOfTheDay</servlet-name>
@@ -158,17 +147,6 @@
 	<servlet-mapping>
 		<servlet-name>HallOfFameList</servlet-name>
 		<url-pattern>/hall_of_fame</url-pattern>
-	</servlet-mapping>
-
-	<!-- /openai_chat -->
-	<servlet>
-		<servlet-name>OpenAIChat</servlet-name>
-		<servlet-class>org.freeciv.servlet.OpenAIChat</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>OpenAIChat</servlet-name>
-		<url-pattern>/openai_chat</url-pattern>
 	</servlet-mapping>
 
 	<!-- /civclientlauncher (game launcher servlet) -->
