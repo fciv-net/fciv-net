@@ -38,7 +38,8 @@ try {
 
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+<link rel="stylesheet" href="/css/solid.min.css">
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
 <meta name="description" content="Fciv.net - play Freeciv in 3D online for free; open source strategy game">
 <meta property="og:image" content="https://fciv.net/static/images/freeciv-webgl-splash-48.png" />

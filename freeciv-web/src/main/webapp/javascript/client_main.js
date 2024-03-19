@@ -109,19 +109,16 @@ function setup_window_size ()
   if (!mentat_enabled) {
     $("#tabs-mentat").hide();
     $("#mentat_tab").hide();
-  } else {
-    $("#tabs-mentat").show();
-    $("#mentat_tab").show();
   }
 
   if (is_small_screen()) {
     $("#map_tab").children().html("<i class='fa fa-globe' aria-hidden='true'></i>");
     $("#opt_tab").children().html("<i class='fa fa-cogs' aria-hidden='true'></i>");
     $("#players_tab").children().html("<i class='fa fa-flag' aria-hidden='true'></i>");
-    $("#cities_tab").children().html("<i class='fa fa-fort-awesome' aria-hidden='true'></i>");
+    $("#cities_tab").children().html("<i class='fa tabs-cities' aria-hidden='true'></i>");
     $("#tech_tab").children().html("<i class='fa fa-flask' aria-hidden='true'></i>");
     $("#civ_tab").children().html("<i class='fa fa-university' aria-hidden='true'></i>");
-    $("#hel_tab").children().html("<i class='fa fa-question-circle-o' aria-hidden='true'></i>");
+    $("#hel_tab").children().html("<i class='fa fa-question' aria-hidden='true'></i>");
     $("#mentat_tab").children().html("<i class='fa fa-user-circle' aria-hidden='true'></i>");
 
     $(".ui-tabs-anchor").css("padding", "3px");

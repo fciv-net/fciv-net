@@ -516,7 +516,7 @@ function pregame_settings()
       "<div id='pregame_settings_tabs-3'> <br><br>" +
 	    "<table id='settings_table'>" +
         "<tr id='mentat_enabled'><td id='mentat_label'>AI Chat:<br><br></td>" +
-        "<td><input type='checkbox' id='mentat_setting'> Enable AI LLM Mentat<br><br></td></tr>" +
+        "<td><input type='checkbox' id='mentat_setting'> Enable AI LLM Mentat (Beta!)<br><br></td></tr>" +
 	    "<tr id='speech_enabled'><td id='speech_label'></td>" +
         "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
 	    "<tr id='voice_row'><td id='voice_label'></td>" +

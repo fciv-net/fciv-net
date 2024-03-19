@@ -112,6 +112,7 @@ function civclient_init()
   $("#tabs-cities").height("auto");
   $("#tabs-opt").height("auto");
   $("#tabs-hel").height("auto");
+  $("#tabs-mentat").height("auto");
 
   $(".button").button();
 
