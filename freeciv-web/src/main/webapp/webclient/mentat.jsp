@@ -3,6 +3,6 @@
 
   <jsp:include page="/web-llm/llm_chat.html" flush="false"/>
 
-  <b><i>Talk to the Freeciv AI Language Model. Requires WebGPU. The TinyLlama and Gemma models works. Requires Nvidia GPU.</i></b>
+  <b><i>Talk to the Freeciv AI Language Model. Requires WebGPU support in Google Chrome and Nvidia GPU hardware. The TinyLlama and Gemma models works. </i></b>
 
 </div>

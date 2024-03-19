@@ -1,5 +1,15 @@
 export default {
 	"model_list": [
+	    // Gemma is default.
+			{
+				"model_url": "https://huggingface.co/mlc-ai/gemma-2b-it-q4f16_1-MLC/resolve/main/",
+				"local_id": "gemma-2b-it-q4f16_1-1k",
+				"model_lib_url": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/gemma-2b-it/gemma-2b-it-q4f16_1-ctx1k_cs1k-webgpu.wasm",
+				"vram_required_MB": 1476.52,
+				"low_resource_required": true,
+				"buffer_size_required_bytes": 262144000,
+				"required_features": ["shader-f16"],
+		},
 		// Llama-2
 		{
 			"model_url": "https://huggingface.co/mlc-ai/Llama-2-7b-chat-hf-q4f32_1-MLC/resolve/main/",
@@ -91,15 +101,7 @@ export default {
 			"low_resource_required": false,
 			"buffer_size_required_bytes": 262144000,
 		},
-		{
-			"model_url": "https://huggingface.co/mlc-ai/gemma-2b-it-q4f16_1-MLC/resolve/main/",
-			"local_id": "gemma-2b-it-q4f16_1-1k",
-			"model_lib_url": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/gemma-2b-it/gemma-2b-it-q4f16_1-ctx1k_cs1k-webgpu.wasm",
-			"vram_required_MB": 1476.52,
-			"low_resource_required": true,
-			"buffer_size_required_bytes": 262144000,
-			"required_features": ["shader-f16"],
-		},
+
 		{
 			"model_url": "https://huggingface.co/mlc-ai/gemma-2b-it-q4f32_1-MLC/resolve/main/",
 			"local_id": "gemma-2b-it-q4f32_1-1k",

@@ -59,7 +59,7 @@ function show_help()
   $(".chatbox_dialog ").show();
   $(".chatbox_dialog ").css('left', 140);
   $(".chatbox_dialog ").css('top', 470);
-  message_log.update({ event: E_CONNECTION, message: "You can ask the Freeciv AI assistant for help here." });
+  //message_log.update({ event: E_CONNECTION, message: "You can ask the Freeciv AI assistant for help here." });
 
   $("#help_overview").click();
 

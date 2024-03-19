@@ -128,7 +128,7 @@ function civclient_init()
   }
 
   mentat_enabled = simpleStorage.get('mentat_setting');
-  if (mentat_enabled == null) {
+  if (mentat_enabled == null || !is_webgpu_supported()) {
     mentat_enabled = false;
   }
 

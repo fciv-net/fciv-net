@@ -106,10 +106,9 @@ function setup_window_size ()
   $("#freeciv_logo").show();
   $("#tabs-hel").hide();
 
-  if (!mentat_enabled) {
-    $("#tabs-mentat").hide();
-    $("#mentat_tab").hide();
-  }
+
+  init_web_llm();
+
 
   if (is_small_screen()) {
     $("#map_tab").children().html("<i class='fa fa-globe' aria-hidden='true'></i>");
