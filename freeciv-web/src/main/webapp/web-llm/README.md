@@ -8,3 +8,7 @@ This is a custom build of https://github.com/mlc-ai/web-llm/tree/main/examples/s
 
 TODO:
 Integrate more with Freeciv 3D.
+
+Changes:
+-Default model set to TinyLlama.
+-Path set to /web-llm instead of /
