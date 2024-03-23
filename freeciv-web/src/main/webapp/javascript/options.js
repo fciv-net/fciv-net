@@ -105,7 +105,6 @@ var reqtree_curved_lines = FALSE;
 var show_buildings = true;
 
 var dialogs_minimized_setting = false;
-var mentat_enabled = false;
 
 function init_options_dialog()
 {
