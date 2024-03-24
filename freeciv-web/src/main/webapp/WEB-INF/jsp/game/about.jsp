@@ -130,11 +130,6 @@
 		<%@include file="/WEB-INF/jsp/fragments/header.jsp"%>
 
 		<div class="jumbotron">
-			<div class="row">
-
-				<img src="/static/images/freeciv-webgl-splash-48.png" alt="" style="width: 95%;">
-
-			</div>
 			<div class="container-fluid">
 				<div class="row top-buffer-3">
 					<p class="lead">
@@ -149,7 +144,7 @@
 				<div class="col-md-6">
 					<div class="game-type">
 						<div class="header">
-							<span class="name"><i class="fa fa-user"></i> <fmt:message key="index-game-launcher-singleplayer" /></span>
+							<span class="name"> <fmt:message key="index-game-launcher-singleplayer" /></span>
 						</div>
 
 						<c:if test="${default_lang}">
@@ -157,21 +152,21 @@
 								Play against the Freeciv AI with 3D WebGL<br>graphics using the Three.js 3D engine
 							</div>
 						</c:if>
-						<a href="/webclient/?action=new&type=singleplayer" class="btn" id="webgl_button"><i class="fa fa-cube"></i> New Game</a>
+						<a href="/webclient/?action=new&type=singleplayer" class="btn" id="webgl_button">New Game</a>
 
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="game-type">
 						<div class="header">
-							<span class="name"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></span>
+							<span class="name"><fmt:message key="index-game-launcher-multiplayer"/></span>
 						</div>
 						<c:if test="${default_lang}">
 							<div class="features">
 								Start or join a game with multiple human or AI players.
 							</div>
 						</c:if>
-						<a href="/game/list?v=multiplayer" class="btn"><i class="fa fa-users"></i> <fmt:message key="index-game-launcher-multiplayer"/></a>
+						<a href="/game/list?v=multiplayer" class="btn"> <fmt:message key="index-game-launcher-multiplayer"/></a>
 
 					</div>
 				</div>
