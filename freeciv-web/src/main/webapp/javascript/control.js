@@ -229,6 +229,9 @@ function control_init()
     set_default_mapview_inactive();
   });
 
+  $("#mentat_tab").click(function(event) {
+    init_web_llm();
+  });
 
   $("#hel_tab").click(function(event) {
     set_default_mapview_inactive();

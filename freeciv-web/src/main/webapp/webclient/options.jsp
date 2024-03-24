@@ -62,6 +62,10 @@
             </div>
         </td>
         <td>
+            <div class="main_menu_buttons">
+                <input type='checkbox' name='ai_mentat_setting' id='ai_mentat_setting'>
+                <b>AI LLM Chat - Mentat</b>
+            </div>
         </td>
     </tr>
 </table>

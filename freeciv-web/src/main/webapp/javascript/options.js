@@ -144,6 +144,25 @@ function init_options_dialog()
     simpleStorage.set('dialogs_minimized_setting', dialogs_minimized_setting);
   });
 
+  $('#ai_mentat_setting').change(function() {
+    mentat_enabled = this.checked;
+    simpleStorage.set("mentat_setting", mentat_enabled);
+    if (mentat_enabled) {
+      $("#mentat_tab").show();
+    } else {
+      $("#mentat_tab").hide();
+    }
+  });
+  var stored_mentat_setting = simpleStorage.get("mentat_setting", "");
+  if (stored_mentat_setting != null && !stored_mentat_setting ) {
+    $("#ai_mentat_setting").prop("checked", false);
+    mentat_enabled = false;
+    $("#mentat_tab").hide();
+  } else if (stored_mentat_setting != null && stored_mentat_setting) {
+    $("#ai_mentat_setting").prop("checked", true);
+    mentat_enabled = true;
+    $("#mentat_tab").show();
+  }
 
   $('#play_sounds_setting').prop('checked', sounds_enabled);
 

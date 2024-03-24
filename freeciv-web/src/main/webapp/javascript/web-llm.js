@@ -17,32 +17,27 @@
 
  ***********************************************************************/
 
+var llm_chat_init = false;
 
 /****************************************************************************
  Init the Freeciv 3D AI Chat LLM.
 ****************************************************************************/
-function init_web_llm()
-{
-  if (!mentat_enabled || !is_webgpu_supported()) {
-    $("#mentat_tab").hide();
-  } else {
-    $("#mentat_tab").show();
-  }
+function init_web_llm() {
+    if (!mentat_enabled || !is_webgpu_supported() || llm_chat_init) return;
 
-  if (!mentat_enabled || !is_webgpu_supported()) return;
+    send_message_to_llm("Hello! Introduce this game Freeciv 3D, a free open source strategy game, as a game AI advisor.");
 
-  setTimeout(send_init_message_to_llm, 5000);
+    $("#chatui-chat").html("<div class='msg-bubble'> <div className='msg-text'><div>Freeciv 3D mentat chat. Please wait while initializing model.</div></div></div>");
 
-
+    llm_chat_init = true;
 }
 
 /****************************************************************************
- Send initial message to Web-llm to start it up.
+ Send message to Web-llm.
 ****************************************************************************/
-function send_init_message_to_llm() {
-  $("#chatui-input").val("Hello! Introduce this game Freeciv 3D, a free open source strategy game, in max 100 words, as a game AI advisor.");
+function send_message_to_llm(message) {
+  $("#chatui-input").val(message);
   $("#chatui-send-btn").click();
-  $("#chatui-input").val("");
 
 }
 
