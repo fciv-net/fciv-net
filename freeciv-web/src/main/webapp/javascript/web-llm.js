@@ -23,7 +23,10 @@ var llm_chat_init = false;
  Init the Freeciv 3D AI Chat LLM.
 ****************************************************************************/
 function init_web_llm() {
-    if (!mentat_enabled || !is_webgpu_supported() || llm_chat_init) return;
+    if (!mentat_enabled || !is_webgpu_supported() || llm_chat_init) {
+        $("#mentat_intro").remove();
+        return;
+    }
 
     send_message_to_llm("Hello! Introduce this game Freeciv 3D, a free open source strategy game, as a game AI advisor.");
 
@@ -38,8 +41,6 @@ function init_web_llm() {
 function send_message_to_llm(message) {
   $("#chatui-input").val(message);
   $("#chatui-send-btn").click();
-
-  $("#mentat_intro").remove();
 }
 
 /****************************************************************************
