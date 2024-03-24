@@ -27,7 +27,7 @@ function init_web_llm() {
 
     send_message_to_llm("Hello! Introduce this game Freeciv 3D, a free open source strategy game, as a game AI advisor.");
 
-    $("#chatui-chat").html("<div class='msg-bubble'> <div className='msg-text'><div>Freeciv 3D mentat chat. Please wait while initializing model.</div></div></div>");
+    $("#chatui-chat").html("<div class='msg-bubble'> <div className='msg-text'><div>Mentat chat for Freeciv 3D.</div></div></div>");
 
     llm_chat_init = true;
 }
