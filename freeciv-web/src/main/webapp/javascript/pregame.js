@@ -515,6 +515,8 @@ function pregame_settings()
 
       "<div id='pregame_settings_tabs-3'> <br><br>" +
 	    "<table id='settings_table'>" +
+        "<tr id='mentat_enabled'><td id='mentat_label'>AI Chat:<br><br></td>" +
+        "<td><input type='checkbox' id='mentat_setting'> Enable AI LLM Mentat (Beta!)<br><br></td></tr>" +
 	    "<tr id='speech_enabled'><td id='speech_label'></td>" +
         "<td><input type='checkbox' id='speech_setting'>Enable speech audio messages</td></tr>" +
 	    "<tr id='voice_row'><td id='voice_label'></td>" +
@@ -818,6 +820,24 @@ function pregame_settings()
     } else {
       speech_enabled = false;
     }
+  });
+
+    var stored_mentat_setting = simpleStorage.get("mentat_setting", "");
+    if (stored_mentat_setting != null && !stored_mentat_setting ) {
+        $("#mentat_setting").prop("checked", false);
+        mentat_enabled = false;
+    } else if (stored_mentat_setting != null && stored_mentat_setting) {
+        $("#mentat_setting").prop("checked", true);
+        mentat_enabled = true;
+    }
+
+  $('#mentat_setting').change(function() {
+        if ($('#mentat_setting').prop('checked')) {
+            mentat_enabled = true;
+        } else {
+            mentat_enabled = false;
+        }
+        simpleStorage.set("mentat_setting", mentat_enabled);
   });
 
   $('#voice').change(function() {

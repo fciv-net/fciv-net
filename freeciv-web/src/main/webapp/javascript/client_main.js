@@ -106,6 +106,10 @@ function setup_window_size ()
   $("#freeciv_logo").show();
   $("#tabs-hel").hide();
 
+
+  init_web_llm();
+
+
   if (is_small_screen()) {
     $("#map_tab").children().html("<i class='fa fa-globe' aria-hidden='true'></i>");
     $("#opt_tab").children().html("<i class='fa fa-cogs' aria-hidden='true'></i>");
@@ -114,6 +118,7 @@ function setup_window_size ()
     $("#tech_tab").children().html("<i class='fa fa-flask' aria-hidden='true'></i>");
     $("#civ_tab").children().html("<i class='fa fa-university' aria-hidden='true'></i>");
     $("#hel_tab").children().html("<i class='fa fa-question' aria-hidden='true'></i>");
+    $("#mentat_tab").children().html("<i class='fa fa-user-circle' aria-hidden='true'></i>");
 
     $(".ui-tabs-anchor").css("padding", "3px");
 
@@ -192,7 +197,8 @@ function show_new_game_message()
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
-    message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! Have fun! ";
+    message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! Have fun! "
+        + ( mentat_enabled ? "You can ask questions to the AI assistant." : "") ;
 
   } else if (game_loaded) {
     message = "Welcome back, " + username;

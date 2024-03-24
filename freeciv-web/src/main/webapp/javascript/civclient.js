@@ -127,6 +127,11 @@ function civclient_init()
     }
   }
 
+  mentat_enabled = simpleStorage.get('mentat_setting');
+  if (mentat_enabled == null || !is_webgpu_supported()) {
+    mentat_enabled = false;
+  }
+
   dialogs_minimized_setting = simpleStorage.get('dialogs_minimized_setting');
 
  init_common_intro_dialog();
