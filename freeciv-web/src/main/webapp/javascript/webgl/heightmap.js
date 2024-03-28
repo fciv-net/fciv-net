@@ -58,6 +58,9 @@ function get_unit_height_offset(punit)
   if (ptype['name'] == "Bomber") {
     return 18.0;
   }
+  if (ptype['name'] == "Helicopter") {
+    return 12.0;
+  }
   if (ptype['name'] == "Cruiser") {
     return 4.0;
   }
