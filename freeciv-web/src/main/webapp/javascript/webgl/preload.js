@@ -494,6 +494,9 @@ switch (filename) {
   case 'Stealth Bomber':
      modelscale = 10;
      break;
+  case 'Bomber':
+    modelscale = 9.5;
+    break;
   case 'Stealth Fighter':
      modelscale = 10;
      break;
